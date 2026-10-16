@@ -1,0 +1,38 @@
+{
+  "id": "FIX-T14__FM01__swap_types_same_element",
+  "file": "data/corrupted/FIX-T14__FM01__swap_types_same_element.data",
+  "sha256": "872137922439adfff9b5e8946ff34c4fbc5a28ecbfd50bba0d4c3a58567437b3",
+  "parent_id": "FIX-T14",
+  "parent_file": "data/fixtures/FIX-T14.data",
+  "parent_sha256": "3ce8d56c543b929bb6f89aed63560c97090100874aa6073800ddf68baaacd877",
+  "failure_mode": "FM01",
+  "operator": "fm01_same",
+  "variant": "swap_types_same_element",
+  "description": "swap two atom-type IDs of the same element in Atoms (e.g. two carbon types); Masses unchanged",
+  "params": {
+    "types": [
+      4,
+      5
+    ],
+    "names": [
+      "oc12",
+      "oc13"
+    ]
+  },
+  "expected_failing_properties": [
+    "P1.16",
+    "TC.2"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P2.6",
+    "TC.1",
+    "TC.2"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  }
+}

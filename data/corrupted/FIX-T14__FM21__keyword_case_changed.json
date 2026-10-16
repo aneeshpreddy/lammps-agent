@@ -1,0 +1,26 @@
+{
+  "id": "FIX-T14__FM21__keyword_case_changed",
+  "file": "data/corrupted/FIX-T14__FM21__keyword_case_changed.data",
+  "sha256": "03778742debb3e6bd834641716f20e3e91c275b3129ad5d72d0c035e661b9426",
+  "parent_id": "FIX-T14",
+  "parent_file": "data/fixtures/FIX-T14.data",
+  "parent_sha256": "3ce8d56c543b929bb6f89aed63560c97090100874aa6073800ddf68baaacd877",
+  "failure_mode": "FM21",
+  "operator": "fm21_case",
+  "variant": "keyword_case_changed",
+  "description": "'Masses' written as 'masses'",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.2"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.2"
+  ],
+  "expected_lammps_behaviour": "Loud (Unknown identifier)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  }
+}

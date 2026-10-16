@@ -1,0 +1,39 @@
+{
+  "id": "REF-02__FM01__swap_types_same_element",
+  "file": "data/corrupted/REF-02__FM01__swap_types_same_element.data",
+  "sha256": "e8619f8c49ea26f9f29d4978f1529d9fe5418cdf7b0403244a1cbd8d5d941395",
+  "parent_id": "REF-02",
+  "parent_file": "data/reference/REF-02.data",
+  "parent_sha256": "c676d14287eef2fc18e162bad1d5533a2a6e52b3e59e7fe5dcf15704b27e5f2b",
+  "failure_mode": "FM01",
+  "operator": "fm01_same",
+  "variant": "swap_types_same_element",
+  "description": "swap two atom-type IDs of the same element in Atoms (e.g. two carbon types); Masses unchanged",
+  "params": {
+    "types": [
+      1,
+      2
+    ],
+    "names": [
+      "c3'",
+      "c3-"
+    ]
+  },
+  "expected_failing_properties": [
+    "P1.16",
+    "TC.2"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P2.6",
+    "TC.1",
+    "TC.2"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-02.params",
+    "density_family": "pce_emc_dense"
+  }
+}

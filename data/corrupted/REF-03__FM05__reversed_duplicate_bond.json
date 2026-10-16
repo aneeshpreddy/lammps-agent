@@ -1,0 +1,36 @@
+{
+  "id": "REF-03__FM05__reversed_duplicate_bond",
+  "file": "data/corrupted/REF-03__FM05__reversed_duplicate_bond.data",
+  "sha256": "7dd71114e0eb78238231fab8a62933a683b1707ed138ae75287d713786a87c7f",
+  "parent_id": "REF-03",
+  "parent_file": "data/reference/REF-03.data",
+  "parent_sha256": "eb94b804964cdd57da5ff49c87768cbfa7cec015ec90bb03d2d63fa38513f7f4",
+  "failure_mode": "FM05",
+  "operator": "fm05",
+  "variant": "reversed_duplicate_bond",
+  "description": "append a reversed copy of an existing bond and raise the header count",
+  "params": {
+    "duplicated_bond": [
+      "1",
+      "7",
+      "14",
+      "1",
+      "#",
+      "c4,c43"
+    ]
+  },
+  "expected_failing_properties": [
+    "P1.6"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.6"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-03.params",
+    "density_family": "pce_emc_dilute"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "id": "REF-03__FM26__no_blank_after_keyword",
+  "file": "data/corrupted/REF-03__FM26__no_blank_after_keyword.data",
+  "sha256": "163d5b35167a733b32dc28eb25b6811ca68d9142c685aef46b659c290891e63b",
+  "parent_id": "REF-03",
+  "parent_file": "data/reference/REF-03.data",
+  "parent_sha256": "eb94b804964cdd57da5ff49c87768cbfa7cec015ec90bb03d2d63fa38513f7f4",
+  "failure_mode": "FM26",
+  "operator": "fm26",
+  "variant": "no_blank_after_keyword",
+  "description": "remove the blank line after the 'Bonds' keyword",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.7"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.7"
+  ],
+  "expected_lammps_behaviour": "Loud in tested cases",
+  "header_consistent": true,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-03.params",
+    "density_family": "pce_emc_dilute"
+  }
+}

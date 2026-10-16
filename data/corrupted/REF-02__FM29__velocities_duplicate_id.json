@@ -1,0 +1,27 @@
+{
+  "id": "REF-02__FM29__velocities_duplicate_id",
+  "file": "data/corrupted/REF-02__FM29__velocities_duplicate_id.data",
+  "sha256": "68f2a32e7ad90e60cc277d17c34a4504b3df1e4528ba0ddb980e306605920c7a",
+  "parent_id": "REF-02",
+  "parent_file": "data/reference/REF-02.data",
+  "parent_sha256": "c676d14287eef2fc18e162bad1d5533a2a6e52b3e59e7fe5dcf15704b27e5f2b",
+  "failure_mode": "FM29",
+  "operator": "fm29",
+  "variant": "velocities_duplicate_id",
+  "description": "append a Velocities section in which the last atom ID is listed twice and the first atom has no row",
+  "params": {},
+  "expected_failing_properties": [
+    "P1.14"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.14"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-02.params",
+    "density_family": "pce_emc_dense"
+  }
+}

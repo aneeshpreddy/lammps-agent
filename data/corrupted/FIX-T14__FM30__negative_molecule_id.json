@@ -1,0 +1,26 @@
+{
+  "id": "FIX-T14__FM30__negative_molecule_id",
+  "file": "data/corrupted/FIX-T14__FM30__negative_molecule_id.data",
+  "sha256": "c640be6dc347d2450332f24d7d4828ef5c3ff8a94676de186c3ce8e4b9e5cf3a",
+  "parent_id": "FIX-T14",
+  "parent_file": "data/fixtures/FIX-T14.data",
+  "parent_sha256": "3ce8d56c543b929bb6f89aed63560c97090100874aa6073800ddf68baaacd877",
+  "failure_mode": "FM30",
+  "operator": "fm30",
+  "variant": "negative_molecule_id",
+  "description": "set one molecule ID to -1",
+  "params": {},
+  "expected_failing_properties": [
+    "P1.8"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.8"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  }
+}

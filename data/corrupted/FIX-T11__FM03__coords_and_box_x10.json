@@ -1,0 +1,32 @@
+{
+  "id": "FIX-T11__FM03__coords_and_box_x10",
+  "file": "data/corrupted/FIX-T11__FM03__coords_and_box_x10.data",
+  "sha256": "93722830aa8874952cb9dc312a6e46d7c5775469f94724e0c8169a728ed1b1f2",
+  "parent_id": "FIX-T11",
+  "parent_file": "data/fixtures/FIX-T11.data",
+  "parent_sha256": "5795324a6d12f4fa7efe2a1c2af11d4ae63f20da6eab223c44f941d98b7a8d31",
+  "failure_mode": "FM03",
+  "operator": "fm03_up",
+  "variant": "coords_and_box_x10",
+  "description": "multiply coordinates and box by 10 (length unit confusion, e.g. nm read as \u00c5)",
+  "params": {
+    "factor": 10.0
+  },
+  "expected_failing_properties": [
+    "P2.3",
+    "P2.4",
+    "P2.5"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.3",
+    "P2.4",
+    "P2.5"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  }
+}

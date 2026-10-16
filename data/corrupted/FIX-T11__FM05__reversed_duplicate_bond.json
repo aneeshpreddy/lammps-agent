@@ -1,0 +1,33 @@
+{
+  "id": "FIX-T11__FM05__reversed_duplicate_bond",
+  "file": "data/corrupted/FIX-T11__FM05__reversed_duplicate_bond.data",
+  "sha256": "07f4aa3875e49e72d3fc9e9ad3b99b4e54cb511fd3fa1ffbb12366455b287a4a",
+  "parent_id": "FIX-T11",
+  "parent_file": "data/fixtures/FIX-T11.data",
+  "parent_sha256": "5795324a6d12f4fa7efe2a1c2af11d4ae63f20da6eab223c44f941d98b7a8d31",
+  "failure_mode": "FM05",
+  "operator": "fm05",
+  "variant": "reversed_duplicate_bond",
+  "description": "append a reversed copy of an existing bond and raise the header count",
+  "params": {
+    "duplicated_bond": [
+      "1",
+      "1",
+      "1",
+      "9"
+    ]
+  },
+  "expected_failing_properties": [
+    "P1.6"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.6"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "REF-03__FM02__mass_guessed_other_element",
+  "file": "data/corrupted/REF-03__FM02__mass_guessed_other_element.data",
+  "sha256": "261f0b6e59432fd0db3b8c66d1f67608b69235b6ff64f750ae8d36d5c40e74c1",
+  "parent_id": "REF-03",
+  "parent_file": "data/reference/REF-03.data",
+  "parent_sha256": "eb94b804964cdd57da5ff49c87768cbfa7cec015ec90bb03d2d63fa38513f7f4",
+  "failure_mode": "FM02",
+  "operator": "fm02",
+  "variant": "mass_guessed_other_element",
+  "description": "replace the mass of the first hydrogen type with helium's (a Z = type-index style guess)",
+  "params": {
+    "type": 7
+  },
+  "expected_failing_properties": [
+    "P2.6"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.6"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-03.params",
+    "density_family": "pce_emc_dilute"
+  }
+}

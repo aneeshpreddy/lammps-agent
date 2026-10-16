@@ -1,0 +1,30 @@
+{
+  "id": "REF-01__FM17__atom_moved_onto_another",
+  "file": "data/corrupted/REF-01__FM17__atom_moved_onto_another.data",
+  "sha256": "529667eba08179d536cf3fbe9d0cad07896741edc0659b417a8127a58944b5d0",
+  "parent_id": "REF-01",
+  "parent_file": "data/reference/REF-01.data",
+  "parent_sha256": "61112aef3b5bcdf5a76781bc0ddada875751971d9086501edadc3e628c9e21ae",
+  "failure_mode": "FM17",
+  "operator": "fm17",
+  "variant": "atom_moved_onto_another",
+  "description": "move an unbonded or terminal atom onto the position of a non-bonded atom 0.3 \u00c5 away",
+  "params": {
+    "moved": 1478,
+    "onto": 1
+  },
+  "expected_failing_properties": [
+    "P2.3"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.3"
+  ],
+  "expected_lammps_behaviour": "Silent at read_data; PE may be inf at run",
+  "header_consistent": true,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-01.params",
+    "density_family": "pce_emc_dense"
+  }
+}

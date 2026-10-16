@@ -1,0 +1,29 @@
+{
+  "id": "FIX-T11",
+  "role": "SYNTHETIC_FIXTURE",
+  "file": "data/fixtures/FIX-T11.data",
+  "sha256": "5795324a6d12f4fa7efe2a1c2af11d4ae63f20da6eab223c44f941d98b7a8d31",
+  "source": "UGRP/CEMENT_MINERALS/tob11_unit_cell.car/.mdf + INTERFACE_FF_1_5 pcff_interface_v1_5.frc via msi2lmp v3.9.11 -class II -ignore",
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  },
+  "trust_status": "SYNTHETIC - for code-path tests only, not an oracle",
+  "tilt_before": [
+    -4.0491455,
+    0.0,
+    0.0
+  ],
+  "tilt_after": [
+    2.6858544999999996,
+    0.0,
+    0.0
+  ],
+  "basis_shift": {
+    "k": -1,
+    "m": 0,
+    "n": 0
+  },
+  "atoms_rewrapped": 35,
+  "parent": "FIX-T11-raw"
+}

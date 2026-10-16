@@ -1,0 +1,32 @@
+{
+  "id": "REF-02__FM12__counter_ion_removed",
+  "file": "data/corrupted/REF-02__FM12__counter_ion_removed.data",
+  "sha256": "7a9c1980e89768c570de67caf4f43e98139fbb165c3e972d0d3e3dfdb6cb3c34",
+  "parent_id": "REF-02",
+  "parent_file": "data/reference/REF-02.data",
+  "parent_sha256": "c676d14287eef2fc18e162bad1d5533a2a6e52b3e59e7fe5dcf15704b27e5f2b",
+  "failure_mode": "FM12",
+  "operator": "fm12_ion",
+  "variant": "counter_ion_removed",
+  "description": "delete the unbonded atom with the largest |q| (a counter-ion) and adjust the header",
+  "params": {
+    "atom": 2111,
+    "abs_q": 2.0
+  },
+  "expected_failing_properties": [
+    "P2.1",
+    "TC.2"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.1",
+    "TC.2"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-02.params",
+    "density_family": "pce_emc_dense"
+  }
+}

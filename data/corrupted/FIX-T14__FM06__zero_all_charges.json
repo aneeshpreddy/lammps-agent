@@ -1,0 +1,26 @@
+{
+  "id": "FIX-T14__FM06__zero_all_charges",
+  "file": "data/corrupted/FIX-T14__FM06__zero_all_charges.data",
+  "sha256": "29fe271a978f486dbabd0b5b99a4310f9a49dbfb8a3d01f54e259e1eefc5a6d7",
+  "parent_id": "FIX-T14",
+  "parent_file": "data/fixtures/FIX-T14.data",
+  "parent_sha256": "3ce8d56c543b929bb6f89aed63560c97090100874aa6073800ddf68baaacd877",
+  "failure_mode": "FM06",
+  "operator": "fm06_zero",
+  "variant": "zero_all_charges",
+  "description": "set every charge to zero",
+  "params": {},
+  "expected_failing_properties": [
+    "P2.1"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.1"
+  ],
+  "expected_lammps_behaviour": "Warn (Using kspace solver on system with no charge)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "id": "FIX-T14__FM14__atom_count_plus_one",
+  "file": "data/corrupted/FIX-T14__FM14__atom_count_plus_one.data",
+  "sha256": "51250ca857782f8d8bd1c61705296b61646f9bdb8b21879f260f60c901aa654b",
+  "parent_id": "FIX-T14",
+  "parent_file": "data/fixtures/FIX-T14.data",
+  "parent_sha256": "3ce8d56c543b929bb6f89aed63560c97090100874aa6073800ddf68baaacd877",
+  "failure_mode": "FM14",
+  "operator": "fm14",
+  "variant": "atom_count_plus_one",
+  "description": "raise the header atom count by one",
+  "params": {},
+  "expected_failing_properties": [
+    "P1.1"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.1"
+  ],
+  "expected_lammps_behaviour": "Loud",
+  "header_consistent": false,
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  }
+}

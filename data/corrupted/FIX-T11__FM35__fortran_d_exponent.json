@@ -1,0 +1,26 @@
+{
+  "id": "FIX-T11__FM35__fortran_d_exponent",
+  "file": "data/corrupted/FIX-T11__FM35__fortran_d_exponent.data",
+  "sha256": "ff0ce6df082ee9f8aa054894d5be547feab73803fc4cc212db6d066762c5a2b5",
+  "parent_id": "FIX-T11",
+  "parent_file": "data/fixtures/FIX-T11.data",
+  "parent_sha256": "5795324a6d12f4fa7efe2a1c2af11d4ae63f20da6eab223c44f941d98b7a8d31",
+  "failure_mode": "FM35",
+  "operator": "fm35",
+  "variant": "fortran_d_exponent",
+  "description": "write the first Masses value with a Fortran D exponent",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.3"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.3"
+  ],
+  "expected_lammps_behaviour": "Loud",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  }
+}

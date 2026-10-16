@@ -1,0 +1,442 @@
+{
+  "calibration_id": "pce_emc",
+  "version": 1,
+  "status": "PROVISIONAL",
+  "date": "2026-10-16",
+  "derivation_version": "calibrate.py v1 (2026-10-16)",
+  "references": [
+    {
+      "id": "REF-01",
+      "file": "data/reference/REF-01.data",
+      "sha256": "61112aef3b5bcdf5a76781bc0ddada875751971d9086501edadc3e628c9e21ae",
+      "family": "pce_emc_dense"
+    },
+    {
+      "id": "REF-02",
+      "file": "data/reference/REF-02.data",
+      "sha256": "c676d14287eef2fc18e162bad1d5533a2a6e52b3e59e7fe5dcf15704b27e5f2b",
+      "family": "pce_emc_dense"
+    },
+    {
+      "id": "REF-03",
+      "file": "data/reference/REF-03.data",
+      "sha256": "eb94b804964cdd57da5ff49c87768cbfa7cec015ec90bb03d2d63fa38513f7f4",
+      "family": "pce_emc_dilute"
+    },
+    {
+      "id": "REF-04",
+      "file": "data/reference/REF-04.data",
+      "sha256": "d6402a0d49b1b1efcbe0311e2ab0aa3f5ad3f6a64f8deb40706506ba6a36690d",
+      "family": "pce_emc_dilute"
+    }
+  ],
+  "bond_length": {
+    "measured": "minimum-image bond length per atom-type-name pair (\u00c5)",
+    "derivation": "[min x (1-0.1), max x (1+0.1)] over the references",
+    "basis": "references show a spread of sd \u2248 3 % of the bond length around the FF r0; a 10 % widening beyond the observed extremes admits re-built or relaxed geometries while staying below the closest non-bonded contact of the same element pair (separation_check)",
+    "margin_rel": 0.1,
+    "pairs": {
+      "c3'|c43": {
+        "n": 37,
+        "min": 1.42679,
+        "max": 1.63368,
+        "mean": 1.51933,
+        "sd": 0.04954,
+        "lo": 1.2841,
+        "hi": 1.797
+      },
+      "c3'|o1=": {
+        "n": 37,
+        "min": 1.13991,
+        "max": 1.23844,
+        "mean": 1.20876,
+        "sd": 0.02038,
+        "lo": 1.0259,
+        "hi": 1.3623
+      },
+      "c3'|o2s": {
+        "n": 37,
+        "min": 1.29643,
+        "max": 1.43471,
+        "mean": 1.36722,
+        "sd": 0.03174,
+        "lo": 1.1668,
+        "hi": 1.5782
+      },
+      "c3-|c43": {
+        "n": 37,
+        "min": 1.46873,
+        "max": 1.68513,
+        "mean": 1.57333,
+        "sd": 0.03909,
+        "lo": 1.3219,
+        "hi": 1.8536
+      },
+      "c3-|o1-": {
+        "n": 74,
+        "min": 1.18324,
+        "max": 1.28663,
+        "mean": 1.23429,
+        "sd": 0.02124,
+        "lo": 1.0649,
+        "hi": 1.4153
+      },
+      "c43|h1": {
+        "n": 74,
+        "min": 1.04233,
+        "max": 1.17235,
+        "mean": 1.09644,
+        "sd": 0.02763,
+        "lo": 0.9381,
+        "hi": 1.2896
+      },
+      "c4o|c4o": {
+        "n": 542,
+        "min": 1.40317,
+        "max": 1.61536,
+        "mean": 1.4998,
+        "sd": 0.03624,
+        "lo": 1.2628,
+        "hi": 1.7769
+      },
+      "c4o|h1": {
+        "n": 2168,
+        "min": 0.99688,
+        "max": 1.20613,
+        "mean": 1.09959,
+        "sd": 0.03055,
+        "lo": 0.8972,
+        "hi": 1.3267
+      },
+      "c4o|o2e": {
+        "n": 1010,
+        "min": 1.33904,
+        "max": 1.57111,
+        "mean": 1.42643,
+        "sd": 0.0323,
+        "lo": 1.2051,
+        "hi": 1.7282
+      },
+      "c4o|o2h": {
+        "n": 37,
+        "min": 1.34064,
+        "max": 1.49804,
+        "mean": 1.41895,
+        "sd": 0.03499,
+        "lo": 1.2066,
+        "hi": 1.6478
+      },
+      "c4o|o2s": {
+        "n": 37,
+        "min": 1.38006,
+        "max": 1.51017,
+        "mean": 1.44513,
+        "sd": 0.03602,
+        "lo": 1.2421,
+        "hi": 1.6612
+      },
+      "c4|c4": {
+        "n": 4,
+        "min": 1.50977,
+        "max": 1.55413,
+        "mean": 1.5369,
+        "sd": 0.017,
+        "lo": 1.3588,
+        "hi": 1.7095
+      },
+      "c4|c43": {
+        "n": 148,
+        "min": 1.47309,
+        "max": 1.74654,
+        "mean": 1.55746,
+        "sd": 0.04845,
+        "lo": 1.3258,
+        "hi": 1.9212
+      },
+      "c4|h1": {
+        "n": 172,
+        "min": 1.0405,
+        "max": 1.22656,
+        "mean": 1.10229,
+        "sd": 0.03451,
+        "lo": 0.9364,
+        "hi": 1.3492
+      },
+      "h1o|o2h": {
+        "n": 37,
+        "min": 0.89948,
+        "max": 1.0018,
+        "mean": 0.94899,
+        "sd": 0.02131,
+        "lo": 0.8095,
+        "hi": 1.102
+      }
+    },
+    "separation_check": [
+      {
+        "bond_pair": "c3'|c43",
+        "element_pair": "C|C",
+        "window_hi": 1.797,
+        "closest_nonbonded": 2.0382,
+        "ok": true
+      },
+      {
+        "bond_pair": "c3'|o1=",
+        "element_pair": "C|O",
+        "window_hi": 1.3623,
+        "closest_nonbonded": 2.0544,
+        "ok": true
+      },
+      {
+        "bond_pair": "c3'|o2s",
+        "element_pair": "C|O",
+        "window_hi": 1.5782,
+        "closest_nonbonded": 2.0544,
+        "ok": true
+      },
+      {
+        "bond_pair": "c3-|c43",
+        "element_pair": "C|C",
+        "window_hi": 1.8536,
+        "closest_nonbonded": 2.0382,
+        "ok": true
+      },
+      {
+        "bond_pair": "c3-|o1-",
+        "element_pair": "C|O",
+        "window_hi": 1.4153,
+        "closest_nonbonded": 2.0544,
+        "ok": true
+      },
+      {
+        "bond_pair": "c43|h1",
+        "element_pair": "C|H",
+        "window_hi": 1.2896,
+        "closest_nonbonded": 1.7473,
+        "ok": true
+      },
+      {
+        "bond_pair": "c4o|c4o",
+        "element_pair": "C|C",
+        "window_hi": 1.7769,
+        "closest_nonbonded": 2.0382,
+        "ok": true
+      },
+      {
+        "bond_pair": "c4o|h1",
+        "element_pair": "C|H",
+        "window_hi": 1.3267,
+        "closest_nonbonded": 1.7473,
+        "ok": true
+      },
+      {
+        "bond_pair": "c4o|o2e",
+        "element_pair": "C|O",
+        "window_hi": 1.7282,
+        "closest_nonbonded": 2.0544,
+        "ok": true
+      },
+      {
+        "bond_pair": "c4o|o2h",
+        "element_pair": "C|O",
+        "window_hi": 1.6478,
+        "closest_nonbonded": 2.0544,
+        "ok": true
+      },
+      {
+        "bond_pair": "c4o|o2s",
+        "element_pair": "C|O",
+        "window_hi": 1.6612,
+        "closest_nonbonded": 2.0544,
+        "ok": true
+      },
+      {
+        "bond_pair": "c4|c4",
+        "element_pair": "C|C",
+        "window_hi": 1.7095,
+        "closest_nonbonded": 2.0382,
+        "ok": true
+      },
+      {
+        "bond_pair": "c4|c43",
+        "element_pair": "C|C",
+        "window_hi": 1.9212,
+        "closest_nonbonded": 2.0382,
+        "ok": true
+      },
+      {
+        "bond_pair": "c4|h1",
+        "element_pair": "C|H",
+        "window_hi": 1.3492,
+        "closest_nonbonded": 1.7473,
+        "ok": true
+      },
+      {
+        "bond_pair": "h1o|o2h",
+        "element_pair": "H|O",
+        "window_hi": 1.102,
+        "closest_nonbonded": 1.4778,
+        "ok": true
+      }
+    ],
+    "separation_ok": true
+  },
+  "overlap": {
+    "measured": "minimum-image distance of non-bonded pairs (all pairs except 1-2 bonds), per element pair (\u00c5)",
+    "derivation": "d_min = (1-0.25) x closest such contact in the references; element pairs with no contact below 4.0 \u00c5 are uncalibrated",
+    "basis": "P2.3 targets gross overlaps (coincident/duplicated sites, collapsed geometry); the references are unrelaxed builds whose closest contacts are already short, so the threshold is placed well below them",
+    "margin_rel": 0.25,
+    "pairs": {
+      "Ca|Ca": {
+        "observed_min": 3.129,
+        "d_min": 2.3468,
+        "closest_pair_in": "REF-01",
+        "atom_ids": [
+          1474,
+          1478
+        ]
+      },
+      "Ca|H": {
+        "observed_min": 2.2495,
+        "d_min": 1.6871,
+        "closest_pair_in": "REF-01",
+        "atom_ids": [
+          404,
+          1475
+        ]
+      },
+      "Ca|O": {
+        "observed_min": 2.6321,
+        "d_min": 1.974,
+        "closest_pair_in": "REF-01",
+        "atom_ids": [
+          913,
+          1473
+        ]
+      },
+      "C|C": {
+        "observed_min": 2.0382,
+        "d_min": 1.5286,
+        "closest_pair_in": "REF-02",
+        "atom_ids": [
+          951,
+          955
+        ]
+      },
+      "C|Ca": {
+        "observed_min": 2.879,
+        "d_min": 2.1592,
+        "closest_pair_in": "REF-01",
+        "atom_ids": [
+          402,
+          1475
+        ]
+      },
+      "C|H": {
+        "observed_min": 1.7473,
+        "d_min": 1.3105,
+        "closest_pair_in": "REF-02",
+        "atom_ids": [
+          377,
+          1731
+        ]
+      },
+      "C|Na": {
+        "observed_min": 2.9121,
+        "d_min": 2.184,
+        "closest_pair_in": "REF-04",
+        "atom_ids": [
+          3,
+          40
+        ]
+      },
+      "C|O": {
+        "observed_min": 2.0544,
+        "d_min": 1.5408,
+        "closest_pair_in": "REF-02",
+        "atom_ids": [
+          1560,
+          1566
+        ]
+      },
+      "H|H": {
+        "observed_min": 1.1858,
+        "d_min": 0.8894,
+        "closest_pair_in": "REF-02",
+        "atom_ids": [
+          379,
+          1731
+        ]
+      },
+      "H|Na": {
+        "observed_min": 2.5653,
+        "d_min": 1.924,
+        "closest_pair_in": "REF-04",
+        "atom_ids": [
+          10,
+          40
+        ]
+      },
+      "H|O": {
+        "observed_min": 1.4778,
+        "d_min": 1.1084,
+        "closest_pair_in": "REF-02",
+        "atom_ids": [
+          190,
+          925
+        ]
+      },
+      "Na|O": {
+        "observed_min": 3.1789,
+        "d_min": 2.3842,
+        "closest_pair_in": "REF-04",
+        "atom_ids": [
+          5,
+          40
+        ]
+      },
+      "O|O": {
+        "observed_min": 2.1271,
+        "d_min": 1.5953,
+        "closest_pair_in": "REF-02",
+        "atom_ids": [
+          1667,
+          1681
+        ]
+      }
+    }
+  },
+  "density": {
+    "pce_emc_dense": {
+      "applicable": true,
+      "values": {
+        "REF-01": 1.0,
+        "REF-02": 1.0
+      },
+      "margin_rel": 0.02,
+      "lo": 0.98,
+      "hi": 1.02,
+      "basis": "REF-01, REF-02 were built by EMC at the requested density1 = 1 g/cm3 (REF-0x.params) and both measure 1.0000 g/cm3. The \u00b12 % margin is NOT reference-derived (two identical values give no spread): it is a PLACEHOLDER for an owner requirement (PROPERTIES \u00a78.5 rule 4) and must be confirmed or replaced."
+    },
+    "pce_emc_dilute": {
+      "applicable": false,
+      "values": {
+        "REF-03": 0.125867,
+        "REF-04": 0.059008
+      },
+      "basis": "isolated chain(s) in a mostly empty periodic box: no bulk density to check"
+    }
+  },
+  "mass": {
+    "tau_m_amu": 0.01,
+    "measured": "|Masses value - standard atomic weight of the mapped element|",
+    "basis": "FF mass tables print 2-5 decimals and use older IUPAC editions (e.g. H 1.00794/1.00797, Ca 40.08, Si 28.086); the largest such difference for the elements in scope is 0.002 amu. 0.01 amu covers it while any element swap differs by > 0.9 amu."
+  },
+  "cell": {
+    "policy": "unwrapped_clusters",
+    "observed_max_centroid_excursion": 0.01369,
+    "tau_centroid": 0.05,
+    "measured": "fractional distance of each bonded cluster's centroid outside [0,1) per periodic dim",
+    "basis": "EMC writes whole (unwrapped) molecules with centroids near the cell; tau = max(0.02, ceil_0.01(3.0 x largest observed excursion))"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "FIX-T14__FM15__masses_values_permuted",
+  "file": "data/corrupted/FIX-T14__FM15__masses_values_permuted.data",
+  "sha256": "9ae29494112e374c7526e99bdaf57510d7af7bc2c33f9a2867f4feb4a41724c0",
+  "parent_id": "FIX-T14",
+  "parent_file": "data/fixtures/FIX-T14.data",
+  "parent_sha256": "3ce8d56c543b929bb6f89aed63560c97090100874aa6073800ddf68baaacd877",
+  "failure_mode": "FM15",
+  "operator": "fm15",
+  "variant": "masses_values_permuted",
+  "description": "swap the mass values of the first two Masses rows with different masses",
+  "params": {
+    "types": [
+      1,
+      2
+    ]
+  },
+  "expected_failing_properties": [
+    "P2.6"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.6"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  }
+}

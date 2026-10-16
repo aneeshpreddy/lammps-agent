@@ -1,0 +1,26 @@
+{
+  "id": "FIX-T14__FM34__header_keyword_repeated",
+  "file": "data/corrupted/FIX-T14__FM34__header_keyword_repeated.data",
+  "sha256": "09ee7f9b9446f3d0a2defb51c38ca44045a9736d70b8f19108639d8051784efa",
+  "parent_id": "FIX-T14",
+  "parent_file": "data/fixtures/FIX-T14.data",
+  "parent_sha256": "3ce8d56c543b929bb6f89aed63560c97090100874aa6073800ddf68baaacd877",
+  "failure_mode": "FM34",
+  "operator": "fm34",
+  "variant": "header_keyword_repeated",
+  "description": "repeat the 'atoms' header line with the count minus one",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.10"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.10"
+  ],
+  "expected_lammps_behaviour": "Silent (last value wins)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  }
+}

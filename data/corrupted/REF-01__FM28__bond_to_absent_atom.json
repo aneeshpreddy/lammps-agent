@@ -1,0 +1,29 @@
+{
+  "id": "REF-01__FM28__bond_to_absent_atom",
+  "file": "data/corrupted/REF-01__FM28__bond_to_absent_atom.data",
+  "sha256": "4d97b08775300fdd904696ee1a1e4caf91f3847fc604ed3dbccf00e72dec5811",
+  "parent_id": "REF-01",
+  "parent_file": "data/reference/REF-01.data",
+  "parent_sha256": "61112aef3b5bcdf5a76781bc0ddada875751971d9086501edadc3e628c9e21ae",
+  "failure_mode": "FM28",
+  "operator": "fm28",
+  "variant": "bond_to_absent_atom",
+  "description": "delete the Atoms row of the second atom of a bond (ID < max ID), leaving the topology",
+  "params": {
+    "deleted_atom": 1
+  },
+  "expected_failing_properties": [
+    "P1.5"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.5"
+  ],
+  "expected_lammps_behaviour": "Crash (SIGSEGV) or Loud",
+  "header_consistent": true,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-01.params",
+    "density_family": "pce_emc_dense"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "REF-01__FM04__angles_dihedrals_impropers_dropped",
+  "file": "data/corrupted/REF-01__FM04__angles_dihedrals_impropers_dropped.data",
+  "sha256": "0eeadd49d5ffc975c230feeb556eb5996f4522c3b1c65fa18987ea63f1d9929c",
+  "parent_id": "REF-01",
+  "parent_file": "data/reference/REF-01.data",
+  "parent_sha256": "61112aef3b5bcdf5a76781bc0ddada875751971d9086501edadc3e628c9e21ae",
+  "failure_mode": "FM04",
+  "operator": "fm04_higher",
+  "variant": "angles_dihedrals_impropers_dropped",
+  "description": "delete every Angles/Dihedrals/Impropers row and set their header counts to 0 (what an ASE lammps-data round trip does, docs/R13_ASE_ROUNDTRIP.md)",
+  "params": {
+    "Impropers": 1664,
+    "Dihedrals": 3309,
+    "Angles": 2724
+  },
+  "expected_failing_properties": [
+    "P1.17",
+    "TC.2"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.17",
+    "TC.2"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-01.params",
+    "density_family": "pce_emc_dense"
+  }
+}

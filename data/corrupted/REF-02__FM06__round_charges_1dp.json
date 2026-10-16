@@ -1,0 +1,27 @@
+{
+  "id": "REF-02__FM06__round_charges_1dp",
+  "file": "data/corrupted/REF-02__FM06__round_charges_1dp.data",
+  "sha256": "80ae270fb4b35dc113debe76f1346e27a29d1ab719412345426f23eb34e9cb00",
+  "parent_id": "REF-02",
+  "parent_file": "data/reference/REF-02.data",
+  "parent_sha256": "c676d14287eef2fc18e162bad1d5533a2a6e52b3e59e7fe5dcf15704b27e5f2b",
+  "failure_mode": "FM06",
+  "operator": "fm06_round",
+  "variant": "round_charges_1dp",
+  "description": "round every charge to one decimal place (individual charges lost; total may stay near zero)",
+  "params": {},
+  "expected_failing_properties": [
+    "TC.2"
+  ],
+  "expected_tier": "TC",
+  "spec_expected_properties": [
+    "P2.1"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-02.params",
+    "density_family": "pce_emc_dense"
+  }
+}

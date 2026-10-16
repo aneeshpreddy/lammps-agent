@@ -1,0 +1,260 @@
+{
+  "calibration_id": "tobermorite_fixture",
+  "version": 1,
+  "status": "SYNTHETIC",
+  "date": "2026-10-16",
+  "derivation_version": "calibrate.py v1 (2026-10-16)",
+  "references": [
+    {
+      "id": "FIX-T11",
+      "file": "data/fixtures/FIX-T11.data",
+      "sha256": "5795324a6d12f4fa7efe2a1c2af11d4ae63f20da6eab223c44f941d98b7a8d31",
+      "family": "tobermorite_interface"
+    },
+    {
+      "id": "FIX-T14",
+      "file": "data/fixtures/FIX-T14.data",
+      "sha256": "3ce8d56c543b929bb6f89aed63560c97090100874aa6073800ddf68baaacd877",
+      "family": "tobermorite_interface"
+    }
+  ],
+  "bond_length": {
+    "measured": "minimum-image bond length per atom-type-name pair (\u00c5)",
+    "derivation": "[min x (1-0.1), max x (1+0.1)] over the references",
+    "basis": "references show a spread of sd \u2248 3 % of the bond length around the FF r0; a 10 % widening beyond the observed extremes admits re-built or relaxed geometries while staying below the closest non-bonded contact of the same element pair (separation_check)",
+    "margin_rel": 0.1,
+    "pairs": {
+      "h*|o*": {
+        "n": 48,
+        "min": 0.97992,
+        "max": 0.99674,
+        "mean": 0.98552,
+        "sd": 0.00396,
+        "lo": 0.8819,
+        "hi": 1.0964
+      },
+      "hoy|oc14": {
+        "n": 8,
+        "min": 0.93907,
+        "max": 0.95478,
+        "mean": 0.94739,
+        "sd": 0.00709,
+        "lo": 0.8452,
+        "hi": 1.0503
+      },
+      "oc12|sc2": {
+        "n": 32,
+        "min": 1.61169,
+        "max": 1.73453,
+        "mean": 1.65301,
+        "sd": 0.03782,
+        "lo": 1.4505,
+        "hi": 1.908
+      },
+      "oc12|sc3": {
+        "n": 20,
+        "min": 1.58735,
+        "max": 1.63559,
+        "mean": 1.60997,
+        "sd": 0.01576,
+        "lo": 1.4286,
+        "hi": 1.7991
+      },
+      "oc13|sc2": {
+        "n": 32,
+        "min": 1.58926,
+        "max": 1.65085,
+        "mean": 1.60889,
+        "sd": 0.01955,
+        "lo": 1.4303,
+        "hi": 1.8159
+      },
+      "oc14|sc3": {
+        "n": 8,
+        "min": 1.65485,
+        "max": 1.65981,
+        "mean": 1.65733,
+        "sd": 0.00248,
+        "lo": 1.4894,
+        "hi": 1.8258
+      },
+      "oc22|sc3": {
+        "n": 4,
+        "min": 1.5654,
+        "max": 1.5654,
+        "mean": 1.5654,
+        "sd": 0.0,
+        "lo": 1.4089,
+        "hi": 1.7219
+      }
+    },
+    "separation_check": [
+      {
+        "bond_pair": "h*|o*",
+        "element_pair": "H|O",
+        "window_hi": 1.0964,
+        "closest_nonbonded": 1.4998,
+        "ok": true
+      },
+      {
+        "bond_pair": "hoy|oc14",
+        "element_pair": "H|O",
+        "window_hi": 1.0503,
+        "closest_nonbonded": 1.4998,
+        "ok": true
+      },
+      {
+        "bond_pair": "oc12|sc2",
+        "element_pair": "O|Si",
+        "window_hi": 1.908,
+        "closest_nonbonded": 3.3924,
+        "ok": true
+      },
+      {
+        "bond_pair": "oc12|sc3",
+        "element_pair": "O|Si",
+        "window_hi": 1.7991,
+        "closest_nonbonded": 3.3924,
+        "ok": true
+      },
+      {
+        "bond_pair": "oc13|sc2",
+        "element_pair": "O|Si",
+        "window_hi": 1.8159,
+        "closest_nonbonded": 3.3924,
+        "ok": true
+      },
+      {
+        "bond_pair": "oc14|sc3",
+        "element_pair": "O|Si",
+        "window_hi": 1.8258,
+        "closest_nonbonded": 3.3924,
+        "ok": true
+      },
+      {
+        "bond_pair": "oc22|sc3",
+        "element_pair": "O|Si",
+        "window_hi": 1.7219,
+        "closest_nonbonded": 3.3924,
+        "ok": true
+      }
+    ],
+    "separation_ok": true
+  },
+  "overlap": {
+    "measured": "minimum-image distance of non-bonded pairs (all pairs except 1-2 bonds), per element pair (\u00c5)",
+    "derivation": "d_min = (1-0.25) x closest such contact in the references; element pairs with no contact below 4.0 \u00c5 are uncalibrated",
+    "basis": "P2.3 targets gross overlaps (coincident/duplicated sites, collapsed geometry); the references are unrelaxed builds whose closest contacts are already short, so the threshold is placed well below them",
+    "margin_rel": 0.25,
+    "pairs": {
+      "Ca|Ca": {
+        "observed_min": 3.6758,
+        "d_min": 2.7569,
+        "closest_pair_in": "FIX-T11",
+        "atom_ids": [
+          23,
+          58
+        ]
+      },
+      "Ca|H": {
+        "observed_min": 2.8663,
+        "d_min": 2.1497,
+        "closest_pair_in": "FIX-T14",
+        "atom_ids": [
+          2,
+          80
+        ]
+      },
+      "Ca|O": {
+        "observed_min": 2.252,
+        "d_min": 1.689,
+        "closest_pair_in": "FIX-T14",
+        "atom_ids": [
+          18,
+          45
+        ]
+      },
+      "Ca|Si": {
+        "observed_min": 3.069,
+        "d_min": 2.3017,
+        "closest_pair_in": "FIX-T11",
+        "atom_ids": [
+          40,
+          57
+        ]
+      },
+      "H|H": {
+        "observed_min": 1.4485,
+        "d_min": 1.0864,
+        "closest_pair_in": "FIX-T14",
+        "atom_ids": [
+          89,
+          90
+        ]
+      },
+      "H|O": {
+        "observed_min": 1.4998,
+        "d_min": 1.1248,
+        "closest_pair_in": "FIX-T14",
+        "atom_ids": [
+          29,
+          96
+        ]
+      },
+      "H|Si": {
+        "observed_min": 2.2316,
+        "d_min": 1.6737,
+        "closest_pair_in": "FIX-T14",
+        "atom_ids": [
+          4,
+          76
+        ]
+      },
+      "O|O": {
+        "observed_min": 2.4219,
+        "d_min": 1.8164,
+        "closest_pair_in": "FIX-T14",
+        "atom_ids": [
+          19,
+          45
+        ]
+      },
+      "O|Si": {
+        "observed_min": 3.3924,
+        "d_min": 2.5443,
+        "closest_pair_in": "FIX-T14",
+        "atom_ids": [
+          23,
+          27
+        ]
+      },
+      "Si|Si": {
+        "observed_min": 3.0192,
+        "d_min": 2.2644,
+        "closest_pair_in": "FIX-T11",
+        "atom_ids": [
+          37,
+          39
+        ]
+      }
+    }
+  },
+  "density": {
+    "tobermorite_interface": {
+      "applicable": true,
+      "values": {
+        "FIX-T11": 2.460292,
+        "FIX-T14": 2.227508
+      },
+      "margin_rel": 0.02,
+      "lo": 2.183,
+      "hi": 2.5095,
+      "basis": "Range of the two INTERFACE FF tobermorite models (11 \u00c5 and 14 \u00c5) widened by the same \u00b12 % placeholder. Synthetic: for code-path tests only."
+    }
+  },
+  "mass": {
+    "tau_m_amu": 0.01,
+    "measured": "|Masses value - standard atomic weight of the mapped element|",
+    "basis": "FF mass tables print 2-5 decimals and use older IUPAC editions (e.g. H 1.00794/1.00797, Ca 40.08, Si 28.086); the largest such difference for the elements in scope is 0.002 amu. 0.01 amu covers it while any element swap differs by > 0.9 amu."
+  }
+}

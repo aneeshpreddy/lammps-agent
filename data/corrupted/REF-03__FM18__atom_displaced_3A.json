@@ -1,0 +1,31 @@
+{
+  "id": "REF-03__FM18__atom_displaced_3A",
+  "file": "data/corrupted/REF-03__FM18__atom_displaced_3A.data",
+  "sha256": "8041ee4464643ca68be432344ee8e9365e64e973b5f0fbd0da8c8b83df31d917",
+  "parent_id": "REF-03",
+  "parent_file": "data/reference/REF-03.data",
+  "parent_sha256": "eb94b804964cdd57da5ff49c87768cbfa7cec015ec90bb03d2d63fa38513f7f4",
+  "failure_mode": "FM18",
+  "operator": "fm18",
+  "variant": "atom_displaced_3A",
+  "description": "displace one bonded atom by 3 \u00c5 along x",
+  "params": {
+    "atom": 1
+  },
+  "expected_failing_properties": [
+    "P2.4",
+    "P2.7"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.4",
+    "P2.7"
+  ],
+  "expected_lammps_behaviour": "Silent at read_data",
+  "header_consistent": true,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-03.params",
+    "density_family": "pce_emc_dilute"
+  }
+}

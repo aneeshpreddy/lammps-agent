@@ -1,0 +1,27 @@
+{
+  "id": "REF-02__FM14__atom_count_plus_one",
+  "file": "data/corrupted/REF-02__FM14__atom_count_plus_one.data",
+  "sha256": "48844abc257f63ec75c7c51a37ea3f31998ed7c47db943919f51aee32d87bd47",
+  "parent_id": "REF-02",
+  "parent_file": "data/reference/REF-02.data",
+  "parent_sha256": "c676d14287eef2fc18e162bad1d5533a2a6e52b3e59e7fe5dcf15704b27e5f2b",
+  "failure_mode": "FM14",
+  "operator": "fm14",
+  "variant": "atom_count_plus_one",
+  "description": "raise the header atom count by one",
+  "params": {},
+  "expected_failing_properties": [
+    "P1.1"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.1"
+  ],
+  "expected_lammps_behaviour": "Loud",
+  "header_consistent": false,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-02.params",
+    "density_family": "pce_emc_dense"
+  }
+}

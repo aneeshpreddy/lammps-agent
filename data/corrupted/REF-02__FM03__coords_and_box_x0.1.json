@@ -1,0 +1,33 @@
+{
+  "id": "REF-02__FM03__coords_and_box_x0.1",
+  "file": "data/corrupted/REF-02__FM03__coords_and_box_x0.1.data",
+  "sha256": "fdfaaa87be07bedf8af9781702c270a95f051758cd15f82de62725549915d10f",
+  "parent_id": "REF-02",
+  "parent_file": "data/reference/REF-02.data",
+  "parent_sha256": "c676d14287eef2fc18e162bad1d5533a2a6e52b3e59e7fe5dcf15704b27e5f2b",
+  "failure_mode": "FM03",
+  "operator": "fm03_down",
+  "variant": "coords_and_box_x0.1",
+  "description": "multiply coordinates and box by 0.1 (\u00c5 read as nm)",
+  "params": {
+    "factor": 0.1
+  },
+  "expected_failing_properties": [
+    "P2.3",
+    "P2.4",
+    "P2.5"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.3",
+    "P2.4",
+    "P2.5"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-02.params",
+    "density_family": "pce_emc_dense"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "id": "FIX-T14__FM06__round_charges_1dp",
+  "file": "data/corrupted/FIX-T14__FM06__round_charges_1dp.data",
+  "sha256": "89bcdf4e639fba146a91ee1f7825d935050ca51e4d681611f64d75e3cb5459a0",
+  "parent_id": "FIX-T14",
+  "parent_file": "data/fixtures/FIX-T14.data",
+  "parent_sha256": "3ce8d56c543b929bb6f89aed63560c97090100874aa6073800ddf68baaacd877",
+  "failure_mode": "FM06",
+  "operator": "fm06_round",
+  "variant": "round_charges_1dp",
+  "description": "round every charge to one decimal place (individual charges lost; total may stay near zero)",
+  "params": {},
+  "expected_failing_properties": [
+    "TC.2"
+  ],
+  "expected_tier": "TC",
+  "spec_expected_properties": [
+    "P2.1"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "FIX-T14",
+  "role": "SYNTHETIC_FIXTURE",
+  "file": "data/fixtures/FIX-T14.data",
+  "sha256": "3ce8d56c543b929bb6f89aed63560c97090100874aa6073800ddf68baaacd877",
+  "source": "UGRP/CEMENT_MINERALS/tob14_avg_cell.car/.mdf + INTERFACE_FF_1_5 pcff_interface_v1_5.frc via msi2lmp v3.9.11 -class II -ignore",
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  },
+  "trust_status": "SYNTHETIC - for code-path tests only, not an oracle",
+  "tilt_before": [
+    -4.071077229,
+    0.0,
+    0.0
+  ],
+  "tilt_after": [
+    2.6639227709999993,
+    0.0,
+    0.0
+  ],
+  "basis_shift": {
+    "k": -1,
+    "m": 0,
+    "n": 0
+  },
+  "atoms_rewrapped": 55,
+  "parent": "FIX-T14-raw"
+}

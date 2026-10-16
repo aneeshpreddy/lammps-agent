@@ -1,0 +1,27 @@
+{
+  "id": "REF-04__FM06__zero_all_charges",
+  "file": "data/corrupted/REF-04__FM06__zero_all_charges.data",
+  "sha256": "ae64f972e7d3be556afb7adafb48bf9542e353c6102fc4615a6be4dbb27afb08",
+  "parent_id": "REF-04",
+  "parent_file": "data/reference/REF-04.data",
+  "parent_sha256": "d6402a0d49b1b1efcbe0311e2ab0aa3f5ad3f6a64f8deb40706506ba6a36690d",
+  "failure_mode": "FM06",
+  "operator": "fm06_zero",
+  "variant": "zero_all_charges",
+  "description": "set every charge to zero",
+  "params": {},
+  "expected_failing_properties": [
+    "P2.1"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.1"
+  ],
+  "expected_lammps_behaviour": "Warn (Using kspace solver on system with no charge)",
+  "header_consistent": true,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-04.params",
+    "density_family": "pce_emc_dilute"
+  }
+}

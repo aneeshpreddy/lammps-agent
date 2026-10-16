@@ -1,0 +1,27 @@
+{
+  "id": "REF-01__FM31__masses_row_duplicated",
+  "file": "data/corrupted/REF-01__FM31__masses_row_duplicated.data",
+  "sha256": "45ad5e0bc710db1b3547217760dcfa79fd0465be170f43b3d91b2fdeb6b0e25d",
+  "parent_id": "REF-01",
+  "parent_file": "data/reference/REF-01.data",
+  "parent_sha256": "61112aef3b5bcdf5a76781bc0ddada875751971d9086501edadc3e628c9e21ae",
+  "failure_mode": "FM31",
+  "operator": "fm31",
+  "variant": "masses_row_duplicated",
+  "description": "replace the second Masses row with a copy of the first",
+  "params": {},
+  "expected_failing_properties": [
+    "P1.4"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.4"
+  ],
+  "expected_lammps_behaviour": "Loud@run only (Tier 3a misses it)",
+  "header_consistent": true,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-01.params",
+    "density_family": "pce_emc_dense"
+  }
+}

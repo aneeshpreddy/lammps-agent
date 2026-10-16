@@ -1,0 +1,41 @@
+{
+  "id": "REF-01__FM01__swap_types_diff_element",
+  "file": "data/corrupted/REF-01__FM01__swap_types_diff_element.data",
+  "sha256": "3bf0e72ec8904e310f433678b9fec5dfcf72fedafe73117d94ceada4a2af75d9",
+  "parent_id": "REF-01",
+  "parent_file": "data/reference/REF-01.data",
+  "parent_sha256": "61112aef3b5bcdf5a76781bc0ddada875751971d9086501edadc3e628c9e21ae",
+  "failure_mode": "FM01",
+  "operator": "fm01_diff",
+  "variant": "swap_types_diff_element",
+  "description": "swap two atom-type IDs of different elements in Atoms; Masses unchanged",
+  "params": {
+    "types": [
+      1,
+      9
+    ],
+    "names": [
+      "c3'",
+      "o1-"
+    ]
+  },
+  "expected_failing_properties": [
+    "P1.16",
+    "P2.3",
+    "P2.4",
+    "TC.2"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P2.6",
+    "TC.1",
+    "TC.2"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-01.params",
+    "density_family": "pce_emc_dense"
+  }
+}

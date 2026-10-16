@@ -1,0 +1,27 @@
+{
+  "id": "REF-01__FM07__written_as_charge_style",
+  "file": "data/corrupted/REF-01__FM07__written_as_charge_style.data",
+  "sha256": "c59a172d9341faf9c8c3afe74e2d689bca04fa2d5dcc3d0ea820e2bcb8d68c0e",
+  "parent_id": "REF-01",
+  "parent_file": "data/reference/REF-01.data",
+  "parent_sha256": "61112aef3b5bcdf5a76781bc0ddada875751971d9086501edadc3e628c9e21ae",
+  "failure_mode": "FM07",
+  "operator": "fm07_charge",
+  "variant": "written_as_charge_style",
+  "description": "drop the molecule-ID column (atom_style charge layout) in a file declared atom_style full",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.4"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.4"
+  ],
+  "expected_lammps_behaviour": "Loud (field count) / Silent if counts match",
+  "header_consistent": true,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-01.params",
+    "density_family": "pce_emc_dense"
+  }
+}

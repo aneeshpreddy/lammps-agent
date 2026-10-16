@@ -1,0 +1,26 @@
+{
+  "id": "FIX-T14__FM21__header_line_after_section",
+  "file": "data/corrupted/FIX-T14__FM21__header_line_after_section.data",
+  "sha256": "e30d7955f8d86473b60e5dbb7cb11c595cf5f6c8a67ba8af4a019ec9d5efe063",
+  "parent_id": "FIX-T14",
+  "parent_file": "data/fixtures/FIX-T14.data",
+  "parent_sha256": "3ce8d56c543b929bb6f89aed63560c97090100874aa6073800ddf68baaacd877",
+  "failure_mode": "FM21",
+  "operator": "fm21_misplaced",
+  "variant": "header_line_after_section",
+  "description": "move the 'atom types' header line to just after the Masses section",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.1"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.1"
+  ],
+  "expected_lammps_behaviour": "Loud (Unknown identifier)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "id": "FIX-T11__FM03__wrong_units_hint",
+  "file": "data/corrupted/FIX-T11__FM03__wrong_units_hint.data",
+  "sha256": "3c9d3d6972d2263cc4dc6fd6441833b283a73daf47126305ba98941aa56f52a2",
+  "parent_id": "FIX-T11",
+  "parent_file": "data/fixtures/FIX-T11.data",
+  "parent_sha256": "5795324a6d12f4fa7efe2a1c2af11d4ae63f20da6eab223c44f941d98b7a8d31",
+  "failure_mode": "FM03",
+  "operator": "fm03_hint",
+  "variant": "wrong_units_hint",
+  "description": "write 'units = metal' on line 1 while the declared units are real",
+  "params": {},
+  "expected_failing_properties": [
+    "P1.15"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.15"
+  ],
+  "expected_lammps_behaviour": "Warn (Inconsistent units in data file)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  }
+}

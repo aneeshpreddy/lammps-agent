@@ -1,0 +1,27 @@
+{
+  "id": "REF-04__FM24__general_triclinic_header",
+  "file": "data/corrupted/REF-04__FM24__general_triclinic_header.data",
+  "sha256": "6e32c6e404869ecf917cab1d7ee38b7dd61b5f1a4de934b47452a5324a4ce3c4",
+  "parent_id": "REF-04",
+  "parent_file": "data/reference/REF-04.data",
+  "parent_sha256": "d6402a0d49b1b1efcbe0311e2ab0aa3f5ad3f6a64f8deb40706506ba6a36690d",
+  "failure_mode": "FM24",
+  "operator": "fm24",
+  "variant": "general_triclinic_header",
+  "description": "add an 'avec' line (general-triclinic keyword, unsupported in scope)",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.5"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.5"
+  ],
+  "expected_lammps_behaviour": "Accepted by this LAMMPS (out of project scope)",
+  "header_consistent": true,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-04.params",
+    "density_family": "pce_emc_dilute"
+  }
+}

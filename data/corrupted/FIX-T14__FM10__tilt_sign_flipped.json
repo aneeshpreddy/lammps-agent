@@ -1,0 +1,30 @@
+{
+  "id": "FIX-T14__FM10__tilt_sign_flipped",
+  "file": "data/corrupted/FIX-T14__FM10__tilt_sign_flipped.data",
+  "sha256": "d4ebc23e7434ed0f47949c9ac0348da6cb610149c5ec08e24db99cf2ea0d9ef8",
+  "parent_id": "FIX-T14",
+  "parent_file": "data/fixtures/FIX-T14.data",
+  "parent_sha256": "3ce8d56c543b929bb6f89aed63560c97090100874aa6073800ddf68baaacd877",
+  "failure_mode": "FM10",
+  "operator": "fm10_flip",
+  "variant": "tilt_sign_flipped",
+  "description": "flip the sign of the xy tilt factor",
+  "params": {},
+  "expected_failing_properties": [
+    "P2.2",
+    "P2.3",
+    "P2.4"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.2",
+    "P2.3",
+    "P2.4"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  }
+}

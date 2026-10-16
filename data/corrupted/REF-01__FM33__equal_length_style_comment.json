@@ -1,0 +1,27 @@
+{
+  "id": "REF-01__FM33__equal_length_style_comment",
+  "file": "data/corrupted/REF-01__FM33__equal_length_style_comment.data",
+  "sha256": "6ec2b907d709d3ad5353e568e5b079fe14aa3918e5452166c867436e6e8a9cd1",
+  "parent_id": "REF-01",
+  "parent_file": "data/reference/REF-01.data",
+  "parent_sha256": "61112aef3b5bcdf5a76781bc0ddada875751971d9086501edadc3e628c9e21ae",
+  "failure_mode": "FM33",
+  "operator": "fm33",
+  "variant": "equal_length_style_comment",
+  "description": "label the Atoms section '# bond' (same length as 'full')",
+  "params": {},
+  "expected_failing_properties": [
+    "P1.11"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.11"
+  ],
+  "expected_lammps_behaviour": "Silent (equal-length names)",
+  "header_consistent": true,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-01.params",
+    "density_family": "pce_emc_dense"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "id": "REF-03__FM21__keyword_case_changed",
+  "file": "data/corrupted/REF-03__FM21__keyword_case_changed.data",
+  "sha256": "b96e1457fafc83545e22b429babf660ab97806cdf96b413721003fc02ea32e44",
+  "parent_id": "REF-03",
+  "parent_file": "data/reference/REF-03.data",
+  "parent_sha256": "eb94b804964cdd57da5ff49c87768cbfa7cec015ec90bb03d2d63fa38513f7f4",
+  "failure_mode": "FM21",
+  "operator": "fm21_case",
+  "variant": "keyword_case_changed",
+  "description": "'Masses' written as 'masses'",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.2"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.2"
+  ],
+  "expected_lammps_behaviour": "Loud (Unknown identifier)",
+  "header_consistent": true,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-03.params",
+    "density_family": "pce_emc_dilute"
+  }
+}

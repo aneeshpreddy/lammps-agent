@@ -1,0 +1,30 @@
+{
+  "id": "FIX-T11__FM27__surplus_final_row",
+  "file": "data/corrupted/FIX-T11__FM27__surplus_final_row.data",
+  "sha256": "a2173b8f44dc5c46fcb6bee3122b54802311fa528e588184e73aa0fa11f112e3",
+  "parent_id": "FIX-T11",
+  "parent_file": "data/fixtures/FIX-T11.data",
+  "parent_sha256": "5795324a6d12f4fa7efe2a1c2af11d4ae63f20da6eab223c44f941d98b7a8d31",
+  "failure_mode": "FM27",
+  "operator": "fm27",
+  "variant": "surplus_final_row",
+  "description": "lower the count of the last section by one, so its final row is surplus",
+  "params": {
+    "section": "Impropers"
+  },
+  "expected_failing_properties": [
+    "P0.11",
+    "P1.1"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.11",
+    "P1.1"
+  ],
+  "expected_lammps_behaviour": "Silent (one surplus row at EOF is ignored)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "FIX-T11__FM10__tilt_over_skewed_same_lattice",
+  "file": "data/corrupted/FIX-T11__FM10__tilt_over_skewed_same_lattice.data",
+  "sha256": "5a3634161914ff1c3fb17115438c221d5d36fbc978e05e5e7ea8d7829df97930",
+  "parent_id": "FIX-T11",
+  "parent_file": "data/fixtures/FIX-T11.data",
+  "parent_sha256": "5795324a6d12f4fa7efe2a1c2af11d4ae63f20da6eab223c44f941d98b7a8d31",
+  "failure_mode": "FM10",
+  "operator": "fm10_skew",
+  "variant": "tilt_over_skewed_same_lattice",
+  "description": "add lx to xy: the same lattice, but beyond the documented tilt bound",
+  "params": {
+    "xy_before": 2.6858545,
+    "xy_after": -4.0491455
+  },
+  "expected_failing_properties": [
+    "P2.8"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.8"
+  ],
+  "expected_lammps_behaviour": "Warn on a different criterion (or none)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  }
+}

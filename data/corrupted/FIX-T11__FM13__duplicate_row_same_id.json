@@ -1,0 +1,28 @@
+{
+  "id": "FIX-T11__FM13__duplicate_row_same_id",
+  "file": "data/corrupted/FIX-T11__FM13__duplicate_row_same_id.data",
+  "sha256": "b475f2a42ec04ebf9ea6bef3f6e3384484ac0d026253dd6171693a84a113b938",
+  "parent_id": "FIX-T11",
+  "parent_file": "data/fixtures/FIX-T11.data",
+  "parent_sha256": "5795324a6d12f4fa7efe2a1c2af11d4ae63f20da6eab223c44f941d98b7a8d31",
+  "failure_mode": "FM13",
+  "operator": "fm13_same",
+  "variant": "duplicate_row_same_id",
+  "description": "duplicate one Atoms row (same ID) and raise the atom count",
+  "params": {
+    "atom": 88
+  },
+  "expected_failing_properties": [
+    "P1.2"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.2"
+  ],
+  "expected_lammps_behaviour": "Silent if max ID >= natoms, else Loud",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  }
+}

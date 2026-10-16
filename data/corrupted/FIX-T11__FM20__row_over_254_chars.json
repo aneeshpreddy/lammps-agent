@@ -1,0 +1,26 @@
+{
+  "id": "FIX-T11__FM20__row_over_254_chars",
+  "file": "data/corrupted/FIX-T11__FM20__row_over_254_chars.data",
+  "sha256": "7848c602c87a38a7e59d9c3fce4ef06825ff48a311fecaeb820c4bbe53ca7d02",
+  "parent_id": "FIX-T11",
+  "parent_file": "data/fixtures/FIX-T11.data",
+  "parent_sha256": "5795324a6d12f4fa7efe2a1c2af11d4ae63f20da6eab223c44f941d98b7a8d31",
+  "failure_mode": "FM20",
+  "operator": "fm20",
+  "variant": "row_over_254_chars",
+  "description": "pad the first Atoms row's z coordinate with 250 trailing digits",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.6"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.6"
+  ],
+  "expected_lammps_behaviour": "Silent (truncated at 254 characters)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  }
+}

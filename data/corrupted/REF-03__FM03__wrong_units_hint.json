@@ -1,0 +1,27 @@
+{
+  "id": "REF-03__FM03__wrong_units_hint",
+  "file": "data/corrupted/REF-03__FM03__wrong_units_hint.data",
+  "sha256": "8e1249644d97b0959361898a1efd3a0fc2a6b18b9d2ecc44390b657c6680b01c",
+  "parent_id": "REF-03",
+  "parent_file": "data/reference/REF-03.data",
+  "parent_sha256": "eb94b804964cdd57da5ff49c87768cbfa7cec015ec90bb03d2d63fa38513f7f4",
+  "failure_mode": "FM03",
+  "operator": "fm03_hint",
+  "variant": "wrong_units_hint",
+  "description": "write 'units = metal' on line 1 while the declared units are real",
+  "params": {},
+  "expected_failing_properties": [
+    "P1.15"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.15"
+  ],
+  "expected_lammps_behaviour": "Warn (Inconsistent units in data file)",
+  "header_consistent": true,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-03.params",
+    "density_family": "pce_emc_dilute"
+  }
+}

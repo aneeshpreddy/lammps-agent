@@ -1,0 +1,33 @@
+{
+  "id": "REF-03__FM08__coords_x1.5_box_kept",
+  "file": "data/corrupted/REF-03__FM08__coords_x1.5_box_kept.data",
+  "sha256": "1cda575c76fd867779fbe2aafc9ecf01b47b7dbb517e9296c267bf73defc7b9a",
+  "parent_id": "REF-03",
+  "parent_file": "data/reference/REF-03.data",
+  "parent_sha256": "eb94b804964cdd57da5ff49c87768cbfa7cec015ec90bb03d2d63fa38513f7f4",
+  "failure_mode": "FM08",
+  "operator": "fm08",
+  "variant": "coords_x1.5_box_kept",
+  "description": "multiply all coordinates by 1.5, box unchanged",
+  "params": {
+    "factor": 1.5
+  },
+  "expected_failing_properties": [
+    "P2.2",
+    "P2.3",
+    "P2.4"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.2",
+    "P2.3",
+    "P2.4"
+  ],
+  "expected_lammps_behaviour": "Silent (periodic remap)",
+  "header_consistent": true,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-03.params",
+    "density_family": "pce_emc_dilute"
+  }
+}

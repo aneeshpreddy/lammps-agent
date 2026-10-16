@@ -1,0 +1,27 @@
+{
+  "id": "REF-03__FM21__header_line_after_section",
+  "file": "data/corrupted/REF-03__FM21__header_line_after_section.data",
+  "sha256": "e023cbd8e1fde05f6002bdc1d84d8a1d2e2b714627fb54690bd50dba841b4938",
+  "parent_id": "REF-03",
+  "parent_file": "data/reference/REF-03.data",
+  "parent_sha256": "eb94b804964cdd57da5ff49c87768cbfa7cec015ec90bb03d2d63fa38513f7f4",
+  "failure_mode": "FM21",
+  "operator": "fm21_misplaced",
+  "variant": "header_line_after_section",
+  "description": "move the 'atom types' header line to just after the Masses section",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.1"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.1"
+  ],
+  "expected_lammps_behaviour": "Loud (Unknown identifier)",
+  "header_consistent": true,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-03.params",
+    "density_family": "pce_emc_dilute"
+  }
+}

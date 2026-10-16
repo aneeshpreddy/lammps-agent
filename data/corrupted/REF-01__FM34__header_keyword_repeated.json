@@ -1,0 +1,27 @@
+{
+  "id": "REF-01__FM34__header_keyword_repeated",
+  "file": "data/corrupted/REF-01__FM34__header_keyword_repeated.data",
+  "sha256": "b888f8c66cec62a56cbe68f2133014d45ad2e88f6523242a0a8345f05d0f91fa",
+  "parent_id": "REF-01",
+  "parent_file": "data/reference/REF-01.data",
+  "parent_sha256": "61112aef3b5bcdf5a76781bc0ddada875751971d9086501edadc3e628c9e21ae",
+  "failure_mode": "FM34",
+  "operator": "fm34",
+  "variant": "header_keyword_repeated",
+  "description": "repeat the 'atoms' header line with the count minus one",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.10"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.10"
+  ],
+  "expected_lammps_behaviour": "Silent (last value wins)",
+  "header_consistent": true,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-01.params",
+    "density_family": "pce_emc_dense"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "REF-02__FM27__surplus_final_row",
+  "file": "data/corrupted/REF-02__FM27__surplus_final_row.data",
+  "sha256": "06f47464ca41799262fc8c25a6107bc0a9b9e1c18310b25760d62e0e318b10da",
+  "parent_id": "REF-02",
+  "parent_file": "data/reference/REF-02.data",
+  "parent_sha256": "c676d14287eef2fc18e162bad1d5533a2a6e52b3e59e7fe5dcf15704b27e5f2b",
+  "failure_mode": "FM27",
+  "operator": "fm27",
+  "variant": "surplus_final_row",
+  "description": "lower the count of the last section by one, so its final row is surplus",
+  "params": {
+    "section": "Impropers"
+  },
+  "expected_failing_properties": [
+    "P0.11",
+    "P1.1"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.11",
+    "P1.1"
+  ],
+  "expected_lammps_behaviour": "Silent (one surplus row at EOF is ignored)",
+  "header_consistent": true,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-02.params",
+    "density_family": "pce_emc_dense"
+  }
+}

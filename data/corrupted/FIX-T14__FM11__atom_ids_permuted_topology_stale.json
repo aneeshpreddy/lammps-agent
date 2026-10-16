@@ -1,0 +1,35 @@
+{
+  "id": "FIX-T14__FM11__atom_ids_permuted_topology_stale",
+  "file": "data/corrupted/FIX-T14__FM11__atom_ids_permuted_topology_stale.data",
+  "sha256": "bdaab764c7c727cc88214027c8a5063dbf79cbfa2bd379449366b614eaf46f53",
+  "parent_id": "FIX-T14",
+  "parent_file": "data/fixtures/FIX-T14.data",
+  "parent_sha256": "3ce8d56c543b929bb6f89aed63560c97090100874aa6073800ddf68baaacd877",
+  "failure_mode": "FM11",
+  "operator": "fm11",
+  "variant": "atom_ids_permuted_topology_stale",
+  "description": "swap the IDs of two distant atoms in Atoms without updating the topology",
+  "params": {
+    "swapped_ids": [
+      1,
+      104
+    ]
+  },
+  "expected_failing_properties": [
+    "P1.16",
+    "P2.4",
+    "TC.2"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P1.16",
+    "P2.4",
+    "TC.2"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  }
+}

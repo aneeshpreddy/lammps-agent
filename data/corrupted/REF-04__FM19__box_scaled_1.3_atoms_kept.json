@@ -1,0 +1,31 @@
+{
+  "id": "REF-04__FM19__box_scaled_1.3_atoms_kept",
+  "file": "data/corrupted/REF-04__FM19__box_scaled_1.3_atoms_kept.data",
+  "sha256": "311686e3ba0f59c02710afe8c3a508c9a5c2a3c75580af95a3acc27bd1f48e9b",
+  "parent_id": "REF-04",
+  "parent_file": "data/reference/REF-04.data",
+  "parent_sha256": "d6402a0d49b1b1efcbe0311e2ab0aa3f5ad3f6a64f8deb40706506ba6a36690d",
+  "failure_mode": "FM19",
+  "operator": "fm19",
+  "variant": "box_scaled_1.3_atoms_kept",
+  "description": "scale the box by 1.3 about its origin; atoms unchanged",
+  "params": {
+    "factor": 1.3
+  },
+  "expected_failing_properties": [
+    "P2.5",
+    "P2.2"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.5",
+    "P2.2"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-04.params",
+    "density_family": "pce_emc_dilute"
+  }
+}

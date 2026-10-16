@@ -1,0 +1,21 @@
+# Project configuration (plan Day 5). Declared validation configurations live in configs/.
+lammps:
+  executable: lmp_serial          # Homebrew name on macOS (SPEC §7.11); 'lmp' on most Linux builds
+  backend: local                  # local | ssh | docker
+  timeout_s: 120                  # PROVISIONAL (OD-L, S-Q6)
+  build_record: docs/lammps_build.txt
+  ssh:                            # used only when backend: ssh (OD-F); never put passwords here
+    host: null                    # e.g. user@cluster.example.edu (key-based auth)
+    remote_scratch: null          # e.g. /scratch/<user>/lammps_validator
+    executable: lmp
+  docker:
+    image: null                   # optional; skipped (plan Day 13)
+    executable: lmp
+
+validator:
+  default_declared_config: configs/emc_pcff_real_full.yaml
+  run_tier3: true                 # Tier 3 runs whenever Tier 0 passes (PROPERTIES §8.2 item 4)
+  run_tier3_full: true            # Tier 3b (full force field + run 0) when the declared config supports it
+
+model:
+  model_id: null                  # filled on 26 Oct from the models overview (R16), with the date

@@ -1,0 +1,26 @@
+{
+  "id": "FIX-T14__FM32__coeff_type_row_duplicated",
+  "file": "data/corrupted/FIX-T14__FM32__coeff_type_row_duplicated.data",
+  "sha256": "c1d72a60a56d9077025a3e41cba4bed0af48ad99f09209789f55de0f3dd36512",
+  "parent_id": "FIX-T14",
+  "parent_file": "data/fixtures/FIX-T14.data",
+  "parent_sha256": "3ce8d56c543b929bb6f89aed63560c97090100874aa6073800ddf68baaacd877",
+  "failure_mode": "FM32",
+  "operator": "fm32",
+  "variant": "coeff_type_row_duplicated",
+  "description": "replace the second Bond Coeffs row with a copy of the first (type 1 twice, type 2 missing)",
+  "params": {},
+  "expected_failing_properties": [
+    "P1.7"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.7"
+  ],
+  "expected_lammps_behaviour": "Silent under nocoeff; Loud@run",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  }
+}

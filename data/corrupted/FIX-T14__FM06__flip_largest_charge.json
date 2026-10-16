@@ -1,0 +1,28 @@
+{
+  "id": "FIX-T14__FM06__flip_largest_charge",
+  "file": "data/corrupted/FIX-T14__FM06__flip_largest_charge.data",
+  "sha256": "dce2e7f44f41285b8701b8dbb5a6411c3d77232cb898fb508b38ef5fa4fb3f99",
+  "parent_id": "FIX-T14",
+  "parent_file": "data/fixtures/FIX-T14.data",
+  "parent_sha256": "3ce8d56c543b929bb6f89aed63560c97090100874aa6073800ddf68baaacd877",
+  "failure_mode": "FM06",
+  "operator": "fm06_flip",
+  "variant": "flip_largest_charge",
+  "description": "flip the sign of the largest-magnitude charge",
+  "params": {
+    "atom": 1
+  },
+  "expected_failing_properties": [
+    "P2.1"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.1"
+  ],
+  "expected_lammps_behaviour": "Silent (Warn only with kspace and |Q|>1e-5)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  }
+}

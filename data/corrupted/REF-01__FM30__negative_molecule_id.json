@@ -1,0 +1,27 @@
+{
+  "id": "REF-01__FM30__negative_molecule_id",
+  "file": "data/corrupted/REF-01__FM30__negative_molecule_id.data",
+  "sha256": "4638ee89e1c8d6f2ba8a30553576b28a9d9e1f8c57f7f3f849c35cb390b0c045",
+  "parent_id": "REF-01",
+  "parent_file": "data/reference/REF-01.data",
+  "parent_sha256": "61112aef3b5bcdf5a76781bc0ddada875751971d9086501edadc3e628c9e21ae",
+  "failure_mode": "FM30",
+  "operator": "fm30",
+  "variant": "negative_molecule_id",
+  "description": "set one molecule ID to -1",
+  "params": {},
+  "expected_failing_properties": [
+    "P1.8"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.8"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-01.params",
+    "density_family": "pce_emc_dense"
+  }
+}

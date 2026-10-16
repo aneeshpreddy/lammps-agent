@@ -1,0 +1,26 @@
+{
+  "id": "FIX-T14__FM10__tilt_line_dropped",
+  "file": "data/corrupted/FIX-T14__FM10__tilt_line_dropped.data",
+  "sha256": "c9fd6b963a78444b2e3e10dde4a7617b21fd337b66a024929551d78d17e392fb",
+  "parent_id": "FIX-T14",
+  "parent_file": "data/fixtures/FIX-T14.data",
+  "parent_sha256": "3ce8d56c543b929bb6f89aed63560c97090100874aa6073800ddf68baaacd877",
+  "failure_mode": "FM10",
+  "operator": "fm10_drop",
+  "variant": "tilt_line_dropped",
+  "description": "delete the 'xy xz yz' line of a triclinic box",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.8"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.8"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  }
+}

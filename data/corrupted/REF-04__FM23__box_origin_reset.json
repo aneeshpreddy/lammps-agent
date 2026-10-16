@@ -1,0 +1,29 @@
+{
+  "id": "REF-04__FM23__box_origin_reset",
+  "file": "data/corrupted/REF-04__FM23__box_origin_reset.data",
+  "sha256": "aea5e5cda68ca6340ccaf61792741b70030d358705c1309de1ee569695cbf28c",
+  "parent_id": "REF-04",
+  "parent_file": "data/reference/REF-04.data",
+  "parent_sha256": "d6402a0d49b1b1efcbe0311e2ab0aa3f5ad3f6a64f8deb40706506ba6a36690d",
+  "failure_mode": "FM23",
+  "operator": "fm23",
+  "variant": "box_origin_reset",
+  "description": "move the box so its origin is 0 (or shift it by half a box if it already is); atoms unchanged",
+  "params": {
+    "shift_x": 10.0
+  },
+  "expected_failing_properties": [
+    "P2.2"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.2"
+  ],
+  "expected_lammps_behaviour": "Silent (periodic)",
+  "header_consistent": true,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-04.params",
+    "density_family": "pce_emc_dilute"
+  }
+}

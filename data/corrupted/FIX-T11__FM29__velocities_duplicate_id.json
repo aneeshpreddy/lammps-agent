@@ -1,0 +1,26 @@
+{
+  "id": "FIX-T11__FM29__velocities_duplicate_id",
+  "file": "data/corrupted/FIX-T11__FM29__velocities_duplicate_id.data",
+  "sha256": "6b3c5c675dc35823410572b717c7469e4f023f995c55526a780837976eab9323",
+  "parent_id": "FIX-T11",
+  "parent_file": "data/fixtures/FIX-T11.data",
+  "parent_sha256": "5795324a6d12f4fa7efe2a1c2af11d4ae63f20da6eab223c44f941d98b7a8d31",
+  "failure_mode": "FM29",
+  "operator": "fm29",
+  "variant": "velocities_duplicate_id",
+  "description": "append a Velocities section in which the last atom ID is listed twice and the first atom has no row",
+  "params": {},
+  "expected_failing_properties": [
+    "P1.14"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.14"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  }
+}

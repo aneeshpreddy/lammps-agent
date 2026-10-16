@@ -1,0 +1,28 @@
+{
+  "id": "FIX-T11__FM28__bond_to_absent_atom",
+  "file": "data/corrupted/FIX-T11__FM28__bond_to_absent_atom.data",
+  "sha256": "8a553ed1d4ace8debe9bbe978c4351e57d0fb771e96ed373bef1f1bd789aff82",
+  "parent_id": "FIX-T11",
+  "parent_file": "data/fixtures/FIX-T11.data",
+  "parent_sha256": "5795324a6d12f4fa7efe2a1c2af11d4ae63f20da6eab223c44f941d98b7a8d31",
+  "failure_mode": "FM28",
+  "operator": "fm28",
+  "variant": "bond_to_absent_atom",
+  "description": "delete the Atoms row of the second atom of a bond (ID < max ID), leaving the topology",
+  "params": {
+    "deleted_atom": 9
+  },
+  "expected_failing_properties": [
+    "P1.5"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.5"
+  ],
+  "expected_lammps_behaviour": "Crash (SIGSEGV) or Loud",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  }
+}

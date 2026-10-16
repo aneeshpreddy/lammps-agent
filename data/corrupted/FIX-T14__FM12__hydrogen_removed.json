@@ -1,0 +1,35 @@
+{
+  "id": "FIX-T14__FM12__hydrogen_removed",
+  "file": "data/corrupted/FIX-T14__FM12__hydrogen_removed.data",
+  "sha256": "ba6736632f5d76be428c45d208793a68a725a991280e508071decc0a2fb7d306",
+  "parent_id": "FIX-T14",
+  "parent_file": "data/fixtures/FIX-T14.data",
+  "parent_sha256": "3ce8d56c543b929bb6f89aed63560c97090100874aa6073800ddf68baaacd877",
+  "failure_mode": "FM12",
+  "operator": "fm12_h",
+  "variant": "hydrogen_removed",
+  "description": "delete one hydrogen and every topology entry containing it; adjust the header",
+  "params": {
+    "atom": 73,
+    "topology_removed": {
+      "Bonds": 1,
+      "Angles": 1,
+      "Dihedrals": 3
+    }
+  },
+  "expected_failing_properties": [
+    "TC.2"
+  ],
+  "expected_tier": "TC",
+  "spec_expected_properties": [
+    "P2.1",
+    "P2.5",
+    "TC.1"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  }
+}

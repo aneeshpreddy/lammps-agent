@@ -1,0 +1,30 @@
+{
+  "id": "FIX-T14__FM13__duplicate_atom_new_id",
+  "file": "data/corrupted/FIX-T14__FM13__duplicate_atom_new_id.data",
+  "sha256": "53a23c0f810a7a88aad4ff64d964554a0cc5800314121fd22d69bd94c1ee627b",
+  "parent_id": "FIX-T14",
+  "parent_file": "data/fixtures/FIX-T14.data",
+  "parent_sha256": "3ce8d56c543b929bb6f89aed63560c97090100874aa6073800ddf68baaacd877",
+  "failure_mode": "FM13",
+  "operator": "fm13_new",
+  "variant": "duplicate_atom_new_id",
+  "description": "duplicate one Atoms row under a new ID (max ID + 1) at the same position",
+  "params": {
+    "new_id": 105
+  },
+  "expected_failing_properties": [
+    "P2.3",
+    "TC.2"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.3",
+    "TC.2"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  }
+}

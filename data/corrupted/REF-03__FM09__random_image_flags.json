@@ -1,0 +1,30 @@
+{
+  "id": "REF-03__FM09__random_image_flags",
+  "file": "data/corrupted/REF-03__FM09__random_image_flags.data",
+  "sha256": "70d4b32bbbc980983d0cbe57a3455b282e1317718afc246b9ed58331db865072",
+  "parent_id": "REF-03",
+  "parent_file": "data/reference/REF-03.data",
+  "parent_sha256": "eb94b804964cdd57da5ff49c87768cbfa7cec015ec90bb03d2d63fa38513f7f4",
+  "failure_mode": "FM09",
+  "operator": "fm09",
+  "variant": "random_image_flags",
+  "description": "add random non-zero image flags in {-1,0,1} to every atom",
+  "params": {
+    "seed": 20261016
+  },
+  "expected_failing_properties": [
+    "P2.7"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P1.9",
+    "P2.7"
+  ],
+  "expected_lammps_behaviour": "Warn at run setup (Inconsistent image flags)",
+  "header_consistent": true,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-03.params",
+    "density_family": "pce_emc_dilute"
+  }
+}

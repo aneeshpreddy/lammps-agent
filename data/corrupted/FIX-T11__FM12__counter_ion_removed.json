@@ -1,0 +1,31 @@
+{
+  "id": "FIX-T11__FM12__counter_ion_removed",
+  "file": "data/corrupted/FIX-T11__FM12__counter_ion_removed.data",
+  "sha256": "035690102b09ccc77690ef6b1a08ec4d20bbdf4cd09e32182b7c2a72c45d7dae",
+  "parent_id": "FIX-T11",
+  "parent_file": "data/fixtures/FIX-T11.data",
+  "parent_sha256": "5795324a6d12f4fa7efe2a1c2af11d4ae63f20da6eab223c44f941d98b7a8d31",
+  "failure_mode": "FM12",
+  "operator": "fm12_ion",
+  "variant": "counter_ion_removed",
+  "description": "delete the unbonded atom with the largest |q| (a counter-ion) and adjust the header",
+  "params": {
+    "atom": 82,
+    "abs_q": 1.5
+  },
+  "expected_failing_properties": [
+    "P2.1",
+    "TC.2"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.1",
+    "TC.2"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  }
+}

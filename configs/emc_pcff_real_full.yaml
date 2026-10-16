@@ -1,0 +1,70 @@
+# Declared validation configuration record (SPEC §7.10).
+# STATUS: PROVISIONAL. Every value below was derived from the candidate references
+# REF-01..REF-04 (EMC v9.4.4 builds of PCE superplasticisers, data/reference/provenance.md)
+# and their EMC-generated INPUT SCRIPTs. None of them is an owner decision yet. When the owner
+# decides OD-B/C/F/G/H/J/L/M/N or S-Q1..S-Q7, change the value, bump config_version, and
+# re-run the validator on every reference (a change invalidates earlier Tier 3 verdicts).
+config_id: emc-pcff-real-full
+config_version: 0.1
+status: PROVISIONAL
+derived_from: [REF-01, REF-02, REF-03, REF-04]
+
+units: real                       # OD-C3   source: REF-0*.in 'units real'
+atom_style: full                  # OD-C1   source: REF-0*.in 'atom_style full'
+boundary: [p, p, p]               # OD-G    REF-0*.in sets no boundary -> LAMMPS default p p p
+box_kind: any                     # P0.8    orthogonal | triclinic | any
+masses_location: data_file        # S-Q1    all references carry Masses in the DATA FILE
+coeffs_location: input_script     # S-Q2    coefficients come from the EMC .params include file
+image_flag_policy: optional       # S-Q3    references carry none; EMC writes unwrapped clusters
+coordinate_wrapping: unwrapped_clusters   # P2.2 policy: wrapped | unwrapped_clusters
+image_consistency: required       # P2.7    applies: EMC writes unwrapped molecules (build.out 'unwrap -> true')
+units_hint_policy: optional       # S-Q7
+encoding_policy: ascii_lf         # OD-M    RECOMMENDED default
+tilt_policy: both                 # OD-N    doc | source | both
+tilt_violation: fail              # P2.8    fail | warn  (policy OPEN)
+net_charge:                       # OD-H
+  required: true                  # EMC 'flag_charged 1'; references sum to 0.0000 e
+  target: 0.0
+  tolerance_e: null               # null -> rounding floor N*0.5*10^-d (PROPERTIES §8.5 rule 3)
+charged_system: true              # P2.1(b) at least one non-zero charge
+molecule_bond_policy: within_molecule     # P1.8  references: no bond crosses molecule IDs
+bonded_term_consistency: required         # P1.10 PCFF/EMC derive angles/dihedrals from bonds
+bonded_term_completeness: required        # P1.17 every bonded triple/path has an angle/dihedral; C(n,3) impropers per centre
+improper_center_index: 1                  # P1.17 class2 impropers list the central atom second (0-based index 1)
+topology_signature_policy: consistent     # P1.16 each topology type joins one atom-type signature
+allowed_sections: [Atoms, Velocities, Masses, Bonds, Angles, Dihedrals, Impropers,
+                   Pair Coeffs, PairIJ Coeffs, Bond Coeffs, Angle Coeffs, Dihedral Coeffs, Improper Coeffs]
+styles:                           # OD-C2   source: REF-0*.params
+  pair: lj/class2/coul/long
+  bond: class2
+  angle: class2
+  dihedral: class2
+  improper: class2
+  kspace: pppm/cg
+type_name_elements:               # OD-J    PCFF / EMC 'cff/basf' type names -> element
+  "c3'": C
+  "c3-": C
+  c4: C
+  c43: C
+  c4o: C
+  ca+2: Ca
+  na+: Na
+  h1: H
+  h1o: H
+  o1-: O
+  o1=: O
+  o2*: O
+  o2c: O
+  o2e: O
+  o2h: O
+  o2s: O
+coeff_file: null                  # set per file: each reference has its own EMC .params include
+system_family: pce_emc            # selects the calibration block
+calibration: calibration/pce_emc.json
+tier3:
+  structure_template: templates/accept_structure.in
+  full_template: templates/emc_pcff_full.in       # force-field block copied from REF-0*.in
+  warning_allow_list:                             # P3.3 (exact message texts, each with a reason)
+    # Emitted by every 'run 0' without an integrator fix: a property of the Tier 3b template, not of the DATA FILE.
+    - "No fixes with time integration, atoms won't move"
+  run_mode: serial                                # OD-L

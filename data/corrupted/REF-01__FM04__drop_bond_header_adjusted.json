@@ -1,0 +1,38 @@
+{
+  "id": "REF-01__FM04__drop_bond_header_adjusted",
+  "file": "data/corrupted/REF-01__FM04__drop_bond_header_adjusted.data",
+  "sha256": "2fe7f56935649bb457f1267fb65387b8f842f86ab6432a30f9096435091b35a1",
+  "parent_id": "REF-01",
+  "parent_file": "data/reference/REF-01.data",
+  "parent_sha256": "61112aef3b5bcdf5a76781bc0ddada875751971d9086501edadc3e628c9e21ae",
+  "failure_mode": "FM04",
+  "operator": "fm04_silent",
+  "variant": "drop_bond_header_adjusted",
+  "description": "delete one bond row and lower the header count (silent variant)",
+  "params": {
+    "deleted_bond": [
+      "736",
+      "11",
+      "732",
+      "734",
+      "#",
+      "c4o,h1"
+    ]
+  },
+  "expected_failing_properties": [
+    "P1.10",
+    "TC.2"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.10",
+    "TC.2"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-01.params",
+    "density_family": "pce_emc_dense"
+  }
+}

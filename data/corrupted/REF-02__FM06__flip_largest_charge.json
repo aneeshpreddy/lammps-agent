@@ -1,0 +1,29 @@
+{
+  "id": "REF-02__FM06__flip_largest_charge",
+  "file": "data/corrupted/REF-02__FM06__flip_largest_charge.data",
+  "sha256": "03c05795f104aa2ae5ba66bc476cef4980262823be8684bc7c81aac4e651f4a7",
+  "parent_id": "REF-02",
+  "parent_file": "data/reference/REF-02.data",
+  "parent_sha256": "c676d14287eef2fc18e162bad1d5533a2a6e52b3e59e7fe5dcf15704b27e5f2b",
+  "failure_mode": "FM06",
+  "operator": "fm06_flip",
+  "variant": "flip_largest_charge",
+  "description": "flip the sign of the largest-magnitude charge",
+  "params": {
+    "atom": 2109
+  },
+  "expected_failing_properties": [
+    "P2.1"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.1"
+  ],
+  "expected_lammps_behaviour": "Silent (Warn only with kspace and |Q|>1e-5)",
+  "header_consistent": true,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-02.params",
+    "density_family": "pce_emc_dense"
+  }
+}

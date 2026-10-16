@@ -1,0 +1,27 @@
+{
+  "id": "REF-04__FM20__row_over_254_chars",
+  "file": "data/corrupted/REF-04__FM20__row_over_254_chars.data",
+  "sha256": "46253251b5e5cb7b3d0f53c979970bf62dd437c5bbb7cd32134615115ce54f4b",
+  "parent_id": "REF-04",
+  "parent_file": "data/reference/REF-04.data",
+  "parent_sha256": "d6402a0d49b1b1efcbe0311e2ab0aa3f5ad3f6a64f8deb40706506ba6a36690d",
+  "failure_mode": "FM20",
+  "operator": "fm20",
+  "variant": "row_over_254_chars",
+  "description": "pad the first Atoms row's z coordinate with 250 trailing digits",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.6"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.6"
+  ],
+  "expected_lammps_behaviour": "Silent (truncated at 254 characters)",
+  "header_consistent": true,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-04.params",
+    "density_family": "pce_emc_dilute"
+  }
+}

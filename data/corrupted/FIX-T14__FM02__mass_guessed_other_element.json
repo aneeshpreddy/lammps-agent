@@ -1,0 +1,28 @@
+{
+  "id": "FIX-T14__FM02__mass_guessed_other_element",
+  "file": "data/corrupted/FIX-T14__FM02__mass_guessed_other_element.data",
+  "sha256": "4b0c97a8d1f8ac0bfbf6086643ffb6239f5f4f7d23e55f385df7bab99954a38d",
+  "parent_id": "FIX-T14",
+  "parent_file": "data/fixtures/FIX-T14.data",
+  "parent_sha256": "3ce8d56c543b929bb6f89aed63560c97090100874aa6073800ddf68baaacd877",
+  "failure_mode": "FM02",
+  "operator": "fm02",
+  "variant": "mass_guessed_other_element",
+  "description": "replace the mass of the first hydrogen type with helium's (a Z = type-index style guess)",
+  "params": {
+    "type": 9
+  },
+  "expected_failing_properties": [
+    "P2.6"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.6"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  }
+}

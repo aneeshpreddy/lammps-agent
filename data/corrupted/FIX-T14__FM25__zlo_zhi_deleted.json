@@ -1,0 +1,26 @@
+{
+  "id": "FIX-T14__FM25__zlo_zhi_deleted",
+  "file": "data/corrupted/FIX-T14__FM25__zlo_zhi_deleted.data",
+  "sha256": "ce2f1072a0f2b69c6daa624c9d030b15f1dc04361a34b30c60eb5f9fd22ae4a9",
+  "parent_id": "FIX-T14",
+  "parent_file": "data/fixtures/FIX-T14.data",
+  "parent_sha256": "3ce8d56c543b929bb6f89aed63560c97090100874aa6073800ddf68baaacd877",
+  "failure_mode": "FM25",
+  "operator": "fm25",
+  "variant": "zlo_zhi_deleted",
+  "description": "delete the 'zlo zhi' line",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.8"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.8"
+  ],
+  "expected_lammps_behaviour": "Silent, no warning (defaults -0.5 0.5)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  }
+}

@@ -1,0 +1,83 @@
+# Declared validation configuration for the SYNTHETIC tobermorite fixtures (data/fixtures/).
+# STATUS: SYNTHETIC. Not an owner decision and not derived from production files: it exists so
+# that triclinic boxes, image flags and Coeff sections inside the DATA FILE are exercised before
+# the owner chooses the system class (OD-B) and force field (OD-C). Values follow the INTERFACE
+# FF 1.5 documentation conventions (PCFF-INTERFACE, class II) and msi2lmp's output.
+config_id: interface-pcff-fixture
+config_version: 0.1
+status: SYNTHETIC
+derived_from: [FIX-T11, FIX-T14]
+
+units: real
+atom_style: full
+boundary: [p, p, p]
+box_kind: triclinic
+masses_location: data_file
+coeffs_location: data_file
+required_coeff_sections: [Pair Coeffs, Bond Coeffs, Angle Coeffs, Dihedral Coeffs, Improper Coeffs]
+image_flag_policy: optional
+coordinate_wrapping: wrapped              # FIX-T11/T14 are wrapped by scripts/make_fixtures.py
+image_consistency: not_applicable         # infinite periodic bonded crystal (RD: consistent flags impossible)
+units_hint_policy: optional
+encoding_policy: ascii_lf
+tilt_policy: both
+tilt_violation: fail
+net_charge: {required: true, target: 0.0, tolerance_e: null}
+charged_system: true
+molecule_bond_policy: report             # msi2lmp molecule IDs are Materials Studio residues; in the
+                                          # infinite tob11 crystal 8 bonds cross them (finding for P1.8 / OD-B)
+bonded_term_consistency: required
+bonded_term_completeness: required        # P1.17 every bonded triple/path has an angle/dihedral; C(n,3) impropers per centre
+improper_center_index: 1                  # P1.17 class2 impropers list the central atom second (0-based index 1)
+topology_signature_policy: consistent
+allowed_sections: [Atoms, Velocities, Masses, Bonds, Angles, Dihedrals, Impropers,
+                   Pair Coeffs, PairIJ Coeffs, Bond Coeffs, Angle Coeffs, Dihedral Coeffs, Improper Coeffs,
+                   BondBond Coeffs, BondAngle Coeffs, MiddleBondTorsion Coeffs, EndBondTorsion Coeffs,
+                   AngleTorsion Coeffs, AngleAngleTorsion Coeffs, BondBond13 Coeffs, AngleAngle Coeffs]
+coeff_param_counts:                       # LAMMPS class2 style docs (parameters per Coeff row)
+  Pair Coeffs: 2
+  Bond Coeffs: 4
+  Angle Coeffs: 4
+  Dihedral Coeffs: 6
+  Improper Coeffs: 2
+  BondBond Coeffs: 3
+  BondAngle Coeffs: 4
+  MiddleBondTorsion Coeffs: 4
+  EndBondTorsion Coeffs: 8
+  AngleTorsion Coeffs: 8
+  AngleAngleTorsion Coeffs: 3
+  BondBond13 Coeffs: 3
+  AngleAngle Coeffs: 6
+styles:
+  pair: lj/class2/coul/long
+  bond: class2
+  angle: class2
+  dihedral: class2
+  improper: class2
+  kspace: pppm
+type_name_elements:                        # element column of pcff_interface_v1_5.frc #atom_types
+  sc2: Si
+  sc3: Si
+  oc12: O
+  oc13: O
+  oc14: O
+  oc22: O
+  o*: O
+  ca+t: Ca
+  h*: H
+  hoy: H
+coeff_file: null
+system_family: tobermorite_interface
+calibration: calibration/tobermorite_fixture.json
+tier3:
+  structure_template: templates/accept_structure.in
+  full_template: templates/interface_pcff_full.in
+  warning_allow_list:
+    # Tier 3b template artefact ('run 0' without an integrator).
+    - "No fixes with time integration, atoms won't move"
+    # (Tier 3a 'nocoeff' zero-style warnings are recognised as mode artefacts by validator/tier3.py.)
+    # Infinite periodic bonded crystal in a 6.7 Å cell: RD read_data, "If your system is an infinite
+    # periodic crystal with bonds then it is impossible to have fully consistent image flags".
+    - "Inconsistent image flags"
+    - "Bond/angle/dihedral extent > half of periodic box length"
+  run_mode: serial

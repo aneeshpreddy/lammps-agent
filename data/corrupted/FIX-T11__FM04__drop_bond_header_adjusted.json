@@ -1,0 +1,35 @@
+{
+  "id": "FIX-T11__FM04__drop_bond_header_adjusted",
+  "file": "data/corrupted/FIX-T11__FM04__drop_bond_header_adjusted.data",
+  "sha256": "17c30dc9cd1fc9e0a69f364bedc3875c7023f4670c502f7858079ed331bb809a",
+  "parent_id": "FIX-T11",
+  "parent_file": "data/fixtures/FIX-T11.data",
+  "parent_sha256": "5795324a6d12f4fa7efe2a1c2af11d4ae63f20da6eab223c44f941d98b7a8d31",
+  "failure_mode": "FM04",
+  "operator": "fm04_silent",
+  "variant": "drop_bond_header_adjusted",
+  "description": "delete one bond row and lower the header count (silent variant)",
+  "params": {
+    "deleted_bond": [
+      "37",
+      "1",
+      "37",
+      "45"
+    ]
+  },
+  "expected_failing_properties": [
+    "P1.10",
+    "TC.2"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.10",
+    "TC.2"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  }
+}

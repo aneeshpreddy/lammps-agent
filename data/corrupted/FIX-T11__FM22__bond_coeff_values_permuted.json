@@ -1,0 +1,27 @@
+{
+  "id": "FIX-T11__FM22__bond_coeff_values_permuted",
+  "file": "data/corrupted/FIX-T11__FM22__bond_coeff_values_permuted.data",
+  "sha256": "e1a3e3857786c6d27b995757bcf087f978918bdcba46d3dcdc4ad9e9467acce7",
+  "parent_id": "FIX-T11",
+  "parent_file": "data/fixtures/FIX-T11.data",
+  "parent_sha256": "5795324a6d12f4fa7efe2a1c2af11d4ae63f20da6eab223c44f941d98b7a8d31",
+  "failure_mode": "FM22",
+  "operator": "fm22_vals",
+  "variant": "bond_coeff_values_permuted",
+  "description": "swap the parameter values (not the IDs or comments) of the first two Bond Coeffs rows",
+  "params": {},
+  "expected_failing_properties": [
+    "TC.2"
+  ],
+  "expected_tier": "TC",
+  "spec_expected_properties": [
+    "P1.7",
+    "TC.2"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  }
+}

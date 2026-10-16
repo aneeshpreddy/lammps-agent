@@ -1,0 +1,7 @@
+# Tier 3a — structure-only acceptance (PROPERTIES P3.1).
+# read_data ... nocoeff: Coeff sections are still read and must have the right number of lines,
+# but are not applied, so no force-field styles are needed (RD; SRC read_data.cpp:429-470).
+units           {units}
+atom_style      {atom_style}
+boundary        {boundary}
+read_data       {datafile} nocoeff

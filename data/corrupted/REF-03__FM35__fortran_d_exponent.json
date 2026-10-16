@@ -1,0 +1,27 @@
+{
+  "id": "REF-03__FM35__fortran_d_exponent",
+  "file": "data/corrupted/REF-03__FM35__fortran_d_exponent.data",
+  "sha256": "f6bdaf53f1bc61a238833c8d4d84d652a7d603964abad74774d886f693433263",
+  "parent_id": "REF-03",
+  "parent_file": "data/reference/REF-03.data",
+  "parent_sha256": "eb94b804964cdd57da5ff49c87768cbfa7cec015ec90bb03d2d63fa38513f7f4",
+  "failure_mode": "FM35",
+  "operator": "fm35",
+  "variant": "fortran_d_exponent",
+  "description": "write the first Masses value with a Fortran D exponent",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.3"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.3"
+  ],
+  "expected_lammps_behaviour": "Loud",
+  "header_consistent": true,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-03.params",
+    "density_family": "pce_emc_dilute"
+  }
+}

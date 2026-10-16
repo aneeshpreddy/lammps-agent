@@ -1,0 +1,13 @@
+{
+  "id": "FIX-T14-raw",
+  "role": "SYNTHETIC_FIXTURE",
+  "file": "data/fixtures/FIX-T14-raw.data",
+  "sha256": "17bdebd07eb96a38d28e2411f2725795097c465d6797b070452c444bec86a138",
+  "source": "UGRP/CEMENT_MINERALS/tob14_avg_cell.car/.mdf + INTERFACE_FF_1_5 pcff_interface_v1_5.frc via msi2lmp v3.9.11 -class II -ignore",
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  },
+  "trust_status": "SYNTHETIC - for code-path tests only, not an oracle",
+  "note": "msi2lmp output as written: tilt not reduced"
+}

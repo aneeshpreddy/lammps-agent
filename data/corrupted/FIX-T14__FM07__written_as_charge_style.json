@@ -1,0 +1,26 @@
+{
+  "id": "FIX-T14__FM07__written_as_charge_style",
+  "file": "data/corrupted/FIX-T14__FM07__written_as_charge_style.data",
+  "sha256": "79592d5612ea8d74bdcba90725b91cda6aea3c4184ba53acbac3921583227663",
+  "parent_id": "FIX-T14",
+  "parent_file": "data/fixtures/FIX-T14.data",
+  "parent_sha256": "3ce8d56c543b929bb6f89aed63560c97090100874aa6073800ddf68baaacd877",
+  "failure_mode": "FM07",
+  "operator": "fm07_charge",
+  "variant": "written_as_charge_style",
+  "description": "drop the molecule-ID column (atom_style charge layout) in a file declared atom_style full",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.4"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.4"
+  ],
+  "expected_lammps_behaviour": "Loud (field count) / Silent if counts match",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  }
+}

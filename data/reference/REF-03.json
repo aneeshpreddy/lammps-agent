@@ -1,0 +1,15 @@
+{
+  "id": "REF-03",
+  "role": "CANDIDATE_REFERENCE",
+  "file": "data/reference/REF-03.data",
+  "sha256": "eb94b804964cdd57da5ff49c87768cbfa7cec015ec90bb03d2d63fa38513f7f4",
+  "source": "UGRP/PCEs/c18e6p15/pce_mono.data (+ .params, .in)",
+  "coeff_file_sha256": "dbc28adfd07edca0f3bf8bece8d2bd0fdf2b53f297b1f6f841bbe4a3b93f0b5b",
+  "input_script_sha256": "812bcd22978d03a00c3ceb59f5912e57de4148bc837664cf537744bdc8b89742",
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-03.params",
+    "density_family": "pce_emc_dilute"
+  },
+  "trust_status": "PROVISIONAL - production-use evidence not yet supplied (provenance.md)"
+}

@@ -1,0 +1,36 @@
+{
+  "id": "REF-03__FM11__atom_ids_permuted_topology_stale",
+  "file": "data/corrupted/REF-03__FM11__atom_ids_permuted_topology_stale.data",
+  "sha256": "39ae6ecc8c79e62825af6a2e6fdf531b2d1c05f1c630b72cbc8f2bd0808d6016",
+  "parent_id": "REF-03",
+  "parent_file": "data/reference/REF-03.data",
+  "parent_sha256": "eb94b804964cdd57da5ff49c87768cbfa7cec015ec90bb03d2d63fa38513f7f4",
+  "failure_mode": "FM11",
+  "operator": "fm11",
+  "variant": "atom_ids_permuted_topology_stale",
+  "description": "swap the IDs of two distant atoms in Atoms without updating the topology",
+  "params": {
+    "swapped_ids": [
+      1,
+      836
+    ]
+  },
+  "expected_failing_properties": [
+    "P1.16",
+    "P2.4",
+    "TC.2"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P1.16",
+    "P2.4",
+    "TC.2"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-03.params",
+    "density_family": "pce_emc_dilute"
+  }
+}

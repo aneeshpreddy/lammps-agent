@@ -1,0 +1,29 @@
+{
+  "id": "REF-01__FM13__duplicate_row_same_id",
+  "file": "data/corrupted/REF-01__FM13__duplicate_row_same_id.data",
+  "sha256": "f54a4991e3edfeddd6fbcadecf5f21a2abc650ce2725d6bb4e1de11fbcc19c61",
+  "parent_id": "REF-01",
+  "parent_file": "data/reference/REF-01.data",
+  "parent_sha256": "61112aef3b5bcdf5a76781bc0ddada875751971d9086501edadc3e628c9e21ae",
+  "failure_mode": "FM13",
+  "operator": "fm13_same",
+  "variant": "duplicate_row_same_id",
+  "description": "duplicate one Atoms row (same ID) and raise the atom count",
+  "params": {
+    "atom": 1478
+  },
+  "expected_failing_properties": [
+    "P1.2"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.2"
+  ],
+  "expected_lammps_behaviour": "Silent if max ID >= natoms, else Loud",
+  "header_consistent": true,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-01.params",
+    "density_family": "pce_emc_dense"
+  }
+}

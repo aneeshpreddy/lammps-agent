@@ -1,0 +1,30 @@
+{
+  "id": "FIX-T14__FM10__tilt_zeroed",
+  "file": "data/corrupted/FIX-T14__FM10__tilt_zeroed.data",
+  "sha256": "40f40f1d49abe8e325ccc2b75378b876baf1496e6b21894629ba5b34b4990396",
+  "parent_id": "FIX-T14",
+  "parent_file": "data/fixtures/FIX-T14.data",
+  "parent_sha256": "3ce8d56c543b929bb6f89aed63560c97090100874aa6073800ddf68baaacd877",
+  "failure_mode": "FM10",
+  "operator": "fm10_zero",
+  "variant": "tilt_zeroed",
+  "description": "set all tilt factors to zero",
+  "params": {},
+  "expected_failing_properties": [
+    "P2.2",
+    "P2.3",
+    "P2.4"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.2",
+    "P2.3",
+    "P2.4"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "id": "FIX-T14__FM31__masses_row_duplicated",
+  "file": "data/corrupted/FIX-T14__FM31__masses_row_duplicated.data",
+  "sha256": "d55d170768a7a2b7ced779db997eea91f441a3ba5f249bbd410e3979ee5e2deb",
+  "parent_id": "FIX-T14",
+  "parent_file": "data/fixtures/FIX-T14.data",
+  "parent_sha256": "3ce8d56c543b929bb6f89aed63560c97090100874aa6073800ddf68baaacd877",
+  "failure_mode": "FM31",
+  "operator": "fm31",
+  "variant": "masses_row_duplicated",
+  "description": "replace the second Masses row with a copy of the first",
+  "params": {},
+  "expected_failing_properties": [
+    "P1.4"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.4"
+  ],
+  "expected_lammps_behaviour": "Loud@run only (Tier 3a misses it)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  }
+}

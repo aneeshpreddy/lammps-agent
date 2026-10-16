@@ -1,0 +1,31 @@
+{
+  "id": "REF-03__FM13__duplicate_atom_new_id",
+  "file": "data/corrupted/REF-03__FM13__duplicate_atom_new_id.data",
+  "sha256": "735831b14f9f50cb0f0bdada5224d6832e790deac269e44001655ee96f67feed",
+  "parent_id": "REF-03",
+  "parent_file": "data/reference/REF-03.data",
+  "parent_sha256": "eb94b804964cdd57da5ff49c87768cbfa7cec015ec90bb03d2d63fa38513f7f4",
+  "failure_mode": "FM13",
+  "operator": "fm13_new",
+  "variant": "duplicate_atom_new_id",
+  "description": "duplicate one Atoms row under a new ID (max ID + 1) at the same position",
+  "params": {
+    "new_id": 846
+  },
+  "expected_failing_properties": [
+    "P2.3",
+    "TC.2"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.3",
+    "TC.2"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-03.params",
+    "density_family": "pce_emc_dilute"
+  }
+}

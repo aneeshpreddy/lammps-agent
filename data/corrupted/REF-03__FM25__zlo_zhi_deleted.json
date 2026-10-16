@@ -1,0 +1,27 @@
+{
+  "id": "REF-03__FM25__zlo_zhi_deleted",
+  "file": "data/corrupted/REF-03__FM25__zlo_zhi_deleted.data",
+  "sha256": "677a58a5408f5cde60b0dfb3839d6c01477ab3975fd52d973fa7eea28460faac",
+  "parent_id": "REF-03",
+  "parent_file": "data/reference/REF-03.data",
+  "parent_sha256": "eb94b804964cdd57da5ff49c87768cbfa7cec015ec90bb03d2d63fa38513f7f4",
+  "failure_mode": "FM25",
+  "operator": "fm25",
+  "variant": "zlo_zhi_deleted",
+  "description": "delete the 'zlo zhi' line",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.8"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.8"
+  ],
+  "expected_lammps_behaviour": "Silent, no warning (defaults -0.5 0.5)",
+  "header_consistent": true,
+  "declared_config": "configs/emc_pcff_real_full.yaml",
+  "overrides": {
+    "coeff_file": "data/reference/REF-03.params",
+    "density_family": "pce_emc_dilute"
+  }
+}

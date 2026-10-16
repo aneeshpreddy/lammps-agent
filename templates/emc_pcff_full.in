@@ -1,0 +1,26 @@
+# Tier 3b — full force-field acceptance (PROPERTIES P3.2) for EMC/PCFF files.
+# Force-field block copied from the EMC-generated INPUT SCRIPT of REF-01..04 (pce_mono.in /
+# pce_1.in, emc.pl v5.2.x); only the run section is replaced by 'run 0'. Coefficients come from
+# the reference's own .params include file ({coeff_file}).
+units           real
+atom_style      full
+boundary        {boundary}
+
+variable        cutoff          index   9.5             # standard cutoff
+variable        charge_cutoff   index   9.5             # charge cutoff
+variable        precision       index   0.001           # kspace precision
+variable        dielectric      index   1               # medium dielectric
+
+pair_style      lj/class2/coul/long ${cutoff} ${charge_cutoff}
+bond_style      harmonic
+special_bonds   lj/coul 0 0 1
+
+read_data       {datafile}
+include         {coeff_file}
+
+if "${flag_charged} != 0" then "kspace_style pppm/cg ${precision}"
+dielectric      ${dielectric}
+
+thermo_style    custom step pe ke etotal evdwl ecoul elong ebond eangle edihed eimp press
+thermo_modify   norm no
+run             0

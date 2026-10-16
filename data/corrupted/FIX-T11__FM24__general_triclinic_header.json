@@ -1,0 +1,26 @@
+{
+  "id": "FIX-T11__FM24__general_triclinic_header",
+  "file": "data/corrupted/FIX-T11__FM24__general_triclinic_header.data",
+  "sha256": "743da5c1a17950af5d35f275da0daf7582b0c0c0033389d87227052bfd0a53c3",
+  "parent_id": "FIX-T11",
+  "parent_file": "data/fixtures/FIX-T11.data",
+  "parent_sha256": "5795324a6d12f4fa7efe2a1c2af11d4ae63f20da6eab223c44f941d98b7a8d31",
+  "failure_mode": "FM24",
+  "operator": "fm24",
+  "variant": "general_triclinic_header",
+  "description": "add an 'avec' line (general-triclinic keyword, unsupported in scope)",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.5"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.5"
+  ],
+  "expected_lammps_behaviour": "Accepted by this LAMMPS (out of project scope)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_fixture.yaml",
+  "overrides": {
+    "density_family": "tobermorite_interface"
+  }
+}

@@ -1,0 +1,21 @@
+# Tier 3b — full force-field acceptance (PROPERTIES P3.2) for PCFF-INTERFACE files written by
+# msi2lmp (coefficients inside the DATA FILE, class 2 styles). SYNTHETIC-FIXTURE configuration:
+# not copied from a group production script (none available for mineral systems yet).
+units           real
+atom_style      full
+boundary        {boundary}
+
+pair_style      lj/class2/coul/long 9.5
+bond_style      class2
+angle_style     class2
+dihedral_style  class2
+improper_style  class2
+special_bonds   lj/coul 0 0 1
+
+read_data       {datafile}
+
+kspace_style    pppm 1.0e-4
+
+thermo_style    custom step pe ke etotal evdwl ecoul elong ebond eangle edihed eimp press
+thermo_modify   norm no
+run             0

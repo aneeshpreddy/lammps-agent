@@ -1,0 +1,3298 @@
+{
+  "generated_by": "scripts/mutate.py",
+  "operators": 49,
+  "files": [
+    {
+      "id": "REF-01__FM01__swap_types_diff_element",
+      "file": "data/corrupted/REF-01__FM01__swap_types_diff_element.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM01",
+      "variant": "swap_types_diff_element",
+      "expected_failing_properties": [
+        "P1.16",
+        "P2.3",
+        "P2.4",
+        "TC.2"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-01__FM01__swap_types_same_element",
+      "file": "data/corrupted/REF-01__FM01__swap_types_same_element.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM01",
+      "variant": "swap_types_same_element",
+      "expected_failing_properties": [
+        "P1.16",
+        "TC.2"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-01__FM02__mass_guessed_other_element",
+      "file": "data/corrupted/REF-01__FM02__mass_guessed_other_element.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM02",
+      "variant": "mass_guessed_other_element",
+      "expected_failing_properties": [
+        "P2.6"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-01__FM03__coords_and_box_x10",
+      "file": "data/corrupted/REF-01__FM03__coords_and_box_x10.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM03",
+      "variant": "coords_and_box_x10",
+      "expected_failing_properties": [
+        "P2.3",
+        "P2.4",
+        "P2.5"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-01__FM03__coords_and_box_x0.1",
+      "file": "data/corrupted/REF-01__FM03__coords_and_box_x0.1.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM03",
+      "variant": "coords_and_box_x0.1",
+      "expected_failing_properties": [
+        "P2.3",
+        "P2.4",
+        "P2.5"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-01__FM03__wrong_units_hint",
+      "file": "data/corrupted/REF-01__FM03__wrong_units_hint.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM03",
+      "variant": "wrong_units_hint",
+      "expected_failing_properties": [
+        "P1.15"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Warn (Inconsistent units in data file)"
+    },
+    {
+      "id": "REF-01__FM04__drop_bond_header_adjusted",
+      "file": "data/corrupted/REF-01__FM04__drop_bond_header_adjusted.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM04",
+      "variant": "drop_bond_header_adjusted",
+      "expected_failing_properties": [
+        "P1.10",
+        "TC.2"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-01__FM04__drop_bond_header_kept",
+      "file": "data/corrupted/REF-01__FM04__drop_bond_header_kept.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM04",
+      "variant": "drop_bond_header_kept",
+      "expected_failing_properties": [
+        "P1.1"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Loud"
+    },
+    {
+      "id": "REF-01__FM04__angles_dihedrals_impropers_dropped",
+      "file": "data/corrupted/REF-01__FM04__angles_dihedrals_impropers_dropped.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM04",
+      "variant": "angles_dihedrals_impropers_dropped",
+      "expected_failing_properties": [
+        "P1.17",
+        "TC.2"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-01__FM05__reversed_duplicate_bond",
+      "file": "data/corrupted/REF-01__FM05__reversed_duplicate_bond.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM05",
+      "variant": "reversed_duplicate_bond",
+      "expected_failing_properties": [
+        "P1.6"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-01__FM06__flip_largest_charge",
+      "file": "data/corrupted/REF-01__FM06__flip_largest_charge.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM06",
+      "variant": "flip_largest_charge",
+      "expected_failing_properties": [
+        "P2.1"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent (Warn only with kspace and |Q|>1e-5)"
+    },
+    {
+      "id": "REF-01__FM06__zero_all_charges",
+      "file": "data/corrupted/REF-01__FM06__zero_all_charges.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM06",
+      "variant": "zero_all_charges",
+      "expected_failing_properties": [
+        "P2.1"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Warn (Using kspace solver on system with no charge)"
+    },
+    {
+      "id": "REF-01__FM06__round_charges_1dp",
+      "file": "data/corrupted/REF-01__FM06__round_charges_1dp.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM06",
+      "variant": "round_charges_1dp",
+      "expected_failing_properties": [
+        "TC.2"
+      ],
+      "expected_tier": "TC",
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-01__FM07__written_as_charge_style",
+      "file": "data/corrupted/REF-01__FM07__written_as_charge_style.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM07",
+      "variant": "written_as_charge_style",
+      "expected_failing_properties": [
+        "P0.4"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Loud (field count) / Silent if counts match"
+    },
+    {
+      "id": "REF-01__FM07__written_as_molecular_style",
+      "file": "data/corrupted/REF-01__FM07__written_as_molecular_style.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM07",
+      "variant": "written_as_molecular_style",
+      "expected_failing_properties": [
+        "P0.4"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Loud (field count) / Silent if counts match"
+    },
+    {
+      "id": "REF-01__FM08__coords_x1.5_box_kept",
+      "file": "data/corrupted/REF-01__FM08__coords_x1.5_box_kept.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM08",
+      "variant": "coords_x1.5_box_kept",
+      "expected_failing_properties": [
+        "P2.2",
+        "P2.3",
+        "P2.4"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent (periodic remap)"
+    },
+    {
+      "id": "REF-01__FM09__random_image_flags",
+      "file": "data/corrupted/REF-01__FM09__random_image_flags.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM09",
+      "variant": "random_image_flags",
+      "expected_failing_properties": [
+        "P2.7"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Warn at run setup (Inconsistent image flags)"
+    },
+    {
+      "id": "REF-01__FM11__atom_ids_permuted_topology_stale",
+      "file": "data/corrupted/REF-01__FM11__atom_ids_permuted_topology_stale.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM11",
+      "variant": "atom_ids_permuted_topology_stale",
+      "expected_failing_properties": [
+        "P1.16",
+        "P2.4",
+        "TC.2"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-01__FM12__counter_ion_removed",
+      "file": "data/corrupted/REF-01__FM12__counter_ion_removed.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM12",
+      "variant": "counter_ion_removed",
+      "expected_failing_properties": [
+        "P2.1",
+        "TC.2"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-01__FM12__hydrogen_removed",
+      "file": "data/corrupted/REF-01__FM12__hydrogen_removed.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM12",
+      "variant": "hydrogen_removed",
+      "expected_failing_properties": [
+        "TC.2"
+      ],
+      "expected_tier": "TC",
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-01__FM13__duplicate_row_same_id",
+      "file": "data/corrupted/REF-01__FM13__duplicate_row_same_id.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM13",
+      "variant": "duplicate_row_same_id",
+      "expected_failing_properties": [
+        "P1.2"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent if max ID >= natoms, else Loud"
+    },
+    {
+      "id": "REF-01__FM13__duplicate_atom_new_id",
+      "file": "data/corrupted/REF-01__FM13__duplicate_atom_new_id.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM13",
+      "variant": "duplicate_atom_new_id",
+      "expected_failing_properties": [
+        "P2.3",
+        "TC.2"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-01__FM14__atom_count_plus_one",
+      "file": "data/corrupted/REF-01__FM14__atom_count_plus_one.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM14",
+      "variant": "atom_count_plus_one",
+      "expected_failing_properties": [
+        "P1.1"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Loud"
+    },
+    {
+      "id": "REF-01__FM27__surplus_final_row",
+      "file": "data/corrupted/REF-01__FM27__surplus_final_row.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM27",
+      "variant": "surplus_final_row",
+      "expected_failing_properties": [
+        "P0.11",
+        "P1.1"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Silent (one surplus row at EOF is ignored)"
+    },
+    {
+      "id": "REF-01__FM15__masses_values_permuted",
+      "file": "data/corrupted/REF-01__FM15__masses_values_permuted.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM15",
+      "variant": "masses_values_permuted",
+      "expected_failing_properties": [
+        "P2.6"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-01__FM17__atom_moved_onto_another",
+      "file": "data/corrupted/REF-01__FM17__atom_moved_onto_another.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM17",
+      "variant": "atom_moved_onto_another",
+      "expected_failing_properties": [
+        "P2.3"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent at read_data; PE may be inf at run"
+    },
+    {
+      "id": "REF-01__FM18__atom_displaced_3A",
+      "file": "data/corrupted/REF-01__FM18__atom_displaced_3A.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM18",
+      "variant": "atom_displaced_3A",
+      "expected_failing_properties": [
+        "P2.4",
+        "P2.7"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent at read_data"
+    },
+    {
+      "id": "REF-01__FM19__box_scaled_1.3_atoms_kept",
+      "file": "data/corrupted/REF-01__FM19__box_scaled_1.3_atoms_kept.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM19",
+      "variant": "box_scaled_1.3_atoms_kept",
+      "expected_failing_properties": [
+        "P2.5",
+        "P2.2"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-01__FM20__row_over_254_chars",
+      "file": "data/corrupted/REF-01__FM20__row_over_254_chars.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM20",
+      "variant": "row_over_254_chars",
+      "expected_failing_properties": [
+        "P0.6"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Silent (truncated at 254 characters)"
+    },
+    {
+      "id": "REF-01__FM21__keyword_case_changed",
+      "file": "data/corrupted/REF-01__FM21__keyword_case_changed.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM21",
+      "variant": "keyword_case_changed",
+      "expected_failing_properties": [
+        "P0.2"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Loud (Unknown identifier)"
+    },
+    {
+      "id": "REF-01__FM21__header_line_after_section",
+      "file": "data/corrupted/REF-01__FM21__header_line_after_section.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM21",
+      "variant": "header_line_after_section",
+      "expected_failing_properties": [
+        "P0.1"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Loud (Unknown identifier)"
+    },
+    {
+      "id": "REF-01__FM23__box_origin_reset",
+      "file": "data/corrupted/REF-01__FM23__box_origin_reset.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM23",
+      "variant": "box_origin_reset",
+      "expected_failing_properties": [
+        "P2.2"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent (periodic)"
+    },
+    {
+      "id": "REF-01__FM24__general_triclinic_header",
+      "file": "data/corrupted/REF-01__FM24__general_triclinic_header.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM24",
+      "variant": "general_triclinic_header",
+      "expected_failing_properties": [
+        "P0.5"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Accepted by this LAMMPS (out of project scope)"
+    },
+    {
+      "id": "REF-01__FM25__zlo_zhi_deleted",
+      "file": "data/corrupted/REF-01__FM25__zlo_zhi_deleted.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM25",
+      "variant": "zlo_zhi_deleted",
+      "expected_failing_properties": [
+        "P0.8"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Silent, no warning (defaults -0.5 0.5)"
+    },
+    {
+      "id": "REF-01__FM26__no_blank_after_keyword",
+      "file": "data/corrupted/REF-01__FM26__no_blank_after_keyword.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM26",
+      "variant": "no_blank_after_keyword",
+      "expected_failing_properties": [
+        "P0.7"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Loud in tested cases"
+    },
+    {
+      "id": "REF-01__FM28__bond_to_absent_atom",
+      "file": "data/corrupted/REF-01__FM28__bond_to_absent_atom.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM28",
+      "variant": "bond_to_absent_atom",
+      "expected_failing_properties": [
+        "P1.5"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Crash (SIGSEGV) or Loud"
+    },
+    {
+      "id": "REF-01__FM29__velocities_duplicate_id",
+      "file": "data/corrupted/REF-01__FM29__velocities_duplicate_id.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM29",
+      "variant": "velocities_duplicate_id",
+      "expected_failing_properties": [
+        "P1.14"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-01__FM30__negative_molecule_id",
+      "file": "data/corrupted/REF-01__FM30__negative_molecule_id.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM30",
+      "variant": "negative_molecule_id",
+      "expected_failing_properties": [
+        "P1.8"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-01__FM31__masses_row_duplicated",
+      "file": "data/corrupted/REF-01__FM31__masses_row_duplicated.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM31",
+      "variant": "masses_row_duplicated",
+      "expected_failing_properties": [
+        "P1.4"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Loud@run only (Tier 3a misses it)"
+    },
+    {
+      "id": "REF-01__FM33__equal_length_style_comment",
+      "file": "data/corrupted/REF-01__FM33__equal_length_style_comment.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM33",
+      "variant": "equal_length_style_comment",
+      "expected_failing_properties": [
+        "P1.11"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent (equal-length names)"
+    },
+    {
+      "id": "REF-01__FM34__header_keyword_repeated",
+      "file": "data/corrupted/REF-01__FM34__header_keyword_repeated.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM34",
+      "variant": "header_keyword_repeated",
+      "expected_failing_properties": [
+        "P0.10"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Silent (last value wins)"
+    },
+    {
+      "id": "REF-01__FM35__fortran_d_exponent",
+      "file": "data/corrupted/REF-01__FM35__fortran_d_exponent.data",
+      "parent_id": "REF-01",
+      "failure_mode": "FM35",
+      "variant": "fortran_d_exponent",
+      "expected_failing_properties": [
+        "P0.3"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Loud"
+    },
+    {
+      "id": "REF-02__FM01__swap_types_diff_element",
+      "file": "data/corrupted/REF-02__FM01__swap_types_diff_element.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM01",
+      "variant": "swap_types_diff_element",
+      "expected_failing_properties": [
+        "P1.16",
+        "P2.3",
+        "P2.4",
+        "TC.2"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-02__FM01__swap_types_same_element",
+      "file": "data/corrupted/REF-02__FM01__swap_types_same_element.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM01",
+      "variant": "swap_types_same_element",
+      "expected_failing_properties": [
+        "P1.16",
+        "TC.2"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-02__FM02__mass_guessed_other_element",
+      "file": "data/corrupted/REF-02__FM02__mass_guessed_other_element.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM02",
+      "variant": "mass_guessed_other_element",
+      "expected_failing_properties": [
+        "P2.6"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-02__FM03__coords_and_box_x10",
+      "file": "data/corrupted/REF-02__FM03__coords_and_box_x10.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM03",
+      "variant": "coords_and_box_x10",
+      "expected_failing_properties": [
+        "P2.3",
+        "P2.4",
+        "P2.5"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-02__FM03__coords_and_box_x0.1",
+      "file": "data/corrupted/REF-02__FM03__coords_and_box_x0.1.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM03",
+      "variant": "coords_and_box_x0.1",
+      "expected_failing_properties": [
+        "P2.3",
+        "P2.4",
+        "P2.5"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-02__FM03__wrong_units_hint",
+      "file": "data/corrupted/REF-02__FM03__wrong_units_hint.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM03",
+      "variant": "wrong_units_hint",
+      "expected_failing_properties": [
+        "P1.15"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Warn (Inconsistent units in data file)"
+    },
+    {
+      "id": "REF-02__FM04__drop_bond_header_adjusted",
+      "file": "data/corrupted/REF-02__FM04__drop_bond_header_adjusted.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM04",
+      "variant": "drop_bond_header_adjusted",
+      "expected_failing_properties": [
+        "P1.10",
+        "TC.2"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-02__FM04__drop_bond_header_kept",
+      "file": "data/corrupted/REF-02__FM04__drop_bond_header_kept.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM04",
+      "variant": "drop_bond_header_kept",
+      "expected_failing_properties": [
+        "P1.1"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Loud"
+    },
+    {
+      "id": "REF-02__FM04__angles_dihedrals_impropers_dropped",
+      "file": "data/corrupted/REF-02__FM04__angles_dihedrals_impropers_dropped.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM04",
+      "variant": "angles_dihedrals_impropers_dropped",
+      "expected_failing_properties": [
+        "P1.17",
+        "TC.2"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-02__FM05__reversed_duplicate_bond",
+      "file": "data/corrupted/REF-02__FM05__reversed_duplicate_bond.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM05",
+      "variant": "reversed_duplicate_bond",
+      "expected_failing_properties": [
+        "P1.6"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-02__FM06__flip_largest_charge",
+      "file": "data/corrupted/REF-02__FM06__flip_largest_charge.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM06",
+      "variant": "flip_largest_charge",
+      "expected_failing_properties": [
+        "P2.1"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent (Warn only with kspace and |Q|>1e-5)"
+    },
+    {
+      "id": "REF-02__FM06__zero_all_charges",
+      "file": "data/corrupted/REF-02__FM06__zero_all_charges.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM06",
+      "variant": "zero_all_charges",
+      "expected_failing_properties": [
+        "P2.1"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Warn (Using kspace solver on system with no charge)"
+    },
+    {
+      "id": "REF-02__FM06__round_charges_1dp",
+      "file": "data/corrupted/REF-02__FM06__round_charges_1dp.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM06",
+      "variant": "round_charges_1dp",
+      "expected_failing_properties": [
+        "TC.2"
+      ],
+      "expected_tier": "TC",
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-02__FM07__written_as_charge_style",
+      "file": "data/corrupted/REF-02__FM07__written_as_charge_style.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM07",
+      "variant": "written_as_charge_style",
+      "expected_failing_properties": [
+        "P0.4"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Loud (field count) / Silent if counts match"
+    },
+    {
+      "id": "REF-02__FM07__written_as_molecular_style",
+      "file": "data/corrupted/REF-02__FM07__written_as_molecular_style.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM07",
+      "variant": "written_as_molecular_style",
+      "expected_failing_properties": [
+        "P0.4"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Loud (field count) / Silent if counts match"
+    },
+    {
+      "id": "REF-02__FM08__coords_x1.5_box_kept",
+      "file": "data/corrupted/REF-02__FM08__coords_x1.5_box_kept.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM08",
+      "variant": "coords_x1.5_box_kept",
+      "expected_failing_properties": [
+        "P2.2",
+        "P2.3",
+        "P2.4"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent (periodic remap)"
+    },
+    {
+      "id": "REF-02__FM09__random_image_flags",
+      "file": "data/corrupted/REF-02__FM09__random_image_flags.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM09",
+      "variant": "random_image_flags",
+      "expected_failing_properties": [
+        "P2.7"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Warn at run setup (Inconsistent image flags)"
+    },
+    {
+      "id": "REF-02__FM11__atom_ids_permuted_topology_stale",
+      "file": "data/corrupted/REF-02__FM11__atom_ids_permuted_topology_stale.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM11",
+      "variant": "atom_ids_permuted_topology_stale",
+      "expected_failing_properties": [
+        "P1.16",
+        "P2.4",
+        "TC.2"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-02__FM12__counter_ion_removed",
+      "file": "data/corrupted/REF-02__FM12__counter_ion_removed.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM12",
+      "variant": "counter_ion_removed",
+      "expected_failing_properties": [
+        "P2.1",
+        "TC.2"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-02__FM12__hydrogen_removed",
+      "file": "data/corrupted/REF-02__FM12__hydrogen_removed.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM12",
+      "variant": "hydrogen_removed",
+      "expected_failing_properties": [
+        "TC.2"
+      ],
+      "expected_tier": "TC",
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-02__FM13__duplicate_row_same_id",
+      "file": "data/corrupted/REF-02__FM13__duplicate_row_same_id.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM13",
+      "variant": "duplicate_row_same_id",
+      "expected_failing_properties": [
+        "P1.2"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent if max ID >= natoms, else Loud"
+    },
+    {
+      "id": "REF-02__FM13__duplicate_atom_new_id",
+      "file": "data/corrupted/REF-02__FM13__duplicate_atom_new_id.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM13",
+      "variant": "duplicate_atom_new_id",
+      "expected_failing_properties": [
+        "P2.3",
+        "TC.2"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-02__FM14__atom_count_plus_one",
+      "file": "data/corrupted/REF-02__FM14__atom_count_plus_one.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM14",
+      "variant": "atom_count_plus_one",
+      "expected_failing_properties": [
+        "P1.1"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Loud"
+    },
+    {
+      "id": "REF-02__FM27__surplus_final_row",
+      "file": "data/corrupted/REF-02__FM27__surplus_final_row.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM27",
+      "variant": "surplus_final_row",
+      "expected_failing_properties": [
+        "P0.11",
+        "P1.1"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Silent (one surplus row at EOF is ignored)"
+    },
+    {
+      "id": "REF-02__FM15__masses_values_permuted",
+      "file": "data/corrupted/REF-02__FM15__masses_values_permuted.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM15",
+      "variant": "masses_values_permuted",
+      "expected_failing_properties": [
+        "P2.6"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-02__FM17__atom_moved_onto_another",
+      "file": "data/corrupted/REF-02__FM17__atom_moved_onto_another.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM17",
+      "variant": "atom_moved_onto_another",
+      "expected_failing_properties": [
+        "P2.3"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent at read_data; PE may be inf at run"
+    },
+    {
+      "id": "REF-02__FM18__atom_displaced_3A",
+      "file": "data/corrupted/REF-02__FM18__atom_displaced_3A.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM18",
+      "variant": "atom_displaced_3A",
+      "expected_failing_properties": [
+        "P2.4",
+        "P2.7"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent at read_data"
+    },
+    {
+      "id": "REF-02__FM19__box_scaled_1.3_atoms_kept",
+      "file": "data/corrupted/REF-02__FM19__box_scaled_1.3_atoms_kept.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM19",
+      "variant": "box_scaled_1.3_atoms_kept",
+      "expected_failing_properties": [
+        "P2.5",
+        "P2.2"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-02__FM20__row_over_254_chars",
+      "file": "data/corrupted/REF-02__FM20__row_over_254_chars.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM20",
+      "variant": "row_over_254_chars",
+      "expected_failing_properties": [
+        "P0.6"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Silent (truncated at 254 characters)"
+    },
+    {
+      "id": "REF-02__FM21__keyword_case_changed",
+      "file": "data/corrupted/REF-02__FM21__keyword_case_changed.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM21",
+      "variant": "keyword_case_changed",
+      "expected_failing_properties": [
+        "P0.2"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Loud (Unknown identifier)"
+    },
+    {
+      "id": "REF-02__FM21__header_line_after_section",
+      "file": "data/corrupted/REF-02__FM21__header_line_after_section.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM21",
+      "variant": "header_line_after_section",
+      "expected_failing_properties": [
+        "P0.1"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Loud (Unknown identifier)"
+    },
+    {
+      "id": "REF-02__FM23__box_origin_reset",
+      "file": "data/corrupted/REF-02__FM23__box_origin_reset.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM23",
+      "variant": "box_origin_reset",
+      "expected_failing_properties": [
+        "P2.2"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent (periodic)"
+    },
+    {
+      "id": "REF-02__FM24__general_triclinic_header",
+      "file": "data/corrupted/REF-02__FM24__general_triclinic_header.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM24",
+      "variant": "general_triclinic_header",
+      "expected_failing_properties": [
+        "P0.5"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Accepted by this LAMMPS (out of project scope)"
+    },
+    {
+      "id": "REF-02__FM25__zlo_zhi_deleted",
+      "file": "data/corrupted/REF-02__FM25__zlo_zhi_deleted.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM25",
+      "variant": "zlo_zhi_deleted",
+      "expected_failing_properties": [
+        "P0.8"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Silent, no warning (defaults -0.5 0.5)"
+    },
+    {
+      "id": "REF-02__FM26__no_blank_after_keyword",
+      "file": "data/corrupted/REF-02__FM26__no_blank_after_keyword.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM26",
+      "variant": "no_blank_after_keyword",
+      "expected_failing_properties": [
+        "P0.7"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Loud in tested cases"
+    },
+    {
+      "id": "REF-02__FM28__bond_to_absent_atom",
+      "file": "data/corrupted/REF-02__FM28__bond_to_absent_atom.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM28",
+      "variant": "bond_to_absent_atom",
+      "expected_failing_properties": [
+        "P1.5"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Crash (SIGSEGV) or Loud"
+    },
+    {
+      "id": "REF-02__FM29__velocities_duplicate_id",
+      "file": "data/corrupted/REF-02__FM29__velocities_duplicate_id.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM29",
+      "variant": "velocities_duplicate_id",
+      "expected_failing_properties": [
+        "P1.14"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-02__FM30__negative_molecule_id",
+      "file": "data/corrupted/REF-02__FM30__negative_molecule_id.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM30",
+      "variant": "negative_molecule_id",
+      "expected_failing_properties": [
+        "P1.8"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-02__FM31__masses_row_duplicated",
+      "file": "data/corrupted/REF-02__FM31__masses_row_duplicated.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM31",
+      "variant": "masses_row_duplicated",
+      "expected_failing_properties": [
+        "P1.4"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Loud@run only (Tier 3a misses it)"
+    },
+    {
+      "id": "REF-02__FM33__equal_length_style_comment",
+      "file": "data/corrupted/REF-02__FM33__equal_length_style_comment.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM33",
+      "variant": "equal_length_style_comment",
+      "expected_failing_properties": [
+        "P1.11"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent (equal-length names)"
+    },
+    {
+      "id": "REF-02__FM34__header_keyword_repeated",
+      "file": "data/corrupted/REF-02__FM34__header_keyword_repeated.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM34",
+      "variant": "header_keyword_repeated",
+      "expected_failing_properties": [
+        "P0.10"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Silent (last value wins)"
+    },
+    {
+      "id": "REF-02__FM35__fortran_d_exponent",
+      "file": "data/corrupted/REF-02__FM35__fortran_d_exponent.data",
+      "parent_id": "REF-02",
+      "failure_mode": "FM35",
+      "variant": "fortran_d_exponent",
+      "expected_failing_properties": [
+        "P0.3"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Loud"
+    },
+    {
+      "id": "REF-03__FM01__swap_types_diff_element",
+      "file": "data/corrupted/REF-03__FM01__swap_types_diff_element.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM01",
+      "variant": "swap_types_diff_element",
+      "expected_failing_properties": [
+        "P1.16",
+        "P2.3",
+        "P2.4",
+        "TC.2"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-03__FM01__swap_types_same_element",
+      "file": "data/corrupted/REF-03__FM01__swap_types_same_element.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM01",
+      "variant": "swap_types_same_element",
+      "expected_failing_properties": [
+        "P1.16",
+        "TC.2"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-03__FM02__mass_guessed_other_element",
+      "file": "data/corrupted/REF-03__FM02__mass_guessed_other_element.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM02",
+      "variant": "mass_guessed_other_element",
+      "expected_failing_properties": [
+        "P2.6"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-03__FM03__coords_and_box_x10",
+      "file": "data/corrupted/REF-03__FM03__coords_and_box_x10.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM03",
+      "variant": "coords_and_box_x10",
+      "expected_failing_properties": [
+        "P2.3",
+        "P2.4",
+        "P2.5"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-03__FM03__coords_and_box_x0.1",
+      "file": "data/corrupted/REF-03__FM03__coords_and_box_x0.1.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM03",
+      "variant": "coords_and_box_x0.1",
+      "expected_failing_properties": [
+        "P2.3",
+        "P2.4",
+        "P2.5"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-03__FM03__wrong_units_hint",
+      "file": "data/corrupted/REF-03__FM03__wrong_units_hint.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM03",
+      "variant": "wrong_units_hint",
+      "expected_failing_properties": [
+        "P1.15"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Warn (Inconsistent units in data file)"
+    },
+    {
+      "id": "REF-03__FM04__drop_bond_header_adjusted",
+      "file": "data/corrupted/REF-03__FM04__drop_bond_header_adjusted.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM04",
+      "variant": "drop_bond_header_adjusted",
+      "expected_failing_properties": [
+        "P1.10",
+        "TC.2"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-03__FM04__drop_bond_header_kept",
+      "file": "data/corrupted/REF-03__FM04__drop_bond_header_kept.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM04",
+      "variant": "drop_bond_header_kept",
+      "expected_failing_properties": [
+        "P1.1"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Loud"
+    },
+    {
+      "id": "REF-03__FM04__angles_dihedrals_impropers_dropped",
+      "file": "data/corrupted/REF-03__FM04__angles_dihedrals_impropers_dropped.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM04",
+      "variant": "angles_dihedrals_impropers_dropped",
+      "expected_failing_properties": [
+        "P1.17",
+        "TC.2"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-03__FM05__reversed_duplicate_bond",
+      "file": "data/corrupted/REF-03__FM05__reversed_duplicate_bond.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM05",
+      "variant": "reversed_duplicate_bond",
+      "expected_failing_properties": [
+        "P1.6"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-03__FM06__flip_largest_charge",
+      "file": "data/corrupted/REF-03__FM06__flip_largest_charge.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM06",
+      "variant": "flip_largest_charge",
+      "expected_failing_properties": [
+        "P2.1"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent (Warn only with kspace and |Q|>1e-5)"
+    },
+    {
+      "id": "REF-03__FM06__zero_all_charges",
+      "file": "data/corrupted/REF-03__FM06__zero_all_charges.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM06",
+      "variant": "zero_all_charges",
+      "expected_failing_properties": [
+        "P2.1"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Warn (Using kspace solver on system with no charge)"
+    },
+    {
+      "id": "REF-03__FM06__round_charges_1dp",
+      "file": "data/corrupted/REF-03__FM06__round_charges_1dp.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM06",
+      "variant": "round_charges_1dp",
+      "expected_failing_properties": [
+        "TC.2"
+      ],
+      "expected_tier": "TC",
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-03__FM07__written_as_charge_style",
+      "file": "data/corrupted/REF-03__FM07__written_as_charge_style.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM07",
+      "variant": "written_as_charge_style",
+      "expected_failing_properties": [
+        "P0.4"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Loud (field count) / Silent if counts match"
+    },
+    {
+      "id": "REF-03__FM07__written_as_molecular_style",
+      "file": "data/corrupted/REF-03__FM07__written_as_molecular_style.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM07",
+      "variant": "written_as_molecular_style",
+      "expected_failing_properties": [
+        "P0.4"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Loud (field count) / Silent if counts match"
+    },
+    {
+      "id": "REF-03__FM08__coords_x1.5_box_kept",
+      "file": "data/corrupted/REF-03__FM08__coords_x1.5_box_kept.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM08",
+      "variant": "coords_x1.5_box_kept",
+      "expected_failing_properties": [
+        "P2.2",
+        "P2.3",
+        "P2.4"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent (periodic remap)"
+    },
+    {
+      "id": "REF-03__FM09__random_image_flags",
+      "file": "data/corrupted/REF-03__FM09__random_image_flags.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM09",
+      "variant": "random_image_flags",
+      "expected_failing_properties": [
+        "P2.7"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Warn at run setup (Inconsistent image flags)"
+    },
+    {
+      "id": "REF-03__FM11__atom_ids_permuted_topology_stale",
+      "file": "data/corrupted/REF-03__FM11__atom_ids_permuted_topology_stale.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM11",
+      "variant": "atom_ids_permuted_topology_stale",
+      "expected_failing_properties": [
+        "P1.16",
+        "P2.4",
+        "TC.2"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-03__FM12__counter_ion_removed",
+      "file": "data/corrupted/REF-03__FM12__counter_ion_removed.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM12",
+      "variant": "counter_ion_removed",
+      "expected_failing_properties": [
+        "P2.1",
+        "TC.2"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-03__FM12__hydrogen_removed",
+      "file": "data/corrupted/REF-03__FM12__hydrogen_removed.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM12",
+      "variant": "hydrogen_removed",
+      "expected_failing_properties": [
+        "TC.2"
+      ],
+      "expected_tier": "TC",
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-03__FM13__duplicate_row_same_id",
+      "file": "data/corrupted/REF-03__FM13__duplicate_row_same_id.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM13",
+      "variant": "duplicate_row_same_id",
+      "expected_failing_properties": [
+        "P1.2"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent if max ID >= natoms, else Loud"
+    },
+    {
+      "id": "REF-03__FM13__duplicate_atom_new_id",
+      "file": "data/corrupted/REF-03__FM13__duplicate_atom_new_id.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM13",
+      "variant": "duplicate_atom_new_id",
+      "expected_failing_properties": [
+        "P2.3",
+        "TC.2"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-03__FM14__atom_count_plus_one",
+      "file": "data/corrupted/REF-03__FM14__atom_count_plus_one.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM14",
+      "variant": "atom_count_plus_one",
+      "expected_failing_properties": [
+        "P1.1"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Loud"
+    },
+    {
+      "id": "REF-03__FM27__surplus_final_row",
+      "file": "data/corrupted/REF-03__FM27__surplus_final_row.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM27",
+      "variant": "surplus_final_row",
+      "expected_failing_properties": [
+        "P0.11",
+        "P1.1"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Silent (one surplus row at EOF is ignored)"
+    },
+    {
+      "id": "REF-03__FM15__masses_values_permuted",
+      "file": "data/corrupted/REF-03__FM15__masses_values_permuted.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM15",
+      "variant": "masses_values_permuted",
+      "expected_failing_properties": [
+        "P2.6"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-03__FM17__atom_moved_onto_another",
+      "file": "data/corrupted/REF-03__FM17__atom_moved_onto_another.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM17",
+      "variant": "atom_moved_onto_another",
+      "expected_failing_properties": [
+        "P2.3"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent at read_data; PE may be inf at run"
+    },
+    {
+      "id": "REF-03__FM18__atom_displaced_3A",
+      "file": "data/corrupted/REF-03__FM18__atom_displaced_3A.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM18",
+      "variant": "atom_displaced_3A",
+      "expected_failing_properties": [
+        "P2.4",
+        "P2.7"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent at read_data"
+    },
+    {
+      "id": "REF-03__FM19__box_scaled_1.3_atoms_kept",
+      "file": "data/corrupted/REF-03__FM19__box_scaled_1.3_atoms_kept.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM19",
+      "variant": "box_scaled_1.3_atoms_kept",
+      "expected_failing_properties": [
+        "P2.5",
+        "P2.2"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-03__FM20__row_over_254_chars",
+      "file": "data/corrupted/REF-03__FM20__row_over_254_chars.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM20",
+      "variant": "row_over_254_chars",
+      "expected_failing_properties": [
+        "P0.6"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Silent (truncated at 254 characters)"
+    },
+    {
+      "id": "REF-03__FM21__keyword_case_changed",
+      "file": "data/corrupted/REF-03__FM21__keyword_case_changed.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM21",
+      "variant": "keyword_case_changed",
+      "expected_failing_properties": [
+        "P0.2"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Loud (Unknown identifier)"
+    },
+    {
+      "id": "REF-03__FM21__header_line_after_section",
+      "file": "data/corrupted/REF-03__FM21__header_line_after_section.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM21",
+      "variant": "header_line_after_section",
+      "expected_failing_properties": [
+        "P0.1"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Loud (Unknown identifier)"
+    },
+    {
+      "id": "REF-03__FM23__box_origin_reset",
+      "file": "data/corrupted/REF-03__FM23__box_origin_reset.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM23",
+      "variant": "box_origin_reset",
+      "expected_failing_properties": [
+        "P2.2"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent (periodic)"
+    },
+    {
+      "id": "REF-03__FM24__general_triclinic_header",
+      "file": "data/corrupted/REF-03__FM24__general_triclinic_header.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM24",
+      "variant": "general_triclinic_header",
+      "expected_failing_properties": [
+        "P0.5"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Accepted by this LAMMPS (out of project scope)"
+    },
+    {
+      "id": "REF-03__FM25__zlo_zhi_deleted",
+      "file": "data/corrupted/REF-03__FM25__zlo_zhi_deleted.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM25",
+      "variant": "zlo_zhi_deleted",
+      "expected_failing_properties": [
+        "P0.8"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Silent, no warning (defaults -0.5 0.5)"
+    },
+    {
+      "id": "REF-03__FM26__no_blank_after_keyword",
+      "file": "data/corrupted/REF-03__FM26__no_blank_after_keyword.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM26",
+      "variant": "no_blank_after_keyword",
+      "expected_failing_properties": [
+        "P0.7"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Loud in tested cases"
+    },
+    {
+      "id": "REF-03__FM28__bond_to_absent_atom",
+      "file": "data/corrupted/REF-03__FM28__bond_to_absent_atom.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM28",
+      "variant": "bond_to_absent_atom",
+      "expected_failing_properties": [
+        "P1.5"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Crash (SIGSEGV) or Loud"
+    },
+    {
+      "id": "REF-03__FM29__velocities_duplicate_id",
+      "file": "data/corrupted/REF-03__FM29__velocities_duplicate_id.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM29",
+      "variant": "velocities_duplicate_id",
+      "expected_failing_properties": [
+        "P1.14"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-03__FM30__negative_molecule_id",
+      "file": "data/corrupted/REF-03__FM30__negative_molecule_id.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM30",
+      "variant": "negative_molecule_id",
+      "expected_failing_properties": [
+        "P1.8"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-03__FM31__masses_row_duplicated",
+      "file": "data/corrupted/REF-03__FM31__masses_row_duplicated.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM31",
+      "variant": "masses_row_duplicated",
+      "expected_failing_properties": [
+        "P1.4"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Loud@run only (Tier 3a misses it)"
+    },
+    {
+      "id": "REF-03__FM33__equal_length_style_comment",
+      "file": "data/corrupted/REF-03__FM33__equal_length_style_comment.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM33",
+      "variant": "equal_length_style_comment",
+      "expected_failing_properties": [
+        "P1.11"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent (equal-length names)"
+    },
+    {
+      "id": "REF-03__FM34__header_keyword_repeated",
+      "file": "data/corrupted/REF-03__FM34__header_keyword_repeated.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM34",
+      "variant": "header_keyword_repeated",
+      "expected_failing_properties": [
+        "P0.10"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Silent (last value wins)"
+    },
+    {
+      "id": "REF-03__FM35__fortran_d_exponent",
+      "file": "data/corrupted/REF-03__FM35__fortran_d_exponent.data",
+      "parent_id": "REF-03",
+      "failure_mode": "FM35",
+      "variant": "fortran_d_exponent",
+      "expected_failing_properties": [
+        "P0.3"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Loud"
+    },
+    {
+      "id": "REF-04__FM01__swap_types_diff_element",
+      "file": "data/corrupted/REF-04__FM01__swap_types_diff_element.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM01",
+      "variant": "swap_types_diff_element",
+      "expected_failing_properties": [
+        "P1.16",
+        "P2.3",
+        "P2.4",
+        "TC.2"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-04__FM01__swap_types_same_element",
+      "file": "data/corrupted/REF-04__FM01__swap_types_same_element.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM01",
+      "variant": "swap_types_same_element",
+      "expected_failing_properties": [
+        "P1.16",
+        "TC.2"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-04__FM02__mass_guessed_other_element",
+      "file": "data/corrupted/REF-04__FM02__mass_guessed_other_element.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM02",
+      "variant": "mass_guessed_other_element",
+      "expected_failing_properties": [
+        "P2.6"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-04__FM03__coords_and_box_x10",
+      "file": "data/corrupted/REF-04__FM03__coords_and_box_x10.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM03",
+      "variant": "coords_and_box_x10",
+      "expected_failing_properties": [
+        "P2.3",
+        "P2.4",
+        "P2.5"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-04__FM03__coords_and_box_x0.1",
+      "file": "data/corrupted/REF-04__FM03__coords_and_box_x0.1.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM03",
+      "variant": "coords_and_box_x0.1",
+      "expected_failing_properties": [
+        "P2.3",
+        "P2.4",
+        "P2.5"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-04__FM03__wrong_units_hint",
+      "file": "data/corrupted/REF-04__FM03__wrong_units_hint.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM03",
+      "variant": "wrong_units_hint",
+      "expected_failing_properties": [
+        "P1.15"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Warn (Inconsistent units in data file)"
+    },
+    {
+      "id": "REF-04__FM04__drop_bond_header_adjusted",
+      "file": "data/corrupted/REF-04__FM04__drop_bond_header_adjusted.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM04",
+      "variant": "drop_bond_header_adjusted",
+      "expected_failing_properties": [
+        "P1.10",
+        "TC.2"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-04__FM04__drop_bond_header_kept",
+      "file": "data/corrupted/REF-04__FM04__drop_bond_header_kept.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM04",
+      "variant": "drop_bond_header_kept",
+      "expected_failing_properties": [
+        "P1.1"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Loud"
+    },
+    {
+      "id": "REF-04__FM04__angles_dihedrals_impropers_dropped",
+      "file": "data/corrupted/REF-04__FM04__angles_dihedrals_impropers_dropped.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM04",
+      "variant": "angles_dihedrals_impropers_dropped",
+      "expected_failing_properties": [
+        "P1.17",
+        "TC.2"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-04__FM05__reversed_duplicate_bond",
+      "file": "data/corrupted/REF-04__FM05__reversed_duplicate_bond.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM05",
+      "variant": "reversed_duplicate_bond",
+      "expected_failing_properties": [
+        "P1.6"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-04__FM06__flip_largest_charge",
+      "file": "data/corrupted/REF-04__FM06__flip_largest_charge.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM06",
+      "variant": "flip_largest_charge",
+      "expected_failing_properties": [
+        "P2.1"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent (Warn only with kspace and |Q|>1e-5)"
+    },
+    {
+      "id": "REF-04__FM06__zero_all_charges",
+      "file": "data/corrupted/REF-04__FM06__zero_all_charges.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM06",
+      "variant": "zero_all_charges",
+      "expected_failing_properties": [
+        "P2.1"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Warn (Using kspace solver on system with no charge)"
+    },
+    {
+      "id": "REF-04__FM06__round_charges_1dp",
+      "file": "data/corrupted/REF-04__FM06__round_charges_1dp.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM06",
+      "variant": "round_charges_1dp",
+      "expected_failing_properties": [
+        "TC.2"
+      ],
+      "expected_tier": "TC",
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-04__FM07__written_as_charge_style",
+      "file": "data/corrupted/REF-04__FM07__written_as_charge_style.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM07",
+      "variant": "written_as_charge_style",
+      "expected_failing_properties": [
+        "P0.4"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Loud (field count) / Silent if counts match"
+    },
+    {
+      "id": "REF-04__FM07__written_as_molecular_style",
+      "file": "data/corrupted/REF-04__FM07__written_as_molecular_style.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM07",
+      "variant": "written_as_molecular_style",
+      "expected_failing_properties": [
+        "P0.4"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Loud (field count) / Silent if counts match"
+    },
+    {
+      "id": "REF-04__FM08__coords_x1.5_box_kept",
+      "file": "data/corrupted/REF-04__FM08__coords_x1.5_box_kept.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM08",
+      "variant": "coords_x1.5_box_kept",
+      "expected_failing_properties": [
+        "P2.2",
+        "P2.3",
+        "P2.4"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent (periodic remap)"
+    },
+    {
+      "id": "REF-04__FM09__random_image_flags",
+      "file": "data/corrupted/REF-04__FM09__random_image_flags.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM09",
+      "variant": "random_image_flags",
+      "expected_failing_properties": [
+        "P2.7"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Warn at run setup (Inconsistent image flags)"
+    },
+    {
+      "id": "REF-04__FM11__atom_ids_permuted_topology_stale",
+      "file": "data/corrupted/REF-04__FM11__atom_ids_permuted_topology_stale.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM11",
+      "variant": "atom_ids_permuted_topology_stale",
+      "expected_failing_properties": [
+        "P1.16",
+        "P2.4",
+        "TC.2"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-04__FM12__counter_ion_removed",
+      "file": "data/corrupted/REF-04__FM12__counter_ion_removed.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM12",
+      "variant": "counter_ion_removed",
+      "expected_failing_properties": [
+        "P2.1",
+        "TC.2"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-04__FM12__hydrogen_removed",
+      "file": "data/corrupted/REF-04__FM12__hydrogen_removed.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM12",
+      "variant": "hydrogen_removed",
+      "expected_failing_properties": [
+        "TC.2"
+      ],
+      "expected_tier": "TC",
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-04__FM13__duplicate_row_same_id",
+      "file": "data/corrupted/REF-04__FM13__duplicate_row_same_id.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM13",
+      "variant": "duplicate_row_same_id",
+      "expected_failing_properties": [
+        "P1.2"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent if max ID >= natoms, else Loud"
+    },
+    {
+      "id": "REF-04__FM13__duplicate_atom_new_id",
+      "file": "data/corrupted/REF-04__FM13__duplicate_atom_new_id.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM13",
+      "variant": "duplicate_atom_new_id",
+      "expected_failing_properties": [
+        "P2.3",
+        "TC.2"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-04__FM14__atom_count_plus_one",
+      "file": "data/corrupted/REF-04__FM14__atom_count_plus_one.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM14",
+      "variant": "atom_count_plus_one",
+      "expected_failing_properties": [
+        "P1.1"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Loud"
+    },
+    {
+      "id": "REF-04__FM27__surplus_final_row",
+      "file": "data/corrupted/REF-04__FM27__surplus_final_row.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM27",
+      "variant": "surplus_final_row",
+      "expected_failing_properties": [
+        "P0.11",
+        "P1.1"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Silent (one surplus row at EOF is ignored)"
+    },
+    {
+      "id": "REF-04__FM15__masses_values_permuted",
+      "file": "data/corrupted/REF-04__FM15__masses_values_permuted.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM15",
+      "variant": "masses_values_permuted",
+      "expected_failing_properties": [
+        "P2.6"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-04__FM17__atom_moved_onto_another",
+      "file": "data/corrupted/REF-04__FM17__atom_moved_onto_another.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM17",
+      "variant": "atom_moved_onto_another",
+      "expected_failing_properties": [
+        "P2.3"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent at read_data; PE may be inf at run"
+    },
+    {
+      "id": "REF-04__FM18__atom_displaced_3A",
+      "file": "data/corrupted/REF-04__FM18__atom_displaced_3A.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM18",
+      "variant": "atom_displaced_3A",
+      "expected_failing_properties": [
+        "P2.4",
+        "P2.7"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent at read_data"
+    },
+    {
+      "id": "REF-04__FM19__box_scaled_1.3_atoms_kept",
+      "file": "data/corrupted/REF-04__FM19__box_scaled_1.3_atoms_kept.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM19",
+      "variant": "box_scaled_1.3_atoms_kept",
+      "expected_failing_properties": [
+        "P2.5",
+        "P2.2"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-04__FM20__row_over_254_chars",
+      "file": "data/corrupted/REF-04__FM20__row_over_254_chars.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM20",
+      "variant": "row_over_254_chars",
+      "expected_failing_properties": [
+        "P0.6"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Silent (truncated at 254 characters)"
+    },
+    {
+      "id": "REF-04__FM21__keyword_case_changed",
+      "file": "data/corrupted/REF-04__FM21__keyword_case_changed.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM21",
+      "variant": "keyword_case_changed",
+      "expected_failing_properties": [
+        "P0.2"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Loud (Unknown identifier)"
+    },
+    {
+      "id": "REF-04__FM21__header_line_after_section",
+      "file": "data/corrupted/REF-04__FM21__header_line_after_section.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM21",
+      "variant": "header_line_after_section",
+      "expected_failing_properties": [
+        "P0.1"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Loud (Unknown identifier)"
+    },
+    {
+      "id": "REF-04__FM23__box_origin_reset",
+      "file": "data/corrupted/REF-04__FM23__box_origin_reset.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM23",
+      "variant": "box_origin_reset",
+      "expected_failing_properties": [
+        "P2.2"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent (periodic)"
+    },
+    {
+      "id": "REF-04__FM24__general_triclinic_header",
+      "file": "data/corrupted/REF-04__FM24__general_triclinic_header.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM24",
+      "variant": "general_triclinic_header",
+      "expected_failing_properties": [
+        "P0.5"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Accepted by this LAMMPS (out of project scope)"
+    },
+    {
+      "id": "REF-04__FM25__zlo_zhi_deleted",
+      "file": "data/corrupted/REF-04__FM25__zlo_zhi_deleted.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM25",
+      "variant": "zlo_zhi_deleted",
+      "expected_failing_properties": [
+        "P0.8"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Silent, no warning (defaults -0.5 0.5)"
+    },
+    {
+      "id": "REF-04__FM26__no_blank_after_keyword",
+      "file": "data/corrupted/REF-04__FM26__no_blank_after_keyword.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM26",
+      "variant": "no_blank_after_keyword",
+      "expected_failing_properties": [
+        "P0.7"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Loud in tested cases"
+    },
+    {
+      "id": "REF-04__FM28__bond_to_absent_atom",
+      "file": "data/corrupted/REF-04__FM28__bond_to_absent_atom.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM28",
+      "variant": "bond_to_absent_atom",
+      "expected_failing_properties": [
+        "P1.5"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Crash (SIGSEGV) or Loud"
+    },
+    {
+      "id": "REF-04__FM29__velocities_duplicate_id",
+      "file": "data/corrupted/REF-04__FM29__velocities_duplicate_id.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM29",
+      "variant": "velocities_duplicate_id",
+      "expected_failing_properties": [
+        "P1.14"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-04__FM30__negative_molecule_id",
+      "file": "data/corrupted/REF-04__FM30__negative_molecule_id.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM30",
+      "variant": "negative_molecule_id",
+      "expected_failing_properties": [
+        "P1.8"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "REF-04__FM31__masses_row_duplicated",
+      "file": "data/corrupted/REF-04__FM31__masses_row_duplicated.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM31",
+      "variant": "masses_row_duplicated",
+      "expected_failing_properties": [
+        "P1.4"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Loud@run only (Tier 3a misses it)"
+    },
+    {
+      "id": "REF-04__FM33__equal_length_style_comment",
+      "file": "data/corrupted/REF-04__FM33__equal_length_style_comment.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM33",
+      "variant": "equal_length_style_comment",
+      "expected_failing_properties": [
+        "P1.11"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent (equal-length names)"
+    },
+    {
+      "id": "REF-04__FM34__header_keyword_repeated",
+      "file": "data/corrupted/REF-04__FM34__header_keyword_repeated.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM34",
+      "variant": "header_keyword_repeated",
+      "expected_failing_properties": [
+        "P0.10"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Silent (last value wins)"
+    },
+    {
+      "id": "REF-04__FM35__fortran_d_exponent",
+      "file": "data/corrupted/REF-04__FM35__fortran_d_exponent.data",
+      "parent_id": "REF-04",
+      "failure_mode": "FM35",
+      "variant": "fortran_d_exponent",
+      "expected_failing_properties": [
+        "P0.3"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Loud"
+    },
+    {
+      "id": "FIX-T11__FM01__swap_types_diff_element",
+      "file": "data/corrupted/FIX-T11__FM01__swap_types_diff_element.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM01",
+      "variant": "swap_types_diff_element",
+      "expected_failing_properties": [
+        "P1.16",
+        "P2.3",
+        "P2.4",
+        "TC.2"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T11__FM01__swap_types_same_element",
+      "file": "data/corrupted/FIX-T11__FM01__swap_types_same_element.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM01",
+      "variant": "swap_types_same_element",
+      "expected_failing_properties": [
+        "P1.16",
+        "TC.2"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T11__FM02__mass_guessed_other_element",
+      "file": "data/corrupted/FIX-T11__FM02__mass_guessed_other_element.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM02",
+      "variant": "mass_guessed_other_element",
+      "expected_failing_properties": [
+        "P2.6"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T11__FM03__coords_and_box_x10",
+      "file": "data/corrupted/FIX-T11__FM03__coords_and_box_x10.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM03",
+      "variant": "coords_and_box_x10",
+      "expected_failing_properties": [
+        "P2.3",
+        "P2.4",
+        "P2.5"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T11__FM03__coords_and_box_x0.1",
+      "file": "data/corrupted/FIX-T11__FM03__coords_and_box_x0.1.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM03",
+      "variant": "coords_and_box_x0.1",
+      "expected_failing_properties": [
+        "P2.3",
+        "P2.4",
+        "P2.5"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T11__FM03__wrong_units_hint",
+      "file": "data/corrupted/FIX-T11__FM03__wrong_units_hint.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM03",
+      "variant": "wrong_units_hint",
+      "expected_failing_properties": [
+        "P1.15"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Warn (Inconsistent units in data file)"
+    },
+    {
+      "id": "FIX-T11__FM04__drop_bond_header_adjusted",
+      "file": "data/corrupted/FIX-T11__FM04__drop_bond_header_adjusted.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM04",
+      "variant": "drop_bond_header_adjusted",
+      "expected_failing_properties": [
+        "P1.10",
+        "TC.2"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T11__FM04__drop_bond_header_kept",
+      "file": "data/corrupted/FIX-T11__FM04__drop_bond_header_kept.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM04",
+      "variant": "drop_bond_header_kept",
+      "expected_failing_properties": [
+        "P1.1"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Loud"
+    },
+    {
+      "id": "FIX-T11__FM04__angles_dihedrals_impropers_dropped",
+      "file": "data/corrupted/FIX-T11__FM04__angles_dihedrals_impropers_dropped.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM04",
+      "variant": "angles_dihedrals_impropers_dropped",
+      "expected_failing_properties": [
+        "P1.17",
+        "TC.2"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T11__FM05__reversed_duplicate_bond",
+      "file": "data/corrupted/FIX-T11__FM05__reversed_duplicate_bond.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM05",
+      "variant": "reversed_duplicate_bond",
+      "expected_failing_properties": [
+        "P1.6"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T11__FM06__flip_largest_charge",
+      "file": "data/corrupted/FIX-T11__FM06__flip_largest_charge.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM06",
+      "variant": "flip_largest_charge",
+      "expected_failing_properties": [
+        "P2.1"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent (Warn only with kspace and |Q|>1e-5)"
+    },
+    {
+      "id": "FIX-T11__FM06__zero_all_charges",
+      "file": "data/corrupted/FIX-T11__FM06__zero_all_charges.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM06",
+      "variant": "zero_all_charges",
+      "expected_failing_properties": [
+        "P2.1"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Warn (Using kspace solver on system with no charge)"
+    },
+    {
+      "id": "FIX-T11__FM06__round_charges_1dp",
+      "file": "data/corrupted/FIX-T11__FM06__round_charges_1dp.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM06",
+      "variant": "round_charges_1dp",
+      "expected_failing_properties": [
+        "TC.2"
+      ],
+      "expected_tier": "TC",
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T11__FM07__written_as_charge_style",
+      "file": "data/corrupted/FIX-T11__FM07__written_as_charge_style.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM07",
+      "variant": "written_as_charge_style",
+      "expected_failing_properties": [
+        "P0.4"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Loud (field count) / Silent if counts match"
+    },
+    {
+      "id": "FIX-T11__FM07__written_as_molecular_style",
+      "file": "data/corrupted/FIX-T11__FM07__written_as_molecular_style.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM07",
+      "variant": "written_as_molecular_style",
+      "expected_failing_properties": [
+        "P0.4"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Loud (field count) / Silent if counts match"
+    },
+    {
+      "id": "FIX-T11__FM08__coords_x1.5_box_kept",
+      "file": "data/corrupted/FIX-T11__FM08__coords_x1.5_box_kept.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM08",
+      "variant": "coords_x1.5_box_kept",
+      "expected_failing_properties": [
+        "P2.2",
+        "P2.3",
+        "P2.4"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent (periodic remap)"
+    },
+    {
+      "id": "FIX-T11__FM10__tilt_sign_flipped",
+      "file": "data/corrupted/FIX-T11__FM10__tilt_sign_flipped.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM10",
+      "variant": "tilt_sign_flipped",
+      "expected_failing_properties": [
+        "P2.2",
+        "P2.3",
+        "P2.4"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T11__FM10__tilt_zeroed",
+      "file": "data/corrupted/FIX-T11__FM10__tilt_zeroed.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM10",
+      "variant": "tilt_zeroed",
+      "expected_failing_properties": [
+        "P2.2",
+        "P2.3",
+        "P2.4"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T11__FM10__tilt_line_dropped",
+      "file": "data/corrupted/FIX-T11__FM10__tilt_line_dropped.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM10",
+      "variant": "tilt_line_dropped",
+      "expected_failing_properties": [
+        "P0.8"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T11__FM10__tilt_over_skewed_same_lattice",
+      "file": "data/corrupted/FIX-T11__FM10__tilt_over_skewed_same_lattice.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM10",
+      "variant": "tilt_over_skewed_same_lattice",
+      "expected_failing_properties": [
+        "P2.8"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Warn on a different criterion (or none)"
+    },
+    {
+      "id": "FIX-T11__FM11__atom_ids_permuted_topology_stale",
+      "file": "data/corrupted/FIX-T11__FM11__atom_ids_permuted_topology_stale.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM11",
+      "variant": "atom_ids_permuted_topology_stale",
+      "expected_failing_properties": [
+        "P1.16",
+        "P2.4",
+        "TC.2"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T11__FM12__counter_ion_removed",
+      "file": "data/corrupted/FIX-T11__FM12__counter_ion_removed.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM12",
+      "variant": "counter_ion_removed",
+      "expected_failing_properties": [
+        "P2.1",
+        "TC.2"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T11__FM12__hydrogen_removed",
+      "file": "data/corrupted/FIX-T11__FM12__hydrogen_removed.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM12",
+      "variant": "hydrogen_removed",
+      "expected_failing_properties": [
+        "TC.2"
+      ],
+      "expected_tier": "TC",
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T11__FM13__duplicate_row_same_id",
+      "file": "data/corrupted/FIX-T11__FM13__duplicate_row_same_id.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM13",
+      "variant": "duplicate_row_same_id",
+      "expected_failing_properties": [
+        "P1.2"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent if max ID >= natoms, else Loud"
+    },
+    {
+      "id": "FIX-T11__FM13__duplicate_atom_new_id",
+      "file": "data/corrupted/FIX-T11__FM13__duplicate_atom_new_id.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM13",
+      "variant": "duplicate_atom_new_id",
+      "expected_failing_properties": [
+        "P2.3",
+        "TC.2"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T11__FM14__atom_count_plus_one",
+      "file": "data/corrupted/FIX-T11__FM14__atom_count_plus_one.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM14",
+      "variant": "atom_count_plus_one",
+      "expected_failing_properties": [
+        "P1.1"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Loud"
+    },
+    {
+      "id": "FIX-T11__FM27__surplus_final_row",
+      "file": "data/corrupted/FIX-T11__FM27__surplus_final_row.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM27",
+      "variant": "surplus_final_row",
+      "expected_failing_properties": [
+        "P0.11",
+        "P1.1"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Silent (one surplus row at EOF is ignored)"
+    },
+    {
+      "id": "FIX-T11__FM15__masses_values_permuted",
+      "file": "data/corrupted/FIX-T11__FM15__masses_values_permuted.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM15",
+      "variant": "masses_values_permuted",
+      "expected_failing_properties": [
+        "P2.6"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T11__FM17__atom_moved_onto_another",
+      "file": "data/corrupted/FIX-T11__FM17__atom_moved_onto_another.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM17",
+      "variant": "atom_moved_onto_another",
+      "expected_failing_properties": [
+        "P2.3"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent at read_data; PE may be inf at run"
+    },
+    {
+      "id": "FIX-T11__FM18__atom_displaced_3A",
+      "file": "data/corrupted/FIX-T11__FM18__atom_displaced_3A.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM18",
+      "variant": "atom_displaced_3A",
+      "expected_failing_properties": [
+        "P2.4",
+        "P2.7"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent at read_data"
+    },
+    {
+      "id": "FIX-T11__FM19__box_scaled_1.3_atoms_kept",
+      "file": "data/corrupted/FIX-T11__FM19__box_scaled_1.3_atoms_kept.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM19",
+      "variant": "box_scaled_1.3_atoms_kept",
+      "expected_failing_properties": [
+        "P2.5",
+        "P2.2"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T11__FM20__row_over_254_chars",
+      "file": "data/corrupted/FIX-T11__FM20__row_over_254_chars.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM20",
+      "variant": "row_over_254_chars",
+      "expected_failing_properties": [
+        "P0.6"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Silent (truncated at 254 characters)"
+    },
+    {
+      "id": "FIX-T11__FM21__keyword_case_changed",
+      "file": "data/corrupted/FIX-T11__FM21__keyword_case_changed.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM21",
+      "variant": "keyword_case_changed",
+      "expected_failing_properties": [
+        "P0.2"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Loud (Unknown identifier)"
+    },
+    {
+      "id": "FIX-T11__FM21__header_line_after_section",
+      "file": "data/corrupted/FIX-T11__FM21__header_line_after_section.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM21",
+      "variant": "header_line_after_section",
+      "expected_failing_properties": [
+        "P0.1"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Loud (Unknown identifier)"
+    },
+    {
+      "id": "FIX-T11__FM22__bond_coeff_values_permuted",
+      "file": "data/corrupted/FIX-T11__FM22__bond_coeff_values_permuted.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM22",
+      "variant": "bond_coeff_values_permuted",
+      "expected_failing_properties": [
+        "TC.2"
+      ],
+      "expected_tier": "TC",
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T11__FM22__bond_coeff_rows_relabelled",
+      "file": "data/corrupted/FIX-T11__FM22__bond_coeff_rows_relabelled.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM22",
+      "variant": "bond_coeff_rows_relabelled",
+      "expected_failing_properties": [
+        "P1.16",
+        "TC.2"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T11__FM32__coeff_type_row_duplicated",
+      "file": "data/corrupted/FIX-T11__FM32__coeff_type_row_duplicated.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM32",
+      "variant": "coeff_type_row_duplicated",
+      "expected_failing_properties": [
+        "P1.7"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent under nocoeff; Loud@run"
+    },
+    {
+      "id": "FIX-T11__FM23__box_origin_reset",
+      "file": "data/corrupted/FIX-T11__FM23__box_origin_reset.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM23",
+      "variant": "box_origin_reset",
+      "expected_failing_properties": [
+        "P2.2"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent (periodic)"
+    },
+    {
+      "id": "FIX-T11__FM24__general_triclinic_header",
+      "file": "data/corrupted/FIX-T11__FM24__general_triclinic_header.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM24",
+      "variant": "general_triclinic_header",
+      "expected_failing_properties": [
+        "P0.5"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Accepted by this LAMMPS (out of project scope)"
+    },
+    {
+      "id": "FIX-T11__FM25__zlo_zhi_deleted",
+      "file": "data/corrupted/FIX-T11__FM25__zlo_zhi_deleted.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM25",
+      "variant": "zlo_zhi_deleted",
+      "expected_failing_properties": [
+        "P0.8"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Silent, no warning (defaults -0.5 0.5)"
+    },
+    {
+      "id": "FIX-T11__FM26__no_blank_after_keyword",
+      "file": "data/corrupted/FIX-T11__FM26__no_blank_after_keyword.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM26",
+      "variant": "no_blank_after_keyword",
+      "expected_failing_properties": [
+        "P0.7"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Loud in tested cases"
+    },
+    {
+      "id": "FIX-T11__FM28__bond_to_absent_atom",
+      "file": "data/corrupted/FIX-T11__FM28__bond_to_absent_atom.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM28",
+      "variant": "bond_to_absent_atom",
+      "expected_failing_properties": [
+        "P1.5"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Crash (SIGSEGV) or Loud"
+    },
+    {
+      "id": "FIX-T11__FM29__velocities_duplicate_id",
+      "file": "data/corrupted/FIX-T11__FM29__velocities_duplicate_id.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM29",
+      "variant": "velocities_duplicate_id",
+      "expected_failing_properties": [
+        "P1.14"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T11__FM30__negative_molecule_id",
+      "file": "data/corrupted/FIX-T11__FM30__negative_molecule_id.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM30",
+      "variant": "negative_molecule_id",
+      "expected_failing_properties": [
+        "P1.8"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T11__FM31__masses_row_duplicated",
+      "file": "data/corrupted/FIX-T11__FM31__masses_row_duplicated.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM31",
+      "variant": "masses_row_duplicated",
+      "expected_failing_properties": [
+        "P1.4"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Loud@run only (Tier 3a misses it)"
+    },
+    {
+      "id": "FIX-T11__FM33__equal_length_style_comment",
+      "file": "data/corrupted/FIX-T11__FM33__equal_length_style_comment.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM33",
+      "variant": "equal_length_style_comment",
+      "expected_failing_properties": [
+        "P1.11"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent (equal-length names)"
+    },
+    {
+      "id": "FIX-T11__FM34__header_keyword_repeated",
+      "file": "data/corrupted/FIX-T11__FM34__header_keyword_repeated.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM34",
+      "variant": "header_keyword_repeated",
+      "expected_failing_properties": [
+        "P0.10"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Silent (last value wins)"
+    },
+    {
+      "id": "FIX-T11__FM35__fortran_d_exponent",
+      "file": "data/corrupted/FIX-T11__FM35__fortran_d_exponent.data",
+      "parent_id": "FIX-T11",
+      "failure_mode": "FM35",
+      "variant": "fortran_d_exponent",
+      "expected_failing_properties": [
+        "P0.3"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Loud"
+    },
+    {
+      "id": "FIX-T14__FM01__swap_types_diff_element",
+      "file": "data/corrupted/FIX-T14__FM01__swap_types_diff_element.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM01",
+      "variant": "swap_types_diff_element",
+      "expected_failing_properties": [
+        "P1.16",
+        "P2.3",
+        "P2.4",
+        "TC.2"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T14__FM01__swap_types_same_element",
+      "file": "data/corrupted/FIX-T14__FM01__swap_types_same_element.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM01",
+      "variant": "swap_types_same_element",
+      "expected_failing_properties": [
+        "P1.16",
+        "TC.2"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T14__FM02__mass_guessed_other_element",
+      "file": "data/corrupted/FIX-T14__FM02__mass_guessed_other_element.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM02",
+      "variant": "mass_guessed_other_element",
+      "expected_failing_properties": [
+        "P2.6"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T14__FM03__coords_and_box_x10",
+      "file": "data/corrupted/FIX-T14__FM03__coords_and_box_x10.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM03",
+      "variant": "coords_and_box_x10",
+      "expected_failing_properties": [
+        "P2.3",
+        "P2.4",
+        "P2.5"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T14__FM03__coords_and_box_x0.1",
+      "file": "data/corrupted/FIX-T14__FM03__coords_and_box_x0.1.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM03",
+      "variant": "coords_and_box_x0.1",
+      "expected_failing_properties": [
+        "P2.3",
+        "P2.4",
+        "P2.5"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T14__FM03__wrong_units_hint",
+      "file": "data/corrupted/FIX-T14__FM03__wrong_units_hint.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM03",
+      "variant": "wrong_units_hint",
+      "expected_failing_properties": [
+        "P1.15"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Warn (Inconsistent units in data file)"
+    },
+    {
+      "id": "FIX-T14__FM04__drop_bond_header_adjusted",
+      "file": "data/corrupted/FIX-T14__FM04__drop_bond_header_adjusted.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM04",
+      "variant": "drop_bond_header_adjusted",
+      "expected_failing_properties": [
+        "P1.10",
+        "TC.2"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T14__FM04__drop_bond_header_kept",
+      "file": "data/corrupted/FIX-T14__FM04__drop_bond_header_kept.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM04",
+      "variant": "drop_bond_header_kept",
+      "expected_failing_properties": [
+        "P1.1"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Loud"
+    },
+    {
+      "id": "FIX-T14__FM04__angles_dihedrals_impropers_dropped",
+      "file": "data/corrupted/FIX-T14__FM04__angles_dihedrals_impropers_dropped.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM04",
+      "variant": "angles_dihedrals_impropers_dropped",
+      "expected_failing_properties": [
+        "P1.17",
+        "TC.2"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T14__FM05__reversed_duplicate_bond",
+      "file": "data/corrupted/FIX-T14__FM05__reversed_duplicate_bond.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM05",
+      "variant": "reversed_duplicate_bond",
+      "expected_failing_properties": [
+        "P1.6"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T14__FM06__flip_largest_charge",
+      "file": "data/corrupted/FIX-T14__FM06__flip_largest_charge.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM06",
+      "variant": "flip_largest_charge",
+      "expected_failing_properties": [
+        "P2.1"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent (Warn only with kspace and |Q|>1e-5)"
+    },
+    {
+      "id": "FIX-T14__FM06__zero_all_charges",
+      "file": "data/corrupted/FIX-T14__FM06__zero_all_charges.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM06",
+      "variant": "zero_all_charges",
+      "expected_failing_properties": [
+        "P2.1"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Warn (Using kspace solver on system with no charge)"
+    },
+    {
+      "id": "FIX-T14__FM06__round_charges_1dp",
+      "file": "data/corrupted/FIX-T14__FM06__round_charges_1dp.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM06",
+      "variant": "round_charges_1dp",
+      "expected_failing_properties": [
+        "TC.2"
+      ],
+      "expected_tier": "TC",
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T14__FM07__written_as_charge_style",
+      "file": "data/corrupted/FIX-T14__FM07__written_as_charge_style.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM07",
+      "variant": "written_as_charge_style",
+      "expected_failing_properties": [
+        "P0.4"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Loud (field count) / Silent if counts match"
+    },
+    {
+      "id": "FIX-T14__FM07__written_as_molecular_style",
+      "file": "data/corrupted/FIX-T14__FM07__written_as_molecular_style.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM07",
+      "variant": "written_as_molecular_style",
+      "expected_failing_properties": [
+        "P0.4"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Loud (field count) / Silent if counts match"
+    },
+    {
+      "id": "FIX-T14__FM08__coords_x1.5_box_kept",
+      "file": "data/corrupted/FIX-T14__FM08__coords_x1.5_box_kept.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM08",
+      "variant": "coords_x1.5_box_kept",
+      "expected_failing_properties": [
+        "P2.2",
+        "P2.3",
+        "P2.4"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent (periodic remap)"
+    },
+    {
+      "id": "FIX-T14__FM10__tilt_sign_flipped",
+      "file": "data/corrupted/FIX-T14__FM10__tilt_sign_flipped.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM10",
+      "variant": "tilt_sign_flipped",
+      "expected_failing_properties": [
+        "P2.2",
+        "P2.3",
+        "P2.4"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T14__FM10__tilt_zeroed",
+      "file": "data/corrupted/FIX-T14__FM10__tilt_zeroed.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM10",
+      "variant": "tilt_zeroed",
+      "expected_failing_properties": [
+        "P2.2",
+        "P2.3",
+        "P2.4"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T14__FM10__tilt_line_dropped",
+      "file": "data/corrupted/FIX-T14__FM10__tilt_line_dropped.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM10",
+      "variant": "tilt_line_dropped",
+      "expected_failing_properties": [
+        "P0.8"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T14__FM10__tilt_over_skewed_same_lattice",
+      "file": "data/corrupted/FIX-T14__FM10__tilt_over_skewed_same_lattice.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM10",
+      "variant": "tilt_over_skewed_same_lattice",
+      "expected_failing_properties": [
+        "P2.8"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Warn on a different criterion (or none)"
+    },
+    {
+      "id": "FIX-T14__FM11__atom_ids_permuted_topology_stale",
+      "file": "data/corrupted/FIX-T14__FM11__atom_ids_permuted_topology_stale.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM11",
+      "variant": "atom_ids_permuted_topology_stale",
+      "expected_failing_properties": [
+        "P1.16",
+        "P2.4",
+        "TC.2"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T14__FM12__counter_ion_removed",
+      "file": "data/corrupted/FIX-T14__FM12__counter_ion_removed.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM12",
+      "variant": "counter_ion_removed",
+      "expected_failing_properties": [
+        "P2.1",
+        "TC.2"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T14__FM12__hydrogen_removed",
+      "file": "data/corrupted/FIX-T14__FM12__hydrogen_removed.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM12",
+      "variant": "hydrogen_removed",
+      "expected_failing_properties": [
+        "TC.2"
+      ],
+      "expected_tier": "TC",
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T14__FM13__duplicate_row_same_id",
+      "file": "data/corrupted/FIX-T14__FM13__duplicate_row_same_id.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM13",
+      "variant": "duplicate_row_same_id",
+      "expected_failing_properties": [
+        "P1.2"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent if max ID >= natoms, else Loud"
+    },
+    {
+      "id": "FIX-T14__FM13__duplicate_atom_new_id",
+      "file": "data/corrupted/FIX-T14__FM13__duplicate_atom_new_id.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM13",
+      "variant": "duplicate_atom_new_id",
+      "expected_failing_properties": [
+        "P2.3",
+        "TC.2"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T14__FM14__atom_count_plus_one",
+      "file": "data/corrupted/FIX-T14__FM14__atom_count_plus_one.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM14",
+      "variant": "atom_count_plus_one",
+      "expected_failing_properties": [
+        "P1.1"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Loud"
+    },
+    {
+      "id": "FIX-T14__FM27__surplus_final_row",
+      "file": "data/corrupted/FIX-T14__FM27__surplus_final_row.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM27",
+      "variant": "surplus_final_row",
+      "expected_failing_properties": [
+        "P0.11",
+        "P1.1"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Silent (one surplus row at EOF is ignored)"
+    },
+    {
+      "id": "FIX-T14__FM15__masses_values_permuted",
+      "file": "data/corrupted/FIX-T14__FM15__masses_values_permuted.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM15",
+      "variant": "masses_values_permuted",
+      "expected_failing_properties": [
+        "P2.6"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T14__FM17__atom_moved_onto_another",
+      "file": "data/corrupted/FIX-T14__FM17__atom_moved_onto_another.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM17",
+      "variant": "atom_moved_onto_another",
+      "expected_failing_properties": [
+        "P2.3"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent at read_data; PE may be inf at run"
+    },
+    {
+      "id": "FIX-T14__FM18__atom_displaced_3A",
+      "file": "data/corrupted/FIX-T14__FM18__atom_displaced_3A.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM18",
+      "variant": "atom_displaced_3A",
+      "expected_failing_properties": [
+        "P2.4",
+        "P2.7"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent at read_data"
+    },
+    {
+      "id": "FIX-T14__FM19__box_scaled_1.3_atoms_kept",
+      "file": "data/corrupted/FIX-T14__FM19__box_scaled_1.3_atoms_kept.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM19",
+      "variant": "box_scaled_1.3_atoms_kept",
+      "expected_failing_properties": [
+        "P2.5",
+        "P2.2"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T14__FM20__row_over_254_chars",
+      "file": "data/corrupted/FIX-T14__FM20__row_over_254_chars.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM20",
+      "variant": "row_over_254_chars",
+      "expected_failing_properties": [
+        "P0.6"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Silent (truncated at 254 characters)"
+    },
+    {
+      "id": "FIX-T14__FM21__keyword_case_changed",
+      "file": "data/corrupted/FIX-T14__FM21__keyword_case_changed.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM21",
+      "variant": "keyword_case_changed",
+      "expected_failing_properties": [
+        "P0.2"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Loud (Unknown identifier)"
+    },
+    {
+      "id": "FIX-T14__FM21__header_line_after_section",
+      "file": "data/corrupted/FIX-T14__FM21__header_line_after_section.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM21",
+      "variant": "header_line_after_section",
+      "expected_failing_properties": [
+        "P0.1"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Loud (Unknown identifier)"
+    },
+    {
+      "id": "FIX-T14__FM22__bond_coeff_values_permuted",
+      "file": "data/corrupted/FIX-T14__FM22__bond_coeff_values_permuted.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM22",
+      "variant": "bond_coeff_values_permuted",
+      "expected_failing_properties": [
+        "TC.2"
+      ],
+      "expected_tier": "TC",
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T14__FM22__bond_coeff_rows_relabelled",
+      "file": "data/corrupted/FIX-T14__FM22__bond_coeff_rows_relabelled.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM22",
+      "variant": "bond_coeff_rows_relabelled",
+      "expected_failing_properties": [
+        "P1.16",
+        "TC.2"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T14__FM32__coeff_type_row_duplicated",
+      "file": "data/corrupted/FIX-T14__FM32__coeff_type_row_duplicated.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM32",
+      "variant": "coeff_type_row_duplicated",
+      "expected_failing_properties": [
+        "P1.7"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent under nocoeff; Loud@run"
+    },
+    {
+      "id": "FIX-T14__FM23__box_origin_reset",
+      "file": "data/corrupted/FIX-T14__FM23__box_origin_reset.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM23",
+      "variant": "box_origin_reset",
+      "expected_failing_properties": [
+        "P2.2"
+      ],
+      "expected_tier": 2,
+      "expected_lammps_behaviour": "Silent (periodic)"
+    },
+    {
+      "id": "FIX-T14__FM24__general_triclinic_header",
+      "file": "data/corrupted/FIX-T14__FM24__general_triclinic_header.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM24",
+      "variant": "general_triclinic_header",
+      "expected_failing_properties": [
+        "P0.5"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Accepted by this LAMMPS (out of project scope)"
+    },
+    {
+      "id": "FIX-T14__FM25__zlo_zhi_deleted",
+      "file": "data/corrupted/FIX-T14__FM25__zlo_zhi_deleted.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM25",
+      "variant": "zlo_zhi_deleted",
+      "expected_failing_properties": [
+        "P0.8"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Silent, no warning (defaults -0.5 0.5)"
+    },
+    {
+      "id": "FIX-T14__FM26__no_blank_after_keyword",
+      "file": "data/corrupted/FIX-T14__FM26__no_blank_after_keyword.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM26",
+      "variant": "no_blank_after_keyword",
+      "expected_failing_properties": [
+        "P0.7"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Loud in tested cases"
+    },
+    {
+      "id": "FIX-T14__FM28__bond_to_absent_atom",
+      "file": "data/corrupted/FIX-T14__FM28__bond_to_absent_atom.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM28",
+      "variant": "bond_to_absent_atom",
+      "expected_failing_properties": [
+        "P1.5"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Crash (SIGSEGV) or Loud"
+    },
+    {
+      "id": "FIX-T14__FM29__velocities_duplicate_id",
+      "file": "data/corrupted/FIX-T14__FM29__velocities_duplicate_id.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM29",
+      "variant": "velocities_duplicate_id",
+      "expected_failing_properties": [
+        "P1.14"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T14__FM30__negative_molecule_id",
+      "file": "data/corrupted/FIX-T14__FM30__negative_molecule_id.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM30",
+      "variant": "negative_molecule_id",
+      "expected_failing_properties": [
+        "P1.8"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent"
+    },
+    {
+      "id": "FIX-T14__FM31__masses_row_duplicated",
+      "file": "data/corrupted/FIX-T14__FM31__masses_row_duplicated.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM31",
+      "variant": "masses_row_duplicated",
+      "expected_failing_properties": [
+        "P1.4"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Loud@run only (Tier 3a misses it)"
+    },
+    {
+      "id": "FIX-T14__FM33__equal_length_style_comment",
+      "file": "data/corrupted/FIX-T14__FM33__equal_length_style_comment.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM33",
+      "variant": "equal_length_style_comment",
+      "expected_failing_properties": [
+        "P1.11"
+      ],
+      "expected_tier": 1,
+      "expected_lammps_behaviour": "Silent (equal-length names)"
+    },
+    {
+      "id": "FIX-T14__FM34__header_keyword_repeated",
+      "file": "data/corrupted/FIX-T14__FM34__header_keyword_repeated.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM34",
+      "variant": "header_keyword_repeated",
+      "expected_failing_properties": [
+        "P0.10"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Silent (last value wins)"
+    },
+    {
+      "id": "FIX-T14__FM35__fortran_d_exponent",
+      "file": "data/corrupted/FIX-T14__FM35__fortran_d_exponent.data",
+      "parent_id": "FIX-T14",
+      "failure_mode": "FM35",
+      "variant": "fortran_d_exponent",
+      "expected_failing_properties": [
+        "P0.3"
+      ],
+      "expected_tier": 0,
+      "expected_lammps_behaviour": "Loud"
+    }
+  ]
+}
