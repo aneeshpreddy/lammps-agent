@@ -1,0 +1,27 @@
+{
+  "id": "REF-05__FM24__general_triclinic_header",
+  "file": "data/corrupted/REF-05__FM24__general_triclinic_header.data",
+  "sha256": "b62e86e52b818d83284782ae4db5367415f5f5d941a21e734ea972d5ffc06f39",
+  "parent_id": "REF-05",
+  "parent_file": "data/reference/REF-05.data",
+  "parent_sha256": "4fb63600be9fa4ad9944d24ebf45884a38331dae3b734a6bf448c2dea7b129fb",
+  "failure_mode": "FM24",
+  "operator": "fm24",
+  "variant": "general_triclinic_header",
+  "description": "add an 'avec' line (general-triclinic keyword, unsupported in scope)",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.5"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.5"
+  ],
+  "expected_lammps_behaviour": "Accepted by this LAMMPS (out of project scope)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_tobermorite.yaml",
+  "overrides": {
+    "density_family": "tobermorite11",
+    "box_kind": "triclinic"
+  }
+}

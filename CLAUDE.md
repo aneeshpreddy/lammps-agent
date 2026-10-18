@@ -1,9 +1,9 @@
 # CLAUDE.md — handoff for this repository
 
-Project: an agentic AI that generates LAMMPS DATA FILEs (structure + topology) for cementitious systems. The deterministic validator is the contribution. Plan: `../LAMMPS_Agent_Daywise_Plan.pdf` (30 Sep – 21 Nov 2026). Spec: `docs/SPEC.md`, `docs/PROPERTIES.md`, `docs/FAILURE_MODES.md` (v0.4). `../Specs/` is the frozen v0.3a snapshot; edit `docs/`, not `../Specs/`.
+Project: an agentic AI that generates LAMMPS DATA FILEs (structure + topology) for cementitious systems. **System class (provisional default since 2026-10-19, SPEC §7.3/§7.15): bulk tobermorite 11 Å / 14 Å from the INTERFACE FF 1.5 database, PCFF-INTERFACE, atom_style full, real units, periodic.** Eval tasks: `eval/tasks/`, overview `docs/EVAL_SET.md`. The deterministic validator is the contribution. Plan: `../LAMMPS_Agent_Daywise_Plan.pdf` (30 Sep – 21 Nov 2026). Spec: `docs/SPEC.md`, `docs/PROPERTIES.md`, `docs/FAILURE_MODES.md` (v0.5). `../Specs/` is the frozen v0.3a snapshot; edit `docs/`, not `../Specs/`.
 
 ## Build order (do not skip ahead)
-validator (done, Gate 1 on 17 Oct) → eval set (19–24 Oct) → single-call baseline (26–28 Oct) → tool layer → agent loop (2–13 Nov, code freeze 13 Nov) → evaluation (16–18 Nov) → write-up.
+validator (done, Gate 1 on 17 Oct) → eval set (19–24 Oct; tasks + references built 19 Oct, split/metrics/harness next) → single-call baseline (26–28 Oct) → tool layer → agent loop (2–13 Nov, code freeze 13 Nov) → evaluation (16–18 Nov) → write-up.
 
 ## Rules
 - The validator never uses ASE, pymatgen or the LLM to reach a verdict. ASE and pymatgen are allowed only as converters under test or for cross-checks.
@@ -21,7 +21,7 @@ pytest -q
 python -m validator FILE [--declared configs/X.yaml] [--coeff-file F] [--reference REF] [--json] [--no-tier3]
 python scripts/calibrate.py && python scripts/mutate.py && python scripts/run_matrix.py
 ```
-LAMMPS: `lmp_serial` (Homebrew, 22 Jul 2025 – Update 6). Probe IDs T1–T39 in the docs refer to an earlier `source_audit/` folder that is not on this machine.
+LAMMPS: `lmp_serial` (Homebrew, 22 Jul 2025 – Update 6). Its PPPM segfaults on many valid boxes (use Ewald), and `replicate … bond/periodic` builds wrong bonds in tilted cells (use `scripts/supercell.py`) — FAILURE_MODES §9.6. Probe IDs T1–T39 in the docs refer to an earlier `source_audit/` folder that is not on this machine.
 
 ## End every working day
 Commit, then add three lines to `docs/LOG.md` (done / not done / tomorrow), following Appendix C.

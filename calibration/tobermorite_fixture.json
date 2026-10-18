@@ -2,7 +2,7 @@
   "calibration_id": "tobermorite_fixture",
   "version": 1,
   "status": "SYNTHETIC",
-  "date": "2026-10-16",
+  "date": "2026-10-19",
   "derivation_version": "calibrate.py v1 (2026-10-16)",
   "references": [
     {
@@ -247,8 +247,8 @@
         "FIX-T14": 2.227508
       },
       "margin_rel": 0.02,
-      "lo": 2.183,
-      "hi": 2.5095,
+      "lo": 2.182958,
+      "hi": 2.509498,
       "basis": "Range of the two INTERFACE FF tobermorite models (11 \u00c5 and 14 \u00c5) widened by the same \u00b12 % placeholder. Synthetic: for code-path tests only."
     }
   },

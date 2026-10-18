@@ -1,0 +1,31 @@
+{
+  "id": "REF-06__FM27__surplus_final_row",
+  "file": "data/corrupted/REF-06__FM27__surplus_final_row.data",
+  "sha256": "cd06c20e26b50f7a166d7568e68284cc3d01923e23200fba273d1255bca7fa46",
+  "parent_id": "REF-06",
+  "parent_file": "data/reference/REF-06.data",
+  "parent_sha256": "d2ea5b318f51dfce000d542d0073b5adb680741448412a02225a1685617b85b4",
+  "failure_mode": "FM27",
+  "operator": "fm27",
+  "variant": "surplus_final_row",
+  "description": "lower the count of the last section by one, so its final row is surplus",
+  "params": {
+    "section": "Impropers"
+  },
+  "expected_failing_properties": [
+    "P0.11",
+    "P1.1"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.11",
+    "P1.1"
+  ],
+  "expected_lammps_behaviour": "Silent (one surplus row at EOF is ignored)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_tobermorite.yaml",
+  "overrides": {
+    "density_family": "tobermorite14",
+    "box_kind": "triclinic"
+  }
+}

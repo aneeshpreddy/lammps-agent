@@ -1,0 +1,27 @@
+{
+  "id": "REF-08__FM14__atom_count_plus_one",
+  "file": "data/corrupted/REF-08__FM14__atom_count_plus_one.data",
+  "sha256": "a0ed736d85bd40b2262b2b6702ae4a42a0160f96c8f60828a492d9927c842530",
+  "parent_id": "REF-08",
+  "parent_file": "data/reference/REF-08.data",
+  "parent_sha256": "9e853fdd440190f8a65241e99953357a43cb9e487cddbaa437fd59c7634e0180",
+  "failure_mode": "FM14",
+  "operator": "fm14",
+  "variant": "atom_count_plus_one",
+  "description": "raise the header atom count by one",
+  "params": {},
+  "expected_failing_properties": [
+    "P1.1"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.1"
+  ],
+  "expected_lammps_behaviour": "Loud",
+  "header_consistent": false,
+  "declared_config": "configs/interface_pcff_tobermorite.yaml",
+  "overrides": {
+    "density_family": "tobermorite14",
+    "box_kind": "orthogonal"
+  }
+}

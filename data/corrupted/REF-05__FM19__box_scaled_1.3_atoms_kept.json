@@ -1,0 +1,31 @@
+{
+  "id": "REF-05__FM19__box_scaled_1.3_atoms_kept",
+  "file": "data/corrupted/REF-05__FM19__box_scaled_1.3_atoms_kept.data",
+  "sha256": "6b8b5e69625d761c134518d07fb6c0afa63dc926a3d073dc0c9cb370c4a4fb31",
+  "parent_id": "REF-05",
+  "parent_file": "data/reference/REF-05.data",
+  "parent_sha256": "4fb63600be9fa4ad9944d24ebf45884a38331dae3b734a6bf448c2dea7b129fb",
+  "failure_mode": "FM19",
+  "operator": "fm19",
+  "variant": "box_scaled_1.3_atoms_kept",
+  "description": "scale the box by 1.3 about its origin; atoms unchanged",
+  "params": {
+    "factor": 1.3
+  },
+  "expected_failing_properties": [
+    "P2.5",
+    "P2.2"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.5",
+    "P2.2"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_tobermorite.yaml",
+  "overrides": {
+    "density_family": "tobermorite11",
+    "box_kind": "triclinic"
+  }
+}

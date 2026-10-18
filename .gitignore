@@ -9,3 +9,4 @@ log.lammps
 # regenerated deterministically by scripts/mutate.py and scripts/reproduce_r13.py (sidecars keep SHA-256)
 data/corrupted/*.data
 data/converted/
+build/

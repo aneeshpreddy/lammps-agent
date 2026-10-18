@@ -159,3 +159,8 @@ def test_p1_17_angle_dropped_with_header_adjusted(write, make_cfg):
     text = replace_line(text, "2 1 5 4 6\n", "")
     res = run(write, make_cfg, text)
     assert failing(res) == {"P1.17"}
+
+
+def test_p1_15_conflicting_units_hints(write, make_cfg):
+    res = run(write, make_cfg, replace_line(VALID, "LAMMPS data file: two waters", "write_data output, units = real  units = metal"))
+    assert failing(res) == {"P1.15"}

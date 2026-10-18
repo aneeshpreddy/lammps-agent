@@ -1,0 +1,27 @@
+{
+  "id": "REF-05__FM06__round_charges_1dp",
+  "file": "data/corrupted/REF-05__FM06__round_charges_1dp.data",
+  "sha256": "b362e9c248bd984c497e539b74895144a05fe9df9c7695fbaba413a8b03150e9",
+  "parent_id": "REF-05",
+  "parent_file": "data/reference/REF-05.data",
+  "parent_sha256": "4fb63600be9fa4ad9944d24ebf45884a38331dae3b734a6bf448c2dea7b129fb",
+  "failure_mode": "FM06",
+  "operator": "fm06_round",
+  "variant": "round_charges_1dp",
+  "description": "round every charge to one decimal place (individual charges lost; total may stay near zero)",
+  "params": {},
+  "expected_failing_properties": [
+    "TC.2"
+  ],
+  "expected_tier": "TC",
+  "spec_expected_properties": [
+    "P2.1"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_tobermorite.yaml",
+  "overrides": {
+    "density_family": "tobermorite11",
+    "box_kind": "triclinic"
+  }
+}

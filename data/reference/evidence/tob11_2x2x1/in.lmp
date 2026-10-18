@@ -1,0 +1,26 @@
+units real
+atom_style full
+boundary p p p
+pair_style lj/class2/coul/long 9.5
+bond_style class2
+angle_style class2
+dihedral_style class2
+improper_style class2
+special_bonds lj/coul 0 0 1
+read_data data.lmp
+kspace_style ewald 1.0e-4
+neighbor 2.0 bin
+neigh_modify delay 0 every 1 check yes
+thermo_style custom step temp pe etotal press lx ly lz xy xz yz vol density
+thermo_modify norm no flush yes
+thermo 250
+min_style cg
+minimize 1.0e-6 1.0e-8 2000 20000
+reset_timestep 0
+timestep 1.0
+velocity all create 300.0 20261019 mom yes rot yes dist gaussian
+fix nvt all nvt temp 300.0 300.0 100.0
+run 5000
+unfix nvt
+fix npt all npt temp 300.0 300.0 100.0 tri 1.0 1.0 1000.0
+run 10000

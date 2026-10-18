@@ -13,7 +13,7 @@ lammps:
     executable: lmp
 
 validator:
-  default_declared_config: configs/emc_pcff_real_full.yaml
+  default_declared_config: configs/interface_pcff_tobermorite.yaml   # primary system class from 2026-10-19 (SPEC §7.3)
   run_tier3: true                 # Tier 3 runs whenever Tier 0 passes (PROPERTIES §8.2 item 4)
   run_tier3_full: true            # Tier 3b (full force field + run 0) when the declared config supports it
 

@@ -30,7 +30,13 @@ from validator.tier3 import NOCOEFF_ARTEFACT_RE, run_lammps  # noqa: E402
 
 POSITIVE = ["data/reference/REF-01.data", "data/reference/REF-02.data", "data/reference/REF-03.data",
             "data/reference/REF-04.data", "data/fixtures/FIX-T11.data", "data/fixtures/FIX-T14.data"]
-NATURAL_NEGATIVE = ["data/fixtures/FIX-T11-raw.data", "data/fixtures/FIX-T14-raw.data"]
+POSITIVE += ["data/reference/REF-05.data", "data/reference/REF-06.data", "data/reference/REF-07.data",
+             "data/reference/REF-08.data"] + [f"data/reference/eval/t{i:02d}.data" for i in range(1, 15)]
+# Real tool output, not synthetic mutations: msi2lmp (tilt not reduced) and LAMMPS 'replicate ... bond/periodic'
+# (scripts/build_references.py crosscheck). Each is judged on its own merits: TC.2 against its parent says
+# whether it is actually wrong; the validator must FAIL exactly the wrong ones.
+NATURAL_NEGATIVE = ["data/fixtures/FIX-T11-raw.data", "data/fixtures/FIX-T14-raw.data"] + \
+    sorted(os.path.relpath(f, ROOT) for f in __import__("glob").glob(os.path.join(ROOT, "data/converted/lammps_replicate/*.data")))
 
 
 def lammps_alone(path, cfg, res):
@@ -115,7 +121,7 @@ def main():
         path = os.path.join(ROOT, rel)
         meta = load_sidecar(path)
         cfg = config_for(path, meta)
-        ref = os.path.join(ROOT, meta["parent_file"]) if kind == "corrupted" else None
+        ref = os.path.join(ROOT, meta["parent_file"]) if meta.get("parent_file") and kind != "positive" else None
         res = validate(path, cfg, reference=ref)
         expected = (m or {}).get("expected_failing_properties", [])
         c = classify(res, expected)
@@ -195,13 +201,18 @@ def write_report(rows, elapsed):
     L.append(f"| First failing tier of CAUGHT files (T0 / T1 / T2) | {t02.get(0, 0)} / {t02.get(1, 0)} / {t02.get(2, 0)} |\n")
     # positives
     L.append("## Positive controls (must PASS)\n")
+    L.append("REF-01..04: PCE candidates (EMC). FIX-T11/T14: synthetic fixtures. REF-05..08 and t01–t14: tobermorite "
+             "published-model references and eval-set reference outputs (primary system class from v0.5).\n")
     L.append("| File | Verdict | Tier reached | Notes |\n|---|---|---|---|")
     for r in pos:
         L.append(f"| {r['id']} | {r['verdict']} | {r['tier_reached']} | {r['first_message'] or '—'} |")
     L.append("\n## Natural negatives (real converter output)\n")
-    L.append("| File | Verdict | Failing | LAMMPS alone | Message |\n|---|---|---|---|---|")
+    L.append("TC.2 (comparison with the parent built by the reference pipeline) says whether the tool output is "
+             "actually wrong; the validator's verdict should agree.\n")
+    L.append("| File | Verdict | Failing | TC.2 vs parent | LAMMPS alone | Message |\n|---|---|---|---|---|---|")
     for r in neg:
-        L.append(f"| {r['id']} | {r['verdict']} | {r['failing']} | {r['lammps_alone']} | {r['first_message']} |")
+        tc = "differs" if r["tc_failing"] else ("identical" if r["parent"] else "—")
+        L.append(f"| {r['id']} | {r['verdict']} | {r['failing'] or '—'} | {tc} | {r['lammps_alone']} | {r['first_message'] or '—'} |")
     # per operator
     L.append("\n## Mutation × detection (aggregated over parents)\n")
     L.append("Columns: n = files (one per applicable parent); caught = Tiers 0–3 FAIL; exp = expected property failed; "

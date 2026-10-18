@@ -1,0 +1,27 @@
+{
+  "id": "REF-06__FM21__header_line_after_section",
+  "file": "data/corrupted/REF-06__FM21__header_line_after_section.data",
+  "sha256": "9cffb2334157431e21313fc723a3ea5d5009fff439ece410cfcd8a1444ec4b8e",
+  "parent_id": "REF-06",
+  "parent_file": "data/reference/REF-06.data",
+  "parent_sha256": "d2ea5b318f51dfce000d542d0073b5adb680741448412a02225a1685617b85b4",
+  "failure_mode": "FM21",
+  "operator": "fm21_misplaced",
+  "variant": "header_line_after_section",
+  "description": "move the 'atom types' header line to just after the Masses section",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.1"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.1"
+  ],
+  "expected_lammps_behaviour": "Loud (Unknown identifier)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_tobermorite.yaml",
+  "overrides": {
+    "density_family": "tobermorite14",
+    "box_kind": "triclinic"
+  }
+}

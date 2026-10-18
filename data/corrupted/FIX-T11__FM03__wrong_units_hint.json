@@ -9,7 +9,9 @@
   "operator": "fm03_hint",
   "variant": "wrong_units_hint",
   "description": "write 'units = metal' on line 1 while the declared units are real",
-  "params": {},
+  "params": {
+    "mode": "appended hint"
+  },
   "expected_failing_properties": [
     "P1.15"
   ],

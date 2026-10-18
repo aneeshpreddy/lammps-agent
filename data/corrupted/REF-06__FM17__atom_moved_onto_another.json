@@ -1,0 +1,30 @@
+{
+  "id": "REF-06__FM17__atom_moved_onto_another",
+  "file": "data/corrupted/REF-06__FM17__atom_moved_onto_another.data",
+  "sha256": "20a19255d59fcc423dee6446414be74557d788d05b3adc5a0c4c97cde4ad2f2d",
+  "parent_id": "REF-06",
+  "parent_file": "data/reference/REF-06.data",
+  "parent_sha256": "d2ea5b318f51dfce000d542d0073b5adb680741448412a02225a1685617b85b4",
+  "failure_mode": "FM17",
+  "operator": "fm17",
+  "variant": "atom_moved_onto_another",
+  "description": "move an unbonded or terminal atom onto the position of a non-bonded atom 0.3 \u00c5 away",
+  "params": {
+    "moved": 104,
+    "onto": 1
+  },
+  "expected_failing_properties": [
+    "P2.3"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.3"
+  ],
+  "expected_lammps_behaviour": "Silent at read_data; PE may be inf at run",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_tobermorite.yaml",
+  "overrides": {
+    "density_family": "tobermorite14",
+    "box_kind": "triclinic"
+  }
+}

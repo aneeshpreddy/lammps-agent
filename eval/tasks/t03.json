@@ -1,0 +1,43 @@
+{
+  "id": "t03",
+  "difficulty": "easy",
+  "input": "Build a LAMMPS data file for the tobermorite 11 Å rectangular (orthogonal) cell from the INTERFACE FF 1.5 model database (tob11_rectangular_cell) with the PCFF-INTERFACE force field (pcff_interface_v1_5.frc): atom_style full, real units, periodic in x, y and z, all force-field coefficients and masses written in the data file, triclinic tilt within LAMMPS's documented bound.",
+  "spec": {
+    "system_family": "tobermorite_interface",
+    "model": "tob11_rectangular_cell",
+    "supercell": [
+      1,
+      1,
+      1
+    ],
+    "force_field": "pcff_interface_v1_5.frc",
+    "atom_style": "full",
+    "units": "real",
+    "boundary": [
+      "p",
+      "p",
+      "p"
+    ],
+    "coefficients_in_data_file": true,
+    "box_kind": "orthogonal",
+    "expected_counts": {
+      "atoms": 176,
+      "bonds": 144,
+      "angles": 200,
+      "dihedrals": 192,
+      "impropers": 96,
+      "atom types": 9
+    }
+  },
+  "exercises": [
+    "FM01",
+    "FM02",
+    "FM06",
+    "FM15",
+    "FM22"
+  ],
+  "note": "orthogonal cell",
+  "declared_config": "configs/interface_pcff_tobermorite.yaml",
+  "reference": "data/reference/eval/t03.data",
+  "reference_sha256": "bd0d513c3b541cd4eaccd6cf2cdb03ecb4120768563749cdc27a190c1652dc42"
+}

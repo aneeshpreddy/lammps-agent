@@ -1,0 +1,27 @@
+{
+  "id": "REF-08__FM30__negative_molecule_id",
+  "file": "data/corrupted/REF-08__FM30__negative_molecule_id.data",
+  "sha256": "875650a6a322ea9786b7b42106d367f301b81816e5040aee833dd8ef513fc35c",
+  "parent_id": "REF-08",
+  "parent_file": "data/reference/REF-08.data",
+  "parent_sha256": "9e853fdd440190f8a65241e99953357a43cb9e487cddbaa437fd59c7634e0180",
+  "failure_mode": "FM30",
+  "operator": "fm30",
+  "variant": "negative_molecule_id",
+  "description": "set one molecule ID to -1",
+  "params": {},
+  "expected_failing_properties": [
+    "P1.8"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.8"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_tobermorite.yaml",
+  "overrides": {
+    "density_family": "tobermorite14",
+    "box_kind": "orthogonal"
+  }
+}

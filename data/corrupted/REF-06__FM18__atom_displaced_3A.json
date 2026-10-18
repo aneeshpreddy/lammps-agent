@@ -1,0 +1,31 @@
+{
+  "id": "REF-06__FM18__atom_displaced_3A",
+  "file": "data/corrupted/REF-06__FM18__atom_displaced_3A.data",
+  "sha256": "fbd33d8af758c94605007dc4bcfbe6bc4efc5b035d169a9231b22137aa72c5bf",
+  "parent_id": "REF-06",
+  "parent_file": "data/reference/REF-06.data",
+  "parent_sha256": "d2ea5b318f51dfce000d542d0073b5adb680741448412a02225a1685617b85b4",
+  "failure_mode": "FM18",
+  "operator": "fm18",
+  "variant": "atom_displaced_3A",
+  "description": "displace one bonded atom by 3 \u00c5 along x",
+  "params": {
+    "atom": 3
+  },
+  "expected_failing_properties": [
+    "P2.4",
+    "P2.7"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.4",
+    "P2.7"
+  ],
+  "expected_lammps_behaviour": "Silent at read_data",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_tobermorite.yaml",
+  "overrides": {
+    "density_family": "tobermorite14",
+    "box_kind": "triclinic"
+  }
+}

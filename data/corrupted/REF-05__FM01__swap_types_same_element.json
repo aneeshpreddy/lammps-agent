@@ -1,0 +1,39 @@
+{
+  "id": "REF-05__FM01__swap_types_same_element",
+  "file": "data/corrupted/REF-05__FM01__swap_types_same_element.data",
+  "sha256": "9c5d743b35e2bb123c3258ff44fbf52d32ba1070956466c654c957bf1d83f41c",
+  "parent_id": "REF-05",
+  "parent_file": "data/reference/REF-05.data",
+  "parent_sha256": "4fb63600be9fa4ad9944d24ebf45884a38331dae3b734a6bf448c2dea7b129fb",
+  "failure_mode": "FM01",
+  "operator": "fm01_same",
+  "variant": "swap_types_same_element",
+  "description": "swap two atom-type IDs of the same element in Atoms (e.g. two carbon types); Masses unchanged",
+  "params": {
+    "types": [
+      3,
+      4
+    ],
+    "names": [
+      "oc12",
+      "oc13"
+    ]
+  },
+  "expected_failing_properties": [
+    "P1.16",
+    "TC.2"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P2.6",
+    "TC.1",
+    "TC.2"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_tobermorite.yaml",
+  "overrides": {
+    "density_family": "tobermorite11",
+    "box_kind": "triclinic"
+  }
+}

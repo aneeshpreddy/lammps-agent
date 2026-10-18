@@ -1,0 +1,41 @@
+{
+  "id": "REF-06__FM01__swap_types_diff_element",
+  "file": "data/corrupted/REF-06__FM01__swap_types_diff_element.data",
+  "sha256": "bebd9ab9d6784c5210e49972426d405ebee61762b6c2359ab4ac1588ef059e72",
+  "parent_id": "REF-06",
+  "parent_file": "data/reference/REF-06.data",
+  "parent_sha256": "d2ea5b318f51dfce000d542d0073b5adb680741448412a02225a1685617b85b4",
+  "failure_mode": "FM01",
+  "operator": "fm01_diff",
+  "variant": "swap_types_diff_element",
+  "description": "swap two atom-type IDs of different elements in Atoms; Masses unchanged",
+  "params": {
+    "types": [
+      2,
+      4
+    ],
+    "names": [
+      "sc2",
+      "oc12"
+    ]
+  },
+  "expected_failing_properties": [
+    "P1.16",
+    "P2.3",
+    "P2.4",
+    "TC.2"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P2.6",
+    "TC.1",
+    "TC.2"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_tobermorite.yaml",
+  "overrides": {
+    "density_family": "tobermorite14",
+    "box_kind": "triclinic"
+  }
+}

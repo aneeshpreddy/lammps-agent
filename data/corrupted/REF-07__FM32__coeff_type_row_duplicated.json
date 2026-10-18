@@ -1,0 +1,27 @@
+{
+  "id": "REF-07__FM32__coeff_type_row_duplicated",
+  "file": "data/corrupted/REF-07__FM32__coeff_type_row_duplicated.data",
+  "sha256": "c53650324dc8731edda6476bb3c806fc635a3805cbc81e7be800c82cbbfad5d1",
+  "parent_id": "REF-07",
+  "parent_file": "data/reference/REF-07.data",
+  "parent_sha256": "df96e14ce78c6a1d059d8ca00497b92bf7c24a61cdaac6deb7f7df93d6d27220",
+  "failure_mode": "FM32",
+  "operator": "fm32",
+  "variant": "coeff_type_row_duplicated",
+  "description": "replace the second Bond Coeffs row with a copy of the first (type 1 twice, type 2 missing)",
+  "params": {},
+  "expected_failing_properties": [
+    "P1.7"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.7"
+  ],
+  "expected_lammps_behaviour": "Silent under nocoeff; Loud@run",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_tobermorite.yaml",
+  "overrides": {
+    "density_family": "tobermorite11",
+    "box_kind": "orthogonal"
+  }
+}

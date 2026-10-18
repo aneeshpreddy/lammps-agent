@@ -1,0 +1,29 @@
+{
+  "id": "REF-07__FM29__velocities_duplicate_id",
+  "file": "data/corrupted/REF-07__FM29__velocities_duplicate_id.data",
+  "sha256": "178150bb25aeb6fc411858c023cb1f9b7dfa90151f0045f178ce17f9676a51a1",
+  "parent_id": "REF-07",
+  "parent_file": "data/reference/REF-07.data",
+  "parent_sha256": "df96e14ce78c6a1d059d8ca00497b92bf7c24a61cdaac6deb7f7df93d6d27220",
+  "failure_mode": "FM29",
+  "operator": "fm29",
+  "variant": "velocities_duplicate_id",
+  "description": "append a Velocities section in which the last atom ID is listed twice and the first atom has no row",
+  "params": {
+    "mode": "edited existing Velocities section"
+  },
+  "expected_failing_properties": [
+    "P1.14"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.14"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_tobermorite.yaml",
+  "overrides": {
+    "density_family": "tobermorite11",
+    "box_kind": "orthogonal"
+  }
+}

@@ -45,6 +45,17 @@ SETS = {
                                  "identical values give no spread): it is a PLACEHOLDER for an owner requirement "
                                  "(PROPERTIES §8.5 rule 4) and must be confirmed or replaced.",
                 "pce_emc_dilute": None}},
+    "tobermorite": {"out": "calibration/tobermorite_interface.json", "id": "tobermorite_interface",
+                    "status": "PROVISIONAL_DEFAULT",
+                    "files": ["data/reference/REF-05.data", "data/reference/REF-06.data",
+                              "data/reference/REF-07.data", "data/reference/REF-08.data"],
+                    "density_margin_rel": 1e-4,
+                    "density_basis": {
+                        f"tobermorite{n}": f"Crystal: every supercell of the tobermorite {n} Å model has exactly the "
+                                           "unit-cell density, and the unit and rectangular cells agree. The ±1e-4 "
+                                           "relative margin covers box lengths printed to >= 6 significant digits; it is "
+                                           "a representation tolerance, not a physical one (PROPERTIES §8.5 rule 3)."
+                        for n in (11, 14)}},
     "fixture": {"out": "calibration/tobermorite_fixture.json", "id": "tobermorite_fixture", "status": "SYNTHETIC",
                 "files": ["data/fixtures/FIX-T11.data", "data/fixtures/FIX-T14.data"],
                 "density_basis": {
@@ -132,9 +143,9 @@ def main(which: str):
                          "basis": "isolated chain(s) in a mostly empty periodic box: no bulk density to check"}
             continue
         lo, hi = min(v for _, v in vals), max(v for _, v in vals)
-        dens[fam] = {"applicable": True, "values": {r: round(v, 6) for r, v in vals}, "margin_rel": DENSITY_MARGIN_REL,
-                     "lo": round(lo * (1 - DENSITY_MARGIN_REL), 4), "hi": round(hi * (1 + DENSITY_MARGIN_REL), 4),
-                     "basis": basis}
+        mr = spec.get("density_margin_rel", DENSITY_MARGIN_REL)
+        dens[fam] = {"applicable": True, "values": {r: round(v, 6) for r, v in vals}, "margin_rel": mr,
+                     "lo": round(lo * (1 - mr), 6), "hi": round(hi * (1 + mr), 6), "basis": basis}
     out = {
         "calibration_id": spec["id"], "version": 1, "status": spec["status"],
         "date": _dt.date.today().isoformat(), "derivation_version": DERIVATION_VERSION,
@@ -177,5 +188,5 @@ def main(which: str):
 
 
 if __name__ == "__main__":
-    for w in (sys.argv[1:] or ["pce", "fixture"]):
+    for w in (sys.argv[1:] or ["pce", "tobermorite", "fixture"]):
         main(w)

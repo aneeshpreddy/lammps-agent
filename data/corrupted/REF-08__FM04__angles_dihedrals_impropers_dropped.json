@@ -1,0 +1,33 @@
+{
+  "id": "REF-08__FM04__angles_dihedrals_impropers_dropped",
+  "file": "data/corrupted/REF-08__FM04__angles_dihedrals_impropers_dropped.data",
+  "sha256": "865f923bb5c6b1fc7d3f09f62b71b902518e31ba33a07b19b959f3e247ad48bf",
+  "parent_id": "REF-08",
+  "parent_file": "data/reference/REF-08.data",
+  "parent_sha256": "9e853fdd440190f8a65241e99953357a43cb9e487cddbaa437fd59c7634e0180",
+  "failure_mode": "FM04",
+  "operator": "fm04_higher",
+  "variant": "angles_dihedrals_impropers_dropped",
+  "description": "delete every Angles/Dihedrals/Impropers row and set their header counts to 0 (what an ASE lammps-data round trip does, docs/R13_ASE_ROUNDTRIP.md)",
+  "params": {
+    "Impropers": 96,
+    "Dihedrals": 168,
+    "Angles": 204
+  },
+  "expected_failing_properties": [
+    "P1.17",
+    "TC.2"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.17",
+    "TC.2"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_tobermorite.yaml",
+  "overrides": {
+    "density_family": "tobermorite14",
+    "box_kind": "orthogonal"
+  }
+}

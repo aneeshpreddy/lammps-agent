@@ -1,0 +1,27 @@
+{
+  "id": "REF-07__FM34__header_keyword_repeated",
+  "file": "data/corrupted/REF-07__FM34__header_keyword_repeated.data",
+  "sha256": "7a026d3f51e643ade8ce1281dbe052116f1cc8e32c0cd89fe821635e61f224aa",
+  "parent_id": "REF-07",
+  "parent_file": "data/reference/REF-07.data",
+  "parent_sha256": "df96e14ce78c6a1d059d8ca00497b92bf7c24a61cdaac6deb7f7df93d6d27220",
+  "failure_mode": "FM34",
+  "operator": "fm34",
+  "variant": "header_keyword_repeated",
+  "description": "repeat the 'atoms' header line with the count minus one",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.10"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.10"
+  ],
+  "expected_lammps_behaviour": "Silent (last value wins)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_tobermorite.yaml",
+  "overrides": {
+    "density_family": "tobermorite11",
+    "box_kind": "orthogonal"
+  }
+}

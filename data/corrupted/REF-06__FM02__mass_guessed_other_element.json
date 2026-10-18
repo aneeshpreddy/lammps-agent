@@ -1,0 +1,29 @@
+{
+  "id": "REF-06__FM02__mass_guessed_other_element",
+  "file": "data/corrupted/REF-06__FM02__mass_guessed_other_element.data",
+  "sha256": "ea27ac793edf146e4a4ec386de3b789e16740afb62e9076606f56d08f0a5a8be",
+  "parent_id": "REF-06",
+  "parent_file": "data/reference/REF-06.data",
+  "parent_sha256": "d2ea5b318f51dfce000d542d0073b5adb680741448412a02225a1685617b85b4",
+  "failure_mode": "FM02",
+  "operator": "fm02",
+  "variant": "mass_guessed_other_element",
+  "description": "replace the mass of the first hydrogen type with helium's (a Z = type-index style guess)",
+  "params": {
+    "type": 9
+  },
+  "expected_failing_properties": [
+    "P2.6"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.6"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_tobermorite.yaml",
+  "overrides": {
+    "density_family": "tobermorite14",
+    "box_kind": "triclinic"
+  }
+}

@@ -1,0 +1,283 @@
+{
+  "calibration_id": "tobermorite_interface",
+  "version": 1,
+  "status": "PROVISIONAL_DEFAULT",
+  "date": "2026-10-19",
+  "derivation_version": "calibrate.py v1 (2026-10-16)",
+  "references": [
+    {
+      "id": "REF-05",
+      "file": "data/reference/REF-05.data",
+      "sha256": "4fb63600be9fa4ad9944d24ebf45884a38331dae3b734a6bf448c2dea7b129fb",
+      "family": "tobermorite11"
+    },
+    {
+      "id": "REF-06",
+      "file": "data/reference/REF-06.data",
+      "sha256": "d2ea5b318f51dfce000d542d0073b5adb680741448412a02225a1685617b85b4",
+      "family": "tobermorite14"
+    },
+    {
+      "id": "REF-07",
+      "file": "data/reference/REF-07.data",
+      "sha256": "df96e14ce78c6a1d059d8ca00497b92bf7c24a61cdaac6deb7f7df93d6d27220",
+      "family": "tobermorite11"
+    },
+    {
+      "id": "REF-08",
+      "file": "data/reference/REF-08.data",
+      "sha256": "9e853fdd440190f8a65241e99953357a43cb9e487cddbaa437fd59c7634e0180",
+      "family": "tobermorite14"
+    }
+  ],
+  "bond_length": {
+    "measured": "minimum-image bond length per atom-type-name pair (\u00c5)",
+    "derivation": "[min x (1-0.1), max x (1+0.1)] over the references",
+    "basis": "references show a spread of sd \u2248 3 % of the bond length around the FF r0; a 10 % widening beyond the observed extremes admits re-built or relaxed geometries while staying below the closest non-bonded contact of the same element pair (separation_check)",
+    "margin_rel": 0.1,
+    "pairs": {
+      "h*|o*": {
+        "n": 144,
+        "min": 0.97992,
+        "max": 0.99674,
+        "mean": 0.98551,
+        "sd": 0.00396,
+        "lo": 0.8819,
+        "hi": 1.0964
+      },
+      "hoy|oc14": {
+        "n": 24,
+        "min": 0.93907,
+        "max": 0.95538,
+        "mean": 0.9471,
+        "sd": 0.00686,
+        "lo": 0.8452,
+        "hi": 1.0509
+      },
+      "oc12|sc2": {
+        "n": 96,
+        "min": 1.61169,
+        "max": 1.73453,
+        "mean": 1.65301,
+        "sd": 0.03782,
+        "lo": 1.4505,
+        "hi": 1.908
+      },
+      "oc12|sc3": {
+        "n": 60,
+        "min": 1.58735,
+        "max": 1.63559,
+        "mean": 1.60997,
+        "sd": 0.01576,
+        "lo": 1.4286,
+        "hi": 1.7991
+      },
+      "oc13|sc2": {
+        "n": 96,
+        "min": 1.58926,
+        "max": 1.65085,
+        "mean": 1.60889,
+        "sd": 0.01955,
+        "lo": 1.4303,
+        "hi": 1.8159
+      },
+      "oc14|sc3": {
+        "n": 24,
+        "min": 1.65485,
+        "max": 1.65981,
+        "mean": 1.65733,
+        "sd": 0.00248,
+        "lo": 1.4894,
+        "hi": 1.8258
+      },
+      "oc22|sc3": {
+        "n": 12,
+        "min": 1.5654,
+        "max": 1.5654,
+        "mean": 1.5654,
+        "sd": 0.0,
+        "lo": 1.4089,
+        "hi": 1.7219
+      }
+    },
+    "separation_check": [
+      {
+        "bond_pair": "h*|o*",
+        "element_pair": "H|O",
+        "window_hi": 1.0964,
+        "closest_nonbonded": 1.4998,
+        "ok": true
+      },
+      {
+        "bond_pair": "hoy|oc14",
+        "element_pair": "H|O",
+        "window_hi": 1.0509,
+        "closest_nonbonded": 1.4998,
+        "ok": true
+      },
+      {
+        "bond_pair": "oc12|sc2",
+        "element_pair": "O|Si",
+        "window_hi": 1.908,
+        "closest_nonbonded": 3.3924,
+        "ok": true
+      },
+      {
+        "bond_pair": "oc12|sc3",
+        "element_pair": "O|Si",
+        "window_hi": 1.7991,
+        "closest_nonbonded": 3.3924,
+        "ok": true
+      },
+      {
+        "bond_pair": "oc13|sc2",
+        "element_pair": "O|Si",
+        "window_hi": 1.8159,
+        "closest_nonbonded": 3.3924,
+        "ok": true
+      },
+      {
+        "bond_pair": "oc14|sc3",
+        "element_pair": "O|Si",
+        "window_hi": 1.8258,
+        "closest_nonbonded": 3.3924,
+        "ok": true
+      },
+      {
+        "bond_pair": "oc22|sc3",
+        "element_pair": "O|Si",
+        "window_hi": 1.7219,
+        "closest_nonbonded": 3.3924,
+        "ok": true
+      }
+    ],
+    "separation_ok": true
+  },
+  "overlap": {
+    "measured": "minimum-image distance of non-bonded pairs (all pairs except 1-2 bonds), per element pair (\u00c5)",
+    "derivation": "d_min = (1-0.25) x closest such contact in the references; element pairs with no contact below 4.0 \u00c5 are uncalibrated",
+    "basis": "P2.3 targets gross overlaps (coincident/duplicated sites, collapsed geometry); the references are unrelaxed builds whose closest contacts are already short, so the threshold is placed well below them",
+    "margin_rel": 0.25,
+    "pairs": {
+      "Ca|Ca": {
+        "observed_min": 3.6758,
+        "d_min": 2.7569,
+        "closest_pair_in": "REF-07",
+        "atom_ids": [
+          96,
+          125
+        ]
+      },
+      "Ca|H": {
+        "observed_min": 2.8663,
+        "d_min": 2.1497,
+        "closest_pair_in": "REF-08",
+        "atom_ids": [
+          102,
+          176
+        ]
+      },
+      "Ca|O": {
+        "observed_min": 2.252,
+        "d_min": 1.689,
+        "closest_pair_in": "REF-08",
+        "atom_ids": [
+          17,
+          42
+        ]
+      },
+      "Ca|Si": {
+        "observed_min": 3.069,
+        "d_min": 2.3017,
+        "closest_pair_in": "REF-07",
+        "atom_ids": [
+          35,
+          164
+        ]
+      },
+      "H|H": {
+        "observed_min": 1.4485,
+        "d_min": 1.0864,
+        "closest_pair_in": "REF-08",
+        "atom_ids": [
+          185,
+          186
+        ]
+      },
+      "H|O": {
+        "observed_min": 1.4998,
+        "d_min": 1.1248,
+        "closest_pair_in": "REF-08",
+        "atom_ids": [
+          28,
+          92
+        ]
+      },
+      "H|Si": {
+        "observed_min": 2.224,
+        "d_min": 1.668,
+        "closest_pair_in": "REF-07",
+        "atom_ids": [
+          78,
+          148
+        ]
+      },
+      "O|O": {
+        "observed_min": 2.4219,
+        "d_min": 1.8164,
+        "closest_pair_in": "REF-08",
+        "atom_ids": [
+          18,
+          42
+        ]
+      },
+      "O|Si": {
+        "observed_min": 3.3924,
+        "d_min": 2.5443,
+        "closest_pair_in": "REF-08",
+        "atom_ids": [
+          4,
+          8
+        ]
+      },
+      "Si|Si": {
+        "observed_min": 3.0192,
+        "d_min": 2.2644,
+        "closest_pair_in": "REF-07",
+        "atom_ids": [
+          32,
+          34
+        ]
+      }
+    }
+  },
+  "density": {
+    "tobermorite11": {
+      "applicable": true,
+      "values": {
+        "REF-05": 2.460292,
+        "REF-07": 2.460287
+      },
+      "margin_rel": 0.0001,
+      "lo": 2.460041,
+      "hi": 2.460538,
+      "basis": "Crystal: every supercell of the tobermorite 11 \u00c5 model has exactly the unit-cell density, and the unit and rectangular cells agree. The \u00b11e-4 relative margin covers box lengths printed to >= 6 significant digits; it is a representation tolerance, not a physical one (PROPERTIES \u00a78.5 rule 3)."
+    },
+    "tobermorite14": {
+      "applicable": true,
+      "values": {
+        "REF-06": 2.227508,
+        "REF-08": 2.227503
+      },
+      "margin_rel": 0.0001,
+      "lo": 2.22728,
+      "hi": 2.227731,
+      "basis": "Crystal: every supercell of the tobermorite 14 \u00c5 model has exactly the unit-cell density, and the unit and rectangular cells agree. The \u00b11e-4 relative margin covers box lengths printed to >= 6 significant digits; it is a representation tolerance, not a physical one (PROPERTIES \u00a78.5 rule 3)."
+    }
+  },
+  "mass": {
+    "tau_m_amu": 0.01,
+    "measured": "|Masses value - standard atomic weight of the mapped element|",
+    "basis": "FF mass tables print 2-5 decimals and use older IUPAC editions (e.g. H 1.00794/1.00797, Ca 40.08, Si 28.086); the largest such difference for the elements in scope is 0.002 amu. 0.01 amu covers it while any element swap differs by > 0.9 amu."
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "REF-08__FM23__box_origin_reset",
+  "file": "data/corrupted/REF-08__FM23__box_origin_reset.data",
+  "sha256": "372c275c42aaf62a8030336233cc583916bcf6af6580e79393f58761a1c93e23",
+  "parent_id": "REF-08",
+  "parent_file": "data/reference/REF-08.data",
+  "parent_sha256": "9e853fdd440190f8a65241e99953357a43cb9e487cddbaa437fd59c7634e0180",
+  "failure_mode": "FM23",
+  "operator": "fm23",
+  "variant": "box_origin_reset",
+  "description": "move the box so its origin is 0 (or shift it by half a box if it already is); atoms unchanged",
+  "params": {
+    "shift_x": 0.554033026
+  },
+  "expected_failing_properties": [
+    "P2.2"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.2"
+  ],
+  "expected_lammps_behaviour": "Silent (periodic)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_tobermorite.yaml",
+  "overrides": {
+    "density_family": "tobermorite14",
+    "box_kind": "orthogonal"
+  }
+}

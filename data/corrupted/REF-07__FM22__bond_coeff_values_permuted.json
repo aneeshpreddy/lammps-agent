@@ -1,0 +1,28 @@
+{
+  "id": "REF-07__FM22__bond_coeff_values_permuted",
+  "file": "data/corrupted/REF-07__FM22__bond_coeff_values_permuted.data",
+  "sha256": "878bd16c67cb107516272e891e18a244fa5ec900ff061a3f5cf3800061c5fff8",
+  "parent_id": "REF-07",
+  "parent_file": "data/reference/REF-07.data",
+  "parent_sha256": "df96e14ce78c6a1d059d8ca00497b92bf7c24a61cdaac6deb7f7df93d6d27220",
+  "failure_mode": "FM22",
+  "operator": "fm22_vals",
+  "variant": "bond_coeff_values_permuted",
+  "description": "swap the parameter values (not the IDs or comments) of the first two Bond Coeffs rows",
+  "params": {},
+  "expected_failing_properties": [
+    "TC.2"
+  ],
+  "expected_tier": "TC",
+  "spec_expected_properties": [
+    "P1.7",
+    "TC.2"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_tobermorite.yaml",
+  "overrides": {
+    "density_family": "tobermorite11",
+    "box_kind": "orthogonal"
+  }
+}

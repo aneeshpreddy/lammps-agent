@@ -4,7 +4,7 @@
 # the owner chooses the system class (OD-B) and force field (OD-C). Values follow the INTERFACE
 # FF 1.5 documentation conventions (PCFF-INTERFACE, class II) and msi2lmp's output.
 config_id: interface-pcff-fixture
-config_version: 0.1
+config_version: 0.2
 status: SYNTHETIC
 derived_from: [FIX-T11, FIX-T14]
 
@@ -81,3 +81,5 @@ tier3:
     - "Inconsistent image flags"
     - "Bond/angle/dihedral extent > half of periodic box length"
   run_mode: serial
+  kspace: "kspace_style pppm 1.0e-4"
+  crash_fallback_kspace: "kspace_style ewald 1.0e-4"

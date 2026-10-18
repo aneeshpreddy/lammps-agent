@@ -104,15 +104,16 @@ def render(template_path: str, mapping: Dict[str, str]) -> str:
     return text
 
 
-def _mapping(cfg) -> Dict[str, str]:
+def _mapping(cfg, kspace: Optional[str] = None) -> Dict[str, str]:
     d = declared(cfg)
     b = d.get("boundary", ["p", "p", "p"])
     return {"units": str(d.get("units")), "atom_style": str(d.get("atom_style")),
             "boundary": " ".join(b) if isinstance(b, list) else str(b),
-            "datafile": "data.lmp", "coeff_file": "coeffs.inc"}
+            "datafile": "data.lmp", "coeff_file": "coeffs.inc",
+            "kspace": kspace or d.get("tier3", {}).get("kspace") or ""}
 
 
-def run_lammps(path: str, cfg, mode: str) -> Optional[Dict[str, Any]]:
+def run_lammps(path: str, cfg, mode: str, kspace: Optional[str] = None) -> Optional[Dict[str, Any]]:
     """Run one Tier 3 mode ('structure' or 'full'); None if the mode is not configured."""
     d = declared(cfg)
     t3 = d.get("tier3", {})
@@ -125,13 +126,15 @@ def run_lammps(path: str, cfg, mode: str) -> Optional[Dict[str, Any]]:
         if not cf:
             return None
         files["coeffs.inc"] = resolve(cf)
-    text = render(resolve(tmpl), _mapping(cfg))
+    mapping = _mapping(cfg, kspace)
+    text = render(resolve(tmpl), mapping)
     backend = make_backend(cfg)
     timeout = t3.get("timeout_s") or cfg.get("lammps", {}).get("timeout_s", 120)
     rr = backend.run(text, files, timeout)
     s = summarise_run(rr)
     s["mode"] = mode
     s["template"] = tmpl
+    s["kspace"] = mapping["kspace"] if mode == "full" else None
     return s
 
 
@@ -150,7 +153,15 @@ def run_tier3(pf: ParsedFile, cfg, path: str) -> (List[CheckResult], Dict[str, A
     s = run_lammps(path, cfg, "structure")
     full_enabled = cfg.get("validator", {}).get("run_tier3_full", True)
     f = run_lammps(path, cfg, "full") if full_enabled else None
-    lam.update({"ran": s is not None, "structure": s, "full": f})
+    # A full-mode CRASH is repeated once with the declared fallback kspace solver: this build's PPPM
+    # segfaults on some valid boxes (FAILURE_MODES §9.6), and such a crash must not be blamed on the file.
+    fb = None
+    fallback = d.get("tier3", {}).get("crash_fallback_kspace")
+    if f is not None and f["outcome"] == CRASH and fallback:
+        fb = run_lammps(path, cfg, "full", kspace=fallback)
+    build_crash = fb is not None and fb["outcome"] == CLEAN
+    f_primary, f = f, (fb if build_crash else f)
+    lam.update({"ran": s is not None, "structure": s, "full": f_primary, "full_fallback": fb})
     if s is not None:
         lam["returncode"] = s["returncode"]
         lam["errors"] = s["errors"] + ([e for e in f["errors"] if e not in s["errors"]] if f else [])
@@ -194,9 +205,12 @@ def run_tier3(pf: ParsedFile, cfg, path: str) -> (List[CheckResult], Dict[str, A
                 probs.append(f"non-finite thermodynamic values after run 0: "
                              f"{ {k: th['values'][k] for k in th['nonfinite']} }")
         attr = _attribute(f["errors"]) if probs else None
+        warns32 = [f"primary kspace '{f_primary['kspace']}' crashed (signal {f_primary['signal']}); judged on the "
+                   f"identical run with '{fb['kspace']}', which was clean: build defect, not the DATA FILE"] if build_crash else []
         checks.append(CheckResult("lammps_full_acceptance", "P3.2", 3, FAIL if probs else PASS, "; ".join(probs),
                                   {"outcome": f["outcome"], "thermo": th, "errors": f["errors"][:5],
-                                   "attribution": attr}))
+                                   "attribution": attr, "kspace": f.get("kspace"),
+                                   "primary_outcome": f_primary["outcome"]}, warns32))
     # P3.3 warning policy -------------------------------------------------------------------
     allow = set(d.get("tier3", {}).get("warning_allow_list") or [])
     runs = [r for r in (s, f) if r is not None]
@@ -217,8 +231,15 @@ def run_tier3(pf: ParsedFile, cfg, path: str) -> (List[CheckResult], Dict[str, A
         checks.append(CheckResult("lammps_process_outcome", "P3.4", 3, NOT_EVALUATED, "LAMMPS not run"))
     else:
         bad = [f"{r['mode']}: {r['outcome']}" for r in runs if r["outcome"] in (CRASH, TIMEOUT, LAUNCH)]
+        det = {r["mode"]: {k: r[k] for k in ("outcome", "returncode", "signal", "timed_out", "elapsed_s",
+                                             "launch_error")} for r in runs}
+        warns34 = []
+        if f_primary is not None and f_primary is not f:
+            det["full_primary"] = {k: f_primary[k] for k in ("outcome", "returncode", "signal", "kspace")}
+            det["attribution"] = "CONFIGURATION (LAMMPS build): fallback kspace run was clean"
+            warns34.append(f"full run with '{f_primary['kspace']}' crashed (signal {f_primary['signal']}) but the "
+                           f"identical run with '{fb['kspace']}' was clean — attributed to the LAMMPS build")
         checks.append(CheckResult("lammps_process_outcome", "P3.4", 3, FAIL if bad else PASS,
                                   "; ".join(bad) + (" (no ERROR line: undiagnosed rejection)" if bad else ""),
-                                  {r["mode"]: {k: r[k] for k in ("outcome", "returncode", "signal", "timed_out",
-                                                                 "elapsed_s", "launch_error")} for r in runs}))
+                                  det, warns34))
     return checks, lam

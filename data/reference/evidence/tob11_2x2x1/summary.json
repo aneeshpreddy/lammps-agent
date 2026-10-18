@@ -1,0 +1,26 @@
+{
+  "label": "tob11_2x2x1",
+  "task": "t05",
+  "ok": true,
+  "returncode": 0,
+  "wall_s": 14.6,
+  "atoms": 352,
+  "minimisation_kcal_per_atom": -0.30516193181817514,
+  "nvt_T_mean_K": 295.12969545454547,
+  "nvt_T_sd_K": 16.56010487336872,
+  "npt_T_mean_K": 296.5525438095238,
+  "npt_density_mean": 2.4172705666666667,
+  "density_start": 2.4602922,
+  "cell_change_vs_published_percent": {
+    "Lx": 0.76,
+    "Ly": 0.61,
+    "Lz": 0.4,
+    "Volume": 1.78
+  },
+  "xy_start": 5.371709,
+  "xy_mean_npt": 5.489236528571428,
+  "warnings": [
+    "WARNING: Inconsistent image flags"
+  ],
+  "errors": []
+}

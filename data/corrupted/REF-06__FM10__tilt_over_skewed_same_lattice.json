@@ -1,0 +1,30 @@
+{
+  "id": "REF-06__FM10__tilt_over_skewed_same_lattice",
+  "file": "data/corrupted/REF-06__FM10__tilt_over_skewed_same_lattice.data",
+  "sha256": "ce5a2231db54e0ad23517aa278a4ce260cdf53d6f4501be9049772244ab814b2",
+  "parent_id": "REF-06",
+  "parent_file": "data/reference/REF-06.data",
+  "parent_sha256": "d2ea5b318f51dfce000d542d0073b5adb680741448412a02225a1685617b85b4",
+  "failure_mode": "FM10",
+  "operator": "fm10_skew",
+  "variant": "tilt_over_skewed_same_lattice",
+  "description": "add lx to xy: the same lattice, but beyond the documented tilt bound",
+  "params": {
+    "xy_before": 2.663922771,
+    "xy_after": -4.071077228999999
+  },
+  "expected_failing_properties": [
+    "P2.8"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.8"
+  ],
+  "expected_lammps_behaviour": "Warn on a different criterion (or none)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_tobermorite.yaml",
+  "overrides": {
+    "density_family": "tobermorite14",
+    "box_kind": "triclinic"
+  }
+}

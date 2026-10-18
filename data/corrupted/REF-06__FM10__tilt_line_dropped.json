@@ -1,0 +1,27 @@
+{
+  "id": "REF-06__FM10__tilt_line_dropped",
+  "file": "data/corrupted/REF-06__FM10__tilt_line_dropped.data",
+  "sha256": "bc5cfcf44a0b037c0c05c1fa09ffc47f06603b5bacc4a908f697396f52c0272b",
+  "parent_id": "REF-06",
+  "parent_file": "data/reference/REF-06.data",
+  "parent_sha256": "d2ea5b318f51dfce000d542d0073b5adb680741448412a02225a1685617b85b4",
+  "failure_mode": "FM10",
+  "operator": "fm10_drop",
+  "variant": "tilt_line_dropped",
+  "description": "delete the 'xy xz yz' line of a triclinic box",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.8"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.8"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_tobermorite.yaml",
+  "overrides": {
+    "density_family": "tobermorite14",
+    "box_kind": "triclinic"
+  }
+}

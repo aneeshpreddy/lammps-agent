@@ -1,0 +1,48 @@
+{
+  "id": "t09",
+  "role": "EVAL_REFERENCE",
+  "file": "data/reference/eval/t09.data",
+  "sha256": "4c9c1aabc9fdb672cd8f355653a812e13c90eec0b41d48569ebe71101be6f67f",
+  "declared_config": "configs/interface_pcff_tobermorite.yaml",
+  "overrides": {
+    "density_family": "tobermorite11",
+    "box_kind": "orthogonal"
+  },
+  "trust_status": "built by the reference pipeline (not by the agent); see REF-05..08 for evidence",
+  "model_source": "UGRP/INTERFACE_FF_1_5/MODEL_DATABASE/CEMENT_MINERALS/tob11_rectangular_cell.car/.mdf",
+  "model_source_sha256": {
+    "car": "92bec8a9339d1e865ce560eb5a5afd58f434db0f44863295f990aede4ee4a9d9",
+    "mdf": "3d968721c2fa96590b122025d6c2d2867bac7c69f2555f3d8e7254ec81f8a33f"
+  },
+  "model_description": "tobermorite 11 \u00c5, rectangular (orthogonal) repeat of the same structure",
+  "force_field": "PCFF-INTERFACE (INTERFACE FF 1.5, pcff_interface_v1_5.frc)",
+  "frc_sha256": "3ad5a1be7334c646ed6cb813b769d0e89a1aa03fe695013e940626b7df922693",
+  "citation": "Heinz, Lin, Mishra, Emami, Langmuir 2013, 29, 1754-1765 (INTERFACE FF); Merlino et al. 1999 (structure)",
+  "steps": [
+    "msi2lmp v3.9.11 -class II -frc pcff_interface_v1_5.frc -ignore",
+    "scripts/cellops.reduce_and_wrap (k=0)",
+    "scripts/supercell.make_supercell 2x1x1",
+    "LAMMPS LAMMPS (22 Jul 2025 - Update 6): read_data + write_data pair ii (kspace ewald)",
+    "no further tilt reduction needed",
+    "comments copied back (43 rows)"
+  ],
+  "msi2lmp_missing_parameter_kinds": [
+    "angleangle",
+    "angleangledihedral",
+    "angledihedral",
+    "bondangle",
+    "bondbond",
+    "endbonddihedral",
+    "midbonddihedral"
+  ],
+  "msi2lmp_missing_parameter_messages": 58,
+  "intermediate_sha256": {
+    "msi2lmp": "16022f7409cde71db4b431d07c1edfeec97e4fa18629dac087f4fcf4add52bfd",
+    "cell": "37cdcc6464740a9be21d5049ebc10d659d2c1b7b86756a38461e8ebfe804e35d"
+  },
+  "supercell": [
+    2,
+    1,
+    1
+  ]
+}

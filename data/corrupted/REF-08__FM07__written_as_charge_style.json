@@ -1,0 +1,27 @@
+{
+  "id": "REF-08__FM07__written_as_charge_style",
+  "file": "data/corrupted/REF-08__FM07__written_as_charge_style.data",
+  "sha256": "48d59e927db6e5540b50ebeeb6cda322208516277ced29fac5f14124315b5190",
+  "parent_id": "REF-08",
+  "parent_file": "data/reference/REF-08.data",
+  "parent_sha256": "9e853fdd440190f8a65241e99953357a43cb9e487cddbaa437fd59c7634e0180",
+  "failure_mode": "FM07",
+  "operator": "fm07_charge",
+  "variant": "written_as_charge_style",
+  "description": "drop the molecule-ID column (atom_style charge layout) in a file declared atom_style full",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.4"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.4"
+  ],
+  "expected_lammps_behaviour": "Loud (field count) / Silent if counts match",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_tobermorite.yaml",
+  "overrides": {
+    "density_family": "tobermorite14",
+    "box_kind": "orthogonal"
+  }
+}

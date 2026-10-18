@@ -363,6 +363,10 @@ def p1_15_units_hint(pf, m: Model, cfg) -> CheckResult:
     units = declared(cfg).get("units")
     pol = declared(cfg).get("units_hint_policy", "optional")
     hint = pf.units_hint
+    hints = re.findall(r"units\s*=\s*(\S+)", pf.first_line)
+    if len(set(hints)) > 1:
+        return _c("units_hint", "P1.15", FAIL, f"line 1 carries conflicting units hints {hints} (LAMMPS reads only the first)",
+                  {"hints": hints, "declared": units})
     if hint is None:
         if pol == "required":
             return _c("units_hint", "P1.15", FAIL, "line 1 has no 'units = <style>' hint, required by the declared configuration (S-Q7)")

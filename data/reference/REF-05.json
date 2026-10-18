@@ -1,0 +1,48 @@
+{
+  "id": "REF-05",
+  "role": "REFERENCE_PUBLISHED_MODEL",
+  "file": "data/reference/REF-05.data",
+  "sha256": "4fb63600be9fa4ad9944d24ebf45884a38331dae3b734a6bf448c2dea7b129fb",
+  "declared_config": "configs/interface_pcff_tobermorite.yaml",
+  "overrides": {
+    "density_family": "tobermorite11",
+    "box_kind": "triclinic"
+  },
+  "trust_status": "PUBLISHED MODEL + documented pipeline + self-generated MD evidence; supervisor confirmation pending (default-unless-objection, LOG 2026-10-19)",
+  "model_source": "UGRP/INTERFACE_FF_1_5/MODEL_DATABASE/CEMENT_MINERALS/tob11_unit_cell.car/.mdf",
+  "model_source_sha256": {
+    "car": "b292f2b1881079563e72f01cbe22d8611bcfdd2769f5b83cbff392d5294c097f",
+    "mdf": "af947e51ec8e61c2e6f4006d08051488f48e80ca952bf0e67fef339256421997"
+  },
+  "model_description": "tobermorite 11 \u00c5 unit cell (Merlino 1999), Ca4Si6O15(OH)2\u00b75H2O, Z = 2",
+  "force_field": "PCFF-INTERFACE (INTERFACE FF 1.5, pcff_interface_v1_5.frc)",
+  "frc_sha256": "3ad5a1be7334c646ed6cb813b769d0e89a1aa03fe695013e940626b7df922693",
+  "citation": "Heinz, Lin, Mishra, Emami, Langmuir 2013, 29, 1754-1765 (INTERFACE FF); Merlino et al. 1999 (structure)",
+  "steps": [
+    "msi2lmp v3.9.11 -class II -frc pcff_interface_v1_5.frc -ignore",
+    "scripts/cellops.reduce_and_wrap (k=-1)",
+    "no replication",
+    "LAMMPS LAMMPS (22 Jul 2025 - Update 6): read_data + write_data pair ii (kspace ewald)",
+    "no further tilt reduction needed",
+    "comments copied back (43 rows)"
+  ],
+  "msi2lmp_missing_parameter_kinds": [
+    "angleangle",
+    "angleangledihedral",
+    "angledihedral",
+    "bondangle",
+    "bondbond",
+    "endbonddihedral",
+    "midbonddihedral"
+  ],
+  "msi2lmp_missing_parameter_messages": 58,
+  "intermediate_sha256": {
+    "msi2lmp": "d7d4b89047c02402df610b514f62d142c227e93013755bec8aa0fd324d1e097c",
+    "cell": "dc48ad17d22d63308e290f839ffbb06819c30434ebe91d4473c93083ba4e5fa2"
+  },
+  "supercell": [
+    1,
+    1,
+    1
+  ]
+}

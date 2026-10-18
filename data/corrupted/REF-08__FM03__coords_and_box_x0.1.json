@@ -1,0 +1,33 @@
+{
+  "id": "REF-08__FM03__coords_and_box_x0.1",
+  "file": "data/corrupted/REF-08__FM03__coords_and_box_x0.1.data",
+  "sha256": "29e6cc6f6bd0a86f8f5d2a68d230f23ac0d0e3305257b12428d7b6ddd962cef5",
+  "parent_id": "REF-08",
+  "parent_file": "data/reference/REF-08.data",
+  "parent_sha256": "9e853fdd440190f8a65241e99953357a43cb9e487cddbaa437fd59c7634e0180",
+  "failure_mode": "FM03",
+  "operator": "fm03_down",
+  "variant": "coords_and_box_x0.1",
+  "description": "multiply coordinates and box by 0.1 (\u00c5 read as nm)",
+  "params": {
+    "factor": 0.1
+  },
+  "expected_failing_properties": [
+    "P2.3",
+    "P2.4",
+    "P2.5"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.3",
+    "P2.4",
+    "P2.5"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_tobermorite.yaml",
+  "overrides": {
+    "density_family": "tobermorite14",
+    "box_kind": "orthogonal"
+  }
+}

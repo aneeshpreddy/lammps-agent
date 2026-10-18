@@ -1,0 +1,27 @@
+{
+  "id": "REF-08__FM25__zlo_zhi_deleted",
+  "file": "data/corrupted/REF-08__FM25__zlo_zhi_deleted.data",
+  "sha256": "40d56dda41ef8ace0f720b97e1f9dc918c66c7dc7b35577d306de22f5f3c11bf",
+  "parent_id": "REF-08",
+  "parent_file": "data/reference/REF-08.data",
+  "parent_sha256": "9e853fdd440190f8a65241e99953357a43cb9e487cddbaa437fd59c7634e0180",
+  "failure_mode": "FM25",
+  "operator": "fm25",
+  "variant": "zlo_zhi_deleted",
+  "description": "delete the 'zlo zhi' line",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.8"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.8"
+  ],
+  "expected_lammps_behaviour": "Silent, no warning (defaults -0.5 0.5)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_tobermorite.yaml",
+  "overrides": {
+    "density_family": "tobermorite14",
+    "box_kind": "orthogonal"
+  }
+}

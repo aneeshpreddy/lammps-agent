@@ -1,0 +1,27 @@
+{
+  "id": "REF-05__FM26__no_blank_after_keyword",
+  "file": "data/corrupted/REF-05__FM26__no_blank_after_keyword.data",
+  "sha256": "07b0b4951db73026f8be26590c33c8652469985fb798d8a5a74e5645294c718a",
+  "parent_id": "REF-05",
+  "parent_file": "data/reference/REF-05.data",
+  "parent_sha256": "4fb63600be9fa4ad9944d24ebf45884a38331dae3b734a6bf448c2dea7b129fb",
+  "failure_mode": "FM26",
+  "operator": "fm26",
+  "variant": "no_blank_after_keyword",
+  "description": "remove the blank line after the 'Bonds' keyword",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.7"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.7"
+  ],
+  "expected_lammps_behaviour": "Loud in tested cases",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_tobermorite.yaml",
+  "overrides": {
+    "density_family": "tobermorite11",
+    "box_kind": "triclinic"
+  }
+}

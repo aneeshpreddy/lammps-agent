@@ -1,0 +1,29 @@
+{
+  "id": "REF-06__FM06__flip_largest_charge",
+  "file": "data/corrupted/REF-06__FM06__flip_largest_charge.data",
+  "sha256": "6b3dbccba67f3043cd30baabd7a4cab890c4039f1d4dff2c976217ca63ba091e",
+  "parent_id": "REF-06",
+  "parent_file": "data/reference/REF-06.data",
+  "parent_sha256": "d2ea5b318f51dfce000d542d0073b5adb680741448412a02225a1685617b85b4",
+  "failure_mode": "FM06",
+  "operator": "fm06_flip",
+  "variant": "flip_largest_charge",
+  "description": "flip the sign of the largest-magnitude charge",
+  "params": {
+    "atom": 1
+  },
+  "expected_failing_properties": [
+    "P2.1"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.1"
+  ],
+  "expected_lammps_behaviour": "Silent (Warn only with kspace and |Q|>1e-5)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_tobermorite.yaml",
+  "overrides": {
+    "density_family": "tobermorite14",
+    "box_kind": "triclinic"
+  }
+}

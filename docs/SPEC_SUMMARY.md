@@ -1,6 +1,6 @@
 # Project Specification Summary
 
-Version 0.4 (2026-10-16, validator phase). v0.3a text unchanged except §4 counts and §10.
+Version 0.5 (2026-10-19). v0.5: system class and force field adopted as a provisional default (§3, §12). v0.4 (2026-10-16): validator phase.
 
 ## 1. Problem
 LLM agents can draft LAMMPS INPUT SCRIPTS, but the LAMMPS DATA FILE a simulation starts from can be silently corrupted: permuted atom types, lost charges, dropped bonds, wrong units, a default-sized box. LAMMPS can still accept such a file, producing plausible but wrong C-S-H simulations. **A source-and-experiment audit of LAMMPS 22 Jul 2025 – Update 6 (2026-10-02) found that 21 of 33 in-scope failure modes give no usable LAMMPS signal. One more (a bond to a non-existent atom) crashes LAMMPS with no error message.**
@@ -10,10 +10,11 @@ Generate, and deterministically validate, one LAMMPS DATA FILE per task for one 
 
 ## 3. Five Core Decisions
 - **A. Artifact = LAMMPS DATA FILE**: LOCKED.
-- **B. System class / C-S-H model family**: OPEN (tobermorite-type is only an example; candidates include the brick model / pyCSH).
-- **C. Force field + atom_style**: OPEN (CLAYFF + full is only an example; ERICA FF and cemff-derived parameters are other options).
-- **D. Input representation**: OPEN.
-- **E. LLM → generation code / tool calls → deterministic writer, with the validator always run by the orchestrator**: RECOMMENDED, awaiting confirmation.
+- **B. System class**: *PROVISIONAL DEFAULT (2026-10-19)* — bulk tobermorite 11 Å / 14 Å and supercells from the INTERFACE FF 1.5 database.
+- **C. Force field + atom_style**: *PROVISIONAL DEFAULT* — PCFF-INTERFACE (class II), atom_style full, units real, periodic, coefficients in the DATA FILE.
+- **D. Input representation**: *PROVISIONAL DEFAULT* — natural-language request + hidden structured spec.
+- **E. LLM → generation code / tool calls → deterministic writer, with the validator always run by the orchestrator**: *PROVISIONAL DEFAULT*.
+- The supervisor has not responded; these are default-unless-objection choices, reversible by re-running the scripts (SPEC §7.15).
 
 ## 4. Correctness Model
 - **Tier 0** parseable · **Tier 1** internally consistent · **Tier 2** physically plausible (system-specific, calibrated tolerances only) · **Tier 3** accepted by LAMMPS *under the declared configuration*, split into structure-only (`read_data … nocoeff`) and full force-field (`run 0`) modes, plus process-outcome classification (clean / error / crash / timeout).
@@ -65,3 +66,9 @@ Full trail: `source_audit/SOURCE_AUDIT.md`.
 
 ## 11. Next phase
 Evaluation set (19–24 Oct): 12–15 tasks inside the decided system family. **Blocked on OD-B / OD-D / OD-I** — the eval tasks need a declared system family, an input representation and trusted references. If OD-B is not decided by 19 Oct, the PCE/EMC candidates are the only family the validator is calibrated for.
+
+## 12. Status on 2026-10-19 (v0.5)
+- **References:** REF-05..08 — published INTERFACE FF tobermorite models built by a documented pipeline, with self-generated MD evidence (`REFERENCE_EVIDENCE.md`); provisional oracle, supervisor sign-off pending.
+- **Eval set drafted:** 14 tasks (3 easy, 8 representative, 3 hard) with reference outputs (`EVAL_SET.md`). Split, metrics and harness are next (22–23 Oct).
+- **Validator on the new system:** 24/24 positive controls pass; 448/448 corrupted files rejected (439 by Tiers 0–2, 9 by TC.2 only).
+- **New LAMMPS findings:** PPPM segfaults on many valid boxes (Ewald used instead); `replicate … bond/periodic` silently joins wrong periodic images in tilted cells — caught by the validator. The v0.4 "stretched bonds crash" claim was withdrawn (it was the PPPM defect).

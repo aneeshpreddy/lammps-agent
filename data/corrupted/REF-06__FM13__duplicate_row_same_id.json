@@ -1,0 +1,29 @@
+{
+  "id": "REF-06__FM13__duplicate_row_same_id",
+  "file": "data/corrupted/REF-06__FM13__duplicate_row_same_id.data",
+  "sha256": "bb1ae2c263e9b921ac928a5ea7945b094daae1d2036c251b375b7605a7bd83fd",
+  "parent_id": "REF-06",
+  "parent_file": "data/reference/REF-06.data",
+  "parent_sha256": "d2ea5b318f51dfce000d542d0073b5adb680741448412a02225a1685617b85b4",
+  "failure_mode": "FM13",
+  "operator": "fm13_same",
+  "variant": "duplicate_row_same_id",
+  "description": "duplicate one Atoms row (same ID) and raise the atom count",
+  "params": {
+    "atom": 104
+  },
+  "expected_failing_properties": [
+    "P1.2"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.2"
+  ],
+  "expected_lammps_behaviour": "Silent if max ID >= natoms, else Loud",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_tobermorite.yaml",
+  "overrides": {
+    "density_family": "tobermorite14",
+    "box_kind": "triclinic"
+  }
+}

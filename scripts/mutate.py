@@ -29,7 +29,10 @@ from dataedit import DataText, join_row, split_comment  # noqa: E402
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "data", "corrupted")
 PARENTS = ["data/reference/REF-01.data", "data/reference/REF-02.data", "data/reference/REF-03.data",
-           "data/reference/REF-04.data", "data/fixtures/FIX-T11.data", "data/fixtures/FIX-T14.data"]
+           "data/reference/REF-04.data", "data/fixtures/FIX-T11.data", "data/fixtures/FIX-T14.data",
+           # primary system class from v0.5 (tobermorite, INTERFACE FF; published-model references)
+           "data/reference/REF-05.data", "data/reference/REF-06.data", "data/reference/REF-07.data",
+           "data/reference/REF-08.data"]
 
 OPERATORS: List[Dict] = []
 
@@ -188,8 +191,12 @@ def fm03_down(d, c):
 @operator("FM03", "wrong_units_hint", ["P1.15"], 1, "Warn (Inconsistent units in data file)",
           "write 'units = metal' on line 1 while the declared units are real")
 def fm03_hint(d, c):
+    import re
+    if re.search(r"units\s*=\s*\S+", d.lines[0]):
+        d.lines[0] = re.sub(r"units\s*=\s*\S+", "units = metal", d.lines[0], count=1)
+        return {"mode": "replaced existing hint"}
     d.lines[0] = d.lines[0] + "  units = metal"
-    return {}
+    return {"mode": "appended hint"}
 
 
 @operator("FM04", "drop_bond_header_adjusted", ["P1.10", "TC.2"], 1, "Silent",
@@ -373,7 +380,15 @@ def fm11(d, c):
     return {"swapped_ids": [int(a), int(b)]}
 
 
+def _delete_velocity_row(d: DataText, atom_id: str):
+    for i, line in d.section_rows("Velocities"):
+        if line.split()[0] == atom_id:
+            d.delete_line(i)
+            return
+
+
 def _delete_atom_with_topology(d: DataText, atom_id: str):
+    _delete_velocity_row(d, atom_id)
     for i, t, com in atom_rows(d):
         if t[0] == atom_id:
             d.delete_line(i)
@@ -621,6 +636,8 @@ def fm28(d, c):
     rows = atom_rows(d)
     maxid = max(int(t[0]) for _, t, _ in rows)
     target = next(t[3] for _, t in topo_rows(d, "Bonds") if int(t[3]) < maxid)
+    _delete_velocity_row(d, target)
+    rows = atom_rows(d)
     for i, t, com in rows:
         if t[0] == target:
             d.delete_line(i)
@@ -632,6 +649,11 @@ def fm28(d, c):
 @operator("FM29", "velocities_duplicate_id", ["P1.14"], 1, "Silent", "append a Velocities section in which "
           "the last atom ID is listed twice and the first atom has no row")
 def fm29(d, c):
+    vrows = d.section_rows("Velocities")
+    if vrows:   # existing section (e.g. write_data output): first atom loses its row, last atom gets two
+        last = vrows[-1][1].split()
+        d.lines[vrows[0][0]] = " ".join([last[0]] + vrows[0][1].split()[1:])
+        return {"mode": "edited existing Velocities section"}
     ids = [t[0] for _, t, _ in atom_rows(d)]
     rows = [join_row([a, "0.0", "0.0", "0.0"]) for a in ids[1:]] + [join_row([ids[-1], "0.0", "0.0", "0.0"])]
     d.append_section("Velocities", rows)

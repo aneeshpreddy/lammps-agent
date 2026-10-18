@@ -120,3 +120,25 @@ def test_cell_list_matches_bruteforce_large():
     sb = {(int(i), int(j)): d for i, j, d in zip(*b)}
     assert sa.keys() == sb.keys()
     assert max(abs(sa[k] - sb[k]) for k in sa) < 1e-9
+
+
+def test_p2_1_statistical_floor_catches_missing_hydrogen(write, make_cfg):
+    # 300 waters (900 atoms) at 4 decimals with one H charge 0.0400 e too small: inside the worst-case
+    # floor (900*0.5e-4 = 0.045 e) but well outside the statistical floor (5*sqrt(900)*1e-4/sqrt(12) = 0.0043 e).
+    atoms, bonds, angles = [], [], []
+    for k in range(300):
+        x, y, z = (k % 10) * 3 + 1.0, (k // 10 % 10) * 3 + 1.0, (k // 100) * 3 + 1.0
+        o = 3 * k + 1
+        q_h2 = "0.4238" if k else "0.3838"
+        atoms += [f"{o} {k+1} 1 -0.8476 {x:.3f} {y:.3f} {z:.3f}",
+                  f"{o+1} {k+1} 2 0.4238 {x+0.816:.3f} {y+0.577:.3f} {z:.3f}",
+                  f"{o+2} {k+1} 2 {q_h2} {x-0.816:.3f} {y+0.577:.3f} {z:.3f}"]
+        bonds += [f"{2*k+1} 1 {o} {o+1}", f"{2*k+2} 1 {o} {o+2}"]
+        angles += [f"{k+1} 1 {o+1} {o} {o+2}"]
+    head = VALID.split("Atoms # full")[0].replace("6 atoms", "900 atoms").replace("4 bonds", "600 bonds") \
+        .replace("2 angles", "300 angles").replace("0.0 12.0", "0.0 30.0")
+    text = head + "Atoms # full\n\n" + "\n".join(atoms) + "\n\nBonds\n\n" + "\n".join(bonds) + "\n\nAngles\n\n" + "\n".join(angles) + "\n"
+    worst = validate(write(text), make_cfg(density_family="x", net_charge={"required": True, "target": 0.0, "floor": "worst_case"}), run_tier3=False)
+    stat = validate(write(text), make_cfg(density_family="x", net_charge={"required": True, "target": 0.0, "floor": "statistical"}), run_tier3=False)
+    assert worst.get("P2.1").verdict == "PASS"
+    assert stat.get("P2.1").verdict == "FAIL"

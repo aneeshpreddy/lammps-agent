@@ -1,0 +1,35 @@
+{
+  "id": "REF-07__FM12__hydrogen_removed",
+  "file": "data/corrupted/REF-07__FM12__hydrogen_removed.data",
+  "sha256": "8a53298035f3cfdef98e930bf60a6f0fdc1a4edd7086e833a5bc686a87ba0d66",
+  "parent_id": "REF-07",
+  "parent_file": "data/reference/REF-07.data",
+  "parent_sha256": "df96e14ce78c6a1d059d8ca00497b92bf7c24a61cdaac6deb7f7df93d6d27220",
+  "failure_mode": "FM12",
+  "operator": "fm12_h",
+  "variant": "hydrogen_removed",
+  "description": "delete one hydrogen and every topology entry containing it; adjust the header",
+  "params": {
+    "atom": 25,
+    "topology_removed": {
+      "Bonds": 1,
+      "Angles": 1
+    }
+  },
+  "expected_failing_properties": [
+    "TC.2"
+  ],
+  "expected_tier": "TC",
+  "spec_expected_properties": [
+    "P2.1",
+    "P2.5",
+    "TC.1"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_tobermorite.yaml",
+  "overrides": {
+    "density_family": "tobermorite11",
+    "box_kind": "orthogonal"
+  }
+}

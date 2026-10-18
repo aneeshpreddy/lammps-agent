@@ -51,18 +51,27 @@ def p2_1_charge(pf, m: Model, cfg, cal) -> CheckResult:
         return _c("P2.1", NOT_EVALUATED, "net-charge requirement not declared (OD-H)")
     problems = []
     qsum = float(m.q.sum())
-    floor = m.natoms * 0.5 * 10.0 ** (-m.q_decimals)
+    # Rounding floor (PROPERTIES §8.5 rule 3, amended v0.5). 'worst_case': every charge off by half a
+    # unit in the last printed place, N*0.5*10^-d. 'statistical' (default from v0.5): independent
+    # uniform rounding errors, 5 sigma of their sum, 5*sqrt(N)*10^-d/sqrt(12). Both get a floating-point
+    # floor so files printed at full double precision (write_data) are not judged on 1e-15 noise.
+    mode = nc.get("floor", "worst_case")
+    step = 10.0 ** (-m.q_decimals)
+    worst = m.natoms * 0.5 * step
+    stat = 5.0 * np.sqrt(m.natoms) * step / np.sqrt(12.0)
+    fp = m.natoms * 1e-12 * max(1.0, float(np.abs(m.q).max()) if m.natoms else 1.0)
+    floor = (stat if mode == "statistical" else worst) + fp
     tau = max(floor, float(nc.get("tolerance_e") or 0.0))
     target = float(nc.get("target", 0.0))
     if nc.get("required") and abs(qsum - target) > tau:
         problems.append(f"total charge = {qsum:+.6f} e, target {target:+.4f} e "
-                        f"(tolerance {tau:.4g} e = rounding floor N*0.5*10^-{m.q_decimals})")
+                        f"(tolerance {tau:.4g} e = {mode} rounding floor for {m.natoms} charges at {m.q_decimals} decimals)")
     if declared(cfg).get("charged_system") and not np.any(m.q != 0.0):
         problems.append("all charges are zero, but the declared configuration describes a charged system (P2.1b)")
-    det = {"total_charge": qsum, "target": target, "tolerance": tau, "rounding_floor": floor,
-           "charge_decimals": m.q_decimals, "natoms": m.natoms}
+    det = {"total_charge": qsum, "target": target, "tolerance": tau, "floor_mode": mode, "rounding_floor": floor,
+           "worst_case_floor": worst, "statistical_floor": stat, "charge_decimals": m.q_decimals, "natoms": m.natoms}
     return _c("P2.1", FAIL if problems else PASS, "; ".join(problems), det,
-              cal="derived:rounding-floor" + (f"+declared {nc.get('tolerance_e')}" if nc.get("tolerance_e") else ""))
+              cal=f"derived:{mode}-rounding-floor" + (f"+declared {nc.get('tolerance_e')}" if nc.get("tolerance_e") else ""))
 
 
 def p2_2_cell(pf, m: Model, cfg, cal) -> CheckResult:
@@ -76,7 +85,7 @@ def p2_2_cell(pf, m: Model, cfg, cal) -> CheckResult:
     lo, hi = s.min(0), s.max(0)
     det = {"policy": policy, "frac_min": lo.round(4).tolist(), "frac_max": hi.round(4).tolist()}
     if policy == "wrapped":
-        eps = 10.0 ** (-m.xyz_decimals) / float(m.cell.perpendicular_widths().min())
+        eps = max(10.0 ** (-m.xyz_decimals) / float(m.cell.perpendicular_widths().min()), 1e-9)
         out = np.zeros(len(s), bool)
         for d in range(3):
             if per[d]:

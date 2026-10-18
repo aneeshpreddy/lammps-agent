@@ -85,3 +85,26 @@ def test_tc_passed_ignores_unevaluated_tc1(write, make_cfg):
     res = validate(write(VALID), make_cfg(), reference=ref, run_tier3=False)
     assert res.get("TC.1").verdict == "NOT_EVALUATED"
     assert res.tc_passed is True
+
+
+@lammps_available
+def test_pppm_build_crash_is_attributed_to_build():
+    # On 22 Jul 2025 U6 (Homebrew) PPPM segfaults on this valid 1x1x2 tobermorite cell; the fallback
+    # Ewald run is clean, so the crash must not count against the DATA FILE (FAILURE_MODES §9.6).
+    import os
+    from validator.config import REPO_ROOT
+    from validator.registry import config_for
+    path = os.path.join(str(REPO_ROOT), "data", "reference", "eval", "t06.data")
+    if not os.path.exists(path):
+        import pytest
+        pytest.skip("eval references not built")
+    cfg = config_for(path)
+    cfg["declared"]["tier3"]["kspace"] = "kspace_style pppm 1.0e-4"
+    cfg["declared"]["tier3"]["crash_fallback_kspace"] = "kspace_style ewald 1.0e-4"
+    res = validate(path, cfg)
+    if res.lammps["full"]["outcome"] != "CRASH":
+        import pytest
+        pytest.skip("PPPM did not crash on this LAMMPS build")
+    assert res.lammps["full_fallback"]["outcome"] == "CLEAN"
+    assert res.get("P3.2").verdict == "PASS" and res.get("P3.2").warnings
+    assert res.get("P3.4").verdict == "PASS" and "LAMMPS build" in res.get("P3.4").details["attribution"]

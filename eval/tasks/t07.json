@@ -1,0 +1,45 @@
+{
+  "id": "t07",
+  "difficulty": "representative",
+  "input": "Build a LAMMPS data file for a 2x2x1 supercell of the tobermorite 14 Å unit cell from the INTERFACE FF 1.5 model database (tob14_avg_cell) with the PCFF-INTERFACE force field (pcff_interface_v1_5.frc): atom_style full, real units, periodic in x, y and z, all force-field coefficients and masses written in the data file, triclinic tilt within LAMMPS's documented bound.",
+  "spec": {
+    "system_family": "tobermorite_interface",
+    "model": "tob14_avg_cell",
+    "supercell": [
+      2,
+      2,
+      1
+    ],
+    "force_field": "pcff_interface_v1_5.frc",
+    "atom_style": "full",
+    "units": "real",
+    "boundary": [
+      "p",
+      "p",
+      "p"
+    ],
+    "coefficients_in_data_file": true,
+    "box_kind": "triclinic",
+    "expected_counts": {
+      "atoms": 416,
+      "bonds": 320,
+      "angles": 408,
+      "dihedrals": 336,
+      "impropers": 192,
+      "atom types": 10
+    }
+  },
+  "exercises": [
+    "FM01",
+    "FM02",
+    "FM06",
+    "FM10",
+    "FM15",
+    "FM18",
+    "FM22"
+  ],
+  "note": "14 Å supercell in the layer plane",
+  "declared_config": "configs/interface_pcff_tobermorite.yaml",
+  "reference": "data/reference/eval/t07.data",
+  "reference_sha256": "151c428a4ab790c9bc3557a7e0686e57142f8cb80a49838202b57ab0602b67f9"
+}

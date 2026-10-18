@@ -1,6 +1,7 @@
 # SPEC — Agentic AI for LAMMPS Data-File Generation
 
-Version 0.4 (2026-10-16, validator phase). Supersedes v0.3a (2026-10-02). Status: **VALIDATOR BUILT; OWNER DECISIONS STILL OPEN.**
+Version 0.5 (2026-10-19). Supersedes v0.4 (2026-10-16). Status: **VALIDATOR BUILT; SYSTEM CLASS ADOPTED AS A PROVISIONAL DEFAULT (supervisor confirmation pending).**
+v0.5 changes: decisions B, C, D, E move from OPEN to **PROVISIONAL DEFAULT** (§7.3, §7.15); §7.8 records published-model references; §7.14 now lists the tobermorite configuration.
 v0.4 changes only §7.8 (candidate references found) and adds §7.14 (validator-phase status and provisional configuration values). Change logs: `LOG.md` (2026-10-02 and 2026-10-16 entries). No open decision below was taken by the validator phase; where the validator needed a value, it uses a **PROVISIONAL** value recorded in `configs/*.yaml` and listed in §7.14.
 
 > **Version note.** These files were derived from the v0.2 files found in `~/Downloads/UGRP/Specs and .md files/`. The project's CLAUDE.md refers to a "v0.3" with failure-mode experiment results (`experiments/fm_verification/`) that was not found on this machine. If that v0.3 exists, merge it with this v0.3a; do not discard either silently.
@@ -49,10 +50,10 @@ Tiers 0–3 inspect only the DATA FILE and the declared validation configuration
 | Decision | Current Decision | Evidence / Rationale | Status | Consequence |
 |---|---|---|---|---|
 | **A. Artifact** | LAMMPS DATA FILE | Owner statement. The `read_data` format is fully documented (LAMMPS read_data doc), so a deterministic parser is feasible. *(v0.3a)* The parser grammar has also been derived from the source (PROPERTIES §8.7). | **LOCKED** | All properties target the DATA FILE. |
-| **B. System class** | None. "Tobermorite-type C-S-H" in the plan is an **example only**. | Candidate families exist, e.g. the brick model — Kunhi Mohamed, Parker, Bowen, Galmarini, *Cem. Concr. Res.* 107 (2018) 221–235, doi:10.1016/j.cemconres.2018.01.007 — and its Python implementation pyCSH, *Cem. Concr. Res.* 183 (2024) 107593. Owner has not chosen. | **OPEN — BLOCKING** | Blocks Tier 2 calibration, reference collection, benchmark design. |
-| **C. Force field + atom_style** | None. "CLAYFF + atom_style full" in the plan is an **example only**. | atom_style fixes the Atoms-section columns (read_data doc; SRC `fields_data_atom`). The FF fixes Coeffs, charges, masses, bonded terms. Candidate FF options (not decisions): CLAYFF (Cygan, Liang, Kalinichev, *J. Phys. Chem. B* 108 (2004) 1255–1266); ERICA FF (*Cem. Concr. Res.* 154 (2022) 106712 — author list to be confirmed); parameters from the cemff database (*Cem. Concr. Res.* 102 (2017) 68–89 — author list to be confirmed). | **OPEN — BLOCKING** | Blocks P0.4, P1.3, P1.7 (per-style), P1.8, P1.11, P1.15, all Tier 2 charge/mass checks, Tier 3b. |
-| **D. Input** | None | Defines what task correctness is checked against. | **OPEN** (not blocking Tiers 0–3) | Blocks the TC layer only. |
-| **E. Model output** | LLM → generation logic / tool calls → deterministic writer → DATA FILE | The plan's stated design intent. A DATA FILE for a C-S-H supercell can contain thousands of atom lines; token-by-token emission is slow, costly and error-prone. | **RECOMMENDATION — owner confirmation needed** | Writer bugs remain in scope for validation. If rejected (LLM emits raw text), the benchmark changes character. |
+| **B. System class** | *(v0.5)* **Bulk tobermorite 11 Å and 14 Å crystals and their supercells**, from the INTERFACE FF 1.5 model database (structures after Merlino 1999). Unit cells (triclinic) and rectangular cells (orthogonal). Surfaces, C-S-H models with defects (brick model / pyCSH) and PCE–mineral interfaces are later extensions, not in the eval set. | The project folder holds exactly this database and the INTERFACE FF paper (Heinz et al., *Langmuir* 2013, 29, 1754); published models give a citable oracle without group production files; the validator already handles triclinic cells and in-file coefficients. Alternatives considered: brick model / pyCSH (more realistic C-S-H, but no files, new tool, usually another FF), surfaces (reopen boundary decisions), PCE on surfaces (too large for the remaining weeks), PCE alone (not C-S-H). | **PROVISIONAL DEFAULT** (owner adopted 2026-10-19; supervisor not reached — §7.15) | Calibration `calibration/tobermorite_interface.json`; references REF-05..08; eval set t01–t14. |
+| **C. Force field + atom_style** | *(v0.5)* **PCFF-INTERFACE (INTERFACE FF 1.5, `pcff_interface_v1_5.frc`, class II), `atom_style full`, `units real`, `boundary p p p`; all coefficients in the DATA FILE.** Before v0.5: none ("CLAYFF + atom_style full" in the plan was an example only). | atom_style fixes the Atoms-section columns (read_data doc; SRC `fields_data_atom`). The FF fixes Coeffs, charges, masses, bonded terms. Candidate FF options (not decisions): CLAYFF (Cygan, Liang, Kalinichev, *J. Phys. Chem. B* 108 (2004) 1255–1266); ERICA FF (*Cem. Concr. Res.* 154 (2022) 106712 — author list to be confirmed); parameters from the cemff database (*Cem. Concr. Res.* 102 (2017) 68–89 — author list to be confirmed). | **PROVISIONAL DEFAULT** (§7.15). Caveat: the .frc defines no class II cross terms for tobermorite; msi2lmp `-ignore` sets them to zero (all quadratic bond/angle terms are defined) | Unblocks P0.4, P1.3, P1.7, P1.8, P1.11, P1.15, Tier 2 charge/mass checks and Tier 3b for this system. |
+| **D. Input** | *(v0.5)* A natural-language request (as in the plan's example task t07) plus a hidden structured spec used for checking (`eval/tasks/tNN.json`: model, supercell, force field, expected counts). | Matches the plan; the structured spec gives TC.1/TC.2 something deterministic to compare against. | **PROVISIONAL DEFAULT** | TC layer can run on the eval set. |
+| **E. Model output** | LLM → generation logic / tool calls → deterministic writer → DATA FILE | The plan's stated design intent. A DATA FILE for a C-S-H supercell can contain thousands of atom lines; token-by-token emission is slow, costly and error-prone. | **PROVISIONAL DEFAULT** (v0.5) | Writer bugs remain in scope for validation. If rejected (LLM emits raw text), the benchmark changes character. |
 
 ---
 
@@ -170,6 +171,7 @@ A future test case belongs in the benchmark only if **all** hold:
 ## 7.8 Oracle / ground truth
 
 - **RECOMMENDED methodology.** 2–3 trusted group DATA FILEs that have run successfully in production, each with its working INPUT SCRIPT, LAMMPS version/build, and force-field source.
+- *(v0.5)* **Published-model references for the adopted system class.** REF-05..REF-08 (tobermorite 11 Å / 14 Å unit and rectangular cells) and the eval-set references t01–t14 are built from the INTERFACE FF 1.5 model database by a documented deterministic pipeline (`scripts/build_references.py`: msi2lmp → tilt reduction → `scripts/supercell.py` → LAMMPS read/write). In place of production-use evidence they carry self-generated evidence (`docs/REFERENCE_EVIDENCE.md`): short MD runs clean with the lattice within 1 % of the published cell, and the energy per unit cell agrees across all 18 tobermorite files to 0.011 %. They are labelled **published model + documented pipeline + self-generated evidence; supervisor confirmation pending**.
 - *(v0.4)* **Candidate references found:** four EMC v9.4.4 builds of PCE superplasticisers in `UGRP/PCEs/` (REF-01..REF-04, `data/reference/provenance.md`), each with its EMC INPUT SCRIPT and `.params` coefficient file. They pass Tiers 0–3 under the provisional configuration. They are **CANDIDATES, not oracles**: creator, responsible person and production-use evidence are not recorded, and they are PCE polymers, not C-S-H. Synthetic triclinic fixtures (tobermorite 11 Å / 14 Å from the INTERFACE FF database via msi2lmp) exercise triclinic code paths only.
 - **A reference is trustworthy only if** it has: documented provenance; construction method; responsible person; cited force field; atom_style; units; LAMMPS version/build; evidence of successful use; known limitations.
 - **Similarity ≠ correctness.** References can contain defects. Any disagreement between a generated file and a reference is a *finding* to investigate, compared property by property with documented tolerances — never an automatic verdict in either direction.
@@ -263,28 +265,37 @@ Build order (CLAUDE.md §3): validator → evaluation set → single-call baseli
 
 ---
 
-## 7.14 Validator-phase status and provisional values (new in v0.4)
+## 7.14 Validator-phase status and provisional values (v0.4; updated v0.5)
 
-**Built (plan Days 5–16):** own parser, Tiers 0–3, TC layer, local/SSH/Docker backends, calibration record, 49 corruption operators, validation matrix. Results: `VALIDATOR_RESULTS.md` (6/6 positive controls pass; 264/264 corrupted files rejected, 257 by the validator's own Tier 0–2 checks). Implementation map: PROPERTIES §8.10.
+**Built (plan Days 5–16):** own parser, Tiers 0–3, TC layer, local/SSH/Docker backends, calibration records, 49 corruption operators, validation matrix. Results: `VALIDATOR_RESULTS.md` (v0.5: 24/24 positive controls pass; 448/448 corrupted files rejected, 439 by the validator's own Tier 0–2 checks, 9 only by TC.2; the validator fails exactly the 6 of 10 LAMMPS-replicated supercells that TC.2 shows to be wrong). Implementation map: PROPERTIES §8.10.
 
-**Provisional values in `configs/emc_pcff_real_full.yaml`** (each derived from the candidate references' EMC files; the owner must confirm or replace them):
+**Primary configuration `configs/interface_pcff_tobermorite.yaml` (PROVISIONAL DEFAULT, v0.5):** units real · atom_style full · boundary p p p · masses and all coefficients in the DATA FILE (class II sections allowed) · coordinates wrapped, image flags optional, no unwrapped-coordinate check (infinite bonded crystal) · tilt: documented bound and source criterion, FAIL · neutral, statistical charge floor · molecule-ID/bond policy: report · bonded-term consistency and completeness required · Tier 3b: class2 styles, `special_bonds lj/coul 0 0 1`, **Ewald 1e-4** (this build's PPPM segfaults on most tobermorite supercells, FAILURE_MODES §9.6) · build: Homebrew `lmp_serial` 22 Jul 2025 – Update 6.
+
+**Secondary configuration `configs/emc_pcff_real_full.yaml`** (PCE candidates REF-01..04) is kept as a regression set; its v0.4 provisional values are unchanged except the statistical charge floor and the PPPM crash fallback:
 
 | Open item | Provisional value | Evidence |
 |---|---|---|
 | OD-C1 atom_style | `full` | REF-0*.in |
-| OD-C2 force field | PCFF-type class 2 (`lj/class2/coul/long`, class2 bonded styles, `pppm/cg`), coefficients in the EMC `.params` include | REF-0*.params (`field cff/basf/basf`) |
+| OD-C2 force field | PCFF-type class 2 (`lj/class2/coul/long`, class2 bonded styles, `pppm/cg`, fallback Ewald on a crash), coefficients in the EMC `.params` include | REF-0*.params (`field cff/basf/basf`) |
 | OD-C3 units | `real` | REF-0*.in |
 | OD-F build | local Homebrew `lmp_serial` 22 Jul 2025 – Update 6 (`docs/lammps_build.txt`) | installed build |
 | OD-G boundary | `p p p` | REF-0*.in sets none → LAMMPS default |
-| OD-H charge | neutrality required, target 0, τ_Q = rounding floor | references sum to 0.0000 e; see PROPERTIES §8.10 note 1 |
+| OD-H charge | neutrality required, target 0, τ_Q = statistical rounding floor (PROPERTIES §8.5 rule 3, v0.5) | references sum to 0.0000 e |
 | OD-J type map | PCFF type names → elements (`type_name_elements`) | Masses values + comments |
 | OD-L run mode | serial, `newton_bond on` (default) | — |
 | OD-M encoding | ASCII + LF | RECOMMENDED default |
 | OD-N tilt | both the documented bound and the source criterion; violations FAIL | — |
-| S-Q1 masses | in the DATA FILE — **and** re-set by the `.params` `mass` commands, so DATA FILE Masses are overridden at run time (FAILURE_MODES §9.6 item 4) | REF-0*.params |
+| S-Q1 masses | in the DATA FILE — **and** re-set by the `.params` `mass` commands (FAILURE_MODES §9.6) | REF-0*.params |
 | S-Q2 coefficients | INPUT SCRIPT (include file) | REF-0*.params |
-| S-Q3 image flags | optional; references carry none and use whole (unwrapped) molecules | REF-0*.data, EMC `unwrap -> true` |
+| S-Q3 image flags | optional; whole (unwrapped) molecules | REF-0*.data, EMC `unwrap -> true` |
 
 **Observation relevant to OD-B / OD-C (not a decision).** The project folder pairs EMC/PCFF PCE models with the INTERFACE FF 1.5 cement-mineral database (PCFF-INTERFACE, the same class 2 functional form) and its tobermorite models. That is consistent with a PCE-on-tobermorite/C-S-H study in PCFF-INTERFACE, but the owner has not said so; B and C remain OPEN.
 
 **Still blocking certification as "trusted":** OD-I (references with provenance and production evidence), OD-B (a C-S-H reference family to calibrate against), the ±2 % density placeholder (PROPERTIES §8.11), and owner review of the margins.
+
+## 7.15 Default-unless-objection record (new in v0.5)
+
+- **2026-10-17/18:** the supervisor did not respond to the questions on system class and references (LOG). Gate 1 and the eval-set start (19 Oct) required a choice.
+- **2026-10-19:** the owner adopted the recommended defaults (B, C, D, E above; references per §7.8) and is to send the supervisor a "proceeding unless you object" note with a deadline.
+- **Reversibility.** Every consequence is regenerated by scripts: a different system class means new models in `scripts/build_references.py`, a new declared configuration, `scripts/calibrate.py`, `scripts/mutate.py`, `scripts/run_matrix.py`. The validator code does not change. Group production files, if they appear, replace or join REF-05..08 as references (provenance.md §D rules apply).
+- **What would change the choice:** the group uses CLAYFF/ERICA instead of INTERFACE FF; the target is C-S-H with defects (brick model) rather than crystalline tobermorite; the study needs surfaces or PCE adsorption in the first evaluation.

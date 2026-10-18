@@ -63,7 +63,7 @@ def tc2_reference(pf, m: Model, cfg, ref_path: str) -> CheckResult:
     # cell ----------------------------------------------------------------------------------------
     if m.cell is None or r.cell is None:
         return CheckResult(name, prop, "TC", NOT_EVALUATED, "box undefined in file or reference")
-    tol_box = 10.0 ** (-min(m.box_decimals, r.box_decimals)) if min(m.box_decimals, r.box_decimals) > 0 else 1e-9
+    tol_box = max(10.0 ** (-min(m.box_decimals, r.box_decimals)), 1e-9) if min(m.box_decimals, r.box_decimals) > 0 else 1e-9
     for lab, a, b in (("box lengths", m.cell.lengths, r.cell.lengths), ("tilt", m.cell.tilt, r.cell.tilt),
                       ("origin", m.cell.origin, r.cell.origin)):
         if np.max(np.abs(a - b)) > tol_box:

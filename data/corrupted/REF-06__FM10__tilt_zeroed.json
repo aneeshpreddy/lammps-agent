@@ -1,0 +1,31 @@
+{
+  "id": "REF-06__FM10__tilt_zeroed",
+  "file": "data/corrupted/REF-06__FM10__tilt_zeroed.data",
+  "sha256": "5f91a708db2f7733109ea02c7411f2e0e54a8fa3743a3feaf252f041963e86e7",
+  "parent_id": "REF-06",
+  "parent_file": "data/reference/REF-06.data",
+  "parent_sha256": "d2ea5b318f51dfce000d542d0073b5adb680741448412a02225a1685617b85b4",
+  "failure_mode": "FM10",
+  "operator": "fm10_zero",
+  "variant": "tilt_zeroed",
+  "description": "set all tilt factors to zero",
+  "params": {},
+  "expected_failing_properties": [
+    "P2.2",
+    "P2.3",
+    "P2.4"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.2",
+    "P2.3",
+    "P2.4"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_tobermorite.yaml",
+  "overrides": {
+    "density_family": "tobermorite14",
+    "box_kind": "triclinic"
+  }
+}

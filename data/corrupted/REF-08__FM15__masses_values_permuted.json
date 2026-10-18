@@ -1,0 +1,32 @@
+{
+  "id": "REF-08__FM15__masses_values_permuted",
+  "file": "data/corrupted/REF-08__FM15__masses_values_permuted.data",
+  "sha256": "2c6e000074bae84524dce9ecc89aa3d502ccb60200e276ec04c04ff1c5407d0b",
+  "parent_id": "REF-08",
+  "parent_file": "data/reference/REF-08.data",
+  "parent_sha256": "9e853fdd440190f8a65241e99953357a43cb9e487cddbaa437fd59c7634e0180",
+  "failure_mode": "FM15",
+  "operator": "fm15",
+  "variant": "masses_values_permuted",
+  "description": "swap the mass values of the first two Masses rows with different masses",
+  "params": {
+    "types": [
+      1,
+      2
+    ]
+  },
+  "expected_failing_properties": [
+    "P2.6"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.6"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_tobermorite.yaml",
+  "overrides": {
+    "density_family": "tobermorite14",
+    "box_kind": "orthogonal"
+  }
+}

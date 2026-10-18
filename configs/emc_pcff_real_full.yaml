@@ -5,7 +5,7 @@
 # decides OD-B/C/F/G/H/J/L/M/N or S-Q1..S-Q7, change the value, bump config_version, and
 # re-run the validator on every reference (a change invalidates earlier Tier 3 verdicts).
 config_id: emc-pcff-real-full
-config_version: 0.1
+config_version: 0.3
 status: PROVISIONAL
 derived_from: [REF-01, REF-02, REF-03, REF-04]
 
@@ -26,6 +26,7 @@ net_charge:                       # OD-H
   required: true                  # EMC 'flag_charged 1'; references sum to 0.0000 e
   target: 0.0
   tolerance_e: null               # null -> rounding floor N*0.5*10^-d (PROPERTIES §8.5 rule 3)
+  floor: statistical              # PROPERTIES §8.5 rule 3 (v0.5): 5*sqrt(N)*10^-d/sqrt(12); was worst_case N*0.5*10^-d
 charged_system: true              # P2.1(b) at least one non-zero charge
 molecule_bond_policy: within_molecule     # P1.8  references: no bond crosses molecule IDs
 bonded_term_consistency: required         # P1.10 PCFF/EMC derive angles/dihedrals from bonds
@@ -68,3 +69,7 @@ tier3:
     # Emitted by every 'run 0' without an integrator fix: a property of the Tier 3b template, not of the DATA FILE.
     - "No fixes with time integration, atoms won't move"
   run_mode: serial                                # OD-L
+  kspace: "kspace_style pppm/cg ${precision}"     # as in REF-0*.in
+  # This build's PPPM segfaults on some valid boxes (FAILURE_MODES §9.6); on a full-mode CRASH the
+  # identical run is repeated once with this solver to attribute the crash (P3.4).
+  crash_fallback_kspace: "kspace_style ewald ${precision}"

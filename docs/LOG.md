@@ -219,3 +219,37 @@ No work is recorded for 5–15 October; everything below was done on 2026-10-16.
 | Code pushed | NOT MET — committed locally; no remote | `git log` |
 
 **Recommended decision:** PASS, conditional on the owner (a) adding a remote and pushing, and (b) accepting the provisional configuration and calibration for now. Tag `validator-v1` created on the commit that produced these results (move it if the owner disagrees). Risk carried into the eval-set week: OD-B / OD-I. If they are still open on 19 Oct, the eval set can only use the PCE/EMC family the validator is calibrated for.
+
+---
+
+## 2026-10-17 / 18 — Gate 1 and open decisions
+
+- Gate 1 assessed as PASS (conditional) in the 2026-10-17 entry; owner informed of what is needed (system class, references).
+- 2026-10-18: supervisor not responding. Recommendation recorded (SPEC §7.3, §7.15): bulk tobermorite from the INTERFACE FF database with PCFF-INTERFACE, published models as references with self-generated evidence, and a "proceeding unless you object" note to the supervisor.
+- Hours: to be filled by project owner.
+
+---
+
+## 2026-10-19 — EVAL SET Day 17 (+ Days 18–19 references): adopt defaults, build references (AI-assisted)
+
+### Done
+- **Decisions B, C, D, E adopted as PROVISIONAL DEFAULT** (owner, default-unless-objection; SPEC v0.5 §7.3, §7.15). Primary configuration `configs/interface_pcff_tobermorite.yaml`; `config.yaml` now defaults to it.
+- **Reference pipeline** `scripts/build_references.py`: INTERFACE FF 1.5 model → msi2lmp → tilt reduction → `scripts/supercell.py` → LAMMPS read/write → comments restored (data tokens verified unchanged). REF-05..08 (unit and rectangular cells of tob11/tob14) and 14 eval references t01–t14; all PASS Tiers 0–3.
+- **Evidence** `scripts/evidence_runs.py` → `docs/REFERENCE_EVIDENCE.md`: minimise + 5 ps NVT + 10 ps NPT clean for both minerals (lattice within 0.8 %); energy per unit cell equal across all 18 tobermorite files to ≤ 0.011 %.
+- **Calibration** `calibration/tobermorite_interface.json` (density window now representational, not the ±2 % placeholder).
+- **Eval set** `eval/tasks/t01–t14.json` (3 easy / 8 representative / 3 hard) and `docs/EVAL_SET.md`.
+- **Validator changes:** statistical charge floor (PROPERTIES §8.5 rule 3, v0.5) — the missing-hydrogen case is now caught by P2.1 instead of only by LAMMPS; P1.15 fails conflicting units hints; kspace command per configuration with a crash fallback (P3.4 attributes PPPM crashes to the build); floating-point floors for files written at full precision. 77 unit tests pass.
+- **Matrix** (448 corrupted files, 10 parents): 0 missed; 439 caught by Tiers 0–2, 9 by TC.2 only. 24/24 positive controls pass. The validator fails exactly the 6 of 10 LAMMPS-replicated supercells that TC.2 shows to be wrong.
+- **Findings** (FAILURE_MODES §9.6 items 9–11): PPPM segfaults on many valid boxes; `replicate … bond/periodic` silently joins wrong images in tilted cells; `write_data` drops type names. **Correction:** the 2026-10-16 claim that stretched bonds crash `run 0` was wrong — it was the PPPM defect (item 2 withdrawn).
+
+### Not Done
+- Supervisor note not yet sent (owner to send; draft given in chat on 2026-10-18).
+- Dev/test split, `METRICS.md`, harness (plan 22–23 Oct).
+- A coefficient-vs-.frc check (permuted coefficient values with intact comments are caught only by TC.2); candidate agent tool later.
+- Bug reports to LAMMPS (PPPM crash, replicate bond/periodic) — optional, owner's call.
+
+### Tomorrow
+- Send the supervisor note; review the 14 tasks; then the split and METRICS.md (Day 20).
+
+### Hours
+- To be filled by project owner.

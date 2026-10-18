@@ -1,0 +1,48 @@
+{
+  "id": "t02",
+  "role": "EVAL_REFERENCE",
+  "file": "data/reference/eval/t02.data",
+  "sha256": "39abb023e6a0821abd5155f10ada5777cd7ef680f2de8e96c3c1ed96db90673f",
+  "declared_config": "configs/interface_pcff_tobermorite.yaml",
+  "overrides": {
+    "density_family": "tobermorite14",
+    "box_kind": "triclinic"
+  },
+  "trust_status": "built by the reference pipeline (not by the agent); see REF-05..08 for evidence",
+  "model_source": "UGRP/INTERFACE_FF_1_5/MODEL_DATABASE/CEMENT_MINERALS/tob14_avg_cell.car/.mdf",
+  "model_source_sha256": {
+    "car": "9d8f4598fd76df1ad29e5c637c93cee4a01e7db1c351c04d0e104f7e8ecac71b",
+    "mdf": "b0a493beb912762671b1134419dbc1bd5b6c609742d5122b1005df214d2e001e"
+  },
+  "model_description": "tobermorite 14 \u00c5 unit cell with averaged occupancies (Merlino 1999), Ca5Si6O16(OH)2\u00b77H2O, Z = 2",
+  "force_field": "PCFF-INTERFACE (INTERFACE FF 1.5, pcff_interface_v1_5.frc)",
+  "frc_sha256": "3ad5a1be7334c646ed6cb813b769d0e89a1aa03fe695013e940626b7df922693",
+  "citation": "Heinz, Lin, Mishra, Emami, Langmuir 2013, 29, 1754-1765 (INTERFACE FF); Merlino et al. 1999 (structure)",
+  "steps": [
+    "msi2lmp v3.9.11 -class II -frc pcff_interface_v1_5.frc -ignore",
+    "scripts/cellops.reduce_and_wrap (k=-1)",
+    "no replication",
+    "LAMMPS LAMMPS (22 Jul 2025 - Update 6): read_data + write_data pair ii (kspace ewald)",
+    "no further tilt reduction needed",
+    "comments copied back (47 rows)"
+  ],
+  "msi2lmp_missing_parameter_kinds": [
+    "angleangle",
+    "angleangledihedral",
+    "angledihedral",
+    "bondangle",
+    "bondbond",
+    "endbonddihedral",
+    "midbonddihedral"
+  ],
+  "msi2lmp_missing_parameter_messages": 61,
+  "intermediate_sha256": {
+    "msi2lmp": "17bdebd07eb96a38d28e2411f2725795097c465d6797b070452c444bec86a138",
+    "cell": "c93e15bdece0add6449337e6be98792e3d87c702c4b875e1513f8644040c0688"
+  },
+  "supercell": [
+    1,
+    1,
+    1
+  ]
+}

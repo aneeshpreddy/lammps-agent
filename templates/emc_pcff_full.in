@@ -1,7 +1,8 @@
 # Tier 3b — full force-field acceptance (PROPERTIES P3.2) for EMC/PCFF files.
 # Force-field block copied from the EMC-generated INPUT SCRIPT of REF-01..04 (pce_mono.in /
 # pce_1.in, emc.pl v5.2.x); only the run section is replaced by 'run 0'. Coefficients come from
-# the reference's own .params include file ({coeff_file}).
+# the reference's own .params include file ({coeff_file}). The kspace command comes from the declared
+# configuration (tier3.kspace; EMC's own choice is 'kspace_style pppm/cg ${precision}').
 units           real
 atom_style      full
 boundary        {boundary}
@@ -18,7 +19,7 @@ special_bonds   lj/coul 0 0 1
 read_data       {datafile}
 include         {coeff_file}
 
-if "${flag_charged} != 0" then "kspace_style pppm/cg ${precision}"
+if "${flag_charged} != 0" then "{kspace}"
 dielectric      ${dielectric}
 
 thermo_style    custom step pe ke etotal evdwl ecoul elong ebond eangle edihed eimp press

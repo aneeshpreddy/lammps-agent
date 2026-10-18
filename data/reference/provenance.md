@@ -1,8 +1,10 @@
 # Reference Inventory and Provenance
 
-Version 0.4 (2026-10-16). Change from v0.3a: four **candidate** references registered (REF-01..REF-04) and two synthetic fixtures (FIX-T11, FIX-T14); the template (§A, §B) and rules (§D) are unchanged.
+Version 0.5 (2026-10-19). Change from v0.4: **published-model references REF-05..REF-08 and eval-set references t01–t14 for the adopted system class** (tobermorite, INTERFACE FF; SPEC §7.3, §7.15). v0.4: four candidate PCE references (REF-01..04) and two synthetic fixtures.
 
-## STATUS: CANDIDATES REGISTERED — TRUST NOT YET ESTABLISHED
+## STATUS (v0.5)
+- **Primary references — REF-05..REF-08 (tobermorite): PUBLISHED MODEL + DOCUMENTED PIPELINE + SELF-GENERATED EVIDENCE; supervisor confirmation pending.** They stand in for group production files, which are not available (SPEC §7.8). See §B2.
+- **Secondary — REF-01..REF-04 (PCE, EMC): CANDIDATES; trust not established** (unchanged from v0.4, below). Kept as a regression set.
 
 The files below were found in `UGRP/PCEs/` and copied here read-only (`chmod 444`), with SHA-256 checksums in their sidecars (`REF-0x.json`). Everything stated is read from the files themselves. **Creator, responsible person and production-use evidence are not recorded anywhere in the folder**, so none of them qualifies as an oracle under SPEC §7.8 yet. They are used as positive controls, calibration sources (status PROVISIONAL) and parents for the negative controls.
 
@@ -47,6 +49,23 @@ Common to REF-01..REF-04: built by **EMC** (Enhanced Monte Carlo, P.J. in 't Vel
 | Known caveats | Masses also re-set by `.params` `mass` commands (DATA FILE values overridden at run time); unwrapped coordinates extend to −0.43…1.31 in fractional units | same | box differs from EMC `lphase` (dilute) | different EMC version; Na⁺ counter-ion |
 | Qualifies as oracle? | **No — candidate** (no creator / production evidence) | No — candidate | No — candidate | No — candidate |
 
+### B2. Tobermorite references (v0.5) — REF-05..REF-08 and eval references t01–t14
+
+| Field | Value |
+|---|---|
+| Source | INTERFACE FF 1.5 model database, `UGRP/INTERFACE_FF_1_5/MODEL_DATABASE/CEMENT_MINERALS/` (identical copy in `UGRP/CEMENT_MINERALS/`): `tob11_unit_cell` (REF-05), `tob14_avg_cell` (REF-06), `tob11_rectangular_cell` (REF-07), `tob14_avg_rectangular_cell` (REF-08). SHA-256 of each .car/.mdf in the sidecars |
+| Structure identity | tobermorite 11 Å, Ca₄Si₆O₁₅(OH)₂·5H₂O, Z = 2 (88 atoms/unit cell); tobermorite 14 Å, Ca₅Si₆O₁₆(OH)₂·7H₂O with averaged occupancies, Z = 2 (104 atoms); unit cells after Merlino 1999 (INTERFACE documentation §3.5); rectangular cells are orthogonal repeats (2 unit cells) of the same crystals |
+| Force field | PCFF-INTERFACE, `pcff_interface_v1_5.frc` (Heinz, Lin, Mishra, Emami, *Langmuir* 2013, 29, 1754–1765; the paper is `UGRP/Papers/Force field/la3038846.pdf`). The .frc defines no class II cross terms for tobermorite (bond-bond, bond-angle, angle-angle, …); msi2lmp `-ignore` sets them to zero. All bond and angle terms are defined and purely quadratic |
+| Construction | `scripts/build_references.py`: msi2lmp v3.9.11 (`-class II -ignore`) → tilt reduction + wrap (`scripts/cellops.py`) → supercell (`scripts/supercell.py`) → LAMMPS 22 Jul 2025 U6 `read_data` + `write_data pair ii` (Ewald) → type-name comments restored. Every step and intermediate checksum is in the sidecar |
+| Creator / responsible person | built 2026-10-19 by the project owner's AI-assisted pipeline; responsible person: project owner |
+| atom_style / units / boundary | full / real (line-1 hint `units = real`) / p p p |
+| Box / image flags | REF-05, REF-06 triclinic (tilt reduced into the documented bound); REF-07, REF-08 orthogonal; atoms wrapped; image flags written by `write_data` (meaningless for an infinite bonded crystal; not checked) |
+| Validation | all 18 files PASS Tiers 0–3 under `configs/interface_pcff_tobermorite.yaml` |
+| Evidence of use (in place of production use) | `docs/REFERENCE_EVIDENCE.md`: minimisation + 5 ps NVT + 10 ps NPT (tri) run clean for 2×2×1 cells of both minerals; lattice lengths within 0.8 % of the published cell; energy per unit cell identical across all 18 files to ≤ 0.011 % |
+| Independent cross-check | LAMMPS `replicate … bond/periodic` rebuilds of the 10 supercells: the 4 that LAMMPS gets right are identical to ours (TC.2); the other 6 are wrong (FAILURE_MODES §9.6 item 10) |
+| Known caveats | zero class II cross terms (above); 14 Å model uses averaged occupancies; references are the published geometry, not relaxed (P2.5 window is representational) |
+| Qualifies as oracle? | **Yes, provisionally**: provenance, construction, force field and evidence of successful use are documented; production use by the group and supervisor sign-off are missing |
+
 ### Synthetic fixtures (`data/fixtures/`) — not references
 
 | ID | Source | Construction | Use |
@@ -64,7 +83,12 @@ Common to REF-01..REF-04: built by **EMC** (Enhanced Monte Carlo, P.J. in 't Vel
 | REF-02 | `REF-02.data` | PCE (EMC, PCFF-type) + Ca²⁺, dense | CANDIDATE — provenance incomplete |
 | REF-03 | `REF-03.data` | PCE (EMC, PCFF-type) + Ca²⁺, dilute | CANDIDATE — provenance incomplete |
 | REF-04 | `REF-04.data` | PCE oligomer (EMC) + Na⁺, dilute | CANDIDATE — provenance incomplete |
-| C-S-H reference(s) | — | — | **REFERENCE COLLECTION REQUIRED** (OD-B) |
+| REF-05 | `REF-05.data` | tobermorite 11 Å unit cell, triclinic, 88 atoms | PUBLISHED MODEL — provisional oracle |
+| REF-06 | `REF-06.data` | tobermorite 14 Å unit cell, triclinic, 104 atoms | PUBLISHED MODEL — provisional oracle |
+| REF-07 | `REF-07.data` | tobermorite 11 Å rectangular cell, 176 atoms | PUBLISHED MODEL — provisional oracle |
+| REF-08 | `REF-08.data` | tobermorite 14 Å rectangular cell, 208 atoms | PUBLISHED MODEL — provisional oracle |
+| t01–t14 | `eval/tNN.data` | eval-set reference outputs (`eval/tasks/tNN.json`) | built by the same pipeline |
+| Group production C-S-H files | — | — | still welcome: would join or replace REF-05..08 |
 
 ---
 

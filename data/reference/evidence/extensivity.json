@@ -1,0 +1,162 @@
+{
+  "rows": [
+    {
+      "file": "data/reference/REF-05.data",
+      "mineral": "tob11",
+      "cells": 1,
+      "pe": -5700.5061,
+      "pe_per_cell": -5700.5061,
+      "verdict": "PASS"
+    },
+    {
+      "file": "data/reference/REF-06.data",
+      "mineral": "tob14",
+      "cells": 1,
+      "pe": -6215.9391,
+      "pe_per_cell": -6215.9391,
+      "verdict": "PASS"
+    },
+    {
+      "file": "data/reference/REF-07.data",
+      "mineral": "tob11",
+      "cells": 2,
+      "pe": -11399.796,
+      "pe_per_cell": -5699.898,
+      "verdict": "PASS"
+    },
+    {
+      "file": "data/reference/REF-08.data",
+      "mineral": "tob14",
+      "cells": 2,
+      "pe": -12432.438,
+      "pe_per_cell": -6216.219,
+      "verdict": "PASS"
+    },
+    {
+      "file": "data/reference/eval/t01.data",
+      "mineral": "tob11",
+      "cells": 1,
+      "pe": -5700.5061,
+      "pe_per_cell": -5700.5061,
+      "verdict": "PASS"
+    },
+    {
+      "file": "data/reference/eval/t02.data",
+      "mineral": "tob14",
+      "cells": 1,
+      "pe": -6215.9391,
+      "pe_per_cell": -6215.9391,
+      "verdict": "PASS"
+    },
+    {
+      "file": "data/reference/eval/t03.data",
+      "mineral": "tob11",
+      "cells": 2,
+      "pe": -11399.796,
+      "pe_per_cell": -5699.898,
+      "verdict": "PASS"
+    },
+    {
+      "file": "data/reference/eval/t04.data",
+      "mineral": "tob11",
+      "cells": 2,
+      "pe": -11401.012,
+      "pe_per_cell": -5700.506,
+      "verdict": "PASS"
+    },
+    {
+      "file": "data/reference/eval/t05.data",
+      "mineral": "tob11",
+      "cells": 4,
+      "pe": -22802.024,
+      "pe_per_cell": -5700.506,
+      "verdict": "PASS"
+    },
+    {
+      "file": "data/reference/eval/t06.data",
+      "mineral": "tob11",
+      "cells": 2,
+      "pe": -11401.012,
+      "pe_per_cell": -5700.506,
+      "verdict": "PASS"
+    },
+    {
+      "file": "data/reference/eval/t07.data",
+      "mineral": "tob14",
+      "cells": 4,
+      "pe": -24863.757,
+      "pe_per_cell": -6215.93925,
+      "verdict": "PASS"
+    },
+    {
+      "file": "data/reference/eval/t08.data",
+      "mineral": "tob14",
+      "cells": 2,
+      "pe": -12431.891,
+      "pe_per_cell": -6215.9455,
+      "verdict": "PASS"
+    },
+    {
+      "file": "data/reference/eval/t09.data",
+      "mineral": "tob11",
+      "cells": 4,
+      "pe": -22799.591,
+      "pe_per_cell": -5699.89775,
+      "verdict": "PASS"
+    },
+    {
+      "file": "data/reference/eval/t10.data",
+      "mineral": "tob14",
+      "cells": 2,
+      "pe": -12432.438,
+      "pe_per_cell": -6216.219,
+      "verdict": "PASS"
+    },
+    {
+      "file": "data/reference/eval/t11.data",
+      "mineral": "tob14",
+      "cells": 2,
+      "pe": -12431.878,
+      "pe_per_cell": -6215.939,
+      "verdict": "PASS"
+    },
+    {
+      "file": "data/reference/eval/t12.data",
+      "mineral": "tob11",
+      "cells": 2,
+      "pe": -11401.024,
+      "pe_per_cell": -5700.512,
+      "verdict": "PASS"
+    },
+    {
+      "file": "data/reference/eval/t13.data",
+      "mineral": "tob14",
+      "cells": 9,
+      "pe": -55943.685,
+      "pe_per_cell": -6215.965,
+      "verdict": "PASS"
+    },
+    {
+      "file": "data/reference/eval/t14.data",
+      "mineral": "tob11",
+      "cells": 18,
+      "pe": -102609.21,
+      "pe_per_cell": -5700.511666666667,
+      "verdict": "PASS"
+    }
+  ],
+  "summary": {
+    "tob11": {
+      "n": 10,
+      "mean": -5700.324761666667,
+      "spread_abs": 0.6142499999996289,
+      "spread_rel_percent": 0.010775701835978094
+    },
+    "tob14": {
+      "n": 8,
+      "mean": -6216.01311875,
+      "spread_abs": 0.27999999999974534,
+      "spread_rel_percent": 0.004504494997849225
+    }
+  }
+}

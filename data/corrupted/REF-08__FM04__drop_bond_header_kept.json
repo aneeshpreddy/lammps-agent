@@ -1,0 +1,34 @@
+{
+  "id": "REF-08__FM04__drop_bond_header_kept",
+  "file": "data/corrupted/REF-08__FM04__drop_bond_header_kept.data",
+  "sha256": "da52702766f08db04a04cf087edb4404c93de4a175f45e4174eec11460cfeede",
+  "parent_id": "REF-08",
+  "parent_file": "data/reference/REF-08.data",
+  "parent_sha256": "9e853fdd440190f8a65241e99953357a43cb9e487cddbaa437fd59c7634e0180",
+  "failure_mode": "FM04",
+  "operator": "fm04_loud",
+  "variant": "drop_bond_header_kept",
+  "description": "delete one bond row, header unchanged",
+  "params": {
+    "deleted_bond": [
+      "81",
+      "1",
+      "103",
+      "106"
+    ]
+  },
+  "expected_failing_properties": [
+    "P1.1"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.1"
+  ],
+  "expected_lammps_behaviour": "Loud",
+  "header_consistent": false,
+  "declared_config": "configs/interface_pcff_tobermorite.yaml",
+  "overrides": {
+    "density_family": "tobermorite14",
+    "box_kind": "orthogonal"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "REF-06__FM03__wrong_units_hint",
+  "file": "data/corrupted/REF-06__FM03__wrong_units_hint.data",
+  "sha256": "8c41cb7a9033735841af6c580806f627ef5bdcc81167e84e27354c17586cd65a",
+  "parent_id": "REF-06",
+  "parent_file": "data/reference/REF-06.data",
+  "parent_sha256": "d2ea5b318f51dfce000d542d0073b5adb680741448412a02225a1685617b85b4",
+  "failure_mode": "FM03",
+  "operator": "fm03_hint",
+  "variant": "wrong_units_hint",
+  "description": "write 'units = metal' on line 1 while the declared units are real",
+  "params": {
+    "mode": "replaced existing hint"
+  },
+  "expected_failing_properties": [
+    "P1.15"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.15"
+  ],
+  "expected_lammps_behaviour": "Warn (Inconsistent units in data file)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_tobermorite.yaml",
+  "overrides": {
+    "density_family": "tobermorite14",
+    "box_kind": "triclinic"
+  }
+}
