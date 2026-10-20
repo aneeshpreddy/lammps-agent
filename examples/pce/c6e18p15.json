@@ -1,0 +1,7 @@
+{"name": "c6e18p15",
+ "description": "Same architecture as the group's EMC model REF-02: polyacrylate backbone, 6 carboxylate units, 18 acrylate-ester PEG side chains of 15 EO units with OH ends, random sequence, methyl end caps, Ca2+ counter-ions.",
+ "emc_reference": "REF-02",
+ "monomers": {"A": {"kind": "acid", "alpha_methyl": false, "deprotonated": true},
+              "E": {"kind": "ester_peg", "alpha_methyl": false, "eo_units": 15, "end": "OH"}},
+ "composition": {"A": 6, "E": 18}, "sequence": "random", "end_groups": ["CH3", "CH3"],
+ "n_chains": 1, "counterion": "Ca2+", "box": {"padding": 10.0}, "force_field": "pcff", "seed": 1}

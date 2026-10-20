@@ -1,0 +1,5 @@
+{"name": "hpeg_aa32_s8_n25",
+ "description": "HPEG-type PCE: methallyl-ether PEG macromonomer (spacer 1, alpha-methyl, 25 EO, OH end) with acrylic acid 4:1, side chains spread evenly, Na+.",
+ "n_side_chains": 8, "n_acid": 32, "side_chain_length": 25, "anchor": "HPEG", "acid": "acrylic",
+ "side_chain_end": "OH", "deprotonated_fraction": 1.0, "sequence": "alternating",
+ "counterion": "Na+", "force_field": "pcff", "seed": 3}

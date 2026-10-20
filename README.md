@@ -12,6 +12,19 @@ Specification: `docs/SPEC.md`, `docs/PROPERTIES.md` (42 properties in Tiers 0–
 | 3 | Does LAMMPS accept it under the declared configuration? | `read_data … nocoeff`; the full force field + `run 0`; warning policy; crash/timeout classification |
 | TC | Does it match the request or a reference? | position-matched comparison with a trusted reference |
 
+## Structure builders (agent tools)
+
+```bash
+python -m builders.pce examples/pce/mpeg_methacrylate.json --ff pcff --out runs/pce     # any PCE architecture
+python -m builders.pce examples/pce/hpeg.json --ff cvff --out runs/pce                  # class I
+python -m builders.minerals tob11_unit_cell --supercell 2 2 1 --ff pcff --out runs/minerals
+python -m builders.minerals --list                                                      # all INTERFACE models
+python scripts/pce_examples.py            # docs/PCE_BUILDER.md  (every example, both force fields, validated)
+python scripts/build_mineral_references.py   # docs/MINERALS.md (every cement mineral, both force fields)
+```
+
+Force fields: CVFF-INTERFACE (class I) and PCFF-INTERFACE (class II), INTERFACE FF 1.5. The builders refuse to write a file when the force field lacks a parameter (other than class II cross terms) or when msi2lmp writes a non-finite value.
+
 ## Install
 
 ```bash

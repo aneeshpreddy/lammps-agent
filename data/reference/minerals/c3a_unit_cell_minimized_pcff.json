@@ -1,0 +1,50 @@
+{
+  "id": "c3a_unit_cell_minimized_pcff",
+  "role": "REFERENCE_PUBLISHED_MODEL",
+  "file": "data/reference/minerals/c3a_unit_cell_minimized_pcff.data",
+  "sha256": "667c54781c943c71efb7348f7408f58e8be9bc842d8c6f6f109974bbffa81a8b",
+  "declared_config": "configs/interface_pcff_minerals.yaml",
+  "overrides": {
+    "density_family": "c3a_unit_cell_minimized",
+    "box_kind": "any"
+  },
+  "trust_status": "PUBLISHED MODEL (INTERFACE FF 1.5) + documented pipeline; supervisor confirmation pending",
+  "build": {
+    "name": "c3a_unit_cell_minimized_pcff",
+    "model": "c3a_unit_cell_minimized",
+    "model_dir": "CEMENT_MINERALS",
+    "model_sha256": {
+      "car": "149bb6029cda5b79550dc6c18b3e13e8c374d177823f19f343b2e782c7f38e02",
+      "mdf": "428ddafd3b017760225e2d6710faf0b5f7a504449246e183384441dd3b468223"
+    },
+    "supercell": [
+      1,
+      1,
+      1
+    ],
+    "force_field": "PCFF-INTERFACE (INTERFACE FF 1.5, class II)",
+    "frc_sha256": "3ad5a1be7334c646ed6cb813b769d0e89a1aa03fe695013e940626b7df922693",
+    "lammps": "LAMMPS (22 Jul 2025 - Update 6)",
+    "tilt_reduction": {
+      "k": 0,
+      "m": 0,
+      "n": 0
+    },
+    "tilt_reduced_after_supercell": false,
+    "comments_restored": 16,
+    "natoms": 264,
+    "data_sha256": "667c54781c943c71efb7348f7408f58e8be9bc842d8c6f6f109974bbffa81a8b",
+    "missing_kinds": [
+      "angleangle",
+      "angleangledihedral",
+      "angledihedral",
+      "bondangle",
+      "bondbond",
+      "endbonddihedral",
+      "midbonddihedral"
+    ],
+    "cross_terms_zeroed": true,
+    "allowed_missing_kinds": [],
+    "simulation_ready": true
+  }
+}

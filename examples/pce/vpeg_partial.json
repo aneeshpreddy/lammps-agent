@@ -1,0 +1,5 @@
+{"name": "vpeg_half_protonated",
+ "description": "EMC M2-type ether macromonomer (spacer 2, no methyl, 4 EO) with acrylic acid 2:1, half of the acid units protonated (COOH), Na+.",
+ "n_side_chains": 6, "n_acid": 12, "side_chain_length": 4, "anchor": "VPEG", "acid": "acrylic",
+ "side_chain_end": "OH", "deprotonated_fraction": 0.5, "sequence": "random", "counterion": "Na+",
+ "force_field": "pcff", "seed": 21}

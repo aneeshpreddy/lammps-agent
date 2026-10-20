@@ -1,0 +1,39 @@
+{
+  "name": "ettr_rectangular_cell_pcff",
+  "model": "ettr_rectangular_cell",
+  "model_dir": "CEMENT_MINERALS",
+  "model_sha256": {
+    "car": "d616e4bf7674336f2736fb0af92cbd2eb1f923f6f2a6eae293b751b1dfcde007",
+    "mdf": "aa2c697546eaa162b4f37978e1f39b8ec66eea6b3fa7d246144859447b844da2"
+  },
+  "supercell": [
+    1,
+    1,
+    1
+  ],
+  "force_field": "PCFF-INTERFACE (INTERFACE FF 1.5, class II)",
+  "frc_sha256": "3ad5a1be7334c646ed6cb813b769d0e89a1aa03fe695013e940626b7df922693",
+  "lammps": "LAMMPS (22 Jul 2025 - Update 6)",
+  "tilt_reduction": {
+    "k": 0,
+    "m": 0,
+    "n": 0
+  },
+  "tilt_reduced_after_supercell": false,
+  "comments_restored": 93,
+  "natoms": 512,
+  "data_file": "/Users/ani.bob/Downloads/UGRP/lammps-agent/data/reference/minerals/ettr_rectangular_cell_pcff.data",
+  "data_sha256": "a4fa1c915c8cd2bdc93069b5ecc7a2011c21d29bd1d46777e6c16d0e1717e72f",
+  "missing_kinds": [
+    "angleangle",
+    "angleangledihedral",
+    "angledihedral",
+    "bondangle",
+    "bondbond",
+    "endbonddihedral",
+    "midbonddihedral"
+  ],
+  "cross_terms_zeroed": true,
+  "allowed_missing_kinds": [],
+  "simulation_ready": true
+}

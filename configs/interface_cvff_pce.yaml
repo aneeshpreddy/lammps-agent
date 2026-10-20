@@ -1,0 +1,62 @@
+# Declared validation configuration for PCE structures written by builders/pce.py in CVFF-INTERFACE
+# (class I). STATUS: PROVISIONAL_DEFAULT. Note (INTERFACE documentation): the tuned PEO parameters exist
+# for PCFF only; CVFF uses its generic ether/ester parameters for the side chains.
+config_id: interface-cvff-pce
+config_version: 0.1
+status: PROVISIONAL_DEFAULT
+derived_from: [REF-01, REF-02, REF-03, REF-04]
+
+units: real
+atom_style: full
+boundary: [p, p, p]
+box_kind: orthogonal
+masses_location: data_file
+coeffs_location: data_file
+required_coeff_sections: [Pair Coeffs, Bond Coeffs, Angle Coeffs, Dihedral Coeffs]
+image_flag_policy: optional
+coordinate_wrapping: wrapped
+image_consistency: required
+units_hint_policy: optional
+encoding_policy: ascii_lf
+tilt_policy: both
+tilt_violation: fail
+net_charge: {required: true, target: 0.0, tolerance_e: null, floor: statistical}
+charged_system: true
+molecule_bond_policy: within_molecule
+bonded_term_consistency: required
+bonded_term_completeness: required
+improper_completeness: false          # class I: impropers only where the FF defines out-of-plane terms
+improper_center_index: 1
+topology_signature_policy: consistent
+allowed_sections: [Atoms, Velocities, Masses, Bonds, Angles, Dihedrals, Impropers,
+                   Pair Coeffs, PairIJ Coeffs, Bond Coeffs, Angle Coeffs, Dihedral Coeffs, Improper Coeffs]
+coeff_param_counts: {Pair Coeffs: 2, Bond Coeffs: 2, Angle Coeffs: 2, Dihedral Coeffs: 3, Improper Coeffs: 3}
+styles: {pair: lj/cut/coul/long, bond: harmonic, angle: harmonic, dihedral: harmonic, improper: cvff, kspace: pppm}
+type_name_elements:   # cvff_interface_v1_5.frc #atom_types element column
+  c: C
+  c1: C
+  c2: C
+  c3: C
+  c-: C
+  "c'": C
+  h: H
+  ho: H
+  o-: O
+  "o'": O
+  o: O
+  oh: O
+  ca+: Ca
+  na+: Na
+  k+: K
+coeff_file: null
+system_family: pce_builder
+density_family: pce_builder
+calibration: calibration/pce_builder.json
+tier3:
+  structure_template: templates/accept_structure.in
+  full_template: templates/interface_cvff_full.in
+  kspace: "kspace_style pppm 1.0e-4"
+  crash_fallback_kspace: "kspace_style ewald 1.0e-4"
+  warning_allow_list:
+    - "No fixes with time integration, atoms won't move"
+  run_mode: serial

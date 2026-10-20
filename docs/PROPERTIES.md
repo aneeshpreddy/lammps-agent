@@ -235,3 +235,10 @@ Status **PROVISIONAL_DEFAULT**, from REF-05..REF-08 (tobermorite 11 Å / 14 Å u
 | d_min | 10 element pairs, e.g. O–Si 2.544, Ca–O 1.689, H–H 1.086 Å | 0.75 × closest non-bonded contact |
 | ρ range | tobermorite11 [2.46004, 2.46054]; tobermorite14 [2.22728, 2.22773] g/cm³ | a crystal has the same density in every supercell (unit and rectangular cells agree), so the margin is representational: ±1e-4 relative. It is **not** a physical tolerance: a relaxed structure (NPT changes ρ by up to 1.8 %, `REFERENCE_EVIDENCE.md`) would FAIL P2.5 — correct for tasks that ask for the published model, to be revisited if tasks ever ask for relaxed cells |
 | τ_m | 0.01 amu | as above |
+
+### 8.12 Changes in v0.6 (2026-10-20)
+- **P1.7:** a required Coeff section is required only if its interaction kind exists (C3S has no dihedrals, so no Dihedral Coeffs).
+- **P2.4:** when no window exists for an atom-type-name pair, the element-pair window derived from the same references is used (recorded per bond as `judged_by_element_pair_window`). This lets files typed by another force field (builder output in CVFF/PCFF-INTERFACE names) be judged against the EMC references.
+- **OD-J map:** `type_name_elements_frc` reads type → element from the declared .frc file; explicit `type_name_elements` entries override it.
+- **P2.3 contact floors for ions:** taken from published INTERFACE structures in which the ions are coordinated (montmorillonite Na⁺/K⁺, tobermorite Ca²⁺; `calibration/pce_builder.json` `contact_sources`), only for element pairs that contain an ion. The EMC files hold one Na⁺ with no oxygen within 3.18 Å, which had set an unrepresentative Na–O floor.
+- **P1.17:** `improper_completeness: false` for class I (CVFF defines out-of-plane terms only at planar centres).

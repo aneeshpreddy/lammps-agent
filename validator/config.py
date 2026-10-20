@@ -74,3 +74,38 @@ def load_calibration(cfg: Dict[str, Any]) -> Optional[Dict[str, Any]]:
         return None
     with open(p) as fh:
         return json.load(fh)
+
+
+_FRC_ELEMENTS: Dict[str, Dict[str, str]] = {}
+
+
+def _frc_elements(path: str) -> Dict[str, str]:
+    """Type -> element from the #atom_types section of a Materials Studio .frc file.
+
+    Read directly (the validator does not import the builders): the .frc is the declared, cited
+    force-field source, not a converter under test."""
+    if path not in _FRC_ELEMENTS:
+        out, section = {}, None
+        with open(path, errors="replace") as fh:
+            for line in fh:
+                if line.startswith("#"):
+                    section = line.split()[0]
+                    continue
+                t = line.split()
+                if section == "#atom_types" and len(t) >= 5 and t[0][:1].isdigit():
+                    el = t[4]
+                    out.setdefault(t[2], el[:1].upper() + el[1:].lower())
+        _FRC_ELEMENTS[path] = out
+    return _FRC_ELEMENTS[path]
+
+
+def element_table(cfg: Dict[str, Any]) -> Dict[str, str]:
+    """Type-name -> element map (OD-J): the declared .frc element column (type_name_elements_frc),
+    overridden by any explicit type_name_elements entries."""
+    d = declared(cfg)
+    table: Dict[str, str] = {}
+    frc = d.get("type_name_elements_frc")
+    if frc:
+        table.update(_frc_elements(resolve(frc)))
+    table.update(d.get("type_name_elements") or {})
+    return table

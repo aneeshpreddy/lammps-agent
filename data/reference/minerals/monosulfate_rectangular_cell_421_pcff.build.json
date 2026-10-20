@@ -1,0 +1,39 @@
+{
+  "name": "monosulfate_rectangular_cell_421_pcff",
+  "model": "monosulfate_rectangular_cell_421",
+  "model_dir": "CEMENT_MINERALS",
+  "model_sha256": {
+    "car": "7ed5ff74e3f60bd8926eccf1f083782506e5e939584e9dbf7bae72f2aae4be42",
+    "mdf": "1a3c2b30fce72d35bd1c66710c81d53a0aafb9a2ede74adbef30b24ea5cbfb51"
+  },
+  "supercell": [
+    1,
+    1,
+    1
+  ],
+  "force_field": "PCFF-INTERFACE (INTERFACE FF 1.5, class II)",
+  "frc_sha256": "3ad5a1be7334c646ed6cb813b769d0e89a1aa03fe695013e940626b7df922693",
+  "lammps": "LAMMPS (22 Jul 2025 - Update 6)",
+  "tilt_reduction": {
+    "k": 0,
+    "m": 0,
+    "n": 0
+  },
+  "tilt_reduced_after_supercell": false,
+  "comments_restored": 93,
+  "natoms": 636,
+  "data_file": "/Users/ani.bob/Downloads/UGRP/lammps-agent/data/reference/minerals/monosulfate_rectangular_cell_421_pcff.data",
+  "data_sha256": "a76dfac75877d7a901b898306d622c488bb245015113e40d5125f73c144286e4",
+  "missing_kinds": [
+    "angleangle",
+    "angleangledihedral",
+    "angledihedral",
+    "bondangle",
+    "bondbond",
+    "endbonddihedral",
+    "midbonddihedral"
+  ],
+  "cross_terms_zeroed": true,
+  "allowed_missing_kinds": [],
+  "simulation_ready": true
+}

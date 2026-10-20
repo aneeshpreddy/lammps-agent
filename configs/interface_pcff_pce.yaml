@@ -1,0 +1,72 @@
+# Declared validation configuration for PCE structures written by builders/pce.py in PCFF-INTERFACE
+# (class II). STATUS: PROVISIONAL_DEFAULT (force field chosen by the project, supervisor 2026-10-20:
+# "F.F is our choice"; class II member of the INTERFACE FF 1.5 pair).
+config_id: interface-pcff-pce
+config_version: 0.1
+status: PROVISIONAL_DEFAULT
+derived_from: [REF-01, REF-02, REF-03, REF-04]   # tolerances (element pairs) from the EMC PCE files
+
+units: real
+atom_style: full
+boundary: [p, p, p]
+box_kind: orthogonal
+masses_location: data_file
+coeffs_location: data_file
+required_coeff_sections: [Pair Coeffs, Bond Coeffs, Angle Coeffs, Dihedral Coeffs, Improper Coeffs]
+image_flag_policy: optional
+coordinate_wrapping: wrapped          # the builder centres the system in a padded box
+image_consistency: required           # molecules are written whole
+units_hint_policy: optional
+encoding_policy: ascii_lf
+tilt_policy: both
+tilt_violation: fail
+net_charge: {required: true, target: 0.0, tolerance_e: null, floor: statistical}
+charged_system: true
+molecule_bond_policy: within_molecule
+bonded_term_consistency: required
+bonded_term_completeness: required    # msi2lmp class II: all angles/dihedrals, C(n,3) impropers
+improper_center_index: 1
+topology_signature_policy: consistent
+allowed_sections: [Atoms, Velocities, Masses, Bonds, Angles, Dihedrals, Impropers,
+                   Pair Coeffs, PairIJ Coeffs, Bond Coeffs, Angle Coeffs, Dihedral Coeffs, Improper Coeffs,
+                   BondBond Coeffs, BondAngle Coeffs, MiddleBondTorsion Coeffs, EndBondTorsion Coeffs,
+                   AngleTorsion Coeffs, AngleAngleTorsion Coeffs, BondBond13 Coeffs, AngleAngle Coeffs]
+coeff_param_counts: {Pair Coeffs: 2, Bond Coeffs: 4, Angle Coeffs: 4, Dihedral Coeffs: 6, Improper Coeffs: 2,
+                     BondBond Coeffs: 3, BondAngle Coeffs: 4, MiddleBondTorsion Coeffs: 4, EndBondTorsion Coeffs: 8,
+                     AngleTorsion Coeffs: 8, AngleAngleTorsion Coeffs: 3, BondBond13 Coeffs: 3, AngleAngle Coeffs: 6}
+styles: {pair: lj/class2/coul/long, bond: class2, angle: class2, dihedral: class2, improper: class2, kspace: pppm}
+type_name_elements:   # pcff_interface_v1_5.frc #atom_types element column
+  c: C
+  c1: C
+  c2: C
+  c3: C
+  c-: C
+  c_1: C
+  ce1: C
+  h: H
+  he1: H
+  ho: H
+  ho2: H
+  ha1: H
+  o-: O
+  o_1: O
+  o_2: O
+  oc: O
+  oh: O
+  oe1: O
+  oa1: O
+  ca+: Ca
+  na+: Na
+  k+: K
+coeff_file: null
+system_family: pce_builder
+density_family: pce_builder
+calibration: calibration/pce_builder.json
+tier3:
+  structure_template: templates/accept_structure.in
+  full_template: templates/interface_pcff_full.in
+  kspace: "kspace_style pppm 1.0e-4"
+  crash_fallback_kspace: "kspace_style ewald 1.0e-4"
+  warning_allow_list:
+    - "No fixes with time integration, atoms won't move"
+  run_mode: serial

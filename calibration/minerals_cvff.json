@@ -1,0 +1,330 @@
+{
+  "calibration_id": "minerals_cvff",
+  "version": 1,
+  "status": "PROVISIONAL_DEFAULT",
+  "date": "2026-10-20",
+  "derivation_version": "calibrate.py v1 (2026-10-16)",
+  "references": [
+    {
+      "id": "c3a_010_surface_separated_cvff",
+      "file": "data/reference/minerals/c3a_010_surface_separated_cvff.data",
+      "sha256": "169163dd36e06be9326151746b1141316859b3371759e2af34f6b13048281096",
+      "family": "surface"
+    },
+    {
+      "id": "c3a_010_surface_together_cvff",
+      "file": "data/reference/minerals/c3a_010_surface_together_cvff.data",
+      "sha256": "af528e071cf1ef60fcab1a74a7a36ad30f6b392bb2157c8f789d244ab04849c4",
+      "family": "surface"
+    },
+    {
+      "id": "c3a_unit_cell_cvff",
+      "file": "data/reference/minerals/c3a_unit_cell_cvff.data",
+      "sha256": "10987dbdbf57d89db46e107fd14670e55a31c05c85204bd108acde662a44d714",
+      "family": "c3a_unit_cell"
+    },
+    {
+      "id": "c3a_unit_cell_minimized_cvff",
+      "file": "data/reference/minerals/c3a_unit_cell_minimized_cvff.data",
+      "sha256": "638cf52ec4a91108d1174adfc25f2c18324b49c7336863e1a4b02a91f5b3a204",
+      "family": "c3a_unit_cell_minimized"
+    },
+    {
+      "id": "c3s_040_surface_cvff",
+      "file": "data/reference/minerals/c3s_040_surface_cvff.data",
+      "sha256": "3ead40208ca50c8b247d3540400067292f13b0f7a5e1c92e1aa929b7b18e2963",
+      "family": "surface"
+    },
+    {
+      "id": "c3s_040_surface_hydroxylated_cvff",
+      "file": "data/reference/minerals/c3s_040_surface_hydroxylated_cvff.data",
+      "sha256": "1ca611c97ad81fab8326c321f1e38ba5acc8e8da4f0309d24fc3a628ceff078d",
+      "family": "surface"
+    },
+    {
+      "id": "c3s_rectangular_cell_minimized_cvff",
+      "file": "data/reference/minerals/c3s_rectangular_cell_minimized_cvff.data",
+      "sha256": "5fd81b7e2f8d9aad0b0591c7318db0be842f461c48f77d94468a118aa783f919",
+      "family": "c3s_rectangular_cell_minimized"
+    },
+    {
+      "id": "c3s_unit_cell_minimized_cvff",
+      "file": "data/reference/minerals/c3s_unit_cell_minimized_cvff.data",
+      "sha256": "f0e54cf3c3ca0736bcc90da57f87c02233f6000c7a528f3b80e68e275acd984f",
+      "family": "c3s_unit_cell_minimized"
+    }
+  ],
+  "contact_sources": [],
+  "bond_length": {
+    "measured": "minimum-image bond length per atom-type-name pair (\u00c5)",
+    "derivation": "[min x (1-0.1), max x (1+0.1)] over the references",
+    "basis": "references show a spread of sd \u2248 3 % of the bond length around the FF r0; a 10 % widening beyond the observed extremes admits re-built or relaxed geometries while staying below the closest non-bonded contact of the same element pair (separation_check)",
+    "margin_rel": 0.1,
+    "pairs": {
+      "ac1|oc3": {
+        "n": 3264,
+        "min": 1.62447,
+        "max": 1.87204,
+        "mean": 1.75612,
+        "sd": 0.03326,
+        "lo": 1.462,
+        "hi": 2.0592
+      },
+      "ac1|oc4": {
+        "n": 3264,
+        "min": 1.61912,
+        "max": 1.86582,
+        "mean": 1.74391,
+        "sd": 0.03211,
+        "lo": 1.4572,
+        "hi": 2.0524
+      },
+      "hoc|oc5": {
+        "n": 72,
+        "min": 0.90734,
+        "max": 1.00933,
+        "mean": 0.95662,
+        "sd": 0.0198,
+        "lo": 0.8166,
+        "hi": 1.1103
+      },
+      "oc1|sc1": {
+        "n": 960,
+        "min": 1.51642,
+        "max": 1.72833,
+        "mean": 1.60134,
+        "sd": 0.02803,
+        "lo": 1.3648,
+        "hi": 1.9012
+      }
+    },
+    "separation_check": [
+      {
+        "bond_pair": "ac1|oc3",
+        "element_pair": "Al|O",
+        "window_hi": 2.0592,
+        "closest_nonbonded": 3.1117,
+        "ok": true
+      },
+      {
+        "bond_pair": "ac1|oc4",
+        "element_pair": "Al|O",
+        "window_hi": 2.0524,
+        "closest_nonbonded": 3.1117,
+        "ok": true
+      },
+      {
+        "bond_pair": "hoc|oc5",
+        "element_pair": "H|O",
+        "window_hi": 1.1103,
+        "closest_nonbonded": 1.6961,
+        "ok": true
+      },
+      {
+        "bond_pair": "oc1|sc1",
+        "element_pair": "O|Si",
+        "window_hi": 1.9012,
+        "closest_nonbonded": 3.1736,
+        "ok": true
+      }
+    ],
+    "element_pairs": {
+      "Al|O": {
+        "n": 6528,
+        "min": 1.61912,
+        "max": 1.87204,
+        "lo": 1.4572,
+        "hi": 2.0592
+      },
+      "H|O": {
+        "n": 72,
+        "min": 0.90734,
+        "max": 1.00933,
+        "lo": 0.8166,
+        "hi": 1.1103
+      },
+      "O|Si": {
+        "n": 960,
+        "min": 1.51642,
+        "max": 1.72833,
+        "lo": 1.3648,
+        "hi": 1.9012
+      }
+    },
+    "element_pairs_note": "fallback for type pairs with no window (e.g. other force-field type names); same derivation, keyed by element pair",
+    "separation_ok": true
+  },
+  "overlap": {
+    "measured": "minimum-image distance of non-bonded pairs (all pairs except 1-2 bonds), per element pair (\u00c5)",
+    "derivation": "d_min = (1-0.25) x closest such contact in the references; element pairs with no contact below 4.0 \u00c5 are uncalibrated",
+    "basis": "P2.3 targets gross overlaps (coincident/duplicated sites, collapsed geometry); the references are unrelaxed builds whose closest contacts are already short, so the threshold is placed well below them",
+    "margin_rel": 0.25,
+    "pairs": {
+      "Al|Al": {
+        "observed_min": 3.2084,
+        "d_min": 2.4063,
+        "closest_pair_in": "c3a_010_surface_together_cvff",
+        "atom_ids": [
+          1977,
+          1978
+        ]
+      },
+      "Al|Ca": {
+        "observed_min": 2.6666,
+        "d_min": 1.9999,
+        "closest_pair_in": "c3a_010_surface_separated_cvff",
+        "atom_ids": [
+          1220,
+          1263
+        ]
+      },
+      "Al|O": {
+        "observed_min": 3.1117,
+        "d_min": 2.3338,
+        "closest_pair_in": "c3a_010_surface_separated_cvff",
+        "atom_ids": [
+          76,
+          2120
+        ]
+      },
+      "Ca|Ca": {
+        "observed_min": 2.7916,
+        "d_min": 2.0937,
+        "closest_pair_in": "c3a_010_surface_together_cvff",
+        "atom_ids": [
+          2021,
+          2093
+        ]
+      },
+      "Ca|H": {
+        "observed_min": 2.2848,
+        "d_min": 1.7136,
+        "closest_pair_in": "c3s_040_surface_hydroxylated_cvff",
+        "atom_ids": [
+          244,
+          977
+        ]
+      },
+      "Ca|O": {
+        "observed_min": 2.0423,
+        "d_min": 1.5317,
+        "closest_pair_in": "c3a_010_surface_together_cvff",
+        "atom_ids": [
+          14,
+          2328
+        ]
+      },
+      "Ca|Si": {
+        "observed_min": 2.7978,
+        "d_min": 2.0984,
+        "closest_pair_in": "c3s_040_surface_cvff",
+        "atom_ids": [
+          889,
+          897
+        ]
+      },
+      "H|H": {
+        "observed_min": 1.6531,
+        "d_min": 1.2398,
+        "closest_pair_in": "c3s_040_surface_hydroxylated_cvff",
+        "atom_ids": [
+          980,
+          992
+        ]
+      },
+      "H|O": {
+        "observed_min": 1.6961,
+        "d_min": 1.2721,
+        "closest_pair_in": "c3s_040_surface_hydroxylated_cvff",
+        "atom_ids": [
+          723,
+          992
+        ]
+      },
+      "H|Si": {
+        "observed_min": 3.0946,
+        "d_min": 2.321,
+        "closest_pair_in": "c3s_040_surface_hydroxylated_cvff",
+        "atom_ids": [
+          190,
+          374
+        ]
+      },
+      "O|O": {
+        "observed_min": 2.3424,
+        "d_min": 1.7568,
+        "closest_pair_in": "c3s_040_surface_cvff",
+        "atom_ids": [
+          32,
+          33
+        ]
+      },
+      "O|Si": {
+        "observed_min": 3.1736,
+        "d_min": 2.3802,
+        "closest_pair_in": "c3s_040_surface_hydroxylated_cvff",
+        "atom_ids": [
+          664,
+          666
+        ]
+      }
+    }
+  },
+  "density": {
+    "surface": {
+      "applicable": false,
+      "values": {
+        "c3a_010_surface_separated_cvff": 0.708269,
+        "c3a_010_surface_together_cvff": 0.708269,
+        "c3s_040_surface_cvff": 0.548951,
+        "c3s_040_surface_hydroxylated_cvff": 0.555371
+      },
+      "basis": "isolated chain(s) in a mostly empty periodic box: no bulk density to check"
+    },
+    "c3a_unit_cell": {
+      "applicable": true,
+      "values": {
+        "c3a_unit_cell_cvff": 3.028483
+      },
+      "margin_rel": 0.0001,
+      "lo": 3.02818,
+      "hi": 3.028786,
+      "basis": "Crystal model: every supercell has the model's density exactly; \u00b11e-4 relative is a representation tolerance (PROPERTIES \u00a78.5 rule 3), not a physical one."
+    },
+    "c3a_unit_cell_minimized": {
+      "applicable": true,
+      "values": {
+        "c3a_unit_cell_minimized_cvff": 3.035995
+      },
+      "margin_rel": 0.0001,
+      "lo": 3.035692,
+      "hi": 3.036299,
+      "basis": "Crystal model: every supercell has the model's density exactly; \u00b11e-4 relative is a representation tolerance (PROPERTIES \u00a78.5 rule 3), not a physical one."
+    },
+    "c3s_rectangular_cell_minimized": {
+      "applicable": true,
+      "values": {
+        "c3s_rectangular_cell_minimized_cvff": 3.150072
+      },
+      "margin_rel": 0.0001,
+      "lo": 3.149757,
+      "hi": 3.150387,
+      "basis": "Crystal model: every supercell has the model's density exactly; \u00b11e-4 relative is a representation tolerance (PROPERTIES \u00a78.5 rule 3), not a physical one."
+    },
+    "c3s_unit_cell_minimized": {
+      "applicable": true,
+      "values": {
+        "c3s_unit_cell_minimized_cvff": 3.150071
+      },
+      "margin_rel": 0.0001,
+      "lo": 3.149756,
+      "hi": 3.150386,
+      "basis": "Crystal model: every supercell has the model's density exactly; \u00b11e-4 relative is a representation tolerance (PROPERTIES \u00a78.5 rule 3), not a physical one."
+    }
+  },
+  "mass": {
+    "tau_m_amu": 0.01,
+    "measured": "|Masses value - standard atomic weight of the mapped element|",
+    "basis": "FF mass tables print 2-5 decimals and use older IUPAC editions (e.g. H 1.00794/1.00797, Ca 40.08, Si 28.086); the largest such difference for the elements in scope is 0.002 amu. 0.01 amu covers it while any element swap differs by > 0.9 amu."
+  }
+}

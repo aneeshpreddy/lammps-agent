@@ -1,0 +1,7 @@
+{"name": "c1e1p2_na",
+ "description": "Same architecture as the group's EMC model REF-04: polyacrylate backbone, 1 carboxylate units, 1 acrylate-ester PEG side chains of 2 EO units with OH ends, random sequence, methyl end caps, Na+ counter-ions.",
+ "emc_reference": "REF-04",
+ "monomers": {"A": {"kind": "acid", "alpha_methyl": false, "deprotonated": true},
+              "E": {"kind": "ester_peg", "alpha_methyl": false, "eo_units": 2, "end": "OH"}},
+ "composition": {"A": 1, "E": 1}, "sequence": "random", "end_groups": ["CH3", "CH3"],
+ "n_chains": 1, "counterion": "Na+", "box": {"padding": 10.0}, "force_field": "pcff", "seed": 1}

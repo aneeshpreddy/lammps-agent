@@ -1,0 +1,7 @@
+{"name": "c12e12p15",
+ "description": "Same architecture as the group's EMC model UGRP/PCEs/c12e12p15 (REF-01): polyacrylate backbone, 12 carboxylate units, 12 acrylate-ester PEG side chains of 15 EO units with OH ends, random sequence, methyl end caps, 6 Ca2+.",
+ "emc_reference": "REF-01",
+ "monomers": {"A": {"kind": "acid", "alpha_methyl": false, "deprotonated": true},
+              "E": {"kind": "ester_peg", "alpha_methyl": false, "eo_units": 15, "end": "OH"}},
+ "composition": {"A": 12, "E": 12}, "sequence": "random", "end_groups": ["CH3", "CH3"],
+ "n_chains": 1, "counterion": "Ca2+", "box": {"padding": 10.0}, "force_field": "pcff", "seed": 1}

@@ -1,0 +1,42 @@
+{
+  "id": "c3a_010_surface_separated_cvff",
+  "role": "REFERENCE_PUBLISHED_MODEL",
+  "file": "data/reference/minerals/c3a_010_surface_separated_cvff.data",
+  "sha256": "169163dd36e06be9326151746b1141316859b3371759e2af34f6b13048281096",
+  "declared_config": "configs/interface_cvff_minerals.yaml",
+  "overrides": {
+    "density_family": "surface",
+    "box_kind": "any"
+  },
+  "trust_status": "PUBLISHED MODEL (INTERFACE FF 1.5) + documented pipeline; supervisor confirmation pending",
+  "build": {
+    "name": "c3a_010_surface_separated_cvff",
+    "model": "c3a_010_surface_separated",
+    "model_dir": "CEMENT_MINERALS",
+    "model_sha256": {
+      "car": "239193fc0939cae15824c12c3642971f631105ac4e2ea639cbe44589107b9fbe",
+      "mdf": "53dbed46dce8c935190d3556e65f9eb5d234325abc03761e8c3d7a2eb9651555"
+    },
+    "supercell": [
+      1,
+      1,
+      1
+    ],
+    "force_field": "CVFF-INTERFACE (INTERFACE FF 1.5, class I)",
+    "frc_sha256": "d64323ed1c6f0e399e5cff1ef74595477e8c4b3f4fadedf88b01f2e1eed7bc48",
+    "lammps": "LAMMPS (22 Jul 2025 - Update 6)",
+    "tilt_reduction": {
+      "k": 0,
+      "m": 0,
+      "n": 0
+    },
+    "tilt_reduced_after_supercell": false,
+    "comments_restored": 16,
+    "natoms": 4224,
+    "data_sha256": "169163dd36e06be9326151746b1141316859b3371759e2af34f6b13048281096",
+    "missing_kinds": [],
+    "cross_terms_zeroed": false,
+    "allowed_missing_kinds": [],
+    "simulation_ready": true
+  }
+}

@@ -11,6 +11,7 @@ invalidates the record: re-run this script and commit the new JSON.
 from __future__ import annotations
 
 import datetime as _dt
+import glob
 import json
 import math
 import os
@@ -24,6 +25,7 @@ sys.path.insert(0, ROOT)
 from validator.geometry import AMU_PER_A3_TO_G_PER_CM3, pairs_within  # noqa: E402
 from validator.model import bond_graph_components, build_model  # noqa: E402
 from validator.parser import parse_file  # noqa: E402
+from validator.config import element_table  # noqa: E402
 from validator.registry import config_for, load_sidecar  # noqa: E402
 from validator.tier2 import bonded_index_pairs  # noqa: E402
 
@@ -56,6 +58,21 @@ SETS = {
                                            "relative margin covers box lengths printed to >= 6 significant digits; it is "
                                            "a representation tolerance, not a physical one (PROPERTIES §8.5 rule 3)."
                         for n in (11, 14)}},
+    "pce_builder": {"out": "calibration/pce_builder.json", "id": "pce_builder", "status": "PROVISIONAL",
+                    "files": ["data/reference/REF-01.data", "data/reference/REF-02.data",
+                              "data/reference/REF-03.data", "data/reference/REF-04.data"],
+                    "density_basis": {"pce_emc_dense": None, "pce_emc_dilute": None},
+                    # Ion-oxygen (and other ion) contact floors: the EMC files hold almost no ion contacts
+                    # (one Na+, 3.18 Å from any O). Published INTERFACE structures in which the ions are
+                    # coordinated supply them; only element pairs containing an ion are taken from these.
+                    "contact_sources": ["data/reference/contact_sources/mont0_333_Na_15_cell_1x1x1_pcff.data",
+                                        "data/reference/contact_sources/mont0_333_K_15_cell_1x1x1_pcff.data",
+                                        "data/reference/REF-05.data", "data/reference/REF-06.data",
+                                        "data/reference/REF-07.data", "data/reference/REF-08.data"],
+                    "contact_ions": ["Na", "K", "Ca"],
+                    "extra_density": {"pce_builder": {"applicable": False,
+                                                      "basis": "builders/pce.py places chains in a padded vacuum box: "
+                                                               "no bulk density to check"}}},
     "fixture": {"out": "calibration/tobermorite_fixture.json", "id": "tobermorite_fixture", "status": "SYNTHETIC",
                 "files": ["data/fixtures/FIX-T11.data", "data/fixtures/FIX-T14.data"],
                 "density_basis": {
@@ -68,10 +85,21 @@ def ceil_to(x, step):
     return math.ceil(x / step - 1e-12) * step
 
 
+def mineral_set(ff: str) -> dict:
+    files = sorted(os.path.relpath(f, ROOT) for f in glob.glob(os.path.join(ROOT, "data", "reference", "minerals", f"*_{ff}.data")))
+    fams = {json.load(open(os.path.join(ROOT, f[:-5] + ".json")))["overrides"]["density_family"] for f in files}
+    basis = {fam: None if fam == "surface" else
+             "Crystal model: every supercell has the model's density exactly; ±1e-4 relative is a representation "
+             "tolerance (PROPERTIES §8.5 rule 3), not a physical one." for fam in fams}
+    return {"out": f"calibration/minerals_{ff}.json", "id": f"minerals_{ff}", "status": "PROVISIONAL_DEFAULT",
+            "files": files, "density_margin_rel": 1e-4, "density_basis": basis}
+
+
 def main(which: str):
-    spec = SETS[which]
+    spec = SETS[which] if which in SETS else mineral_set(which.split("_", 1)[1])
     refs = []
     bonds = defaultdict(list)
+    ebonds = defaultdict(list)
     contact = {}
     density = defaultdict(list)
     centroid_exc = []
@@ -80,7 +108,7 @@ def main(which: str):
         meta = load_sidecar(path)
         cfg = config_for(path, meta)
         dec = cfg["declared"]
-        el_table = dec.get("type_name_elements", {})
+        el_table = element_table(cfg)
         pf = parse_file(path)
         m = build_model(pf, dec["atom_style"])
         names = m.type_names
@@ -95,6 +123,8 @@ def main(which: str):
             for k, l in enumerate(L):
                 key = "|".join(sorted((names[int(m.types[ii[k]])], names[int(m.types[jj[k]])])))
                 bonds[key].append(float(l))
+                ekey = "|".join(sorted((el_table[names[int(m.types[ii[k]])]], el_table[names[int(m.types[jj[k]])]])))
+                ebonds[ekey].append(float(l))
         # closest non-bonded (all pairs except 1-2) contact per element pair
         bonded = bonded_index_pairs(m)
         I, J, D = pairs_within(m.cell, m.xyz, CONTACT_SEARCH_A)
@@ -114,6 +144,33 @@ def main(which: str):
                 cen = s[comp == c].mean(0)
                 centroid_exc.append(float(np.max(np.maximum(-cen, cen - 1.0).clip(min=0))))
 
+    # ---- ion contact sources (geometry only) ---------------------------------------------------
+    contact_src = []
+    if spec.get("contact_sources"):
+        from builders.ff import tables as frc_tables
+        frc_el = {t: el for t, (mass, el) in frc_tables("pcff").masses.items()}
+        ions = set(spec["contact_ions"])
+        for f in spec["contact_sources"]:
+            path = os.path.join(ROOT, f)
+            pf = parse_file(path)
+            m = build_model(pf, "full")
+            el_of = {t: frc_el.get(n) for t, n in m.type_names.items()}
+            bonded = bonded_index_pairs(m)
+            I, J, D = pairs_within(m.cell, m.xyz, CONTACT_SEARCH_A)
+            n_used = 0
+            for i, j, d in zip(I.tolist(), J.tolist(), D.tolist()):
+                if (i, j) in bonded:
+                    continue
+                ei, ej = el_of.get(int(m.types[i])), el_of.get(int(m.types[j]))
+                if not ei or not ej or not ({ei, ej} & ions):
+                    continue
+                key = "|".join(sorted((ei, ej)))
+                n_used += 1
+                if key not in contact or d < contact[key]["observed_min"]:
+                    contact[key] = {"observed_min": d, "reference": os.path.basename(f),
+                                    "atom_ids": [int(m.ids[i]), int(m.ids[j])]}
+            contact_src.append({"file": f, "sha256": pf.sha256, "ion_pairs_used": n_used})
+
     # ---- assemble ----------------------------------------------------------------------------
     bond_tab = {}
     for key, v in sorted(bonds.items()):
@@ -122,13 +179,19 @@ def main(which: str):
                          "mean": round(float(v.mean()), 5), "sd": round(float(v.std()), 5),
                          "lo": round(float(v.min()) * (1 - BOND_MARGIN_REL), 4),
                          "hi": round(float(v.max()) * (1 + BOND_MARGIN_REL), 4)}
+    ebond_tab = {}
+    for key, v in sorted(ebonds.items()):
+        v = np.array(v)
+        ebond_tab[key] = {"n": int(len(v)), "min": round(float(v.min()), 5), "max": round(float(v.max()), 5),
+                          "lo": round(float(v.min()) * (1 - BOND_MARGIN_REL), 4),
+                          "hi": round(float(v.max()) * (1 + BOND_MARGIN_REL), 4)}
     overlap = {k: {"observed_min": round(v["observed_min"], 4), "d_min": round(v["observed_min"] * (1 - OVERLAP_MARGIN_REL), 4),
                    "closest_pair_in": v["reference"], "atom_ids": v["atom_ids"]} for k, v in sorted(contact.items())}
     # separation check: a widened bond window must stay below the closest non-bonded contact of that element pair
     sep = []
     el_of_name = {}
     for f in spec["files"]:
-        el_of_name.update(config_for(os.path.join(ROOT, f))["declared"].get("type_name_elements", {}))
+        el_of_name.update(element_table(config_for(os.path.join(ROOT, f))))
     for key, w in bond_tab.items():
         a, b2 = key.split("|")
         ekey = "|".join(sorted((el_of_name[a], el_of_name[b2])))
@@ -146,10 +209,12 @@ def main(which: str):
         mr = spec.get("density_margin_rel", DENSITY_MARGIN_REL)
         dens[fam] = {"applicable": True, "values": {r: round(v, 6) for r, v in vals}, "margin_rel": mr,
                      "lo": round(lo * (1 - mr), 6), "hi": round(hi * (1 + mr), 6), "basis": basis}
+    dens.update(spec.get("extra_density", {}))
     out = {
         "calibration_id": spec["id"], "version": 1, "status": spec["status"],
         "date": _dt.date.today().isoformat(), "derivation_version": DERIVATION_VERSION,
         "references": refs,
+        "contact_sources": contact_src,
         "bond_length": {"measured": "minimum-image bond length per atom-type-name pair (Å)",
                         "derivation": f"[min x (1-{BOND_MARGIN_REL}), max x (1+{BOND_MARGIN_REL})] over the references",
                         "basis": "references show a spread of sd ≈ 3 % of the bond length around the FF r0; a 10 % "
@@ -157,6 +222,9 @@ def main(which: str):
                                  "staying below the closest non-bonded contact of the same element pair "
                                  "(separation_check)", "margin_rel": BOND_MARGIN_REL,
                         "pairs": bond_tab, "separation_check": sep,
+                        "element_pairs": ebond_tab,
+                        "element_pairs_note": "fallback for type pairs with no window (e.g. other force-field "
+                                              "type names); same derivation, keyed by element pair",
                         "separation_ok": all(s["ok"] for s in sep)},
         "overlap": {"measured": "minimum-image distance of non-bonded pairs (all pairs except 1-2 bonds), per element pair (Å)",
                     "derivation": f"d_min = (1-{OVERLAP_MARGIN_REL}) x closest such contact in the references; "
@@ -188,5 +256,5 @@ def main(which: str):
 
 
 if __name__ == "__main__":
-    for w in (sys.argv[1:] or ["pce", "tobermorite", "fixture"]):
+    for w in (sys.argv[1:] or ["pce", "pce_builder", "tobermorite", "fixture"]):
         main(w)

@@ -1,0 +1,583 @@
+[
+  {
+    "model": "c3a_010_surface_hydrated_h2o",
+    "ff": "pcff",
+    "built": true,
+    "natoms": 7773,
+    "file": "data/reference/minerals/c3a_010_surface_hydrated_h2o_pcff.data",
+    "cross_terms_zeroed": true,
+    "verdict": "PASS",
+    "tier_reached": 3,
+    "validate_s": 545.3,
+    "not_pass": [],
+    "first_problem": ""
+  },
+  {
+    "model": "c3a_010_surface_hydrated_h2o",
+    "ff": "cvff",
+    "built": false,
+    "reason": "msi2lmp wrote non-finite parameters for c3a_010_surface_hydrated_h2o (CVFF-INTERFACE (INTERFACE FF 1.5, class I)), refusing:  3        nan   1   2 # oc3-ac1-oc4-hoc; line 62: 4        nan   1   2 # oc4-ac1-oc4-hoc"
+  },
+  {
+    "model": "c3a_010_surface_hydrated_large",
+    "ff": "pcff",
+    "built": true,
+    "natoms": 3816,
+    "file": "data/reference/minerals/c3a_010_surface_hydrated_large_pcff.data",
+    "cross_terms_zeroed": true,
+    "verdict": "PASS",
+    "tier_reached": 3,
+    "validate_s": 259.3,
+    "not_pass": [],
+    "first_problem": ""
+  },
+  {
+    "model": "c3a_010_surface_hydrated_large",
+    "ff": "cvff",
+    "built": false,
+    "reason": "msi2lmp wrote non-finite parameters for c3a_010_surface_hydrated_large (CVFF-INTERFACE (INTERFACE FF 1.5, class I)), refusing:  3        nan   1   2 # oc3-ac1-oc4-hoc; line 56: 4        nan   1   2 # oc4-ac1-oc4-hoc"
+  },
+  {
+    "model": "c3a_010_surface_hydrated_small",
+    "ff": "pcff",
+    "built": true,
+    "natoms": 1272,
+    "file": "data/reference/minerals/c3a_010_surface_hydrated_small_pcff.data",
+    "cross_terms_zeroed": true,
+    "verdict": "PASS",
+    "tier_reached": 3,
+    "validate_s": 0.9,
+    "not_pass": [],
+    "first_problem": ""
+  },
+  {
+    "model": "c3a_010_surface_hydrated_small",
+    "ff": "cvff",
+    "built": false,
+    "reason": "msi2lmp wrote non-finite parameters for c3a_010_surface_hydrated_small (CVFF-INTERFACE (INTERFACE FF 1.5, class I)), refusing:  3        nan   1   2 # oc3-ac1-oc4-hoc; line 56: 4        nan   1   2 # oc4-ac1-oc4-hoc"
+  },
+  {
+    "model": "c3a_010_surface_separated",
+    "ff": "pcff",
+    "built": true,
+    "natoms": 4224,
+    "file": "data/reference/minerals/c3a_010_surface_separated_pcff.data",
+    "cross_terms_zeroed": true,
+    "verdict": "PASS",
+    "tier_reached": 3,
+    "validate_s": 24.8,
+    "not_pass": [],
+    "first_problem": ""
+  },
+  {
+    "model": "c3a_010_surface_separated",
+    "ff": "cvff",
+    "built": true,
+    "natoms": 4224,
+    "file": "data/reference/minerals/c3a_010_surface_separated_cvff.data",
+    "cross_terms_zeroed": false,
+    "verdict": "PASS",
+    "tier_reached": 3,
+    "validate_s": 252.7,
+    "not_pass": [],
+    "first_problem": ""
+  },
+  {
+    "model": "c3a_010_surface_together",
+    "ff": "pcff",
+    "built": true,
+    "natoms": 4224,
+    "file": "data/reference/minerals/c3a_010_surface_together_pcff.data",
+    "cross_terms_zeroed": true,
+    "verdict": "PASS",
+    "tier_reached": 3,
+    "validate_s": 7.3,
+    "not_pass": [],
+    "first_problem": ""
+  },
+  {
+    "model": "c3a_010_surface_together",
+    "ff": "cvff",
+    "built": true,
+    "natoms": 4224,
+    "file": "data/reference/minerals/c3a_010_surface_together_cvff.data",
+    "cross_terms_zeroed": false,
+    "verdict": "PASS",
+    "tier_reached": 3,
+    "validate_s": 70.2,
+    "not_pass": [],
+    "first_problem": ""
+  },
+  {
+    "model": "c3a_unit_cell",
+    "ff": "pcff",
+    "built": true,
+    "natoms": 264,
+    "file": "data/reference/minerals/c3a_unit_cell_pcff.data",
+    "cross_terms_zeroed": true,
+    "verdict": "PASS",
+    "tier_reached": 3,
+    "validate_s": 0.3,
+    "not_pass": [],
+    "first_problem": ""
+  },
+  {
+    "model": "c3a_unit_cell",
+    "ff": "cvff",
+    "built": true,
+    "natoms": 264,
+    "file": "data/reference/minerals/c3a_unit_cell_cvff.data",
+    "cross_terms_zeroed": false,
+    "verdict": "PASS",
+    "tier_reached": 3,
+    "validate_s": 0.2,
+    "not_pass": [],
+    "first_problem": ""
+  },
+  {
+    "model": "c3a_unit_cell_minimized",
+    "ff": "pcff",
+    "built": true,
+    "natoms": 264,
+    "file": "data/reference/minerals/c3a_unit_cell_minimized_pcff.data",
+    "cross_terms_zeroed": true,
+    "verdict": "PASS",
+    "tier_reached": 3,
+    "validate_s": 0.2,
+    "not_pass": [],
+    "first_problem": ""
+  },
+  {
+    "model": "c3a_unit_cell_minimized",
+    "ff": "cvff",
+    "built": true,
+    "natoms": 264,
+    "file": "data/reference/minerals/c3a_unit_cell_minimized_cvff.data",
+    "cross_terms_zeroed": false,
+    "verdict": "PASS",
+    "tier_reached": 3,
+    "validate_s": 0.2,
+    "not_pass": [],
+    "first_problem": ""
+  },
+  {
+    "model": "c3s_040_surface",
+    "ff": "pcff",
+    "built": true,
+    "natoms": 972,
+    "file": "data/reference/minerals/c3s_040_surface_pcff.data",
+    "cross_terms_zeroed": true,
+    "verdict": "PASS",
+    "tier_reached": 3,
+    "validate_s": 0.7,
+    "not_pass": [],
+    "first_problem": ""
+  },
+  {
+    "model": "c3s_040_surface",
+    "ff": "cvff",
+    "built": true,
+    "natoms": 972,
+    "file": "data/reference/minerals/c3s_040_surface_cvff.data",
+    "cross_terms_zeroed": false,
+    "verdict": "PASS",
+    "tier_reached": 3,
+    "validate_s": 630.4,
+    "not_pass": [],
+    "first_problem": ""
+  },
+  {
+    "model": "c3s_040_surface_hydroxylated",
+    "ff": "pcff",
+    "built": true,
+    "natoms": 1080,
+    "file": "data/reference/minerals/c3s_040_surface_hydroxylated_pcff.data",
+    "cross_terms_zeroed": true,
+    "verdict": "PASS",
+    "tier_reached": 3,
+    "validate_s": 0.8,
+    "not_pass": [],
+    "first_problem": ""
+  },
+  {
+    "model": "c3s_040_surface_hydroxylated",
+    "ff": "cvff",
+    "built": true,
+    "natoms": 1080,
+    "file": "data/reference/minerals/c3s_040_surface_hydroxylated_cvff.data",
+    "cross_terms_zeroed": false,
+    "verdict": "PASS",
+    "tier_reached": 3,
+    "validate_s": 0.9,
+    "not_pass": [],
+    "first_problem": ""
+  },
+  {
+    "model": "c3s_rectangular_cell_minimized",
+    "ff": "pcff",
+    "built": true,
+    "natoms": 162,
+    "file": "data/reference/minerals/c3s_rectangular_cell_minimized_pcff.data",
+    "cross_terms_zeroed": true,
+    "verdict": "PASS",
+    "tier_reached": 3,
+    "validate_s": 0.0,
+    "not_pass": [],
+    "first_problem": ""
+  },
+  {
+    "model": "c3s_rectangular_cell_minimized",
+    "ff": "cvff",
+    "built": true,
+    "natoms": 162,
+    "file": "data/reference/minerals/c3s_rectangular_cell_minimized_cvff.data",
+    "cross_terms_zeroed": false,
+    "verdict": "PASS",
+    "tier_reached": 3,
+    "validate_s": 0.0,
+    "not_pass": [],
+    "first_problem": ""
+  },
+  {
+    "model": "c3s_unit_cell",
+    "ff": "pcff",
+    "built": false,
+    "reason": "defective database entry: the .car and .mdf atom lists differ (ND vs CA2); use c3s_unit_cell_minimized"
+  },
+  {
+    "model": "c3s_unit_cell",
+    "ff": "cvff",
+    "built": false,
+    "reason": "defective database entry: the .car and .mdf atom lists differ (ND vs CA2); use c3s_unit_cell_minimized"
+  },
+  {
+    "model": "c3s_unit_cell_minimized",
+    "ff": "pcff",
+    "built": true,
+    "natoms": 54,
+    "file": "data/reference/minerals/c3s_unit_cell_minimized_pcff.data",
+    "cross_terms_zeroed": true,
+    "verdict": "PASS",
+    "tier_reached": 3,
+    "validate_s": 0.0,
+    "not_pass": [],
+    "first_problem": ""
+  },
+  {
+    "model": "c3s_unit_cell_minimized",
+    "ff": "cvff",
+    "built": true,
+    "natoms": 54,
+    "file": "data/reference/minerals/c3s_unit_cell_minimized_cvff.data",
+    "cross_terms_zeroed": false,
+    "verdict": "PASS",
+    "tier_reached": 3,
+    "validate_s": 0.0,
+    "not_pass": [],
+    "first_problem": ""
+  },
+  {
+    "model": "ettr_008_surface",
+    "ff": "pcff",
+    "built": true,
+    "natoms": 4096,
+    "file": "data/reference/minerals/ettr_008_surface_pcff.data",
+    "cross_terms_zeroed": true,
+    "verdict": "PASS",
+    "tier_reached": 3,
+    "validate_s": 278.0,
+    "not_pass": [],
+    "first_problem": ""
+  },
+  {
+    "model": "ettr_008_surface",
+    "ff": "cvff",
+    "built": false,
+    "reason": "CVFF-INTERFACE (INTERFACE FF 1.5, class I) lacks parameters for ettr_008_surface (refusing to write zeros):  Unable to find angle data for ac2 oc10 hoc; Unable to find angle data for ac2 oc5 hoc; Unable to find angle data for ac"
+  },
+  {
+    "model": "ettr_200_surface",
+    "ff": "pcff",
+    "built": true,
+    "natoms": 4096,
+    "file": "data/reference/minerals/ettr_200_surface_pcff.data",
+    "cross_terms_zeroed": true,
+    "verdict": "PASS",
+    "tier_reached": 3,
+    "validate_s": 922.5,
+    "not_pass": [],
+    "first_problem": ""
+  },
+  {
+    "model": "ettr_200_surface",
+    "ff": "cvff",
+    "built": false,
+    "reason": "CVFF-INTERFACE (INTERFACE FF 1.5, class I) lacks parameters for ettr_200_surface (refusing to write zeros):  Unable to find angle data for ac2 oc10 hoc; Unable to find angle data for ac2 oc5 hoc; Unable to find angle data for ac"
+  },
+  {
+    "model": "ettr_rectangular_cell",
+    "ff": "pcff",
+    "built": true,
+    "natoms": 512,
+    "file": "data/reference/minerals/ettr_rectangular_cell_pcff.data",
+    "cross_terms_zeroed": true,
+    "verdict": "PASS",
+    "tier_reached": 3,
+    "validate_s": 0.2,
+    "not_pass": [],
+    "first_problem": ""
+  },
+  {
+    "model": "ettr_rectangular_cell",
+    "ff": "cvff",
+    "built": false,
+    "reason": "CVFF-INTERFACE (INTERFACE FF 1.5, class I) lacks parameters for ettr_rectangular_cell (refusing to write zeros):  Unable to find angle data for ac2 oc10 hoc; Unable to find angle data for ac2 oc5 hoc; Unable to find angle data for ac"
+  },
+  {
+    "model": "ettr_unit_cell",
+    "ff": "pcff",
+    "built": true,
+    "natoms": 256,
+    "file": "data/reference/minerals/ettr_unit_cell_pcff.data",
+    "cross_terms_zeroed": true,
+    "verdict": "PASS",
+    "tier_reached": 3,
+    "validate_s": 0.1,
+    "not_pass": [],
+    "first_problem": ""
+  },
+  {
+    "model": "ettr_unit_cell",
+    "ff": "cvff",
+    "built": false,
+    "reason": "CVFF-INTERFACE (INTERFACE FF 1.5, class I) lacks parameters for ettr_unit_cell (refusing to write zeros):  Unable to find angle data for ac2 oc10 hoc; Unable to find angle data for ac2 oc5 hoc; Unable to find angle data for ac"
+  },
+  {
+    "model": "monosulfate_002_surface",
+    "ff": "pcff",
+    "built": true,
+    "natoms": 424,
+    "file": "data/reference/minerals/monosulfate_002_surface_pcff.data",
+    "cross_terms_zeroed": true,
+    "verdict": "PASS",
+    "tier_reached": 3,
+    "validate_s": 0.2,
+    "not_pass": [],
+    "first_problem": ""
+  },
+  {
+    "model": "monosulfate_002_surface",
+    "ff": "cvff",
+    "built": false,
+    "reason": "CVFF-INTERFACE (INTERFACE FF 1.5, class I) lacks parameters for monosulfate_002_surface (refusing to write zeros):  Unable to find angle data for ac3 oc16 hoy; Unable to find angle data for ac3 oc17 hoy; Unable to find angle data for a"
+  },
+  {
+    "model": "monosulfate_cell_221",
+    "ff": "pcff",
+    "built": true,
+    "natoms": 318,
+    "file": "data/reference/minerals/monosulfate_cell_221_pcff.data",
+    "cross_terms_zeroed": true,
+    "verdict": "PASS",
+    "tier_reached": 3,
+    "validate_s": 0.1,
+    "not_pass": [],
+    "first_problem": ""
+  },
+  {
+    "model": "monosulfate_cell_221",
+    "ff": "cvff",
+    "built": false,
+    "reason": "CVFF-INTERFACE (INTERFACE FF 1.5, class I) lacks parameters for monosulfate_cell_221 (refusing to write zeros):  Unable to find angle data for ac3 oc16 hoy; Unable to find angle data for ac3 oc17 hoy; Unable to find angle data for a"
+  },
+  {
+    "model": "monosulfate_rectangular_cell_421",
+    "ff": "pcff",
+    "built": true,
+    "natoms": 636,
+    "file": "data/reference/minerals/monosulfate_rectangular_cell_421_pcff.data",
+    "cross_terms_zeroed": true,
+    "verdict": "PASS",
+    "tier_reached": 3,
+    "validate_s": 0.2,
+    "not_pass": [],
+    "first_problem": ""
+  },
+  {
+    "model": "monosulfate_rectangular_cell_421",
+    "ff": "cvff",
+    "built": false,
+    "reason": "CVFF-INTERFACE (INTERFACE FF 1.5, class I) lacks parameters for monosulfate_rectangular_cell_421 (refusing to write zeros):  Unable to find angle data for ac3 oc16 hoy; Unable to find angle data for ac3 oc17 hoy; Unable to find angle data for a"
+  },
+  {
+    "model": "tob11_004_surface",
+    "ff": "pcff",
+    "built": true,
+    "natoms": 1584,
+    "file": "data/reference/minerals/tob11_004_surface_pcff.data",
+    "cross_terms_zeroed": true,
+    "verdict": "PASS",
+    "tier_reached": 3,
+    "validate_s": 1.3,
+    "not_pass": [],
+    "first_problem": ""
+  },
+  {
+    "model": "tob11_004_surface",
+    "ff": "cvff",
+    "built": false,
+    "reason": "CVFF-INTERFACE (INTERFACE FF 1.5, class I) lacks parameters for tob11_004_surface (refusing to write zeros):  Unable to find angle data for oc12 sc2 oc12; Unable to find angle data for oc12 sc2 oc13; Unable to find angle data for"
+  },
+  {
+    "model": "tob11_100_surface",
+    "ff": "pcff",
+    "built": true,
+    "natoms": 1539,
+    "file": "data/reference/minerals/tob11_100_surface_pcff.data",
+    "cross_terms_zeroed": true,
+    "verdict": "PASS",
+    "tier_reached": 3,
+    "validate_s": 1.7,
+    "not_pass": [],
+    "first_problem": ""
+  },
+  {
+    "model": "tob11_100_surface",
+    "ff": "cvff",
+    "built": false,
+    "reason": "CVFF-INTERFACE (INTERFACE FF 1.5, class I) lacks parameters for tob11_100_surface (refusing to write zeros):  Unable to find angle data for oc12 sc2 oc12; Unable to find angle data for oc12 sc2 oc13; Unable to find angle data for"
+  },
+  {
+    "model": "tob11_rectangular_cell",
+    "ff": "pcff",
+    "built": true,
+    "natoms": 176,
+    "file": "data/reference/minerals/tob11_rectangular_cell_pcff.data",
+    "cross_terms_zeroed": true,
+    "verdict": "PASS",
+    "tier_reached": 3,
+    "validate_s": 0.1,
+    "not_pass": [],
+    "first_problem": ""
+  },
+  {
+    "model": "tob11_rectangular_cell",
+    "ff": "cvff",
+    "built": false,
+    "reason": "CVFF-INTERFACE (INTERFACE FF 1.5, class I) lacks parameters for tob11_rectangular_cell (refusing to write zeros):  Unable to find angle data for oc12 sc2 oc12; Unable to find angle data for oc12 sc2 oc13; Unable to find angle data for"
+  },
+  {
+    "model": "tob11_unit_cell",
+    "ff": "pcff",
+    "built": true,
+    "natoms": 88,
+    "file": "data/reference/minerals/tob11_unit_cell_pcff.data",
+    "cross_terms_zeroed": true,
+    "verdict": "PASS",
+    "tier_reached": 3,
+    "validate_s": 0.1,
+    "not_pass": [],
+    "first_problem": ""
+  },
+  {
+    "model": "tob11_unit_cell",
+    "ff": "cvff",
+    "built": false,
+    "reason": "CVFF-INTERFACE (INTERFACE FF 1.5, class I) lacks parameters for tob11_unit_cell (refusing to write zeros):  Unable to find angle data for oc12 sc2 oc12; Unable to find angle data for oc12 sc2 oc13; Unable to find angle data for"
+  },
+  {
+    "model": "tob14_001_surface",
+    "ff": "pcff",
+    "built": true,
+    "natoms": 1248,
+    "file": "data/reference/minerals/tob14_001_surface_pcff.data",
+    "cross_terms_zeroed": true,
+    "verdict": "PASS",
+    "tier_reached": 3,
+    "validate_s": 180.8,
+    "not_pass": [],
+    "first_problem": ""
+  },
+  {
+    "model": "tob14_001_surface",
+    "ff": "cvff",
+    "built": false,
+    "reason": "CVFF-INTERFACE (INTERFACE FF 1.5, class I) lacks parameters for tob14_001_surface (refusing to write zeros):  Unable to find angle data for oc12 sc2 oc12; Unable to find angle data for oc12 sc2 oc13; Unable to find angle data for"
+  },
+  {
+    "model": "tob14_004_surface",
+    "ff": "pcff",
+    "built": true,
+    "natoms": 1248,
+    "file": "data/reference/minerals/tob14_004_surface_pcff.data",
+    "cross_terms_zeroed": true,
+    "verdict": "PASS",
+    "tier_reached": 3,
+    "validate_s": 0.9,
+    "not_pass": [],
+    "first_problem": ""
+  },
+  {
+    "model": "tob14_004_surface",
+    "ff": "cvff",
+    "built": false,
+    "reason": "CVFF-INTERFACE (INTERFACE FF 1.5, class I) lacks parameters for tob14_004_surface (refusing to write zeros):  Unable to find angle data for oc12 sc2 oc12; Unable to find angle data for oc12 sc2 oc13; Unable to find angle data for"
+  },
+  {
+    "model": "tob14_100_surface",
+    "ff": "pcff",
+    "built": true,
+    "natoms": 1248,
+    "file": "data/reference/minerals/tob14_100_surface_pcff.data",
+    "cross_terms_zeroed": true,
+    "verdict": "PASS",
+    "tier_reached": 3,
+    "validate_s": 0.7,
+    "not_pass": [],
+    "first_problem": ""
+  },
+  {
+    "model": "tob14_100_surface",
+    "ff": "cvff",
+    "built": false,
+    "reason": "CVFF-INTERFACE (INTERFACE FF 1.5, class I) lacks parameters for tob14_100_surface (refusing to write zeros):  Unable to find angle data for oc12 sc2 oc12; Unable to find angle data for oc12 sc2 oc13; Unable to find angle data for"
+  },
+  {
+    "model": "tob14_avg_cell",
+    "ff": "pcff",
+    "built": true,
+    "natoms": 104,
+    "file": "data/reference/minerals/tob14_avg_cell_pcff.data",
+    "cross_terms_zeroed": true,
+    "verdict": "PASS",
+    "tier_reached": 3,
+    "validate_s": 0.0,
+    "not_pass": [],
+    "first_problem": ""
+  },
+  {
+    "model": "tob14_avg_cell",
+    "ff": "cvff",
+    "built": false,
+    "reason": "CVFF-INTERFACE (INTERFACE FF 1.5, class I) lacks parameters for tob14_avg_cell (refusing to write zeros):  Unable to find angle data for oc12 sc2 oc12; Unable to find angle data for oc12 sc2 oc13; Unable to find angle data for"
+  },
+  {
+    "model": "tob14_avg_rectangular_cell",
+    "ff": "pcff",
+    "built": true,
+    "natoms": 208,
+    "file": "data/reference/minerals/tob14_avg_rectangular_cell_pcff.data",
+    "cross_terms_zeroed": true,
+    "verdict": "PASS",
+    "tier_reached": 3,
+    "validate_s": 0.0,
+    "not_pass": [],
+    "first_problem": ""
+  },
+  {
+    "model": "tob14_avg_rectangular_cell",
+    "ff": "cvff",
+    "built": false,
+    "reason": "CVFF-INTERFACE (INTERFACE FF 1.5, class I) lacks parameters for tob14_avg_rectangular_cell (refusing to write zeros):  Unable to find angle data for oc12 sc2 oc12; Unable to find angle data for oc12 sc2 oc13; Unable to find angle data for"
+  }
+]

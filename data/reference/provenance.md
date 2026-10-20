@@ -4,7 +4,8 @@ Version 0.5 (2026-10-19). Change from v0.4: **published-model references REF-05.
 
 ## STATUS (v0.5)
 - **Primary references — REF-05..REF-08 (tobermorite): PUBLISHED MODEL + DOCUMENTED PIPELINE + SELF-GENERATED EVIDENCE; supervisor confirmation pending.** They stand in for group production files, which are not available (SPEC §7.8). See §B2.
-- **Secondary — REF-01..REF-04 (PCE, EMC): CANDIDATES; trust not established** (unchanged from v0.4, below). Kept as a regression set.
+- **REF-01..REF-04 (PCE, EMC):** identified by the supervisor on 2026-10-20 as the group's PCE data ("PCE files have data"). They are the references for the PCE system class; `builders/pce.py` reproduces their composition and full topology counts exactly (`docs/PCE_BUILDER.md`). Production-use evidence is still not recorded.
+- **Mineral references (v0.6):** every INTERFACE cement-mineral model in each supported force field, `data/reference/minerals/` (`docs/MINERALS.md`). Contact sources (geometry only, not simulation inputs): `data/reference/contact_sources/` (montmorillonite Na⁺/K⁺, built with out-of-plane terms missing, `simulation_ready: false`).
 
 The files below were found in `UGRP/PCEs/` and copied here read-only (`chmod 444`), with SHA-256 checksums in their sidecars (`REF-0x.json`). Everything stated is read from the files themselves. **Creator, responsible person and production-use evidence are not recorded anywhere in the folder**, so none of them qualifies as an oracle under SPEC §7.8 yet. They are used as positive controls, calibration sources (status PROVISIONAL) and parents for the negative controls.
 

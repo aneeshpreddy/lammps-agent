@@ -1,0 +1,39 @@
+{
+  "name": "c3a_010_surface_hydrated_large_pcff",
+  "model": "c3a_010_surface_hydrated_large",
+  "model_dir": "CEMENT_MINERALS",
+  "model_sha256": {
+    "car": "9b3a525b4692866e523f664f982c647830727acb2c4e5f7f6310579274b2e4e3",
+    "mdf": "8b6bce0f9ff75b930e51a6cdcdbb755a3e074f03a212c74308d877b34ade3177"
+  },
+  "supercell": [
+    1,
+    1,
+    1
+  ],
+  "force_field": "PCFF-INTERFACE (INTERFACE FF 1.5, class II)",
+  "frc_sha256": "3ad5a1be7334c646ed6cb813b769d0e89a1aa03fe695013e940626b7df922693",
+  "lammps": "LAMMPS (22 Jul 2025 - Update 6)",
+  "tilt_reduction": {
+    "k": 0,
+    "m": 0,
+    "n": 0
+  },
+  "tilt_reduced_after_supercell": false,
+  "comments_restored": 25,
+  "natoms": 3816,
+  "data_file": "/Users/ani.bob/Downloads/UGRP/lammps-agent/data/reference/minerals/c3a_010_surface_hydrated_large_pcff.data",
+  "data_sha256": "2af8fd6a3735c7584787b8a961eeba1f43d7ceb713444f8c6a8f2f0157b9bf4b",
+  "missing_kinds": [
+    "angleangle",
+    "angleangledihedral",
+    "angledihedral",
+    "bondangle",
+    "bondbond",
+    "endbonddihedral",
+    "midbonddihedral"
+  ],
+  "cross_terms_zeroed": true,
+  "allowed_missing_kinds": [],
+  "simulation_ready": true
+}

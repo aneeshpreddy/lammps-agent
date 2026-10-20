@@ -1,0 +1,4 @@
+{"name": "tpeg_aa18_s6_n30_gradient",
+ "description": "TPEG-type PCE: isoprenyl-ether PEG (spacer 2, alpha-methyl, 30 EO) with acrylic acid 3:1, gradient sequence, Ca2+.",
+ "n_side_chains": 6, "n_acid": 18, "side_chain_length": 30, "anchor": "TPEG", "acid": "acrylic",
+ "side_chain_end": "OH", "sequence": "gradient", "counterion": "Ca2+", "force_field": "pcff", "seed": 5}

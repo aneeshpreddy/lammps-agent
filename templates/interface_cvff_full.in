@@ -1,0 +1,22 @@
+# Tier 3b — full force-field acceptance (PROPERTIES P3.2) for CVFF-INTERFACE (class I) files written by
+# msi2lmp (coefficients inside the DATA FILE). Styles follow LAMMPS's msi2lmp class I examples
+# (tools/msi2lmp/test/in.crambin-class1). special_bonds: CVFF/PCFF include 1-4 non-bonded terms in full
+# [verify against the INTERFACE/CVFF documentation]. The kspace line comes from tier3.kspace.
+units           real
+atom_style      full
+boundary        {boundary}
+
+pair_style      lj/cut/coul/long 9.5
+bond_style      harmonic
+angle_style     harmonic
+dihedral_style  harmonic
+improper_style  cvff
+special_bonds   lj/coul 0 0 1
+
+read_data       {datafile}
+
+{kspace}
+
+thermo_style    custom step pe ke etotal evdwl ecoul elong ebond eangle edihed eimp press
+thermo_modify   norm no
+run             0

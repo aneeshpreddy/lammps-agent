@@ -2,7 +2,7 @@
   "calibration_id": "pce_emc",
   "version": 1,
   "status": "PROVISIONAL",
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "derivation_version": "calibrate.py v1 (2026-10-16)",
   "references": [
     {
@@ -279,6 +279,37 @@
         "ok": true
       }
     ],
+    "element_pairs": {
+      "C|C": {
+        "n": 768,
+        "min": 1.40317,
+        "max": 1.74654,
+        "lo": 1.2628,
+        "hi": 1.9212
+      },
+      "C|H": {
+        "n": 2414,
+        "min": 0.99688,
+        "max": 1.22656,
+        "lo": 0.8972,
+        "hi": 1.3492
+      },
+      "C|O": {
+        "n": 1232,
+        "min": 1.13991,
+        "max": 1.57111,
+        "lo": 1.0259,
+        "hi": 1.7282
+      },
+      "H|O": {
+        "n": 37,
+        "min": 0.89948,
+        "max": 1.0018,
+        "lo": 0.8095,
+        "hi": 1.102
+      }
+    },
+    "element_pairs_note": "fallback for type pairs with no window (e.g. other force-field type names); same derivation, keyed by element pair",
     "separation_ok": true
   },
   "overlap": {

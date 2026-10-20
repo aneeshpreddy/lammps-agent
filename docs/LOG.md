@@ -253,3 +253,27 @@ No work is recorded for 5–15 October; everything below was done on 2026-10-16.
 
 ### Hours
 - To be filled by project owner.
+
+---
+
+## 2026-10-20 — Supervisor directive: PCE of any architecture + all minerals, class I and class II (AI-assisted)
+
+### Done
+- Supervisor message recorded verbatim (SPEC v0.6 §7.16). Decisions B and C now DECIDED: PCE (any architecture) + all INTERFACE cement minerals; CVFF-INTERFACE (class I) and PCFF-INTERFACE (class II).
+- **`builders/pce.py`**: PCE architecture JSON → typed, charged (force-field bond increments), 3D-grown, relaxed molecule → msi2lmp → LAMMPS DATA FILE. Acid (acrylic/methacrylic, protonated or not), maleic, ester-PEG (MPEG), ether-PEG (APEG/HPEG/TPEG/VPEG), any side-chain length/end group, sequence random/alternating/block/gradient/explicit, any number of chains, Na⁺/K⁺/Ca²⁺. INTERFACE PEO types for ester PEG in PCFF.
+- **Cross-check:** rebuilding the group's EMC architectures reproduces REF-01..04 exactly (composition and atoms/bonds/angles/dihedrals/impropers). PCFF charges for backbone and carboxylate equal EMC's to 4 decimals.
+- **`builders/minerals.py`**: any INTERFACE model, any supercell, either force field. 35/35 mineral references PASS (27 PCFF, 8 CVFF); CVFF unavailable for tobermorite, ettringite, monosulfate (no parameters) and hydrated C3A (msi2lmp NaN).
+- 20/20 example PCEs (10 architectures × 2 force fields) PASS every tier (`docs/PCE_BUILDER.md`).
+- Validator: P1.7 conditional sections, P2.4 element-pair fallback, .frc element tables, ion contact floors from published structures, class I improper rule. 98 unit tests.
+- Findings 12–15 in FAILURE_MODES §9.6.
+
+### Not Done
+- Eval set still tobermorite-only: to be revised for PCE + minerals with a position-free PCE equivalence (METRICS.md, 22 Oct).
+- PCE–mineral interface systems (combined builds) not attempted.
+- Confirm with the supervisor what "main chains" means (read as number of chains and backbone length).
+
+### Tomorrow
+- Revise the eval set (PCE architectures in both force fields + minerals), then split and METRICS.md.
+
+### Hours
+- To be filled by project owner.

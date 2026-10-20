@@ -10,3 +10,4 @@ log.lammps
 data/corrupted/*.data
 data/converted/
 build/
+data/generated/

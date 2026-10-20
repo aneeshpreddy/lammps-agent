@@ -1,0 +1,5 @@
+{"name": "olig_test",
+ "monomers": {"A": {"kind": "acid", "alpha_methyl": false, "deprotonated": true},
+              "E": {"kind": "ester_peg", "alpha_methyl": false, "eo_units": 3, "end": "OH"}},
+ "composition": {"A": 2, "E": 2}, "sequence": "alternating", "end_groups": ["CH3", "CH3"],
+ "n_chains": 1, "counterion": "Ca2+", "box": {"padding": 10.0}, "force_field": "pcff", "seed": 7}

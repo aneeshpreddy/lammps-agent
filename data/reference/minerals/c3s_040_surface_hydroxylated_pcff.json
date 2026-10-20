@@ -1,0 +1,46 @@
+{
+  "id": "c3s_040_surface_hydroxylated_pcff",
+  "role": "REFERENCE_PUBLISHED_MODEL",
+  "file": "data/reference/minerals/c3s_040_surface_hydroxylated_pcff.data",
+  "sha256": "7c21d64ef40a18a14350496f9db19a1291b44af3234938fd7259ed9f96cc1b53",
+  "declared_config": "configs/interface_pcff_minerals.yaml",
+  "overrides": {
+    "density_family": "surface",
+    "box_kind": "any"
+  },
+  "trust_status": "PUBLISHED MODEL (INTERFACE FF 1.5) + documented pipeline; supervisor confirmation pending",
+  "build": {
+    "name": "c3s_040_surface_hydroxylated_pcff",
+    "model": "c3s_040_surface_hydroxylated",
+    "model_dir": "CEMENT_MINERALS",
+    "model_sha256": {
+      "car": "58ba26f0fd9ff50af12801f383b02d847e22ef05866d2eaab1bf9dea382aacc6",
+      "mdf": "c9162f67cdb2419316dd27e137555bf630d6872a8a558a0bf0c2ff8551a8d486"
+    },
+    "supercell": [
+      1,
+      1,
+      1
+    ],
+    "force_field": "PCFF-INTERFACE (INTERFACE FF 1.5, class II)",
+    "frc_sha256": "3ad5a1be7334c646ed6cb813b769d0e89a1aa03fe695013e940626b7df922693",
+    "lammps": "LAMMPS (22 Jul 2025 - Update 6)",
+    "tilt_reduction": {
+      "k": 0,
+      "m": 0,
+      "n": 0
+    },
+    "tilt_reduced_after_supercell": false,
+    "comments_restored": 15,
+    "natoms": 1080,
+    "data_sha256": "7c21d64ef40a18a14350496f9db19a1291b44af3234938fd7259ed9f96cc1b53",
+    "missing_kinds": [
+      "angleangle",
+      "bondangle",
+      "bondbond"
+    ],
+    "cross_terms_zeroed": true,
+    "allowed_missing_kinds": [],
+    "simulation_ready": true
+  }
+}

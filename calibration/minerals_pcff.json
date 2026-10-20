@@ -1,0 +1,1115 @@
+{
+  "calibration_id": "minerals_pcff",
+  "version": 1,
+  "status": "PROVISIONAL_DEFAULT",
+  "date": "2026-10-20",
+  "derivation_version": "calibrate.py v1 (2026-10-16)",
+  "references": [
+    {
+      "id": "c3a_010_surface_hydrated_h2o_pcff",
+      "file": "data/reference/minerals/c3a_010_surface_hydrated_h2o_pcff.data",
+      "sha256": "c6ed14509154b5cd634985e9c7f22022c3dfda44f3d7898ddd3b7f824da68d65",
+      "family": "surface"
+    },
+    {
+      "id": "c3a_010_surface_hydrated_large_pcff",
+      "file": "data/reference/minerals/c3a_010_surface_hydrated_large_pcff.data",
+      "sha256": "2af8fd6a3735c7584787b8a961eeba1f43d7ceb713444f8c6a8f2f0157b9bf4b",
+      "family": "surface"
+    },
+    {
+      "id": "c3a_010_surface_hydrated_small_pcff",
+      "file": "data/reference/minerals/c3a_010_surface_hydrated_small_pcff.data",
+      "sha256": "0c30b2634fe38819b856b9a0801242116ce64334ece978763bbd80f092f00636",
+      "family": "surface"
+    },
+    {
+      "id": "c3a_010_surface_separated_pcff",
+      "file": "data/reference/minerals/c3a_010_surface_separated_pcff.data",
+      "sha256": "bbddf7328cfc1bd639ec28c84646ca8826ffe8a2e4368094bd89247438b47ae7",
+      "family": "surface"
+    },
+    {
+      "id": "c3a_010_surface_together_pcff",
+      "file": "data/reference/minerals/c3a_010_surface_together_pcff.data",
+      "sha256": "f54d6504444c6f6cfcea992a28999d27daeba100b2b24c0192ae6b09c14675aa",
+      "family": "surface"
+    },
+    {
+      "id": "c3a_unit_cell_minimized_pcff",
+      "file": "data/reference/minerals/c3a_unit_cell_minimized_pcff.data",
+      "sha256": "667c54781c943c71efb7348f7408f58e8be9bc842d8c6f6f109974bbffa81a8b",
+      "family": "c3a_unit_cell_minimized"
+    },
+    {
+      "id": "c3a_unit_cell_pcff",
+      "file": "data/reference/minerals/c3a_unit_cell_pcff.data",
+      "sha256": "bd90a77ad47eaf2a801d5a2ce8d978bf31c25576913cd9d48860a199221a1424",
+      "family": "c3a_unit_cell"
+    },
+    {
+      "id": "c3s_040_surface_hydroxylated_pcff",
+      "file": "data/reference/minerals/c3s_040_surface_hydroxylated_pcff.data",
+      "sha256": "7c21d64ef40a18a14350496f9db19a1291b44af3234938fd7259ed9f96cc1b53",
+      "family": "surface"
+    },
+    {
+      "id": "c3s_040_surface_pcff",
+      "file": "data/reference/minerals/c3s_040_surface_pcff.data",
+      "sha256": "c37a00807195ad8d6407be8d1b2692a502a2235529dc614ab9741250ecd37bcf",
+      "family": "surface"
+    },
+    {
+      "id": "c3s_rectangular_cell_minimized_pcff",
+      "file": "data/reference/minerals/c3s_rectangular_cell_minimized_pcff.data",
+      "sha256": "db2c4ea3e9ebfd818642940c010c6a84b2cc0dabca30b91f6df77ca896482ab2",
+      "family": "c3s_rectangular_cell_minimized"
+    },
+    {
+      "id": "c3s_unit_cell_minimized_pcff",
+      "file": "data/reference/minerals/c3s_unit_cell_minimized_pcff.data",
+      "sha256": "07713482cd7234025d0fdda3dcca83fc1d70f778b5ec15454f2822b16ae7a031",
+      "family": "c3s_unit_cell_minimized"
+    },
+    {
+      "id": "ettr_008_surface_pcff",
+      "file": "data/reference/minerals/ettr_008_surface_pcff.data",
+      "sha256": "425b98dd52f175ab9783a790dda8c7ce9205793cf3e7fb7fd36b9c32507bbe7f",
+      "family": "surface"
+    },
+    {
+      "id": "ettr_200_surface_pcff",
+      "file": "data/reference/minerals/ettr_200_surface_pcff.data",
+      "sha256": "d870b324c6e19774f8644e34493417cab54649945da43a9973168aa61d609a1f",
+      "family": "surface"
+    },
+    {
+      "id": "ettr_rectangular_cell_pcff",
+      "file": "data/reference/minerals/ettr_rectangular_cell_pcff.data",
+      "sha256": "a4fa1c915c8cd2bdc93069b5ecc7a2011c21d29bd1d46777e6c16d0e1717e72f",
+      "family": "ettr_rectangular_cell"
+    },
+    {
+      "id": "ettr_unit_cell_pcff",
+      "file": "data/reference/minerals/ettr_unit_cell_pcff.data",
+      "sha256": "03907ca1b512d705031c48d3de943465eb73a6305220b0285d22c944253792f8",
+      "family": "ettr_unit_cell"
+    },
+    {
+      "id": "monosulfate_002_surface_pcff",
+      "file": "data/reference/minerals/monosulfate_002_surface_pcff.data",
+      "sha256": "c32e09cab13bd713d2004fc93ef37a1e1aa4101e41ac65e092b5562d17796b19",
+      "family": "surface"
+    },
+    {
+      "id": "monosulfate_cell_221_pcff",
+      "file": "data/reference/minerals/monosulfate_cell_221_pcff.data",
+      "sha256": "9bd9a50f606255829b0a46564fc1b7fd0ac6d0ab1a7d551b84632a78cfb2fa9e",
+      "family": "monosulfate_cell_221"
+    },
+    {
+      "id": "monosulfate_rectangular_cell_421_pcff",
+      "file": "data/reference/minerals/monosulfate_rectangular_cell_421_pcff.data",
+      "sha256": "a76dfac75877d7a901b898306d622c488bb245015113e40d5125f73c144286e4",
+      "family": "monosulfate_rectangular_cell_421"
+    },
+    {
+      "id": "tob11_004_surface_pcff",
+      "file": "data/reference/minerals/tob11_004_surface_pcff.data",
+      "sha256": "1a2fa9bbb1f81c795bead1a4179e7ef1245798db28ce0d3a8ad779626ce89395",
+      "family": "surface"
+    },
+    {
+      "id": "tob11_100_surface_pcff",
+      "file": "data/reference/minerals/tob11_100_surface_pcff.data",
+      "sha256": "7fdabae618ffc1f2420490e112d866c7637134e7bb894e59bb4e1a6830d71e7e",
+      "family": "surface"
+    },
+    {
+      "id": "tob11_rectangular_cell_pcff",
+      "file": "data/reference/minerals/tob11_rectangular_cell_pcff.data",
+      "sha256": "b26aab429dedb105f0ca672a837ced32d8126ada5420e021dc1f46646b3b46d8",
+      "family": "tob11_rectangular_cell"
+    },
+    {
+      "id": "tob11_unit_cell_pcff",
+      "file": "data/reference/minerals/tob11_unit_cell_pcff.data",
+      "sha256": "3a13e72ab3695d5e64eaaeafc49efd920d87e74cd52993093b762009a703e928",
+      "family": "tob11_unit_cell"
+    },
+    {
+      "id": "tob14_001_surface_pcff",
+      "file": "data/reference/minerals/tob14_001_surface_pcff.data",
+      "sha256": "d7584deda08a60bc12132f3f224ecde5fe875305285a971a375ca568c4afde87",
+      "family": "surface"
+    },
+    {
+      "id": "tob14_004_surface_pcff",
+      "file": "data/reference/minerals/tob14_004_surface_pcff.data",
+      "sha256": "40c7ba81ba5f9e7418264d7c5c38e92c6e79e1ff35a8d74a5fa644af9422fc42",
+      "family": "surface"
+    },
+    {
+      "id": "tob14_100_surface_pcff",
+      "file": "data/reference/minerals/tob14_100_surface_pcff.data",
+      "sha256": "5d169c2b808cc42cb2080c9717979d993cadf729a722c17d9b5cd1319eed6bdf",
+      "family": "surface"
+    },
+    {
+      "id": "tob14_avg_cell_pcff",
+      "file": "data/reference/minerals/tob14_avg_cell_pcff.data",
+      "sha256": "cf7759d28dfce4ee600f3598ffa84239b0e1816ee61d5db581b97c0a3ebe09a7",
+      "family": "tob14_avg_cell"
+    },
+    {
+      "id": "tob14_avg_rectangular_cell_pcff",
+      "file": "data/reference/minerals/tob14_avg_rectangular_cell_pcff.data",
+      "sha256": "2430f7d98b0ff400053437d1950a4555867e1ced377ac52e9ca30df181604222",
+      "family": "tob14_avg_rectangular_cell"
+    }
+  ],
+  "contact_sources": [],
+  "bond_length": {
+    "measured": "minimum-image bond length per atom-type-name pair (\u00c5)",
+    "derivation": "[min x (1-0.1), max x (1+0.1)] over the references",
+    "basis": "references show a spread of sd \u2248 3 % of the bond length around the FF r0; a 10 % widening beyond the observed extremes admits re-built or relaxed geometries while staying below the closest non-bonded contact of the same element pair (separation_check)",
+    "margin_rel": 0.1,
+    "pairs": {
+      "ac1|oc3": {
+        "n": 5568,
+        "min": 1.6089,
+        "max": 1.96025,
+        "mean": 1.75842,
+        "sd": 0.04059,
+        "lo": 1.448,
+        "hi": 2.1563
+      },
+      "ac1|oc4": {
+        "n": 5568,
+        "min": 1.58054,
+        "max": 1.91346,
+        "mean": 1.74431,
+        "sd": 0.03767,
+        "lo": 1.4225,
+        "hi": 2.1048
+      },
+      "ac2|oc10": {
+        "n": 140,
+        "min": 1.80607,
+        "max": 1.91288,
+        "mean": 1.90746,
+        "sd": 0.0215,
+        "lo": 1.6255,
+        "hi": 2.1042
+      },
+      "ac2|oc5": {
+        "n": 140,
+        "min": 1.90939,
+        "max": 2.00656,
+        "mean": 1.9154,
+        "sd": 0.01994,
+        "lo": 1.7184,
+        "hi": 2.2072
+      },
+      "ac2|oc6": {
+        "n": 140,
+        "min": 1.90643,
+        "max": 2.00656,
+        "mean": 1.91444,
+        "sd": 0.02028,
+        "lo": 1.7158,
+        "hi": 2.2072
+      },
+      "ac2|oc7": {
+        "n": 140,
+        "min": 1.90643,
+        "max": 2.00656,
+        "mean": 1.91438,
+        "sd": 0.02029,
+        "lo": 1.7158,
+        "hi": 2.2072
+      },
+      "ac2|oc8": {
+        "n": 140,
+        "min": 1.80607,
+        "max": 1.91265,
+        "mean": 1.90745,
+        "sd": 0.02149,
+        "lo": 1.6255,
+        "hi": 2.1039
+      },
+      "ac2|oc9": {
+        "n": 140,
+        "min": 1.8061,
+        "max": 1.91288,
+        "mean": 1.90755,
+        "sd": 0.02152,
+        "lo": 1.6255,
+        "hi": 2.1042
+      },
+      "ac3|oc16": {
+        "n": 52,
+        "min": 1.9053,
+        "max": 1.90531,
+        "mean": 1.9053,
+        "sd": 0.0,
+        "lo": 1.7148,
+        "hi": 2.0958
+      },
+      "ac3|oc17": {
+        "n": 52,
+        "min": 1.9053,
+        "max": 1.9053,
+        "mean": 1.9053,
+        "sd": 0.0,
+        "lo": 1.7148,
+        "hi": 2.0958
+      },
+      "ac3|oc18": {
+        "n": 52,
+        "min": 1.9053,
+        "max": 1.90531,
+        "mean": 1.9053,
+        "sd": 0.0,
+        "lo": 1.7148,
+        "hi": 2.0958
+      },
+      "ac3|oc19": {
+        "n": 52,
+        "min": 1.9053,
+        "max": 1.9053,
+        "mean": 1.9053,
+        "sd": 0.0,
+        "lo": 1.7148,
+        "hi": 2.0958
+      },
+      "ac3|oc20": {
+        "n": 52,
+        "min": 1.9053,
+        "max": 1.9053,
+        "mean": 1.9053,
+        "sd": 0.0,
+        "lo": 1.7148,
+        "hi": 2.0958
+      },
+      "ac3|oc21": {
+        "n": 52,
+        "min": 1.9053,
+        "max": 1.90531,
+        "mean": 1.9053,
+        "sd": 0.0,
+        "lo": 1.7148,
+        "hi": 2.0958
+      },
+      "h*|o*": {
+        "n": 9420,
+        "min": 0.9027,
+        "max": 1.10528,
+        "mean": 0.98826,
+        "sd": 0.02032,
+        "lo": 0.8124,
+        "hi": 1.2158
+      },
+      "hoc|oc10": {
+        "n": 140,
+        "min": 0.93202,
+        "max": 0.94831,
+        "mean": 0.94656,
+        "sd": 0.00238,
+        "lo": 0.8388,
+        "hi": 1.0431
+      },
+      "hoc|oc4": {
+        "n": 432,
+        "min": 0.86583,
+        "max": 1.01923,
+        "mean": 0.93544,
+        "sd": 0.02596,
+        "lo": 0.7792,
+        "hi": 1.1212
+      },
+      "hoc|oc5": {
+        "n": 644,
+        "min": 0.85651,
+        "max": 1.0155,
+        "mean": 0.94579,
+        "sd": 0.02208,
+        "lo": 0.7709,
+        "hi": 1.117
+      },
+      "hoc|oc6": {
+        "n": 140,
+        "min": 0.93516,
+        "max": 0.94948,
+        "mean": 0.94647,
+        "sd": 0.00214,
+        "lo": 0.8416,
+        "hi": 1.0444
+      },
+      "hoc|oc7": {
+        "n": 140,
+        "min": 0.93516,
+        "max": 0.94948,
+        "mean": 0.94646,
+        "sd": 0.00214,
+        "lo": 0.8416,
+        "hi": 1.0444
+      },
+      "hoc|oc8": {
+        "n": 140,
+        "min": 0.93202,
+        "max": 0.94831,
+        "mean": 0.94652,
+        "sd": 0.00238,
+        "lo": 0.8388,
+        "hi": 1.0431
+      },
+      "hoc|oc9": {
+        "n": 140,
+        "min": 0.93202,
+        "max": 0.94831,
+        "mean": 0.94653,
+        "sd": 0.00238,
+        "lo": 0.8388,
+        "hi": 1.0431
+      },
+      "hoy|oc14": {
+        "n": 312,
+        "min": 0.87561,
+        "max": 1.03622,
+        "mean": 0.94915,
+        "sd": 0.02358,
+        "lo": 0.788,
+        "hi": 1.1398
+      },
+      "hoy|oc16": {
+        "n": 52,
+        "min": 0.92918,
+        "max": 0.93482,
+        "mean": 0.9324,
+        "sd": 0.00206,
+        "lo": 0.8363,
+        "hi": 1.0283
+      },
+      "hoy|oc17": {
+        "n": 52,
+        "min": 0.92939,
+        "max": 0.93497,
+        "mean": 0.93249,
+        "sd": 0.00204,
+        "lo": 0.8365,
+        "hi": 1.0285
+      },
+      "hoy|oc18": {
+        "n": 52,
+        "min": 0.93028,
+        "max": 0.93437,
+        "mean": 0.93252,
+        "sd": 0.00173,
+        "lo": 0.8372,
+        "hi": 1.0278
+      },
+      "hoy|oc19": {
+        "n": 52,
+        "min": 0.9305,
+        "max": 0.93477,
+        "mean": 0.93262,
+        "sd": 0.00159,
+        "lo": 0.8375,
+        "hi": 1.0283
+      },
+      "hoy|oc20": {
+        "n": 52,
+        "min": 0.93054,
+        "max": 0.93498,
+        "mean": 0.93295,
+        "sd": 0.00165,
+        "lo": 0.8375,
+        "hi": 1.0285
+      },
+      "hoy|oc21": {
+        "n": 52,
+        "min": 0.93027,
+        "max": 0.93538,
+        "mean": 0.93284,
+        "sd": 0.00199,
+        "lo": 0.8372,
+        "hi": 1.0289
+      },
+      "oc11|s'": {
+        "n": 840,
+        "min": 1.31028,
+        "max": 1.55148,
+        "mean": 1.48554,
+        "sd": 0.02051,
+        "lo": 1.1793,
+        "hi": 1.7066
+      },
+      "oc12|sc2": {
+        "n": 1248,
+        "min": 1.54769,
+        "max": 1.73453,
+        "mean": 1.63352,
+        "sd": 0.02768,
+        "lo": 1.3929,
+        "hi": 1.908
+      },
+      "oc12|sc3": {
+        "n": 780,
+        "min": 1.56181,
+        "max": 1.73897,
+        "mean": 1.63896,
+        "sd": 0.02756,
+        "lo": 1.4056,
+        "hi": 1.9129
+      },
+      "oc13|sc2": {
+        "n": 1248,
+        "min": 1.5203,
+        "max": 1.69063,
+        "mean": 1.60365,
+        "sd": 0.02551,
+        "lo": 1.3683,
+        "hi": 1.8597
+      },
+      "oc14|sc3": {
+        "n": 312,
+        "min": 1.57964,
+        "max": 1.7246,
+        "mean": 1.65548,
+        "sd": 0.02463,
+        "lo": 1.4217,
+        "hi": 1.8971
+      },
+      "oc15|s_m": {
+        "n": 104,
+        "min": 1.24059,
+        "max": 1.51811,
+        "mean": 1.45572,
+        "sd": 0.11176,
+        "lo": 1.1165,
+        "hi": 1.6699
+      },
+      "oc1|sc1": {
+        "n": 960,
+        "min": 1.51642,
+        "max": 1.72833,
+        "mean": 1.60134,
+        "sd": 0.02803,
+        "lo": 1.3648,
+        "hi": 1.9012
+      },
+      "oc22|sc3": {
+        "n": 156,
+        "min": 1.54269,
+        "max": 1.69928,
+        "mean": 1.61184,
+        "sd": 0.02958,
+        "lo": 1.3884,
+        "hi": 1.8692
+      }
+    },
+    "separation_check": [
+      {
+        "bond_pair": "ac1|oc3",
+        "element_pair": "Al|O",
+        "window_hi": 2.1563,
+        "closest_nonbonded": 2.9345,
+        "ok": true
+      },
+      {
+        "bond_pair": "ac1|oc4",
+        "element_pair": "Al|O",
+        "window_hi": 2.1048,
+        "closest_nonbonded": 2.9345,
+        "ok": true
+      },
+      {
+        "bond_pair": "ac2|oc10",
+        "element_pair": "Al|O",
+        "window_hi": 2.1042,
+        "closest_nonbonded": 2.9345,
+        "ok": true
+      },
+      {
+        "bond_pair": "ac2|oc5",
+        "element_pair": "Al|O",
+        "window_hi": 2.2072,
+        "closest_nonbonded": 2.9345,
+        "ok": true
+      },
+      {
+        "bond_pair": "ac2|oc6",
+        "element_pair": "Al|O",
+        "window_hi": 2.2072,
+        "closest_nonbonded": 2.9345,
+        "ok": true
+      },
+      {
+        "bond_pair": "ac2|oc7",
+        "element_pair": "Al|O",
+        "window_hi": 2.2072,
+        "closest_nonbonded": 2.9345,
+        "ok": true
+      },
+      {
+        "bond_pair": "ac2|oc8",
+        "element_pair": "Al|O",
+        "window_hi": 2.1039,
+        "closest_nonbonded": 2.9345,
+        "ok": true
+      },
+      {
+        "bond_pair": "ac2|oc9",
+        "element_pair": "Al|O",
+        "window_hi": 2.1042,
+        "closest_nonbonded": 2.9345,
+        "ok": true
+      },
+      {
+        "bond_pair": "ac3|oc16",
+        "element_pair": "Al|O",
+        "window_hi": 2.0958,
+        "closest_nonbonded": 2.9345,
+        "ok": true
+      },
+      {
+        "bond_pair": "ac3|oc17",
+        "element_pair": "Al|O",
+        "window_hi": 2.0958,
+        "closest_nonbonded": 2.9345,
+        "ok": true
+      },
+      {
+        "bond_pair": "ac3|oc18",
+        "element_pair": "Al|O",
+        "window_hi": 2.0958,
+        "closest_nonbonded": 2.9345,
+        "ok": true
+      },
+      {
+        "bond_pair": "ac3|oc19",
+        "element_pair": "Al|O",
+        "window_hi": 2.0958,
+        "closest_nonbonded": 2.9345,
+        "ok": true
+      },
+      {
+        "bond_pair": "ac3|oc20",
+        "element_pair": "Al|O",
+        "window_hi": 2.0958,
+        "closest_nonbonded": 2.9345,
+        "ok": true
+      },
+      {
+        "bond_pair": "ac3|oc21",
+        "element_pair": "Al|O",
+        "window_hi": 2.0958,
+        "closest_nonbonded": 2.9345,
+        "ok": true
+      },
+      {
+        "bond_pair": "h*|o*",
+        "element_pair": "H|O",
+        "window_hi": 1.2158,
+        "closest_nonbonded": 1.3638,
+        "ok": true
+      },
+      {
+        "bond_pair": "hoc|oc10",
+        "element_pair": "H|O",
+        "window_hi": 1.0431,
+        "closest_nonbonded": 1.3638,
+        "ok": true
+      },
+      {
+        "bond_pair": "hoc|oc4",
+        "element_pair": "H|O",
+        "window_hi": 1.1212,
+        "closest_nonbonded": 1.3638,
+        "ok": true
+      },
+      {
+        "bond_pair": "hoc|oc5",
+        "element_pair": "H|O",
+        "window_hi": 1.117,
+        "closest_nonbonded": 1.3638,
+        "ok": true
+      },
+      {
+        "bond_pair": "hoc|oc6",
+        "element_pair": "H|O",
+        "window_hi": 1.0444,
+        "closest_nonbonded": 1.3638,
+        "ok": true
+      },
+      {
+        "bond_pair": "hoc|oc7",
+        "element_pair": "H|O",
+        "window_hi": 1.0444,
+        "closest_nonbonded": 1.3638,
+        "ok": true
+      },
+      {
+        "bond_pair": "hoc|oc8",
+        "element_pair": "H|O",
+        "window_hi": 1.0431,
+        "closest_nonbonded": 1.3638,
+        "ok": true
+      },
+      {
+        "bond_pair": "hoc|oc9",
+        "element_pair": "H|O",
+        "window_hi": 1.0431,
+        "closest_nonbonded": 1.3638,
+        "ok": true
+      },
+      {
+        "bond_pair": "hoy|oc14",
+        "element_pair": "H|O",
+        "window_hi": 1.1398,
+        "closest_nonbonded": 1.3638,
+        "ok": true
+      },
+      {
+        "bond_pair": "hoy|oc16",
+        "element_pair": "H|O",
+        "window_hi": 1.0283,
+        "closest_nonbonded": 1.3638,
+        "ok": true
+      },
+      {
+        "bond_pair": "hoy|oc17",
+        "element_pair": "H|O",
+        "window_hi": 1.0285,
+        "closest_nonbonded": 1.3638,
+        "ok": true
+      },
+      {
+        "bond_pair": "hoy|oc18",
+        "element_pair": "H|O",
+        "window_hi": 1.0278,
+        "closest_nonbonded": 1.3638,
+        "ok": true
+      },
+      {
+        "bond_pair": "hoy|oc19",
+        "element_pair": "H|O",
+        "window_hi": 1.0283,
+        "closest_nonbonded": 1.3638,
+        "ok": true
+      },
+      {
+        "bond_pair": "hoy|oc20",
+        "element_pair": "H|O",
+        "window_hi": 1.0285,
+        "closest_nonbonded": 1.3638,
+        "ok": true
+      },
+      {
+        "bond_pair": "hoy|oc21",
+        "element_pair": "H|O",
+        "window_hi": 1.0289,
+        "closest_nonbonded": 1.3638,
+        "ok": true
+      },
+      {
+        "bond_pair": "oc11|s'",
+        "element_pair": "O|S",
+        "window_hi": 1.7066,
+        "closest_nonbonded": 3.1416,
+        "ok": true
+      },
+      {
+        "bond_pair": "oc12|sc2",
+        "element_pair": "O|Si",
+        "window_hi": 1.908,
+        "closest_nonbonded": 2.9536,
+        "ok": true
+      },
+      {
+        "bond_pair": "oc12|sc3",
+        "element_pair": "O|Si",
+        "window_hi": 1.9129,
+        "closest_nonbonded": 2.9536,
+        "ok": true
+      },
+      {
+        "bond_pair": "oc13|sc2",
+        "element_pair": "O|Si",
+        "window_hi": 1.8597,
+        "closest_nonbonded": 2.9536,
+        "ok": true
+      },
+      {
+        "bond_pair": "oc14|sc3",
+        "element_pair": "O|Si",
+        "window_hi": 1.8971,
+        "closest_nonbonded": 2.9536,
+        "ok": true
+      },
+      {
+        "bond_pair": "oc15|s_m",
+        "element_pair": "O|S",
+        "window_hi": 1.6699,
+        "closest_nonbonded": 3.1416,
+        "ok": true
+      },
+      {
+        "bond_pair": "oc1|sc1",
+        "element_pair": "O|Si",
+        "window_hi": 1.9012,
+        "closest_nonbonded": 2.9536,
+        "ok": true
+      },
+      {
+        "bond_pair": "oc22|sc3",
+        "element_pair": "O|Si",
+        "window_hi": 1.8692,
+        "closest_nonbonded": 2.9536,
+        "ok": true
+      }
+    ],
+    "element_pairs": {
+      "Al|O": {
+        "n": 12288,
+        "min": 1.58054,
+        "max": 2.00656,
+        "lo": 1.4225,
+        "hi": 2.2072
+      },
+      "H|O": {
+        "n": 11820,
+        "min": 0.85651,
+        "max": 1.10528,
+        "lo": 0.7709,
+        "hi": 1.2158
+      },
+      "O|S": {
+        "n": 944,
+        "min": 1.24059,
+        "max": 1.55148,
+        "lo": 1.1165,
+        "hi": 1.7066
+      },
+      "O|Si": {
+        "n": 4704,
+        "min": 1.51642,
+        "max": 1.73897,
+        "lo": 1.3648,
+        "hi": 1.9129
+      }
+    },
+    "element_pairs_note": "fallback for type pairs with no window (e.g. other force-field type names); same derivation, keyed by element pair",
+    "separation_ok": true
+  },
+  "overlap": {
+    "measured": "minimum-image distance of non-bonded pairs (all pairs except 1-2 bonds), per element pair (\u00c5)",
+    "derivation": "d_min = (1-0.25) x closest such contact in the references; element pairs with no contact below 4.0 \u00c5 are uncalibrated",
+    "basis": "P2.3 targets gross overlaps (coincident/duplicated sites, collapsed geometry); the references are unrelaxed builds whose closest contacts are already short, so the threshold is placed well below them",
+    "margin_rel": 0.25,
+    "pairs": {
+      "Al|Al": {
+        "observed_min": 3.133,
+        "d_min": 2.3498,
+        "closest_pair_in": "c3a_010_surface_hydrated_large_pcff",
+        "atom_ids": [
+          1511,
+          1512
+        ]
+      },
+      "Al|Ca": {
+        "observed_min": 2.6666,
+        "d_min": 1.9999,
+        "closest_pair_in": "c3a_010_surface_separated_pcff",
+        "atom_ids": [
+          1220,
+          1263
+        ]
+      },
+      "Al|H": {
+        "observed_min": 1.8954,
+        "d_min": 1.4215,
+        "closest_pair_in": "c3a_010_surface_hydrated_small_pcff",
+        "atom_ids": [
+          849,
+          1115
+        ]
+      },
+      "Al|O": {
+        "observed_min": 2.9345,
+        "d_min": 2.2008,
+        "closest_pair_in": "c3a_010_surface_hydrated_large_pcff",
+        "atom_ids": [
+          624,
+          670
+        ]
+      },
+      "Ca|Ca": {
+        "observed_min": 2.719,
+        "d_min": 2.0393,
+        "closest_pair_in": "c3a_010_surface_hydrated_small_pcff",
+        "atom_ids": [
+          724,
+          798
+        ]
+      },
+      "Ca|H": {
+        "observed_min": 2.152,
+        "d_min": 1.614,
+        "closest_pair_in": "c3a_010_surface_hydrated_h2o_pcff",
+        "atom_ids": [
+          4471,
+          7084
+        ]
+      },
+      "Ca|O": {
+        "observed_min": 2.0192,
+        "d_min": 1.5144,
+        "closest_pair_in": "c3a_010_surface_hydrated_large_pcff",
+        "atom_ids": [
+          1693,
+          1798
+        ]
+      },
+      "Ca|S": {
+        "observed_min": 3.6212,
+        "d_min": 2.7159,
+        "closest_pair_in": "monosulfate_002_surface_pcff",
+        "atom_ids": [
+          23,
+          198
+        ]
+      },
+      "Ca|Si": {
+        "observed_min": 2.7701,
+        "d_min": 2.0776,
+        "closest_pair_in": "tob11_100_surface_pcff",
+        "atom_ids": [
+          815,
+          1244
+        ]
+      },
+      "H|H": {
+        "observed_min": 1.2446,
+        "d_min": 0.9334,
+        "closest_pair_in": "c3a_010_surface_hydrated_small_pcff",
+        "atom_ids": [
+          1222,
+          1251
+        ]
+      },
+      "H|O": {
+        "observed_min": 1.3638,
+        "d_min": 1.0229,
+        "closest_pair_in": "tob14_100_surface_pcff",
+        "atom_ids": [
+          32,
+          468
+        ]
+      },
+      "H|S": {
+        "observed_min": 2.3672,
+        "d_min": 1.7754,
+        "closest_pair_in": "monosulfate_002_surface_pcff",
+        "atom_ids": [
+          10,
+          257
+        ]
+      },
+      "H|Si": {
+        "observed_min": 2.0786,
+        "d_min": 1.559,
+        "closest_pair_in": "tob14_100_surface_pcff",
+        "atom_ids": [
+          812,
+          860
+        ]
+      },
+      "O|O": {
+        "observed_min": 1.8229,
+        "d_min": 1.3672,
+        "closest_pair_in": "c3a_010_surface_hydrated_large_pcff",
+        "atom_ids": [
+          2830,
+          3083
+        ]
+      },
+      "O|S": {
+        "observed_min": 3.1416,
+        "d_min": 2.3562,
+        "closest_pair_in": "monosulfate_002_surface_pcff",
+        "atom_ids": [
+          10,
+          215
+        ]
+      },
+      "O|Si": {
+        "observed_min": 2.9536,
+        "d_min": 2.2152,
+        "closest_pair_in": "tob14_004_surface_pcff",
+        "atom_ids": [
+          585,
+          1169
+        ]
+      },
+      "Si|Si": {
+        "observed_min": 2.9078,
+        "d_min": 2.1808,
+        "closest_pair_in": "tob14_001_surface_pcff",
+        "atom_ids": [
+          1155,
+          1156
+        ]
+      }
+    }
+  },
+  "density": {
+    "surface": {
+      "applicable": false,
+      "values": {
+        "c3a_010_surface_hydrated_h2o_pcff": 1.679729,
+        "c3a_010_surface_hydrated_large_pcff": 0.743686,
+        "c3a_010_surface_hydrated_small_pcff": 1.197631,
+        "c3a_010_surface_separated_pcff": 0.708269,
+        "c3a_010_surface_together_pcff": 0.708269,
+        "c3s_040_surface_hydroxylated_pcff": 0.555371,
+        "c3s_040_surface_pcff": 0.548951,
+        "ettr_008_surface_pcff": 0.481343,
+        "ettr_200_surface_pcff": 0.437038,
+        "monosulfate_002_surface_pcff": 0.449937,
+        "tob11_004_surface_pcff": 0.948842,
+        "tob11_100_surface_pcff": 0.93897,
+        "tob14_001_surface_pcff": 0.725116,
+        "tob14_004_surface_pcff": 0.725116,
+        "tob14_100_surface_pcff": 0.589998
+      },
+      "basis": "isolated chain(s) in a mostly empty periodic box: no bulk density to check"
+    },
+    "c3a_unit_cell_minimized": {
+      "applicable": true,
+      "values": {
+        "c3a_unit_cell_minimized_pcff": 3.035995
+      },
+      "margin_rel": 0.0001,
+      "lo": 3.035692,
+      "hi": 3.036299,
+      "basis": "Crystal model: every supercell has the model's density exactly; \u00b11e-4 relative is a representation tolerance (PROPERTIES \u00a78.5 rule 3), not a physical one."
+    },
+    "c3a_unit_cell": {
+      "applicable": true,
+      "values": {
+        "c3a_unit_cell_pcff": 3.028483
+      },
+      "margin_rel": 0.0001,
+      "lo": 3.02818,
+      "hi": 3.028786,
+      "basis": "Crystal model: every supercell has the model's density exactly; \u00b11e-4 relative is a representation tolerance (PROPERTIES \u00a78.5 rule 3), not a physical one."
+    },
+    "c3s_rectangular_cell_minimized": {
+      "applicable": true,
+      "values": {
+        "c3s_rectangular_cell_minimized_pcff": 3.150072
+      },
+      "margin_rel": 0.0001,
+      "lo": 3.149757,
+      "hi": 3.150387,
+      "basis": "Crystal model: every supercell has the model's density exactly; \u00b11e-4 relative is a representation tolerance (PROPERTIES \u00a78.5 rule 3), not a physical one."
+    },
+    "c3s_unit_cell_minimized": {
+      "applicable": true,
+      "values": {
+        "c3s_unit_cell_minimized_pcff": 3.150071
+      },
+      "margin_rel": 0.0001,
+      "lo": 3.149756,
+      "hi": 3.150386,
+      "basis": "Crystal model: every supercell has the model's density exactly; \u00b11e-4 relative is a representation tolerance (PROPERTIES \u00a78.5 rule 3), not a physical one."
+    },
+    "ettr_rectangular_cell": {
+      "applicable": true,
+      "values": {
+        "ettr_rectangular_cell_pcff": 1.79271
+      },
+      "margin_rel": 0.0001,
+      "lo": 1.792531,
+      "hi": 1.79289,
+      "basis": "Crystal model: every supercell has the model's density exactly; \u00b11e-4 relative is a representation tolerance (PROPERTIES \u00a78.5 rule 3), not a physical one."
+    },
+    "ettr_unit_cell": {
+      "applicable": true,
+      "values": {
+        "ettr_unit_cell_pcff": 1.792711
+      },
+      "margin_rel": 0.0001,
+      "lo": 1.792532,
+      "hi": 1.79289,
+      "basis": "Crystal model: every supercell has the model's density exactly; \u00b11e-4 relative is a representation tolerance (PROPERTIES \u00a78.5 rule 3), not a physical one."
+    },
+    "monosulfate_cell_221": {
+      "applicable": true,
+      "values": {
+        "monosulfate_cell_221_pcff": 2.01505
+      },
+      "margin_rel": 0.0001,
+      "lo": 2.014848,
+      "hi": 2.015251,
+      "basis": "Crystal model: every supercell has the model's density exactly; \u00b11e-4 relative is a representation tolerance (PROPERTIES \u00a78.5 rule 3), not a physical one."
+    },
+    "monosulfate_rectangular_cell_421": {
+      "applicable": true,
+      "values": {
+        "monosulfate_rectangular_cell_421_pcff": 2.015047
+      },
+      "margin_rel": 0.0001,
+      "lo": 2.014846,
+      "hi": 2.015249,
+      "basis": "Crystal model: every supercell has the model's density exactly; \u00b11e-4 relative is a representation tolerance (PROPERTIES \u00a78.5 rule 3), not a physical one."
+    },
+    "tob11_rectangular_cell": {
+      "applicable": true,
+      "values": {
+        "tob11_rectangular_cell_pcff": 2.460287
+      },
+      "margin_rel": 0.0001,
+      "lo": 2.460041,
+      "hi": 2.460533,
+      "basis": "Crystal model: every supercell has the model's density exactly; \u00b11e-4 relative is a representation tolerance (PROPERTIES \u00a78.5 rule 3), not a physical one."
+    },
+    "tob11_unit_cell": {
+      "applicable": true,
+      "values": {
+        "tob11_unit_cell_pcff": 2.460292
+      },
+      "margin_rel": 0.0001,
+      "lo": 2.460046,
+      "hi": 2.460538,
+      "basis": "Crystal model: every supercell has the model's density exactly; \u00b11e-4 relative is a representation tolerance (PROPERTIES \u00a78.5 rule 3), not a physical one."
+    },
+    "tob14_avg_cell": {
+      "applicable": true,
+      "values": {
+        "tob14_avg_cell_pcff": 2.227508
+      },
+      "margin_rel": 0.0001,
+      "lo": 2.227285,
+      "hi": 2.227731,
+      "basis": "Crystal model: every supercell has the model's density exactly; \u00b11e-4 relative is a representation tolerance (PROPERTIES \u00a78.5 rule 3), not a physical one."
+    },
+    "tob14_avg_rectangular_cell": {
+      "applicable": true,
+      "values": {
+        "tob14_avg_rectangular_cell_pcff": 2.227503
+      },
+      "margin_rel": 0.0001,
+      "lo": 2.22728,
+      "hi": 2.227726,
+      "basis": "Crystal model: every supercell has the model's density exactly; \u00b11e-4 relative is a representation tolerance (PROPERTIES \u00a78.5 rule 3), not a physical one."
+    }
+  },
+  "mass": {
+    "tau_m_amu": 0.01,
+    "measured": "|Masses value - standard atomic weight of the mapped element|",
+    "basis": "FF mass tables print 2-5 decimals and use older IUPAC editions (e.g. H 1.00794/1.00797, Ca 40.08, Si 28.086); the largest such difference for the elements in scope is 0.002 amu. 0.01 amu covers it while any element swap differs by > 0.9 amu."
+  }
+}

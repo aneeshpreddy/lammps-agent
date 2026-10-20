@@ -204,8 +204,11 @@ def p1_7_coeffs(pf, m: Model, cfg) -> CheckResult:
         elif s.rows:
             notes.append(f"{s.name}: parameter count not checked (no declared count; OD-C2)")
     if dec.get("coeffs_location") == "data_file":
+        # a Coeff section is required only when its kind of interaction exists (C3S has no dihedrals)
+        kind_count = {"Pair Coeffs": "atom types", "Bond Coeffs": "bond types", "Angle Coeffs": "angle types",
+                      "Dihedral Coeffs": "dihedral types", "Improper Coeffs": "improper types"}
         for req in dec.get("required_coeff_sections", []):
-            if pf.section(req) is None:
+            if pf.section(req) is None and (pf.header_int(kind_count.get(req, ""), 0) or 0) > 0:
                 problems.append(f"required section '{req}' missing (coeffs_location: data_file)")
     return _ok("coeff_sections", "P1.7", not problems, "; ".join(problems[:5]),
                {"problems": problems, "notes": notes})
@@ -531,7 +534,10 @@ def p1_17_bonded_completeness(pf, m: Model, cfg) -> CheckResult:
     if miss_d:
         problems.append(f"{len(miss_d)} bonded path(s) i-j-k-l without a dihedral, e.g. {sorted(miss_d)[0]}")
     ci = int(declared(cfg).get("improper_center_index", 1))
-    want_i = {(j, frozenset(c)) for j in nb if len(nb[j]) >= 3 for c in combinations(nb[j], 3)}
+    # class I force fields (CVFF) define out-of-plane terms only at planar centres, so the
+    # C(n,3) rule is switched off there (improper_completeness: false)
+    check_impropers = declared(cfg).get("improper_completeness", True)
+    want_i = {(j, frozenset(c)) for j in nb if len(nb[j]) >= 3 for c in combinations(nb[j], 3)} if check_impropers else set()
     got_i = set()
     if "Impropers" in m.topology:
         for x in m.topology["Impropers"].atoms.tolist():

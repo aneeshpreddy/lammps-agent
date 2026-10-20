@@ -2,7 +2,7 @@
   "calibration_id": "tobermorite_fixture",
   "version": 1,
   "status": "SYNTHETIC",
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "derivation_version": "calibrate.py v1 (2026-10-16)",
   "references": [
     {
@@ -139,6 +139,23 @@
         "ok": true
       }
     ],
+    "element_pairs": {
+      "H|O": {
+        "n": 56,
+        "min": 0.93907,
+        "max": 0.99674,
+        "lo": 0.8452,
+        "hi": 1.0964
+      },
+      "O|Si": {
+        "n": 96,
+        "min": 1.5654,
+        "max": 1.73453,
+        "lo": 1.4089,
+        "hi": 1.908
+      }
+    },
+    "element_pairs_note": "fallback for type pairs with no window (e.g. other force-field type names); same derivation, keyed by element pair",
     "separation_ok": true
   },
   "overlap": {

@@ -10,7 +10,7 @@ from typing import Dict, List, Optional
 
 import numpy as np
 
-from .config import declared, load_calibration
+from .config import declared, element_table, load_calibration
 from .elements import STANDARD_MASS, nearest_element
 from .geometry import AMU_PER_A3_TO_G_PER_CM3, pairs_within, tilt_checks
 from .model import Model, bond_graph_components
@@ -38,7 +38,7 @@ def _cal_tag(cal: Optional[dict]) -> Optional[str]:
 
 
 def _element_map(m: Model, cfg) -> Dict[int, Optional[str]]:
-    table = declared(cfg).get("type_name_elements") or {}
+    table = element_table(cfg)
     return {t: table.get(m.type_names.get(t)) for t in range(1, m.n_atom_types + 1)}
 
 
@@ -182,24 +182,34 @@ def p2_4_bonds(pf, m: Model, cfg, cal) -> CheckResult:
     if m.cell is None:
         return _c("P2.4", NOT_EVALUATED, "box not defined")
     table = (cal or {}).get("bond_length", {}).get("pairs", {})
-    if not table:
+    etable = (cal or {}).get("bond_length", {}).get("element_pairs", {})
+    if not table and not etable:
         return _c("P2.4", NOT_CALIBRATED, "no calibrated bond-length windows")
     if not m.type_names:
         return _c("P2.4", NOT_EVALUATED, "atom type names unknown (bond windows are keyed by type names; OD-J)")
+    el = _element_map(m, cfg)
     idx = m.index_of()
     ii = np.array([idx[int(a)] for a in b.atoms[:, 0]])
     jj = np.array([idx[int(a)] for a in b.atoms[:, 1]])
     L = m.cell.min_image_distances(m.xyz[jj] - m.xyz[ii])
-    viol, uncal = [], []
+    viol, uncal, by_element = [], [], 0
     for k in range(len(L)):
         ni, nj = m.type_names.get(int(m.types[ii[k]]), "?"), m.type_names.get(int(m.types[jj[k]]), "?")
         key = "|".join(sorted((ni, nj)))
         w = table.get(key)
+        if w is None:     # fall back to the element-pair window (wider, but force-field independent)
+            ei, ej = el.get(int(m.types[ii[k]])), el.get(int(m.types[jj[k]]))
+            if ei and ej:
+                w = etable.get("|".join(sorted((ei, ej))))
+                if w is not None:
+                    by_element += 1
+                    key = key + " [element " + "|".join(sorted((ei, ej))) + "]"
         if w is None:
             uncal.append((key, L[k], k))
         elif not (w["lo"] <= L[k] <= w["hi"]):
             viol.append((key, L[k], k, w))
     det = {"bonds": int(len(L)), "violations": len(viol), "uncalibrated_bonds": len(uncal),
+           "judged_by_element_pair_window": by_element,
            "length_min": float(L.min()), "length_max": float(L.max()),
            "examples": [{"line": b.linenos[k], "pair": key, "length": round(float(l), 4),
                          "window": [w["lo"], w["hi"]]} for key, l, k, w in viol[:MAXEX]]}

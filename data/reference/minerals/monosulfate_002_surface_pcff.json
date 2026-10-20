@@ -1,0 +1,50 @@
+{
+  "id": "monosulfate_002_surface_pcff",
+  "role": "REFERENCE_PUBLISHED_MODEL",
+  "file": "data/reference/minerals/monosulfate_002_surface_pcff.data",
+  "sha256": "c32e09cab13bd713d2004fc93ef37a1e1aa4101e41ac65e092b5562d17796b19",
+  "declared_config": "configs/interface_pcff_minerals.yaml",
+  "overrides": {
+    "density_family": "surface",
+    "box_kind": "any"
+  },
+  "trust_status": "PUBLISHED MODEL (INTERFACE FF 1.5) + documented pipeline; supervisor confirmation pending",
+  "build": {
+    "name": "monosulfate_002_surface_pcff",
+    "model": "monosulfate_002_surface",
+    "model_dir": "CEMENT_MINERALS",
+    "model_sha256": {
+      "car": "fcb24f58cdccd05ea12f2642ae3ecbc5da97b59ee95bcbe527cffb7008fc5267",
+      "mdf": "50db0d7bd54b30bce64fe5547769f7b0a355e7d34dceff768760ce0c1ced497d"
+    },
+    "supercell": [
+      1,
+      1,
+      1
+    ],
+    "force_field": "PCFF-INTERFACE (INTERFACE FF 1.5, class II)",
+    "frc_sha256": "3ad5a1be7334c646ed6cb813b769d0e89a1aa03fe695013e940626b7df922693",
+    "lammps": "LAMMPS (22 Jul 2025 - Update 6)",
+    "tilt_reduction": {
+      "k": 0,
+      "m": 0,
+      "n": 0
+    },
+    "tilt_reduced_after_supercell": false,
+    "comments_restored": 93,
+    "natoms": 424,
+    "data_sha256": "c32e09cab13bd713d2004fc93ef37a1e1aa4101e41ac65e092b5562d17796b19",
+    "missing_kinds": [
+      "angleangle",
+      "angleangledihedral",
+      "angledihedral",
+      "bondangle",
+      "bondbond",
+      "endbonddihedral",
+      "midbonddihedral"
+    ],
+    "cross_terms_zeroed": true,
+    "allowed_missing_kinds": [],
+    "simulation_ready": true
+  }
+}

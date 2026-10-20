@@ -12,7 +12,7 @@ from typing import Dict, List, Optional
 
 import numpy as np
 
-from .config import declared, periodic_flags
+from .config import declared, element_table, periodic_flags
 from .geometry import pairs_within
 from .model import Model, build_model
 from .parser import parse_file
@@ -34,7 +34,7 @@ def tc1_composition(m: Model, cfg) -> CheckResult:
     if not want:
         return CheckResult("composition_vs_request", "TC.1", "TC", NOT_EVALUATED,
                            "no requested composition (input representation OD-D undecided)")
-    table = declared(cfg).get("type_name_elements") or {}
+    table = element_table(cfg)
     got = Counter(table.get(m.type_names.get(int(t)), f"type{t}") for t in m.types)
     diff = {e: (got.get(e, 0), n) for e, n in want.items() if got.get(e, 0) != n}
     extra = {e: c for e, c in got.items() if e not in want}

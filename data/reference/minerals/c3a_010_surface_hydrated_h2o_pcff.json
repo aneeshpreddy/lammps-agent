@@ -1,0 +1,50 @@
+{
+  "id": "c3a_010_surface_hydrated_h2o_pcff",
+  "role": "REFERENCE_PUBLISHED_MODEL",
+  "file": "data/reference/minerals/c3a_010_surface_hydrated_h2o_pcff.data",
+  "sha256": "c6ed14509154b5cd634985e9c7f22022c3dfda44f3d7898ddd3b7f824da68d65",
+  "declared_config": "configs/interface_pcff_minerals.yaml",
+  "overrides": {
+    "density_family": "surface",
+    "box_kind": "any"
+  },
+  "trust_status": "PUBLISHED MODEL (INTERFACE FF 1.5) + documented pipeline; supervisor confirmation pending",
+  "build": {
+    "name": "c3a_010_surface_hydrated_h2o_pcff",
+    "model": "c3a_010_surface_hydrated_h2o",
+    "model_dir": "CEMENT_MINERALS",
+    "model_sha256": {
+      "car": "9d21caaf6824bb02242a1c7b8ffa387a146f5db73f2d30128ad0c47d23afc5c2",
+      "mdf": "e5a4f9b3f4a9ad976672414e59715b1b787d7ae4fcf07ef4953861a1ac4e2ac2"
+    },
+    "supercell": [
+      1,
+      1,
+      1
+    ],
+    "force_field": "PCFF-INTERFACE (INTERFACE FF 1.5, class II)",
+    "frc_sha256": "3ad5a1be7334c646ed6cb813b769d0e89a1aa03fe695013e940626b7df922693",
+    "lammps": "LAMMPS (22 Jul 2025 - Update 6)",
+    "tilt_reduction": {
+      "k": 0,
+      "m": 0,
+      "n": 0
+    },
+    "tilt_reduced_after_supercell": false,
+    "comments_restored": 31,
+    "natoms": 7773,
+    "data_sha256": "c6ed14509154b5cd634985e9c7f22022c3dfda44f3d7898ddd3b7f824da68d65",
+    "missing_kinds": [
+      "angleangle",
+      "angleangledihedral",
+      "angledihedral",
+      "bondangle",
+      "bondbond",
+      "endbonddihedral",
+      "midbonddihedral"
+    ],
+    "cross_terms_zeroed": true,
+    "allowed_missing_kinds": [],
+    "simulation_ready": true
+  }
+}
