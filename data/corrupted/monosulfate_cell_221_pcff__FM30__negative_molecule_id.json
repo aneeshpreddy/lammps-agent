@@ -1,0 +1,27 @@
+{
+  "id": "monosulfate_cell_221_pcff__FM30__negative_molecule_id",
+  "file": "data/corrupted/monosulfate_cell_221_pcff__FM30__negative_molecule_id.data",
+  "sha256": "54ecaf1c5ff56b8ab628c810442d8b95225cc5051a676dfaa998846a48846dd4",
+  "parent_id": "monosulfate_cell_221_pcff",
+  "parent_file": "data/reference/minerals/monosulfate_cell_221_pcff.data",
+  "parent_sha256": "9bd9a50f606255829b0a46564fc1b7fd0ac6d0ab1a7d551b84632a78cfb2fa9e",
+  "failure_mode": "FM30",
+  "operator": "fm30",
+  "variant": "negative_molecule_id",
+  "description": "set one molecule ID to -1",
+  "params": {},
+  "expected_failing_properties": [
+    "P1.8"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.8"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_minerals.yaml",
+  "overrides": {
+    "density_family": "monosulfate_cell_221",
+    "box_kind": "triclinic"
+  }
+}

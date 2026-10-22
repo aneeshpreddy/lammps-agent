@@ -1,0 +1,24 @@
+{
+  "id": "PB-01_cvff__FM33__equal_length_style_comment",
+  "file": "data/corrupted/PB-01_cvff__FM33__equal_length_style_comment.data",
+  "sha256": "0248d10e7e1c9912e03ddf0e9bb2a303c438b4991d00e0b1f97aa8971244cd72",
+  "parent_id": "PB-01_cvff",
+  "parent_file": "data/reference/pce_builder/PB-01_cvff.data",
+  "parent_sha256": "71f2a6c87ed6e663ece9da4740c796b0885449f901b03a71fc5d2e06e55a36f7",
+  "failure_mode": "FM33",
+  "operator": "fm33",
+  "variant": "equal_length_style_comment",
+  "description": "label the Atoms section '# bond' (same length as 'full')",
+  "params": {},
+  "expected_failing_properties": [
+    "P1.11"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.11"
+  ],
+  "expected_lammps_behaviour": "Silent (equal-length names)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_pce.yaml",
+  "overrides": {}
+}

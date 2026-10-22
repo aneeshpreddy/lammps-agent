@@ -1,0 +1,26 @@
+{
+  "id": "PB-01_pcff__FM06__flip_largest_charge",
+  "file": "data/corrupted/PB-01_pcff__FM06__flip_largest_charge.data",
+  "sha256": "5f63cede91bd8706e6cf9180d629a07ae7629fc9e07cf5af5f7f1b776a2858aa",
+  "parent_id": "PB-01_pcff",
+  "parent_file": "data/reference/pce_builder/PB-01_pcff.data",
+  "parent_sha256": "220d302f3c2fccdecfe3e210b4e65eef042364017ca4db284c25d4de0cc63c75",
+  "failure_mode": "FM06",
+  "operator": "fm06_flip",
+  "variant": "flip_largest_charge",
+  "description": "flip the sign of the largest-magnitude charge",
+  "params": {
+    "atom": 357
+  },
+  "expected_failing_properties": [
+    "P2.1"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.1"
+  ],
+  "expected_lammps_behaviour": "Silent (Warn only with kspace and |Q|>1e-5)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_pce.yaml",
+  "overrides": {}
+}

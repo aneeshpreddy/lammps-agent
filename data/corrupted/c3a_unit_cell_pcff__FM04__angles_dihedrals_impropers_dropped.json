@@ -1,0 +1,33 @@
+{
+  "id": "c3a_unit_cell_pcff__FM04__angles_dihedrals_impropers_dropped",
+  "file": "data/corrupted/c3a_unit_cell_pcff__FM04__angles_dihedrals_impropers_dropped.data",
+  "sha256": "2715cb989326d67d589ab976a907dc2d0047d93c0b91b29cf74b2decd3200b37",
+  "parent_id": "c3a_unit_cell_pcff",
+  "parent_file": "data/reference/minerals/c3a_unit_cell_pcff.data",
+  "parent_sha256": "bd90a77ad47eaf2a801d5a2ce8d978bf31c25576913cd9d48860a199221a1424",
+  "failure_mode": "FM04",
+  "operator": "fm04_higher",
+  "variant": "angles_dihedrals_impropers_dropped",
+  "description": "delete every Angles/Dihedrals/Impropers row and set their header counts to 0 (what an ASE lammps-data round trip does, docs/R13_ASE_ROUNDTRIP.md)",
+  "params": {
+    "Impropers": 192,
+    "Dihedrals": 288,
+    "Angles": 336
+  },
+  "expected_failing_properties": [
+    "P1.17",
+    "TC.2"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.17",
+    "TC.2"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_minerals.yaml",
+  "overrides": {
+    "density_family": "c3a_unit_cell",
+    "box_kind": "any"
+  }
+}

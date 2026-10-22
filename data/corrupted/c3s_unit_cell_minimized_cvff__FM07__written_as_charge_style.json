@@ -1,0 +1,27 @@
+{
+  "id": "c3s_unit_cell_minimized_cvff__FM07__written_as_charge_style",
+  "file": "data/corrupted/c3s_unit_cell_minimized_cvff__FM07__written_as_charge_style.data",
+  "sha256": "67f3bb79f62f51aad73af2068fcbddc609b37bc39b00ffca8869071dbed0495b",
+  "parent_id": "c3s_unit_cell_minimized_cvff",
+  "parent_file": "data/reference/minerals/c3s_unit_cell_minimized_cvff.data",
+  "parent_sha256": "f0e54cf3c3ca0736bcc90da57f87c02233f6000c7a528f3b80e68e275acd984f",
+  "failure_mode": "FM07",
+  "operator": "fm07_charge",
+  "variant": "written_as_charge_style",
+  "description": "drop the molecule-ID column (atom_style charge layout) in a file declared atom_style full",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.4"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.4"
+  ],
+  "expected_lammps_behaviour": "Loud (field count) / Silent if counts match",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_minerals.yaml",
+  "overrides": {
+    "density_family": "c3s_unit_cell_minimized",
+    "box_kind": "triclinic"
+  }
+}

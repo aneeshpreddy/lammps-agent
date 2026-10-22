@@ -1,0 +1,51 @@
+{
+  "id": "m04",
+  "role": "EVAL_REFERENCE_V2",
+  "file": "data/reference/eval_v2/m04.data",
+  "sha256": "386fe43b8c650056350f78793d3421e899c55eca1d02649fe774edc79be979da",
+  "declared_config": "configs/interface_pcff_minerals.yaml",
+  "overrides": {
+    "tc_mode": "graph",
+    "tc_compare_cell": true,
+    "density_family": "ettr_unit_cell"
+  },
+  "trust_status": "built by builders/ (deterministic); validated through Tier 3",
+  "build": {
+    "name": "m04",
+    "model": "ettr_unit_cell",
+    "model_dir": "CEMENT_MINERALS",
+    "model_sha256": {
+      "car": "713ade2355e291249698556a6328ead8770d4afb130a6911be802739b1bcc076",
+      "mdf": "cf81936e31eee60cb117adc8320d11bf69d69de12fe0f0243616b466f55005eb"
+    },
+    "supercell": [
+      1,
+      1,
+      2
+    ],
+    "force_field": "PCFF-INTERFACE (INTERFACE FF 1.5, class II)",
+    "frc_sha256": "3ad5a1be7334c646ed6cb813b769d0e89a1aa03fe695013e940626b7df922693",
+    "lammps": "LAMMPS (22 Jul 2025 - Update 6)",
+    "tilt_reduction": {
+      "k": 0,
+      "m": 0,
+      "n": 0
+    },
+    "tilt_reduced_after_supercell": false,
+    "comments_restored": 93,
+    "natoms": 512,
+    "data_sha256": "386fe43b8c650056350f78793d3421e899c55eca1d02649fe774edc79be979da",
+    "missing_kinds": [
+      "angleangle",
+      "angleangledihedral",
+      "angledihedral",
+      "bondangle",
+      "bondbond",
+      "endbonddihedral",
+      "midbonddihedral"
+    ],
+    "cross_terms_zeroed": true,
+    "allowed_missing_kinds": [],
+    "simulation_ready": true
+  }
+}

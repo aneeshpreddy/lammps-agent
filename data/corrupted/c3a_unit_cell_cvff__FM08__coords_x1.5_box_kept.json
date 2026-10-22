@@ -1,0 +1,33 @@
+{
+  "id": "c3a_unit_cell_cvff__FM08__coords_x1.5_box_kept",
+  "file": "data/corrupted/c3a_unit_cell_cvff__FM08__coords_x1.5_box_kept.data",
+  "sha256": "e9b54b3fe740e96e4b0474ad958ed9c49e6a7e3b639386465f642116a34ec4f3",
+  "parent_id": "c3a_unit_cell_cvff",
+  "parent_file": "data/reference/minerals/c3a_unit_cell_cvff.data",
+  "parent_sha256": "10987dbdbf57d89db46e107fd14670e55a31c05c85204bd108acde662a44d714",
+  "failure_mode": "FM08",
+  "operator": "fm08",
+  "variant": "coords_x1.5_box_kept",
+  "description": "multiply all coordinates by 1.5, box unchanged",
+  "params": {
+    "factor": 1.5
+  },
+  "expected_failing_properties": [
+    "P2.2",
+    "P2.3",
+    "P2.4"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.2",
+    "P2.3",
+    "P2.4"
+  ],
+  "expected_lammps_behaviour": "Silent (periodic remap)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_minerals.yaml",
+  "overrides": {
+    "density_family": "c3a_unit_cell",
+    "box_kind": "any"
+  }
+}

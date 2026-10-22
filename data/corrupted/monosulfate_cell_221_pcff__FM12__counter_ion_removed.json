@@ -1,0 +1,32 @@
+{
+  "id": "monosulfate_cell_221_pcff__FM12__counter_ion_removed",
+  "file": "data/corrupted/monosulfate_cell_221_pcff__FM12__counter_ion_removed.data",
+  "sha256": "8881c967dd5b648aca23e9ad1102c7ce677a55b1782f71230910cee70c44930b",
+  "parent_id": "monosulfate_cell_221_pcff",
+  "parent_file": "data/reference/minerals/monosulfate_cell_221_pcff.data",
+  "parent_sha256": "9bd9a50f606255829b0a46564fc1b7fd0ac6d0ab1a7d551b84632a78cfb2fa9e",
+  "failure_mode": "FM12",
+  "operator": "fm12_ion",
+  "variant": "counter_ion_removed",
+  "description": "delete the unbonded atom with the largest |q| (a counter-ion) and adjust the header",
+  "params": {
+    "atom": 9,
+    "abs_q": 1.4
+  },
+  "expected_failing_properties": [
+    "P2.1",
+    "TC.2"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.1",
+    "TC.2"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_minerals.yaml",
+  "overrides": {
+    "density_family": "monosulfate_cell_221",
+    "box_kind": "triclinic"
+  }
+}

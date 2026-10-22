@@ -1,0 +1,24 @@
+{
+  "id": "PB-02_cvff__FM21__header_line_after_section",
+  "file": "data/corrupted/PB-02_cvff__FM21__header_line_after_section.data",
+  "sha256": "af1808c7dda0c87e7113dee834abf883be56f5d6ae6783f2dfe1f93dddaaff24",
+  "parent_id": "PB-02_cvff",
+  "parent_file": "data/reference/pce_builder/PB-02_cvff.data",
+  "parent_sha256": "8027f299287cb810213d7bb21b5d1e257e264d23e03e5610f769a3888aeb8efe",
+  "failure_mode": "FM21",
+  "operator": "fm21_misplaced",
+  "variant": "header_line_after_section",
+  "description": "move the 'atom types' header line to just after the Masses section",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.1"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.1"
+  ],
+  "expected_lammps_behaviour": "Loud (Unknown identifier)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_pce.yaml",
+  "overrides": {}
+}

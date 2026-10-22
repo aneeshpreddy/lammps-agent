@@ -1,0 +1,27 @@
+{
+  "id": "c3s_unit_cell_minimized_cvff__FM25__zlo_zhi_deleted",
+  "file": "data/corrupted/c3s_unit_cell_minimized_cvff__FM25__zlo_zhi_deleted.data",
+  "sha256": "154c8b520294f5a2a4674fcdcd80a1004d58bcfecb916f9715e2ea281655c9db",
+  "parent_id": "c3s_unit_cell_minimized_cvff",
+  "parent_file": "data/reference/minerals/c3s_unit_cell_minimized_cvff.data",
+  "parent_sha256": "f0e54cf3c3ca0736bcc90da57f87c02233f6000c7a528f3b80e68e275acd984f",
+  "failure_mode": "FM25",
+  "operator": "fm25",
+  "variant": "zlo_zhi_deleted",
+  "description": "delete the 'zlo zhi' line",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.8"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.8"
+  ],
+  "expected_lammps_behaviour": "Silent, no warning (defaults -0.5 0.5)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_minerals.yaml",
+  "overrides": {
+    "density_family": "c3s_unit_cell_minimized",
+    "box_kind": "triclinic"
+  }
+}

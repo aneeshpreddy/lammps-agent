@@ -1,0 +1,24 @@
+{
+  "id": "PB-01_cvff__FM29__velocities_duplicate_id",
+  "file": "data/corrupted/PB-01_cvff__FM29__velocities_duplicate_id.data",
+  "sha256": "d60a387ad75a97b96dc3e8bd71d30e16cdb595610b2cdd2e4ba58e5bdc5c9e11",
+  "parent_id": "PB-01_cvff",
+  "parent_file": "data/reference/pce_builder/PB-01_cvff.data",
+  "parent_sha256": "71f2a6c87ed6e663ece9da4740c796b0885449f901b03a71fc5d2e06e55a36f7",
+  "failure_mode": "FM29",
+  "operator": "fm29",
+  "variant": "velocities_duplicate_id",
+  "description": "append a Velocities section in which the last atom ID is listed twice and the first atom has no row",
+  "params": {},
+  "expected_failing_properties": [
+    "P1.14"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.14"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_pce.yaml",
+  "overrides": {}
+}

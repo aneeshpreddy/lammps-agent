@@ -1,0 +1,31 @@
+{
+  "id": "ettr_unit_cell_pcff__FM18__atom_displaced_3A",
+  "file": "data/corrupted/ettr_unit_cell_pcff__FM18__atom_displaced_3A.data",
+  "sha256": "afbe89f4d9b4a39db1053ad74d3f47c7e7ed9201db165e51963bb267f5c69d70",
+  "parent_id": "ettr_unit_cell_pcff",
+  "parent_file": "data/reference/minerals/ettr_unit_cell_pcff.data",
+  "parent_sha256": "03907ca1b512d705031c48d3de943465eb73a6305220b0285d22c944253792f8",
+  "failure_mode": "FM18",
+  "operator": "fm18",
+  "variant": "atom_displaced_3A",
+  "description": "displace one bonded atom by 3 \u00c5 along x",
+  "params": {
+    "atom": 1
+  },
+  "expected_failing_properties": [
+    "P2.4",
+    "P2.7"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.4",
+    "P2.7"
+  ],
+  "expected_lammps_behaviour": "Silent at read_data",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_minerals.yaml",
+  "overrides": {
+    "density_family": "ettr_unit_cell",
+    "box_kind": "triclinic"
+  }
+}

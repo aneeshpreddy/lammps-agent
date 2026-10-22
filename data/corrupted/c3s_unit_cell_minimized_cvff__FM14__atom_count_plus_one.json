@@ -1,0 +1,27 @@
+{
+  "id": "c3s_unit_cell_minimized_cvff__FM14__atom_count_plus_one",
+  "file": "data/corrupted/c3s_unit_cell_minimized_cvff__FM14__atom_count_plus_one.data",
+  "sha256": "9b14d39e6017519cc47188576555a1aa318393193af932afb894cc495aa79bc1",
+  "parent_id": "c3s_unit_cell_minimized_cvff",
+  "parent_file": "data/reference/minerals/c3s_unit_cell_minimized_cvff.data",
+  "parent_sha256": "f0e54cf3c3ca0736bcc90da57f87c02233f6000c7a528f3b80e68e275acd984f",
+  "failure_mode": "FM14",
+  "operator": "fm14",
+  "variant": "atom_count_plus_one",
+  "description": "raise the header atom count by one",
+  "params": {},
+  "expected_failing_properties": [
+    "P1.1"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.1"
+  ],
+  "expected_lammps_behaviour": "Loud",
+  "header_consistent": false,
+  "declared_config": "configs/interface_cvff_minerals.yaml",
+  "overrides": {
+    "density_family": "c3s_unit_cell_minimized",
+    "box_kind": "triclinic"
+  }
+}

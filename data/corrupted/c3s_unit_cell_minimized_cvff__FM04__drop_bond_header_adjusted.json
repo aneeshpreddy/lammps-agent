@@ -1,0 +1,36 @@
+{
+  "id": "c3s_unit_cell_minimized_cvff__FM04__drop_bond_header_adjusted",
+  "file": "data/corrupted/c3s_unit_cell_minimized_cvff__FM04__drop_bond_header_adjusted.data",
+  "sha256": "e475239b54b2ebd0f86d94228d8d152f0c34c3095cc4e25f3881df53dfbb6626",
+  "parent_id": "c3s_unit_cell_minimized_cvff",
+  "parent_file": "data/reference/minerals/c3s_unit_cell_minimized_cvff.data",
+  "parent_sha256": "f0e54cf3c3ca0736bcc90da57f87c02233f6000c7a528f3b80e68e275acd984f",
+  "failure_mode": "FM04",
+  "operator": "fm04_silent",
+  "variant": "drop_bond_header_adjusted",
+  "description": "delete one bond row and lower the header count (silent variant)",
+  "params": {
+    "deleted_bond": [
+      "13",
+      "1",
+      "34",
+      "20"
+    ]
+  },
+  "expected_failing_properties": [
+    "P1.10",
+    "TC.2"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.10",
+    "TC.2"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_minerals.yaml",
+  "overrides": {
+    "density_family": "c3s_unit_cell_minimized",
+    "box_kind": "triclinic"
+  }
+}

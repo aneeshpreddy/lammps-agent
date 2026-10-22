@@ -1,0 +1,31 @@
+{
+  "id": "c3s_unit_cell_minimized_pcff__FM27__surplus_final_row",
+  "file": "data/corrupted/c3s_unit_cell_minimized_pcff__FM27__surplus_final_row.data",
+  "sha256": "164ae450b5ced2108cbd82ec0bfc849b0875202791f69e72b58bf2fc1232de38",
+  "parent_id": "c3s_unit_cell_minimized_pcff",
+  "parent_file": "data/reference/minerals/c3s_unit_cell_minimized_pcff.data",
+  "parent_sha256": "07713482cd7234025d0fdda3dcca83fc1d70f778b5ec15454f2822b16ae7a031",
+  "failure_mode": "FM27",
+  "operator": "fm27",
+  "variant": "surplus_final_row",
+  "description": "lower the count of the last section by one, so its final row is surplus",
+  "params": {
+    "section": "Impropers"
+  },
+  "expected_failing_properties": [
+    "P0.11",
+    "P1.1"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.11",
+    "P1.1"
+  ],
+  "expected_lammps_behaviour": "Silent (one surplus row at EOF is ignored)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_minerals.yaml",
+  "overrides": {
+    "density_family": "c3s_unit_cell_minimized",
+    "box_kind": "triclinic"
+  }
+}

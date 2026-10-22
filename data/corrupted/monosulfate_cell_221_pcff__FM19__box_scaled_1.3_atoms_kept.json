@@ -1,0 +1,31 @@
+{
+  "id": "monosulfate_cell_221_pcff__FM19__box_scaled_1.3_atoms_kept",
+  "file": "data/corrupted/monosulfate_cell_221_pcff__FM19__box_scaled_1.3_atoms_kept.data",
+  "sha256": "228e4e38d7e1a321c0d2e00407f9fe71e79a2c0ef717c8fb6cb2825c39845da4",
+  "parent_id": "monosulfate_cell_221_pcff",
+  "parent_file": "data/reference/minerals/monosulfate_cell_221_pcff.data",
+  "parent_sha256": "9bd9a50f606255829b0a46564fc1b7fd0ac6d0ab1a7d551b84632a78cfb2fa9e",
+  "failure_mode": "FM19",
+  "operator": "fm19",
+  "variant": "box_scaled_1.3_atoms_kept",
+  "description": "scale the box by 1.3 about its origin; atoms unchanged",
+  "params": {
+    "factor": 1.3
+  },
+  "expected_failing_properties": [
+    "P2.5",
+    "P2.2"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.5",
+    "P2.2"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_minerals.yaml",
+  "overrides": {
+    "density_family": "monosulfate_cell_221",
+    "box_kind": "triclinic"
+  }
+}

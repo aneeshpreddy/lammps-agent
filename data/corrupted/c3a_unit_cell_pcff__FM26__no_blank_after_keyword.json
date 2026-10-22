@@ -1,0 +1,27 @@
+{
+  "id": "c3a_unit_cell_pcff__FM26__no_blank_after_keyword",
+  "file": "data/corrupted/c3a_unit_cell_pcff__FM26__no_blank_after_keyword.data",
+  "sha256": "7d471443c03084ea5f48fba61e6d0a4faa781dee2038a25b99bb36b117b48b0a",
+  "parent_id": "c3a_unit_cell_pcff",
+  "parent_file": "data/reference/minerals/c3a_unit_cell_pcff.data",
+  "parent_sha256": "bd90a77ad47eaf2a801d5a2ce8d978bf31c25576913cd9d48860a199221a1424",
+  "failure_mode": "FM26",
+  "operator": "fm26",
+  "variant": "no_blank_after_keyword",
+  "description": "remove the blank line after the 'Bonds' keyword",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.7"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.7"
+  ],
+  "expected_lammps_behaviour": "Loud in tested cases",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_minerals.yaml",
+  "overrides": {
+    "density_family": "c3a_unit_cell",
+    "box_kind": "any"
+  }
+}

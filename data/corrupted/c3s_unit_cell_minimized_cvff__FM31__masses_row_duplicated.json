@@ -1,0 +1,27 @@
+{
+  "id": "c3s_unit_cell_minimized_cvff__FM31__masses_row_duplicated",
+  "file": "data/corrupted/c3s_unit_cell_minimized_cvff__FM31__masses_row_duplicated.data",
+  "sha256": "7131bc838d01cee16837a369d1abc6fc8d6868e6413ee0dbb918d16c8816aa98",
+  "parent_id": "c3s_unit_cell_minimized_cvff",
+  "parent_file": "data/reference/minerals/c3s_unit_cell_minimized_cvff.data",
+  "parent_sha256": "f0e54cf3c3ca0736bcc90da57f87c02233f6000c7a528f3b80e68e275acd984f",
+  "failure_mode": "FM31",
+  "operator": "fm31",
+  "variant": "masses_row_duplicated",
+  "description": "replace the second Masses row with a copy of the first",
+  "params": {},
+  "expected_failing_properties": [
+    "P1.4"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.4"
+  ],
+  "expected_lammps_behaviour": "Loud@run only (Tier 3a misses it)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_minerals.yaml",
+  "overrides": {
+    "density_family": "c3s_unit_cell_minimized",
+    "box_kind": "triclinic"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "c3a_unit_cell_cvff__FM23__box_origin_reset",
+  "file": "data/corrupted/c3a_unit_cell_cvff__FM23__box_origin_reset.data",
+  "sha256": "b0c7d3b153823909ba5e7303c6dbc747645e1eb77708aaea9a384a5325b1c27d",
+  "parent_id": "c3a_unit_cell_cvff",
+  "parent_file": "data/reference/minerals/c3a_unit_cell_cvff.data",
+  "parent_sha256": "10987dbdbf57d89db46e107fd14670e55a31c05c85204bd108acde662a44d714",
+  "failure_mode": "FM23",
+  "operator": "fm23",
+  "variant": "box_origin_reset",
+  "description": "move the box so its origin is 0 (or shift it by half a box if it already is); atoms unchanged",
+  "params": {
+    "shift_x": 0.115628847
+  },
+  "expected_failing_properties": [
+    "P2.2"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.2"
+  ],
+  "expected_lammps_behaviour": "Silent (periodic)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_minerals.yaml",
+  "overrides": {
+    "density_family": "c3a_unit_cell",
+    "box_kind": "any"
+  }
+}

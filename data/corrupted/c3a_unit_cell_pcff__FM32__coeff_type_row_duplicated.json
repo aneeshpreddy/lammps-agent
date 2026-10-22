@@ -1,0 +1,27 @@
+{
+  "id": "c3a_unit_cell_pcff__FM32__coeff_type_row_duplicated",
+  "file": "data/corrupted/c3a_unit_cell_pcff__FM32__coeff_type_row_duplicated.data",
+  "sha256": "a68b075367b214fa1710f71da8da31e97db21ad817294f8635b6920d6f57bd75",
+  "parent_id": "c3a_unit_cell_pcff",
+  "parent_file": "data/reference/minerals/c3a_unit_cell_pcff.data",
+  "parent_sha256": "bd90a77ad47eaf2a801d5a2ce8d978bf31c25576913cd9d48860a199221a1424",
+  "failure_mode": "FM32",
+  "operator": "fm32",
+  "variant": "coeff_type_row_duplicated",
+  "description": "replace the second Bond Coeffs row with a copy of the first (type 1 twice, type 2 missing)",
+  "params": {},
+  "expected_failing_properties": [
+    "P1.7"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.7"
+  ],
+  "expected_lammps_behaviour": "Silent under nocoeff; Loud@run",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_minerals.yaml",
+  "overrides": {
+    "density_family": "c3a_unit_cell",
+    "box_kind": "any"
+  }
+}

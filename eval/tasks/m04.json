@@ -1,0 +1,32 @@
+{
+  "id": "m04",
+  "difficulty": "representative",
+  "domain": "mineral",
+  "force_field": "pcff",
+  "input": "Build a LAMMPS data file for ettringite: the INTERFACE FF hexagonal unit cell doubled along c, in the class II PCFF-INTERFACE force field (INTERFACE FF 1.5).",
+  "hidden_spec": {
+    "builder": "minerals",
+    "model": "ettr_unit_cell",
+    "supercell": [
+      1,
+      1,
+      2
+    ],
+    "force_field": "pcff"
+  },
+  "declared_config": "configs/interface_pcff_minerals.yaml",
+  "tc_mode": "graph",
+  "tc_compare_cell": true,
+  "exercises": [
+    "FM06",
+    "FM10",
+    "FM14",
+    "FM18"
+  ],
+  "note": "hexagonal cell, water and hydroxide",
+  "reference": "data/reference/eval_v2/m04.data",
+  "reference_sha256": "386fe43b8c650056350f78793d3421e899c55eca1d02649fe774edc79be979da",
+  "expected_counts": {
+    "atoms": 512
+  }
+}

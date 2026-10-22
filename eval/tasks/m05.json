@@ -1,0 +1,32 @@
+{
+  "id": "m05",
+  "difficulty": "representative",
+  "domain": "mineral",
+  "force_field": "cvff",
+  "input": "Build a LAMMPS data file for one unit cell of tricalcium aluminate (C3A, INTERFACE FF model) in the class I CVFF-INTERFACE force field (INTERFACE FF 1.5).",
+  "hidden_spec": {
+    "builder": "minerals",
+    "model": "c3a_unit_cell",
+    "supercell": [
+      1,
+      1,
+      1
+    ],
+    "force_field": "cvff"
+  },
+  "declared_config": "configs/interface_cvff_minerals.yaml",
+  "tc_mode": "graph",
+  "tc_compare_cell": true,
+  "exercises": [
+    "FM02",
+    "FM06",
+    "FM15",
+    "FM22"
+  ],
+  "note": "class I mineral, 264 atoms",
+  "reference": "data/reference/eval_v2/m05.data",
+  "reference_sha256": "1b2ecddeef9896ed2b915b4caf7d3e5fbdabd202ea2e74529d7bd66a4422abcf",
+  "expected_counts": {
+    "atoms": 264
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "ettr_unit_cell_pcff__FM28__bond_to_absent_atom",
+  "file": "data/corrupted/ettr_unit_cell_pcff__FM28__bond_to_absent_atom.data",
+  "sha256": "1ec56a98338b14312ebca96a1e37bc77c513874d6b6c12935e2951d6520e27f2",
+  "parent_id": "ettr_unit_cell_pcff",
+  "parent_file": "data/reference/minerals/ettr_unit_cell_pcff.data",
+  "parent_sha256": "03907ca1b512d705031c48d3de943465eb73a6305220b0285d22c944253792f8",
+  "failure_mode": "FM28",
+  "operator": "fm28",
+  "variant": "bond_to_absent_atom",
+  "description": "delete the Atoms row of the second atom of a bond (ID < max ID), leaving the topology",
+  "params": {
+    "deleted_atom": 4
+  },
+  "expected_failing_properties": [
+    "P1.5"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.5"
+  ],
+  "expected_lammps_behaviour": "Crash (SIGSEGV) or Loud",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_minerals.yaml",
+  "overrides": {
+    "density_family": "ettr_unit_cell",
+    "box_kind": "triclinic"
+  }
+}

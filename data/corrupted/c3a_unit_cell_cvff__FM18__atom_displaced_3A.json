@@ -1,0 +1,31 @@
+{
+  "id": "c3a_unit_cell_cvff__FM18__atom_displaced_3A",
+  "file": "data/corrupted/c3a_unit_cell_cvff__FM18__atom_displaced_3A.data",
+  "sha256": "00558cc84563f1bdb1cd7ada75cc60f029ab1dbe75b275572b16023e05b8ac23",
+  "parent_id": "c3a_unit_cell_cvff",
+  "parent_file": "data/reference/minerals/c3a_unit_cell_cvff.data",
+  "parent_sha256": "10987dbdbf57d89db46e107fd14670e55a31c05c85204bd108acde662a44d714",
+  "failure_mode": "FM18",
+  "operator": "fm18",
+  "variant": "atom_displaced_3A",
+  "description": "displace one bonded atom by 3 \u00c5 along x",
+  "params": {
+    "atom": 7
+  },
+  "expected_failing_properties": [
+    "P2.4",
+    "P2.7"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.4",
+    "P2.7"
+  ],
+  "expected_lammps_behaviour": "Silent at read_data",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_minerals.yaml",
+  "overrides": {
+    "density_family": "c3a_unit_cell",
+    "box_kind": "any"
+  }
+}

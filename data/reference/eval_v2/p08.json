@@ -1,0 +1,86 @@
+{
+  "id": "p08",
+  "role": "EVAL_REFERENCE_V2",
+  "file": "data/reference/eval_v2/p08.data",
+  "sha256": "bd4226e4f6137e972a3422b0460b8c2008460d39b3e2bbaa9eb84dbd1c52a108",
+  "declared_config": "configs/interface_cvff_pce.yaml",
+  "overrides": {
+    "tc_mode": "graph",
+    "tc_compare_cell": false
+  },
+  "trust_status": "built by builders/ (deterministic); validated through Tier 3",
+  "build": {
+    "name": "p08",
+    "spec": {
+      "name": "p08",
+      "monomers": {
+        "M": {
+          "kind": "diacid",
+          "deprotonated": 2
+        },
+        "P": {
+          "kind": "ether_peg",
+          "alpha_methyl": false,
+          "spacer": 1,
+          "eo_units": 20,
+          "end": "OH"
+        }
+      },
+      "composition": {
+        "M": 8,
+        "P": 8
+      },
+      "sequence": "alternating",
+      "end_groups": [
+        "CH3",
+        "H"
+      ],
+      "n_chains": 1,
+      "counterion": "Na+",
+      "box": {
+        "padding": 10.0
+      },
+      "force_field": "cvff",
+      "seed": 9,
+      "conformation": "random",
+      "relax": true
+    },
+    "force_field": "CVFF-INTERFACE (INTERFACE FF 1.5, class I)",
+    "frc": "INTERFACE_FF_1_5/FORCE_FIELDS/cvff_interface_v1_5.frc",
+    "sequences": [
+      "MPMPMPMPMPMPMPMP"
+    ],
+    "chain_charges": [
+      -16
+    ],
+    "counterions": 16,
+    "natoms": 1301,
+    "elements": {
+      "C": 377,
+      "O": 200,
+      "H": 708,
+      "Na": 16
+    },
+    "net_charge": -0.0,
+    "box": [
+      74.8018,
+      64.1512,
+      71.9886
+    ],
+    "grower_min_nonbonded_distance_A": [
+      0.995
+    ],
+    "data_sha256": "bd4226e4f6137e972a3422b0460b8c2008460d39b3e2bbaa9eb84dbd1c52a108",
+    "msi2lmp_missing_kinds": [],
+    "msi2lmp_missing_messages": 0,
+    "cross_terms_zeroed": false,
+    "relaxed": true,
+    "stages": [
+      "soft A=10.0",
+      "soft A=40.0",
+      "soft A=100.0",
+      "lj/cut/coul/cut 10.0"
+    ],
+    "final_energy_kcal_mol": 1668.94368594621
+  }
+}

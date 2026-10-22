@@ -1,0 +1,27 @@
+{
+  "id": "c3a_unit_cell_pcff__FM25__zlo_zhi_deleted",
+  "file": "data/corrupted/c3a_unit_cell_pcff__FM25__zlo_zhi_deleted.data",
+  "sha256": "4886d15d85daf6b438edb5841d0dd17a5f393df0d7e6b84557558db539f2690d",
+  "parent_id": "c3a_unit_cell_pcff",
+  "parent_file": "data/reference/minerals/c3a_unit_cell_pcff.data",
+  "parent_sha256": "bd90a77ad47eaf2a801d5a2ce8d978bf31c25576913cd9d48860a199221a1424",
+  "failure_mode": "FM25",
+  "operator": "fm25",
+  "variant": "zlo_zhi_deleted",
+  "description": "delete the 'zlo zhi' line",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.8"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.8"
+  ],
+  "expected_lammps_behaviour": "Silent, no warning (defaults -0.5 0.5)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_minerals.yaml",
+  "overrides": {
+    "density_family": "c3a_unit_cell",
+    "box_kind": "any"
+  }
+}

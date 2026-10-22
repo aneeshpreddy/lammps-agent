@@ -1,0 +1,27 @@
+{
+  "id": "monosulfate_cell_221_pcff__FM25__zlo_zhi_deleted",
+  "file": "data/corrupted/monosulfate_cell_221_pcff__FM25__zlo_zhi_deleted.data",
+  "sha256": "de3d5c779346aafefb1e51fb5fab87061f69ccced9826b97d9516a11672b1f3c",
+  "parent_id": "monosulfate_cell_221_pcff",
+  "parent_file": "data/reference/minerals/monosulfate_cell_221_pcff.data",
+  "parent_sha256": "9bd9a50f606255829b0a46564fc1b7fd0ac6d0ab1a7d551b84632a78cfb2fa9e",
+  "failure_mode": "FM25",
+  "operator": "fm25",
+  "variant": "zlo_zhi_deleted",
+  "description": "delete the 'zlo zhi' line",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.8"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.8"
+  ],
+  "expected_lammps_behaviour": "Silent, no warning (defaults -0.5 0.5)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_minerals.yaml",
+  "overrides": {
+    "density_family": "monosulfate_cell_221",
+    "box_kind": "triclinic"
+  }
+}

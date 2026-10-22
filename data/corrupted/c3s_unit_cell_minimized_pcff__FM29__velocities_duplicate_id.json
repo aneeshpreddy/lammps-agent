@@ -1,0 +1,29 @@
+{
+  "id": "c3s_unit_cell_minimized_pcff__FM29__velocities_duplicate_id",
+  "file": "data/corrupted/c3s_unit_cell_minimized_pcff__FM29__velocities_duplicate_id.data",
+  "sha256": "a5cb5f7a21fffcb408da7a436e07a71eb498c09ef6edbbd01b5c1d6bcfe6ef10",
+  "parent_id": "c3s_unit_cell_minimized_pcff",
+  "parent_file": "data/reference/minerals/c3s_unit_cell_minimized_pcff.data",
+  "parent_sha256": "07713482cd7234025d0fdda3dcca83fc1d70f778b5ec15454f2822b16ae7a031",
+  "failure_mode": "FM29",
+  "operator": "fm29",
+  "variant": "velocities_duplicate_id",
+  "description": "append a Velocities section in which the last atom ID is listed twice and the first atom has no row",
+  "params": {
+    "mode": "edited existing Velocities section"
+  },
+  "expected_failing_properties": [
+    "P1.14"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.14"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_minerals.yaml",
+  "overrides": {
+    "density_family": "c3s_unit_cell_minimized",
+    "box_kind": "triclinic"
+  }
+}

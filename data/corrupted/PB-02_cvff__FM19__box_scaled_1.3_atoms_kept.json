@@ -1,0 +1,28 @@
+{
+  "id": "PB-02_cvff__FM19__box_scaled_1.3_atoms_kept",
+  "file": "data/corrupted/PB-02_cvff__FM19__box_scaled_1.3_atoms_kept.data",
+  "sha256": "61a9df72f7fc68181d5a11dd5dde3efb501cd86a4760c8702091f39a26a2b49d",
+  "parent_id": "PB-02_cvff",
+  "parent_file": "data/reference/pce_builder/PB-02_cvff.data",
+  "parent_sha256": "8027f299287cb810213d7bb21b5d1e257e264d23e03e5610f769a3888aeb8efe",
+  "failure_mode": "FM19",
+  "operator": "fm19",
+  "variant": "box_scaled_1.3_atoms_kept",
+  "description": "scale the box by 1.3 about its origin; atoms unchanged",
+  "params": {
+    "factor": 1.3
+  },
+  "expected_failing_properties": [
+    "P2.5",
+    "P2.2"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.5",
+    "P2.2"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_pce.yaml",
+  "overrides": {}
+}

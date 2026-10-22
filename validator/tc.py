@@ -1,5 +1,15 @@
 """Task-correctness layer (PROPERTIES TC.1, TC.2). Separate from Tiers 0-3.
 
+TC.2 has three comparison modes (declared `tc_mode`, normally set per task; METRICS.md):
+  positions  — atoms matched by minimum-image position (default; references built by the same route)
+  graph      — position-free: the multiset of molecules, each identified by a Weisfeiler-Lehman hash
+               of its typed, charged bond graph, must be identical; optional cell comparison
+               (`tc_compare_cell`). For deterministic structures built in a different geometry
+               (minerals, PCE with explicit/alternating/block sequences).
+  chemistry  — position- and sequence-free: per molecule, the multiset of (atom type, charge), the
+               net charge and the counts of bond type-signatures must match. For random-sequence PCE,
+               where any draw of the requested architecture is equally correct.
+
 TC.2 compares a file with a trusted reference *property by property*. Atoms are matched by
 position (minimum image) rather than by ID, so a consistent renumbering is not reported as a
 difference while a changed type, charge, bond or position is. Similarity is not proof of
@@ -14,7 +24,7 @@ import numpy as np
 
 from .config import declared, element_table, periodic_flags
 from .geometry import pairs_within
-from .model import Model, build_model
+from .model import Model, bond_graph_components, build_model
 from .parser import parse_file
 from .result import FAIL, NOT_EVALUATED, PASS, CheckResult
 
@@ -156,8 +166,104 @@ def tc2_reference(pf, m: Model, cfg, ref_path: str) -> CheckResult:
                        det, calibration="derived:representation")
 
 
+# ---- position-free modes ------------------------------------------------------------------------
+def _labels(m: Model):
+    names = m.type_names or {}
+    q = m.q if m.q is not None else np.zeros(m.natoms)
+    return [f"{names.get(int(t), int(t))}|{round(float(c), 3):+.3f}" for t, c in zip(m.types, q)]
+
+
+def _adjacency(m: Model):
+    idx = m.index_of()
+    adj = [[] for _ in range(m.natoms)]
+    b = m.topology.get("Bonds")
+    if b is not None:
+        for i, j in b.atoms.tolist():
+            if i in idx and j in idx:
+                adj[idx[i]].append(idx[j])
+                adj[idx[j]].append(idx[i])
+    return adj
+
+
+def molecule_hashes(m: Model, rounds: int = 24) -> Counter:
+    """Weisfeiler-Lehman hash per bonded molecule (labels: type name + charge to 3 decimals).
+    Not a complete isomorphism test, but it separates different sequences, types, charges and
+    connectivities within `rounds` bonds; equal hashes for all molecules is the TC criterion."""
+    import hashlib
+    lab = _labels(m)
+    adj = _adjacency(m)
+    cur = lab
+    for _ in range(rounds):
+        cur = [hashlib.sha1((cur[i] + "(" + ",".join(sorted(cur[j] for j in adj[i])) + ")").encode()).hexdigest()[:16]
+               for i in range(m.natoms)]
+    comp = bond_graph_components(m)
+    mols: Dict[int, List[str]] = {}
+    for i, c in enumerate(comp):
+        mols.setdefault(int(c), []).append(cur[i])
+    return Counter(hashlib.sha1("".join(sorted(v)).encode()).hexdigest()[:16] for v in mols.values())
+
+
+def molecule_chemistry(m: Model) -> Counter:
+    names = m.type_names or {}
+    q = m.q if m.q is not None else np.zeros(m.natoms)
+    adj = _adjacency(m)
+    comp = bond_graph_components(m)
+    mols: Dict[int, List[int]] = {}
+    for i, c in enumerate(comp):
+        mols.setdefault(int(c), []).append(i)
+    out = Counter()
+    for atoms in mols.values():
+        # (type, charge) multiset: bond-increment charges depend only on bonded neighbours, so this is
+        # independent of the monomer sequence but catches redistributed charges
+        tc = Counter(f"{names.get(int(m.types[i]), int(m.types[i]))}|{round(float(q[i]), 3):+.3f}" for i in atoms)
+        bc = Counter("|".join(sorted((str(names.get(int(m.types[i]), "")), str(names.get(int(m.types[j]), "")))))
+                     for i in atoms for j in adj[i] if i < j)
+        key = (tuple(sorted(tc.items())), round(float(sum(q[i] for i in atoms)), 3), tuple(sorted(bc.items())))
+        out[key] += 1
+    return out
+
+
+def tc2_position_free(pf, m: Model, cfg, ref_path: str, mode: str) -> CheckResult:
+    name, prop = "reference_comparison", "TC.2"
+    try:
+        rpf = parse_file(ref_path)
+        r = build_model(rpf, m.atom_style, periodic_flags(cfg))
+    except Exception as e:
+        return CheckResult(name, prop, "TC", NOT_EVALUATED, f"reference unreadable: {e}")
+    diffs: List[str] = []
+    for key in ("atoms", "bonds", "angles", "dihedrals", "impropers"):
+        a, b = pf.header_int(key, 0), rpf.header_int(key, 0)
+        if a != b:
+            diffs.append(f"{key}: {a} vs reference {b}")
+    if mode == "graph":
+        a, b = molecule_hashes(m), molecule_hashes(r)
+        what = "molecular graphs"
+    else:
+        a, b = molecule_chemistry(m), molecule_chemistry(r)
+        what = "molecule chemistries"
+    if a != b:
+        diffs.append(f"{what}: {sum((a - b).values())} molecule(s) not in the reference, "
+                     f"{sum((b - a).values())} reference molecule(s) not reproduced (of {sum(b.values())})")
+    if declared(cfg).get("tc_compare_cell") and m.cell is not None and r.cell is not None:
+        tol = 1e-3
+        if np.max(np.abs(m.cell.lengths - r.cell.lengths)) > tol or np.max(np.abs(m.cell.tilt - r.cell.tilt)) > tol:
+            diffs.append(f"cell: lengths {np.round(m.cell.lengths, 4).tolist()} tilt {np.round(m.cell.tilt, 4).tolist()} vs "
+                         f"reference {np.round(r.cell.lengths, 4).tolist()} {np.round(r.cell.tilt, 4).tolist()}")
+    det = {"reference": ref_path, "reference_sha256": rpf.sha256, "mode": mode, "differences": diffs[:MAXEX],
+           "molecules": sum(b.values())}
+    return CheckResult(name, prop, "TC", FAIL if diffs else PASS,
+                       f"{len(diffs)} difference(s) from the reference ({mode} mode); first: {diffs[0]}" if diffs else "",
+                       det, calibration="exact")
+
+
 def run_tc(pf, m: Model, cfg, reference: Optional[str]) -> List[CheckResult]:
     out = [tc1_composition(m, cfg)]
     if reference:
-        out.append(tc2_reference(pf, m, cfg, reference))
+        mode = declared(cfg).get("tc_mode", "positions")
+        if mode == "positions":
+            out.append(tc2_reference(pf, m, cfg, reference))
+        elif mode in ("graph", "chemistry"):
+            out.append(tc2_position_free(pf, m, cfg, reference, mode))
+        else:
+            out.append(CheckResult("reference_comparison", "TC.2", "TC", NOT_EVALUATED, f"unknown tc_mode {mode!r}"))
     return out

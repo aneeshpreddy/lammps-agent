@@ -1,0 +1,32 @@
+{
+  "id": "ettr_unit_cell_pcff__FM15__masses_values_permuted",
+  "file": "data/corrupted/ettr_unit_cell_pcff__FM15__masses_values_permuted.data",
+  "sha256": "5a7370939395dbe087d3ab008646fd760edc9019889d2cf36185429903b0fd95",
+  "parent_id": "ettr_unit_cell_pcff",
+  "parent_file": "data/reference/minerals/ettr_unit_cell_pcff.data",
+  "parent_sha256": "03907ca1b512d705031c48d3de943465eb73a6305220b0285d22c944253792f8",
+  "failure_mode": "FM15",
+  "operator": "fm15",
+  "variant": "masses_values_permuted",
+  "description": "swap the mass values of the first two Masses rows with different masses",
+  "params": {
+    "types": [
+      1,
+      2
+    ]
+  },
+  "expected_failing_properties": [
+    "P2.6"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.6"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_minerals.yaml",
+  "overrides": {
+    "density_family": "ettr_unit_cell",
+    "box_kind": "triclinic"
+  }
+}

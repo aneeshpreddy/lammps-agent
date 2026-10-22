@@ -1,0 +1,24 @@
+{
+  "id": "PB-01_cvff__FM26__no_blank_after_keyword",
+  "file": "data/corrupted/PB-01_cvff__FM26__no_blank_after_keyword.data",
+  "sha256": "06bb8e9885d87130b02563c72c55864ca5801feda743eefc5e82cf079b6bb745",
+  "parent_id": "PB-01_cvff",
+  "parent_file": "data/reference/pce_builder/PB-01_cvff.data",
+  "parent_sha256": "71f2a6c87ed6e663ece9da4740c796b0885449f901b03a71fc5d2e06e55a36f7",
+  "failure_mode": "FM26",
+  "operator": "fm26",
+  "variant": "no_blank_after_keyword",
+  "description": "remove the blank line after the 'Bonds' keyword",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.7"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.7"
+  ],
+  "expected_lammps_behaviour": "Loud in tested cases",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_pce.yaml",
+  "overrides": {}
+}

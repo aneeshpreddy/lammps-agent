@@ -1,0 +1,34 @@
+{
+  "id": "PB-01_pcff__FM12__hydrogen_removed",
+  "file": "data/corrupted/PB-01_pcff__FM12__hydrogen_removed.data",
+  "sha256": "3bc4580597460d866b72659bc2d27f4caf073735ce2936d81b97866109acc000",
+  "parent_id": "PB-01_pcff",
+  "parent_file": "data/reference/pce_builder/PB-01_pcff.data",
+  "parent_sha256": "220d302f3c2fccdecfe3e210b4e65eef042364017ca4db284c25d4de0cc63c75",
+  "failure_mode": "FM12",
+  "operator": "fm12_h",
+  "variant": "hydrogen_removed",
+  "description": "delete one hydrogen and every topology entry containing it; adjust the header",
+  "params": {
+    "atom": 18,
+    "topology_removed": {
+      "Bonds": 1,
+      "Angles": 3,
+      "Dihedrals": 9,
+      "Impropers": 3
+    }
+  },
+  "expected_failing_properties": [
+    "TC.2"
+  ],
+  "expected_tier": "TC",
+  "spec_expected_properties": [
+    "P2.1",
+    "P2.5",
+    "TC.1"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_pce.yaml",
+  "overrides": {}
+}

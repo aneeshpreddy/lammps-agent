@@ -1,0 +1,31 @@
+{
+  "id": "PB-02_pcff__FM05__reversed_duplicate_bond",
+  "file": "data/corrupted/PB-02_pcff__FM05__reversed_duplicate_bond.data",
+  "sha256": "76522a864d8bed894be70b2d0f91958cfa6ba6c5eca22e397b9092675c3e3960",
+  "parent_id": "PB-02_pcff",
+  "parent_file": "data/reference/pce_builder/PB-02_pcff.data",
+  "parent_sha256": "8a63ca3d80baf8ef5bef8ee2aaf01034b04f3abb6f66e64525e2f439756cf235",
+  "failure_mode": "FM05",
+  "operator": "fm05",
+  "variant": "reversed_duplicate_bond",
+  "description": "append a reversed copy of an existing bond and raise the header count",
+  "params": {
+    "duplicated_bond": [
+      "1",
+      "1",
+      "1",
+      "2"
+    ]
+  },
+  "expected_failing_properties": [
+    "P1.6"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.6"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_pce.yaml",
+  "overrides": {}
+}

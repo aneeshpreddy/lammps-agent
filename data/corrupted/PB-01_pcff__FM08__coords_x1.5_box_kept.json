@@ -1,0 +1,30 @@
+{
+  "id": "PB-01_pcff__FM08__coords_x1.5_box_kept",
+  "file": "data/corrupted/PB-01_pcff__FM08__coords_x1.5_box_kept.data",
+  "sha256": "b55a2e01f399ef77fd1f4d52bb3a1c67496991141af3494195a137caa0a231c1",
+  "parent_id": "PB-01_pcff",
+  "parent_file": "data/reference/pce_builder/PB-01_pcff.data",
+  "parent_sha256": "220d302f3c2fccdecfe3e210b4e65eef042364017ca4db284c25d4de0cc63c75",
+  "failure_mode": "FM08",
+  "operator": "fm08",
+  "variant": "coords_x1.5_box_kept",
+  "description": "multiply all coordinates by 1.5, box unchanged",
+  "params": {
+    "factor": 1.5
+  },
+  "expected_failing_properties": [
+    "P2.2",
+    "P2.3",
+    "P2.4"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.2",
+    "P2.3",
+    "P2.4"
+  ],
+  "expected_lammps_behaviour": "Silent (periodic remap)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_pce.yaml",
+  "overrides": {}
+}

@@ -1,0 +1,27 @@
+{
+  "id": "c3a_unit_cell_pcff__FM06__round_charges_1dp",
+  "file": "data/corrupted/c3a_unit_cell_pcff__FM06__round_charges_1dp.data",
+  "sha256": "bf3399db1858aa7dcdc1312fff6196dcc1b81b09708545f1dee5a8368da13bc1",
+  "parent_id": "c3a_unit_cell_pcff",
+  "parent_file": "data/reference/minerals/c3a_unit_cell_pcff.data",
+  "parent_sha256": "bd90a77ad47eaf2a801d5a2ce8d978bf31c25576913cd9d48860a199221a1424",
+  "failure_mode": "FM06",
+  "operator": "fm06_round",
+  "variant": "round_charges_1dp",
+  "description": "round every charge to one decimal place (individual charges lost; total may stay near zero)",
+  "params": {},
+  "expected_failing_properties": [
+    "TC.2"
+  ],
+  "expected_tier": "TC",
+  "spec_expected_properties": [
+    "P2.1"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_minerals.yaml",
+  "overrides": {
+    "density_family": "c3a_unit_cell",
+    "box_kind": "any"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "id": "ettr_unit_cell_pcff__FM33__equal_length_style_comment",
+  "file": "data/corrupted/ettr_unit_cell_pcff__FM33__equal_length_style_comment.data",
+  "sha256": "3277882db06dc5ee5c9dd5b1bedf970656371d8290753d44ed95f08a477b4924",
+  "parent_id": "ettr_unit_cell_pcff",
+  "parent_file": "data/reference/minerals/ettr_unit_cell_pcff.data",
+  "parent_sha256": "03907ca1b512d705031c48d3de943465eb73a6305220b0285d22c944253792f8",
+  "failure_mode": "FM33",
+  "operator": "fm33",
+  "variant": "equal_length_style_comment",
+  "description": "label the Atoms section '# bond' (same length as 'full')",
+  "params": {},
+  "expected_failing_properties": [
+    "P1.11"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.11"
+  ],
+  "expected_lammps_behaviour": "Silent (equal-length names)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_minerals.yaml",
+  "overrides": {
+    "density_family": "ettr_unit_cell",
+    "box_kind": "triclinic"
+  }
+}

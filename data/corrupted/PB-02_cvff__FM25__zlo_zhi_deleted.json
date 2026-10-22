@@ -1,0 +1,24 @@
+{
+  "id": "PB-02_cvff__FM25__zlo_zhi_deleted",
+  "file": "data/corrupted/PB-02_cvff__FM25__zlo_zhi_deleted.data",
+  "sha256": "f4304f9f17b86c0918840048ac5e24f503b4fd5cf0155386f59eef1c93a3a081",
+  "parent_id": "PB-02_cvff",
+  "parent_file": "data/reference/pce_builder/PB-02_cvff.data",
+  "parent_sha256": "8027f299287cb810213d7bb21b5d1e257e264d23e03e5610f769a3888aeb8efe",
+  "failure_mode": "FM25",
+  "operator": "fm25",
+  "variant": "zlo_zhi_deleted",
+  "description": "delete the 'zlo zhi' line",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.8"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.8"
+  ],
+  "expected_lammps_behaviour": "Silent, no warning (defaults -0.5 0.5)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_pce.yaml",
+  "overrides": {}
+}

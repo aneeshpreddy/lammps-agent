@@ -1,0 +1,26 @@
+{
+  "id": "PB-01_cvff__FM02__mass_guessed_other_element",
+  "file": "data/corrupted/PB-01_cvff__FM02__mass_guessed_other_element.data",
+  "sha256": "eaf2618aebbcb1dbdee27e204d5815d2d2785878425e2de6c61184e93e2f05ad",
+  "parent_id": "PB-01_cvff",
+  "parent_file": "data/reference/pce_builder/PB-01_cvff.data",
+  "parent_sha256": "71f2a6c87ed6e663ece9da4740c796b0885449f901b03a71fc5d2e06e55a36f7",
+  "failure_mode": "FM02",
+  "operator": "fm02",
+  "variant": "mass_guessed_other_element",
+  "description": "replace the mass of the first hydrogen type with helium's (a Z = type-index style guess)",
+  "params": {
+    "type": 5
+  },
+  "expected_failing_properties": [
+    "P2.6"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.6"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_pce.yaml",
+  "overrides": {}
+}

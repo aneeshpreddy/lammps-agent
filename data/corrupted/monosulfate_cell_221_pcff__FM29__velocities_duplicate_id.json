@@ -1,0 +1,29 @@
+{
+  "id": "monosulfate_cell_221_pcff__FM29__velocities_duplicate_id",
+  "file": "data/corrupted/monosulfate_cell_221_pcff__FM29__velocities_duplicate_id.data",
+  "sha256": "203836e971ef6bc065a29f1d4c662751b19a07a1c10dc24d650e5b389d046833",
+  "parent_id": "monosulfate_cell_221_pcff",
+  "parent_file": "data/reference/minerals/monosulfate_cell_221_pcff.data",
+  "parent_sha256": "9bd9a50f606255829b0a46564fc1b7fd0ac6d0ab1a7d551b84632a78cfb2fa9e",
+  "failure_mode": "FM29",
+  "operator": "fm29",
+  "variant": "velocities_duplicate_id",
+  "description": "append a Velocities section in which the last atom ID is listed twice and the first atom has no row",
+  "params": {
+    "mode": "edited existing Velocities section"
+  },
+  "expected_failing_properties": [
+    "P1.14"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.14"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_minerals.yaml",
+  "overrides": {
+    "density_family": "monosulfate_cell_221",
+    "box_kind": "triclinic"
+  }
+}

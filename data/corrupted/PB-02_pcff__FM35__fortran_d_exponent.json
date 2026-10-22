@@ -1,0 +1,24 @@
+{
+  "id": "PB-02_pcff__FM35__fortran_d_exponent",
+  "file": "data/corrupted/PB-02_pcff__FM35__fortran_d_exponent.data",
+  "sha256": "a0140e9cc79c6e15ef6ae319eb178d6a298c5b9b4935ae6910fe703d0de7aa33",
+  "parent_id": "PB-02_pcff",
+  "parent_file": "data/reference/pce_builder/PB-02_pcff.data",
+  "parent_sha256": "8a63ca3d80baf8ef5bef8ee2aaf01034b04f3abb6f66e64525e2f439756cf235",
+  "failure_mode": "FM35",
+  "operator": "fm35",
+  "variant": "fortran_d_exponent",
+  "description": "write the first Masses value with a Fortran D exponent",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.3"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.3"
+  ],
+  "expected_lammps_behaviour": "Loud",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_pce.yaml",
+  "overrides": {}
+}

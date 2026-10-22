@@ -1,0 +1,54 @@
+{
+  "id": "p04",
+  "difficulty": "representative",
+  "domain": "pce",
+  "force_field": "pcff",
+  "input": "Build a LAMMPS data file in the class II PCFF-INTERFACE force field (INTERFACE FF 1.5) for an MPEG-type PCE: poly(methacrylic acid) backbone, fully deprotonated, with 30 methacrylate units and 10 MPEG methacrylate side chains of 23 ethylene-oxide units (methoxy-terminated), random sequence, hydrogen chain ends, sodium counter-ions.",
+  "hidden_spec": {
+    "builder": "pce",
+    "monomers": {
+      "A": {
+        "kind": "acid",
+        "alpha_methyl": true,
+        "deprotonated": true
+      },
+      "E": {
+        "kind": "ester_peg",
+        "alpha_methyl": true,
+        "eo_units": 23,
+        "end": "OCH3"
+      }
+    },
+    "composition": {
+      "A": 30,
+      "E": 10
+    },
+    "sequence": "random",
+    "end_groups": [
+      "H",
+      "H"
+    ],
+    "counterion": "Na+",
+    "seed": 11,
+    "force_field": "pcff",
+    "name": "p04",
+    "box": {
+      "padding": 10.0
+    }
+  },
+  "declared_config": "configs/interface_pcff_pce.yaml",
+  "tc_mode": "chemistry",
+  "tc_compare_cell": false,
+  "exercises": [
+    "FM04",
+    "FM06",
+    "FM12",
+    "FM22"
+  ],
+  "note": "2122 atoms",
+  "reference": "data/reference/eval_v2/p04.data",
+  "reference_sha256": "3ce8b9db4845364a61a02901df63ee75fa27a33285ea1a33a2f9fde49787fc00",
+  "expected_counts": {
+    "atoms": 2122
+  }
+}

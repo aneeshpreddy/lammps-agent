@@ -1,0 +1,33 @@
+{
+  "id": "ettr_unit_cell_pcff__FM08__coords_x1.5_box_kept",
+  "file": "data/corrupted/ettr_unit_cell_pcff__FM08__coords_x1.5_box_kept.data",
+  "sha256": "653904b019efd4057235d41a5910cfc3546e099cb8c6c348c44f82571be67f7b",
+  "parent_id": "ettr_unit_cell_pcff",
+  "parent_file": "data/reference/minerals/ettr_unit_cell_pcff.data",
+  "parent_sha256": "03907ca1b512d705031c48d3de943465eb73a6305220b0285d22c944253792f8",
+  "failure_mode": "FM08",
+  "operator": "fm08",
+  "variant": "coords_x1.5_box_kept",
+  "description": "multiply all coordinates by 1.5, box unchanged",
+  "params": {
+    "factor": 1.5
+  },
+  "expected_failing_properties": [
+    "P2.2",
+    "P2.3",
+    "P2.4"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.2",
+    "P2.3",
+    "P2.4"
+  ],
+  "expected_lammps_behaviour": "Silent (periodic remap)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_minerals.yaml",
+  "overrides": {
+    "density_family": "ettr_unit_cell",
+    "box_kind": "triclinic"
+  }
+}

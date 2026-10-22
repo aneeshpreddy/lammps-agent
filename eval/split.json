@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "created": "2026-10-22",
+  "seed": 20261022,
+  "rule": "stratified by (domain, difficulty); round(n/3), min 1, per stratum to test; both force fields in test",
+  "dev": [
+    "m02",
+    "m03",
+    "m05",
+    "m07",
+    "p02",
+    "p04",
+    "p05",
+    "p06",
+    "p07",
+    "p08"
+  ],
+  "test": [
+    "m01",
+    "m04",
+    "m06",
+    "p01",
+    "p03",
+    "p09"
+  ],
+  "tasks_sha256": {
+    "m01": "30b5fe6c7d199af6bc75131e17eca0e435f5b6fe9f101cddb583783e23f121f9",
+    "m02": "5e0d6bc8835675b02f71b34b3863fe3f58c8cdb687d06352466c6861eaae9746",
+    "m03": "465b92fba7f77e13d53d3f27f2b1d95cb4abfc57ed92879b7323526605a36978",
+    "m04": "01790492aaf5eff1a51dc17856e8110ce2da6539d8d3d0c4747b56983f0f218c",
+    "m05": "1dfd933cc3c12b2af2ed006fb3627efd3b9111e7c7a617b1f71df9a8d60a00e9",
+    "m06": "5d44c79429a8740ce4e756dcfb35f5a1d54b0ff684f9d8fc5d2a68ca4ef75024",
+    "m07": "30a5371aa35d8e32bb751428fe1b69660cedcd6adafbb3af8424c160f838f42f",
+    "p01": "437a4a8e86e15c0d1c13e592b87eb9aff287ad129325ae5e9f34b9b4d238e33a",
+    "p02": "d038d644111f1d1682d92db47c69d01bba6941e7dcd27a524b650b2676babb6d",
+    "p03": "1ea84b756956a14a269f3d2b15ed5a04c28522301b907c6f0d884bee57f523d0",
+    "p04": "d2fb87e74e2302e5d4a5720db0dd8e5c5b92daf2457b4ed3628487da534b52a0",
+    "p05": "4b631e2c20c7468ca790c9b13ea6bcf5c5de23e8b7bcc146e98702f4dbd7359e",
+    "p06": "48cf04111e46ac1deac0f40c17b499353a566985a5adde4d7c220a85faa61ec9",
+    "p07": "5b77a9c185408829b15401417eecd4707c44c9ff0930a52f5d96a752e039298e",
+    "p08": "f593a7cdc159538bcf7277cc7d034022646c839393aa65e122cde3569cea5062",
+    "p09": "3703c7763f2a111d6ebdfcdd0a7ffdb9d23592885cac23e7856aa037c6e1cf34"
+  }
+}

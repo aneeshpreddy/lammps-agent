@@ -1,0 +1,34 @@
+{
+  "id": "c3s_unit_cell_minimized_pcff__FM05__reversed_duplicate_bond",
+  "file": "data/corrupted/c3s_unit_cell_minimized_pcff__FM05__reversed_duplicate_bond.data",
+  "sha256": "c88ba04b074325b5a292f7442df4d80f40ef07d1a517053407011b4f8d2f3801",
+  "parent_id": "c3s_unit_cell_minimized_pcff",
+  "parent_file": "data/reference/minerals/c3s_unit_cell_minimized_pcff.data",
+  "parent_sha256": "07713482cd7234025d0fdda3dcca83fc1d70f778b5ec15454f2822b16ae7a031",
+  "failure_mode": "FM05",
+  "operator": "fm05",
+  "variant": "reversed_duplicate_bond",
+  "description": "append a reversed copy of an existing bond and raise the header count",
+  "params": {
+    "duplicated_bond": [
+      "1",
+      "1",
+      "7",
+      "14"
+    ]
+  },
+  "expected_failing_properties": [
+    "P1.6"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.6"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_minerals.yaml",
+  "overrides": {
+    "density_family": "c3s_unit_cell_minimized",
+    "box_kind": "triclinic"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "id": "c3s_unit_cell_minimized_pcff__FM06__zero_all_charges",
+  "file": "data/corrupted/c3s_unit_cell_minimized_pcff__FM06__zero_all_charges.data",
+  "sha256": "8483090600d16577d1c2d123b263c2e2fcac531cdaf3279b660208c865f04d29",
+  "parent_id": "c3s_unit_cell_minimized_pcff",
+  "parent_file": "data/reference/minerals/c3s_unit_cell_minimized_pcff.data",
+  "parent_sha256": "07713482cd7234025d0fdda3dcca83fc1d70f778b5ec15454f2822b16ae7a031",
+  "failure_mode": "FM06",
+  "operator": "fm06_zero",
+  "variant": "zero_all_charges",
+  "description": "set every charge to zero",
+  "params": {},
+  "expected_failing_properties": [
+    "P2.1"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.1"
+  ],
+  "expected_lammps_behaviour": "Warn (Using kspace solver on system with no charge)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_minerals.yaml",
+  "overrides": {
+    "density_family": "c3s_unit_cell_minimized",
+    "box_kind": "triclinic"
+  }
+}

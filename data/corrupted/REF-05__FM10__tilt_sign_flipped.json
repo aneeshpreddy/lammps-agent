@@ -9,7 +9,9 @@
   "operator": "fm10_flip",
   "variant": "tilt_sign_flipped",
   "description": "flip the sign of the xy tilt factor",
-  "params": {},
+  "params": {
+    "component": "xy"
+  },
   "expected_failing_properties": [
     "P2.2",
     "P2.3",

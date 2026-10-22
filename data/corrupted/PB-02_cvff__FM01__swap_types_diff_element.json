@@ -1,0 +1,38 @@
+{
+  "id": "PB-02_cvff__FM01__swap_types_diff_element",
+  "file": "data/corrupted/PB-02_cvff__FM01__swap_types_diff_element.data",
+  "sha256": "7b6d601013960ff16a4974a08c3625dc72f4918da5b3892e2dedc95326f20838",
+  "parent_id": "PB-02_cvff",
+  "parent_file": "data/reference/pce_builder/PB-02_cvff.data",
+  "parent_sha256": "8027f299287cb810213d7bb21b5d1e257e264d23e03e5610f769a3888aeb8efe",
+  "failure_mode": "FM01",
+  "operator": "fm01_diff",
+  "variant": "swap_types_diff_element",
+  "description": "swap two atom-type IDs of different elements in Atoms; Masses unchanged",
+  "params": {
+    "types": [
+      1,
+      4
+    ],
+    "names": [
+      "c1",
+      "o-"
+    ]
+  },
+  "expected_failing_properties": [
+    "P1.16",
+    "P2.3",
+    "P2.4",
+    "TC.2"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P2.6",
+    "TC.1",
+    "TC.2"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_pce.yaml",
+  "overrides": {}
+}

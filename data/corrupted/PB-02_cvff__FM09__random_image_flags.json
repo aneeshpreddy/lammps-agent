@@ -1,0 +1,27 @@
+{
+  "id": "PB-02_cvff__FM09__random_image_flags",
+  "file": "data/corrupted/PB-02_cvff__FM09__random_image_flags.data",
+  "sha256": "2c9bb00e3d81f0268565093e687a7bd614dbcd0fe1c2c2baf126df77fe376ac4",
+  "parent_id": "PB-02_cvff",
+  "parent_file": "data/reference/pce_builder/PB-02_cvff.data",
+  "parent_sha256": "8027f299287cb810213d7bb21b5d1e257e264d23e03e5610f769a3888aeb8efe",
+  "failure_mode": "FM09",
+  "operator": "fm09",
+  "variant": "random_image_flags",
+  "description": "add random non-zero image flags in {-1,0,1} to every atom",
+  "params": {
+    "seed": 20261016
+  },
+  "expected_failing_properties": [
+    "P2.7"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P1.9",
+    "P2.7"
+  ],
+  "expected_lammps_behaviour": "Warn at run setup (Inconsistent image flags)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_pce.yaml",
+  "overrides": {}
+}

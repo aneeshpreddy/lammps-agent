@@ -1,0 +1,29 @@
+{
+  "id": "monosulfate_cell_221_pcff__FM03__wrong_units_hint",
+  "file": "data/corrupted/monosulfate_cell_221_pcff__FM03__wrong_units_hint.data",
+  "sha256": "59318f43e80c0821010c84d7e1b9b0dc82e761864e28c6cbb4f92b05485ced66",
+  "parent_id": "monosulfate_cell_221_pcff",
+  "parent_file": "data/reference/minerals/monosulfate_cell_221_pcff.data",
+  "parent_sha256": "9bd9a50f606255829b0a46564fc1b7fd0ac6d0ab1a7d551b84632a78cfb2fa9e",
+  "failure_mode": "FM03",
+  "operator": "fm03_hint",
+  "variant": "wrong_units_hint",
+  "description": "write 'units = metal' on line 1 while the declared units are real",
+  "params": {
+    "mode": "replaced existing hint"
+  },
+  "expected_failing_properties": [
+    "P1.15"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.15"
+  ],
+  "expected_lammps_behaviour": "Warn (Inconsistent units in data file)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_minerals.yaml",
+  "overrides": {
+    "density_family": "monosulfate_cell_221",
+    "box_kind": "triclinic"
+  }
+}

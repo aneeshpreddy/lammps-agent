@@ -1,0 +1,27 @@
+{
+  "id": "monosulfate_cell_221_pcff__FM07__written_as_molecular_style",
+  "file": "data/corrupted/monosulfate_cell_221_pcff__FM07__written_as_molecular_style.data",
+  "sha256": "cf1094ac39737cb13c9a7f351287ddd90ce237d601398d09086a5e5ecac53c2b",
+  "parent_id": "monosulfate_cell_221_pcff",
+  "parent_file": "data/reference/minerals/monosulfate_cell_221_pcff.data",
+  "parent_sha256": "9bd9a50f606255829b0a46564fc1b7fd0ac6d0ab1a7d551b84632a78cfb2fa9e",
+  "failure_mode": "FM07",
+  "operator": "fm07_mol",
+  "variant": "written_as_molecular_style",
+  "description": "drop the charge column (atom_style molecular layout) in a file declared atom_style full",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.4"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.4"
+  ],
+  "expected_lammps_behaviour": "Loud (field count) / Silent if counts match",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_minerals.yaml",
+  "overrides": {
+    "density_family": "monosulfate_cell_221",
+    "box_kind": "triclinic"
+  }
+}

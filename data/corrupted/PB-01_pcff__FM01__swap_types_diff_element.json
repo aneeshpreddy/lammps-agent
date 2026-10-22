@@ -1,0 +1,38 @@
+{
+  "id": "PB-01_pcff__FM01__swap_types_diff_element",
+  "file": "data/corrupted/PB-01_pcff__FM01__swap_types_diff_element.data",
+  "sha256": "e9c526e7db722b56be9ee5b89a9f723088ec55999b27eda92a240ae40c0a8a7e",
+  "parent_id": "PB-01_pcff",
+  "parent_file": "data/reference/pce_builder/PB-01_pcff.data",
+  "parent_sha256": "220d302f3c2fccdecfe3e210b4e65eef042364017ca4db284c25d4de0cc63c75",
+  "failure_mode": "FM01",
+  "operator": "fm01_diff",
+  "variant": "swap_types_diff_element",
+  "description": "swap two atom-type IDs of different elements in Atoms; Masses unchanged",
+  "params": {
+    "types": [
+      1,
+      3
+    ],
+    "names": [
+      "c1",
+      "oc"
+    ]
+  },
+  "expected_failing_properties": [
+    "P1.16",
+    "P2.3",
+    "P2.4",
+    "TC.2"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P2.6",
+    "TC.1",
+    "TC.2"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_pce.yaml",
+  "overrides": {}
+}

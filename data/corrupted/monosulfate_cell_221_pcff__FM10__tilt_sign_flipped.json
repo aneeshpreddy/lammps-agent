@@ -1,0 +1,33 @@
+{
+  "id": "monosulfate_cell_221_pcff__FM10__tilt_sign_flipped",
+  "file": "data/corrupted/monosulfate_cell_221_pcff__FM10__tilt_sign_flipped.data",
+  "sha256": "ec8444026b1d804a8dfa76299943e7ff9600d1fffd5744193e7ddf1c58cdb991",
+  "parent_id": "monosulfate_cell_221_pcff",
+  "parent_file": "data/reference/minerals/monosulfate_cell_221_pcff.data",
+  "parent_sha256": "9bd9a50f606255829b0a46564fc1b7fd0ac6d0ab1a7d551b84632a78cfb2fa9e",
+  "failure_mode": "FM10",
+  "operator": "fm10_flip",
+  "variant": "tilt_sign_flipped",
+  "description": "flip the sign of the xy tilt factor",
+  "params": {
+    "component": "xy"
+  },
+  "expected_failing_properties": [
+    "P2.2",
+    "P2.3",
+    "P2.4"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.2",
+    "P2.3",
+    "P2.4"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_minerals.yaml",
+  "overrides": {
+    "density_family": "monosulfate_cell_221",
+    "box_kind": "triclinic"
+  }
+}

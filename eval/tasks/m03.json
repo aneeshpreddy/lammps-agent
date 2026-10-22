@@ -1,0 +1,33 @@
+{
+  "id": "m03",
+  "difficulty": "representative",
+  "domain": "mineral",
+  "force_field": "pcff",
+  "input": "Build a LAMMPS data file for a 2x2x1 supercell of the tobermorite 14 Å unit cell (INTERFACE FF model, averaged occupancies) in the class II PCFF-INTERFACE force field (INTERFACE FF 1.5).",
+  "hidden_spec": {
+    "builder": "minerals",
+    "model": "tob14_avg_cell",
+    "supercell": [
+      2,
+      2,
+      1
+    ],
+    "force_field": "pcff"
+  },
+  "declared_config": "configs/interface_pcff_minerals.yaml",
+  "tc_mode": "graph",
+  "tc_compare_cell": true,
+  "exercises": [
+    "FM10",
+    "FM11",
+    "FM14",
+    "FM18",
+    "FM22"
+  ],
+  "note": "supercell along a: LAMMPS replicate trap",
+  "reference": "data/reference/eval_v2/m03.data",
+  "reference_sha256": "a271ac6e31cdf86f678b7ae3770e18afde5f02e06fefb123ec1b509f2c022114",
+  "expected_counts": {
+    "atoms": 416
+  }
+}

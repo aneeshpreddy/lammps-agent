@@ -1,0 +1,24 @@
+{
+  "id": "PB-02_cvff__FM34__header_keyword_repeated",
+  "file": "data/corrupted/PB-02_cvff__FM34__header_keyword_repeated.data",
+  "sha256": "cf5f0466a022e5fc7f7e55d11a871e6bfa9889eaac3a7b997318ac385d4eaa88",
+  "parent_id": "PB-02_cvff",
+  "parent_file": "data/reference/pce_builder/PB-02_cvff.data",
+  "parent_sha256": "8027f299287cb810213d7bb21b5d1e257e264d23e03e5610f769a3888aeb8efe",
+  "failure_mode": "FM34",
+  "operator": "fm34",
+  "variant": "header_keyword_repeated",
+  "description": "repeat the 'atoms' header line with the count minus one",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.10"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.10"
+  ],
+  "expected_lammps_behaviour": "Silent (last value wins)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_pce.yaml",
+  "overrides": {}
+}

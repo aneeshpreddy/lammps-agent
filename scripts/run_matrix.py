@@ -31,7 +31,7 @@ from validator.tier3 import NOCOEFF_ARTEFACT_RE, run_lammps  # noqa: E402
 POSITIVE = ["data/reference/REF-01.data", "data/reference/REF-02.data", "data/reference/REF-03.data",
             "data/reference/REF-04.data", "data/fixtures/FIX-T11.data", "data/fixtures/FIX-T14.data"]
 POSITIVE += ["data/reference/REF-05.data", "data/reference/REF-06.data", "data/reference/REF-07.data",
-             "data/reference/REF-08.data"] + [f"data/reference/eval/t{i:02d}.data" for i in range(1, 15)]
+             "data/reference/REF-08.data"] + [f"data/reference/eval/t{i:02d}.data" for i in range(1, 15)] + ["data/reference/pce_builder/PB-01_pcff.data", "data/reference/pce_builder/PB-01_cvff.data", "data/reference/pce_builder/PB-02_pcff.data", "data/reference/pce_builder/PB-02_cvff.data", "data/reference/minerals/c3s_unit_cell_minimized_pcff.data", "data/reference/minerals/c3s_unit_cell_minimized_cvff.data", "data/reference/minerals/c3a_unit_cell_pcff.data", "data/reference/minerals/c3a_unit_cell_cvff.data", "data/reference/minerals/ettr_unit_cell_pcff.data", "data/reference/minerals/monosulfate_cell_221_pcff.data"]
 # Real tool output, not synthetic mutations: msi2lmp (tilt not reduced) and LAMMPS 'replicate ... bond/periodic'
 # (scripts/build_references.py crosscheck). Each is judged on its own merits: TC.2 against its parent says
 # whether it is actually wrong; the validator must FAIL exactly the wrong ones.

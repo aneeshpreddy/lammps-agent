@@ -1,0 +1,89 @@
+{
+  "name": "PB-02_pcff",
+  "spec": {
+    "name": "PB-02_pcff",
+    "monomers": {
+      "A": {
+        "kind": "acid",
+        "alpha_methyl": false,
+        "deprotonated": true
+      },
+      "E": {
+        "kind": "ester_peg",
+        "alpha_methyl": false,
+        "eo_units": 10,
+        "end": "OCH3"
+      }
+    },
+    "composition": {
+      "A": 6,
+      "E": 3
+    },
+    "sequence": "block",
+    "end_groups": [
+      "CH3",
+      "CH3"
+    ],
+    "n_chains": 3,
+    "counterion": "Ca2+",
+    "box": {
+      "padding": 10.0
+    },
+    "force_field": "pcff",
+    "seed": 2,
+    "conformation": "random",
+    "relax": true
+  },
+  "force_field": "PCFF-INTERFACE (INTERFACE FF 1.5, class II)",
+  "frc": "INTERFACE_FF_1_5/FORCE_FIELDS/pcff_interface_v1_5.frc",
+  "sequences": [
+    "AAAAAAEEE",
+    "AAAAAAEEE",
+    "AAAAAAEEE"
+  ],
+  "chain_charges": [
+    -6,
+    -6,
+    -6
+  ],
+  "counterions": 9,
+  "natoms": 915,
+  "elements": {
+    "C": 276,
+    "O": 144,
+    "H": 486,
+    "Ca": 9
+  },
+  "net_charge": 0.0,
+  "box": [
+    121.5233,
+    52.1951,
+    47.1828
+  ],
+  "grower_min_nonbonded_distance_A": [
+    1.269,
+    1.416,
+    1.497
+  ],
+  "data_file": "data/reference/pce_builder/PB-02_pcff.data",
+  "data_sha256": "8a63ca3d80baf8ef5bef8ee2aaf01034b04f3abb6f66e64525e2f439756cf235",
+  "msi2lmp_missing_kinds": [
+    "angleangle",
+    "angleangledihedral",
+    "angledihedral",
+    "bondangle",
+    "bondbond",
+    "endbonddihedral",
+    "midbonddihedral"
+  ],
+  "msi2lmp_missing_messages": 75,
+  "cross_terms_zeroed": true,
+  "relaxed": true,
+  "stages": [
+    "soft A=10.0",
+    "soft A=40.0",
+    "soft A=100.0",
+    "lj/class2/coul/cut 10.0"
+  ],
+  "final_energy_kcal_mol": -23.6103044581078
+}

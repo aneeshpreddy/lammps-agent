@@ -1,0 +1,27 @@
+{
+  "id": "ettr_unit_cell_pcff__FM07__written_as_molecular_style",
+  "file": "data/corrupted/ettr_unit_cell_pcff__FM07__written_as_molecular_style.data",
+  "sha256": "8fd105a96be14ff0c18c551c8ad8e59fa3c405aa4b0a665ce4b73d8c6f8678a4",
+  "parent_id": "ettr_unit_cell_pcff",
+  "parent_file": "data/reference/minerals/ettr_unit_cell_pcff.data",
+  "parent_sha256": "03907ca1b512d705031c48d3de943465eb73a6305220b0285d22c944253792f8",
+  "failure_mode": "FM07",
+  "operator": "fm07_mol",
+  "variant": "written_as_molecular_style",
+  "description": "drop the charge column (atom_style molecular layout) in a file declared atom_style full",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.4"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.4"
+  ],
+  "expected_lammps_behaviour": "Loud (field count) / Silent if counts match",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_minerals.yaml",
+  "overrides": {
+    "density_family": "ettr_unit_cell",
+    "box_kind": "triclinic"
+  }
+}

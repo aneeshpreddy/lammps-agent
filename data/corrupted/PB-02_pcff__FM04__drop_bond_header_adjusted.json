@@ -1,0 +1,33 @@
+{
+  "id": "PB-02_pcff__FM04__drop_bond_header_adjusted",
+  "file": "data/corrupted/PB-02_pcff__FM04__drop_bond_header_adjusted.data",
+  "sha256": "f615d5cbf1df7397d637049f7da3adc3368e4cfc2117bcd7697783ed39e6bc6d",
+  "parent_id": "PB-02_pcff",
+  "parent_file": "data/reference/pce_builder/PB-02_pcff.data",
+  "parent_sha256": "8a63ca3d80baf8ef5bef8ee2aaf01034b04f3abb6f66e64525e2f439756cf235",
+  "failure_mode": "FM04",
+  "operator": "fm04_silent",
+  "variant": "drop_bond_header_adjusted",
+  "description": "delete one bond row and lower the header count (silent variant)",
+  "params": {
+    "deleted_bond": [
+      "452",
+      "13",
+      "442",
+      "443"
+    ]
+  },
+  "expected_failing_properties": [
+    "P1.10",
+    "TC.2"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.10",
+    "TC.2"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_pce.yaml",
+  "overrides": {}
+}

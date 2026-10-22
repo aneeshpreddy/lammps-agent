@@ -1,0 +1,26 @@
+{
+  "id": "PB-02_cvff__FM03__wrong_units_hint",
+  "file": "data/corrupted/PB-02_cvff__FM03__wrong_units_hint.data",
+  "sha256": "113fce0c83e635bdbb1b43ae5f6d2a790ded73473b8df9e71d9973cb6509c8ee",
+  "parent_id": "PB-02_cvff",
+  "parent_file": "data/reference/pce_builder/PB-02_cvff.data",
+  "parent_sha256": "8027f299287cb810213d7bb21b5d1e257e264d23e03e5610f769a3888aeb8efe",
+  "failure_mode": "FM03",
+  "operator": "fm03_hint",
+  "variant": "wrong_units_hint",
+  "description": "write 'units = metal' on line 1 while the declared units are real",
+  "params": {
+    "mode": "appended hint"
+  },
+  "expected_failing_properties": [
+    "P1.15"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.15"
+  ],
+  "expected_lammps_behaviour": "Warn (Inconsistent units in data file)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_pce.yaml",
+  "overrides": {}
+}

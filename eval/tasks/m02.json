@@ -1,0 +1,33 @@
+{
+  "id": "m02",
+  "difficulty": "easy",
+  "domain": "mineral",
+  "force_field": "pcff",
+  "input": "Build a LAMMPS data file for one unit cell of tobermorite 11 Å (INTERFACE FF model) in the class II PCFF-INTERFACE force field (INTERFACE FF 1.5), with the triclinic tilt within LAMMPS's documented bound.",
+  "hidden_spec": {
+    "builder": "minerals",
+    "model": "tob11_unit_cell",
+    "supercell": [
+      1,
+      1,
+      1
+    ],
+    "force_field": "pcff"
+  },
+  "declared_config": "configs/interface_pcff_minerals.yaml",
+  "tc_mode": "graph",
+  "tc_compare_cell": true,
+  "exercises": [
+    "FM02",
+    "FM06",
+    "FM10",
+    "FM15",
+    "FM22"
+  ],
+  "note": "triclinic, tilt reduction needed",
+  "reference": "data/reference/eval_v2/m02.data",
+  "reference_sha256": "c3d34dacb9fff5f0e0431f9938105e95bc920aa5b32ffcf6e7d9b6df99d0f9fe",
+  "expected_counts": {
+    "atoms": 88
+  }
+}

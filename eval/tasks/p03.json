@@ -1,0 +1,54 @@
+{
+  "id": "p03",
+  "difficulty": "representative",
+  "domain": "pce",
+  "force_field": "pcff",
+  "input": "Build a LAMMPS data file in the class II PCFF-INTERFACE force field (INTERFACE FF 1.5) for a polyacrylate PCE with 12 carboxylate units and 12 acrylate ester side chains of 15 ethylene-oxide units (hydroxyl-terminated), random sequence, methyl end caps, neutralised with calcium ions.",
+  "hidden_spec": {
+    "builder": "pce",
+    "monomers": {
+      "A": {
+        "kind": "acid",
+        "alpha_methyl": false,
+        "deprotonated": true
+      },
+      "E": {
+        "kind": "ester_peg",
+        "alpha_methyl": false,
+        "eo_units": 15,
+        "end": "OH"
+      }
+    },
+    "composition": {
+      "A": 12,
+      "E": 12
+    },
+    "sequence": "random",
+    "end_groups": [
+      "CH3",
+      "CH3"
+    ],
+    "counterion": "Ca2+",
+    "seed": 1,
+    "force_field": "pcff",
+    "name": "p03",
+    "box": {
+      "padding": 10.0
+    }
+  },
+  "declared_config": "configs/interface_pcff_pce.yaml",
+  "tc_mode": "chemistry",
+  "tc_compare_cell": false,
+  "exercises": [
+    "FM04",
+    "FM06",
+    "FM12",
+    "FM22"
+  ],
+  "note": "the group's c12e12p15 (REF-01) architecture",
+  "reference": "data/reference/eval_v2/p03.data",
+  "reference_sha256": "482af1c8a9e0c51c4f448dfa3541723e0bf3f92c6974a5fcbb3bfda0a91cf404",
+  "expected_counts": {
+    "atoms": 1478
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "id": "p07",
+  "difficulty": "hard",
+  "domain": "pce",
+  "force_field": "pcff",
+  "input": "Build a LAMMPS data file in the class II PCFF-INTERFACE force field (INTERFACE FF 1.5) for a TPEG-type PCE: 6 isoprenyl-ether PEG side chains of 30 ethylene-oxide units with 18 acrylate units, side-chain density increasing along the backbone (gradient), neutralised with Ca2+.",
+  "hidden_spec": {
+    "builder": "pce",
+    "n_side_chains": 6,
+    "n_acid": 18,
+    "side_chain_length": 30,
+    "anchor": "TPEG",
+    "acid": "acrylic",
+    "side_chain_end": "OH",
+    "sequence": "gradient",
+    "counterion": "Ca2+",
+    "seed": 5,
+    "force_field": "pcff",
+    "name": "p07",
+    "box": {
+      "padding": 10.0
+    }
+  },
+  "declared_config": "configs/interface_pcff_pce.yaml",
+  "tc_mode": "chemistry",
+  "tc_compare_cell": false,
+  "exercises": [
+    "FM06",
+    "FM12",
+    "FM17"
+  ],
+  "note": "1517 atoms, gradient sequence",
+  "reference": "data/reference/eval_v2/p07.data",
+  "reference_sha256": "ebbe0f514486980fcd56b5fd277251b2e4ee965e2877f9e69cc1a3d6baad0c0d",
+  "expected_counts": {
+    "atoms": 1517
+  }
+}

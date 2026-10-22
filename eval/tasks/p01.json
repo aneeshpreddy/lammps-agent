@@ -1,0 +1,53 @@
+{
+  "id": "p01",
+  "difficulty": "easy",
+  "domain": "pce",
+  "force_field": "pcff",
+  "input": "Build a LAMMPS data file in the class II PCFF-INTERFACE force field (INTERFACE FF 1.5) for a short PCE oligomer: one acrylate (carboxylate) unit and one acrylate ester unit carrying a hydroxyl-terminated di(ethylene glycol) chain, methyl end caps, neutralised with one Na+.",
+  "hidden_spec": {
+    "builder": "pce",
+    "monomers": {
+      "A": {
+        "kind": "acid",
+        "alpha_methyl": false,
+        "deprotonated": true
+      },
+      "E": {
+        "kind": "ester_peg",
+        "alpha_methyl": false,
+        "eo_units": 2,
+        "end": "OH"
+      }
+    },
+    "composition": {
+      "A": 1,
+      "E": 1
+    },
+    "sequence": "random",
+    "end_groups": [
+      "CH3",
+      "CH3"
+    ],
+    "counterion": "Na+",
+    "seed": 4,
+    "force_field": "pcff",
+    "name": "p01",
+    "box": {
+      "padding": 10.0
+    }
+  },
+  "declared_config": "configs/interface_pcff_pce.yaml",
+  "tc_mode": "chemistry",
+  "tc_compare_cell": false,
+  "exercises": [
+    "FM06",
+    "FM12",
+    "FM22"
+  ],
+  "note": "same chemistry as the group's EMC file REF-04",
+  "reference": "data/reference/eval_v2/p01.data",
+  "reference_sha256": "f0711079cac40013cbb5ecb492b5e96b05401707df64f3f65c1a8725bcbcc18b",
+  "expected_counts": {
+    "atoms": 40
+  }
+}

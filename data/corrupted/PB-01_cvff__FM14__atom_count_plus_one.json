@@ -1,0 +1,24 @@
+{
+  "id": "PB-01_cvff__FM14__atom_count_plus_one",
+  "file": "data/corrupted/PB-01_cvff__FM14__atom_count_plus_one.data",
+  "sha256": "7281ef490890b8f31b0bb8a5a91a5c86f753b14c533230e379203800608ed017",
+  "parent_id": "PB-01_cvff",
+  "parent_file": "data/reference/pce_builder/PB-01_cvff.data",
+  "parent_sha256": "71f2a6c87ed6e663ece9da4740c796b0885449f901b03a71fc5d2e06e55a36f7",
+  "failure_mode": "FM14",
+  "operator": "fm14",
+  "variant": "atom_count_plus_one",
+  "description": "raise the header atom count by one",
+  "params": {},
+  "expected_failing_properties": [
+    "P1.1"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.1"
+  ],
+  "expected_lammps_behaviour": "Loud",
+  "header_consistent": false,
+  "declared_config": "configs/interface_cvff_pce.yaml",
+  "overrides": {}
+}

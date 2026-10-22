@@ -1,0 +1,34 @@
+{
+  "id": "c3a_unit_cell_cvff__FM04__drop_bond_header_kept",
+  "file": "data/corrupted/c3a_unit_cell_cvff__FM04__drop_bond_header_kept.data",
+  "sha256": "20dc892c3b0d97968ac3e67909c1e36ed2b458121714c3aa29f501ddb70537fe",
+  "parent_id": "c3a_unit_cell_cvff",
+  "parent_file": "data/reference/minerals/c3a_unit_cell_cvff.data",
+  "parent_sha256": "10987dbdbf57d89db46e107fd14670e55a31c05c85204bd108acde662a44d714",
+  "failure_mode": "FM04",
+  "operator": "fm04_loud",
+  "variant": "drop_bond_header_kept",
+  "description": "delete one bond row, header unchanged",
+  "params": {
+    "deleted_bond": [
+      "97",
+      "1",
+      "141",
+      "72"
+    ]
+  },
+  "expected_failing_properties": [
+    "P1.1"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.1"
+  ],
+  "expected_lammps_behaviour": "Loud",
+  "header_consistent": false,
+  "declared_config": "configs/interface_cvff_minerals.yaml",
+  "overrides": {
+    "density_family": "c3a_unit_cell",
+    "box_kind": "any"
+  }
+}

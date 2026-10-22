@@ -32,7 +32,18 @@ PARENTS = ["data/reference/REF-01.data", "data/reference/REF-02.data", "data/ref
            "data/reference/REF-04.data", "data/fixtures/FIX-T11.data", "data/fixtures/FIX-T14.data",
            # primary system class from v0.5 (tobermorite, INTERFACE FF; published-model references)
            "data/reference/REF-05.data", "data/reference/REF-06.data", "data/reference/REF-07.data",
-           "data/reference/REF-08.data"]
+           "data/reference/REF-08.data",
+           # system class of 2026-10-20: builder PCEs (class I and II) and other cement minerals
+           "data/reference/pce_builder/PB-01_pcff.data",
+           "data/reference/pce_builder/PB-01_cvff.data",
+           "data/reference/pce_builder/PB-02_pcff.data",
+           "data/reference/pce_builder/PB-02_cvff.data",
+           "data/reference/minerals/c3s_unit_cell_minimized_pcff.data",
+           "data/reference/minerals/c3s_unit_cell_minimized_cvff.data",
+           "data/reference/minerals/c3a_unit_cell_pcff.data",
+           "data/reference/minerals/c3a_unit_cell_cvff.data",
+           "data/reference/minerals/ettr_unit_cell_pcff.data",
+           "data/reference/minerals/monosulfate_cell_221_pcff.data"]
 
 OPERATORS: List[Dict] = []
 
@@ -325,8 +336,10 @@ def fm10_flip(d, c):
     if not tilt or not any(tilt):
         return None
     v = d.header_values("xy xz yz")
-    d.set_header("xy xz yz", [fmt(-float(v[0]), v[0])] + v[1:])
-    return {}
+    k = next(i for i, x in enumerate(v) if float(x) != 0.0)     # first non-zero tilt (xz for monoclinic C3S)
+    v[k] = fmt(-float(v[k]), v[k])
+    d.set_header("xy xz yz", v)
+    return {"component": ["xy", "xz", "yz"][k]}
 
 
 @operator("FM10", "tilt_zeroed", ["P2.2", "P2.3", "P2.4"], 2, "Silent", "set all tilt factors to zero")
@@ -563,9 +576,12 @@ def _coeff_rows(d, name):
           spec_expect=["P1.7", "TC.2"])
 def fm22_vals(d, c):
     rows = _coeff_rows(d, "Bond Coeffs")
-    if len(rows) < 2:
+    # two rows whose parameter values differ (equivalent bond types often share identical values)
+    pair = next(((x, y) for k, x in enumerate(rows) for y in rows[k + 1:]
+                 if [float(v) for v in x[1][1:]] != [float(v) for v in y[1][1:]]), None)
+    if pair is None:
         return None
-    (ia, ta, ca), (ib, tb, cb) = rows[0], rows[1]
+    (ia, ta, ca), (ib, tb, cb) = pair
     ta[1:], tb[1:] = tb[1:], ta[1:]
     put(d, ia, ta, ca)
     put(d, ib, tb, cb)
@@ -703,6 +719,23 @@ def fm35(d, c):
 
 
 # ---- driver -----------------------------------------------------------------------------------
+def _numeric_tokens(text):
+    """What a mutation must change to be a negative control: line 1, any comment, any numeric value,
+    or whether a line exceeds 254 characters. Whitespace-only reformatting is a no-op."""
+    lines = text.splitlines()
+    out = [lines[0].strip() if lines else ""]
+    for ln in lines[1:]:
+        toks, com = split_comment(ln)
+        row = []
+        for t in toks:
+            try:
+                row.append(float(t))
+            except ValueError:
+                row.append(t)
+        out.append((row, com.strip(), len(ln) > 254))
+    return out
+
+
 def sha256(path):
     return hashlib.sha256(open(path, "rb").read()).hexdigest()
 
@@ -712,7 +745,7 @@ def main():
         for f in glob.glob(os.path.join(OUT, "*")):
             os.remove(f)
     os.makedirs(OUT, exist_ok=True)
-    manifest = []
+    manifest, noops = [], []
     for parent in PARENTS:
         ppath = os.path.join(ROOT, parent)
         with open(os.path.splitext(ppath)[0] + ".json") as fh:
@@ -727,6 +760,9 @@ def main():
             if params is None:
                 continue
             name = f"{pmeta['id']}__{op['fm']}__{op['variant']}"
+            if _numeric_tokens(d.text()) == _numeric_tokens(open(ppath).read()):
+                noops.append(name)      # the operator changed nothing in this parent: not a negative control
+                continue
             out = os.path.join(OUT, name + ".data")
             d.write(out)
             meta = {
@@ -746,10 +782,11 @@ def main():
                                                    "expected_failing_properties", "expected_tier",
                                                    "expected_lammps_behaviour")})
     with open(os.path.join(OUT, "manifest.json"), "w") as fh:
-        json.dump({"generated_by": "scripts/mutate.py", "operators": len(OPERATORS), "files": manifest}, fh, indent=2)
+        json.dump({"generated_by": "scripts/mutate.py", "operators": len(OPERATORS), "files": manifest,
+                   "skipped_no_op": noops}, fh, indent=2)
     fms = sorted({m["failure_mode"] for m in manifest})
     print(f"{len(manifest)} corrupted files from {len(PARENTS)} parents, {len(OPERATORS)} operators, "
-          f"{len(fms)} failure modes: {', '.join(fms)}")
+          f"{len(fms)} failure modes: {', '.join(fms)}; skipped {len(noops)} no-op mutation(s): {noops}")
 
 
 if __name__ == "__main__":

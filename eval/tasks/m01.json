@@ -1,0 +1,33 @@
+{
+  "id": "m01",
+  "difficulty": "easy",
+  "domain": "mineral",
+  "force_field": "cvff",
+  "input": "Build a LAMMPS data file for one unit cell of tricalcium silicate (C3S, the minimized INTERFACE FF unit cell) in the class I CVFF-INTERFACE force field (INTERFACE FF 1.5).",
+  "hidden_spec": {
+    "builder": "minerals",
+    "model": "c3s_unit_cell_minimized",
+    "supercell": [
+      1,
+      1,
+      1
+    ],
+    "force_field": "cvff"
+  },
+  "declared_config": "configs/interface_cvff_minerals.yaml",
+  "tc_mode": "graph",
+  "tc_compare_cell": true,
+  "exercises": [
+    "FM02",
+    "FM06",
+    "FM10",
+    "FM15",
+    "FM22"
+  ],
+  "note": "class I mineral; no dihedrals",
+  "reference": "data/reference/eval_v2/m01.data",
+  "reference_sha256": "3106fcd3fa47a38b258c6c1990e7dea71a5902cc8f232ce85524036a97dac2b8",
+  "expected_counts": {
+    "atoms": 54
+  }
+}

@@ -287,3 +287,26 @@ No work is recorded for 5–15 October; everything below was done on 2026-10-16.
 - **Caveats carried forward:** Tier 2 tolerances are provisional (supervisor to confirm the margins); the corruption matrix has not yet been rerun on the system class set on 2026-10-20 (class I CVFF PCEs, non-tobermorite minerals); a position-free TC comparison for PCE is still to be built (needed for METRICS.md).
 - **Supervisor sign-off:** not yet recorded; forward the repo link.
 - **Next:** rerun the corruption matrix with builder PCEs (both force fields) and mineral references as parents; then the eval set, METRICS.md and the dev/test split.
+
+---
+
+## 2026-10-22 — EVAL SET Day 20: comparison modes, eval set v2, METRICS, frozen split (AI-assisted)
+
+### Done
+- **TC.2 position-free modes** (`validator/tc.py`): `graph` (Weisfeiler–Lehman hash of each typed, charged molecule graph; optional cell comparison) and `chemistry` (per molecule: (type, charge) multiset, net charge, bonded type-pair counts). The same spec with a different random draw → `graph` FAIL, `chemistry` PASS; a wrong composition → both FAIL. 101 tests pass.
+- **Validator rerun on the new system class:** 20 parents (adding builder PCEs class I/II, C3S, C3A, ettringite, monosulfate); 870 corrupted files, 0 missed, 848 caught by Tiers 0–2, 22 only by TC.2; 34/34 positive controls pass. Three operator defects fixed: no-op mutations are now skipped and listed (8 were "missed" only because nothing had changed), the tilt flip uses the first non-zero component, and the coefficient swap picks rows whose values differ.
+- **Eval set v2** (`scripts/build_eval_set.py`, `docs/EVAL_SET.md`): 16 tasks (7 minerals, 9 PCE; 5 class I, 11 class II; 4 easy, 7 representative, 5 hard). Every reference passes all tiers, matches itself in its TC mode, and rebuilds byte-identically. v1 (tobermorite only) is kept in `eval/tasks_v1/`.
+- **`docs/METRICS.md` v1.0**: success = valid (all tiers) AND equivalent (TC.2 in the task's mode); 3 repeats on dev, 5 on test; breakdowns and diagnostics.
+- **Split frozen** (`scripts/make_split.py`, seed 20261022): dev = m02 m03 m05 m07 p02 p04 p05 p06 p07 p08; test = m01 m04 m06 p01 p03 p09.
+  **`eval/split.json` SHA-256: b1e632ad536c23b66b4cec155a4ee44a329b16a758b8ad29c5a1cb1e33c5031f.** Do not open the test split before 16 Nov.
+
+### Not Done
+- Harness `eval/harness.py` with oracle / corrupter sanity checks (plan Day 21, 23 Oct).
+- Coefficient–geometry consistency check for FM22 (largest remaining TC-only category).
+- Supervisor: meaning of "main chains"; whether PCE-on-mineral systems belong in the evaluation.
+
+### Tomorrow
+- Harness + oracle/corrupter checks.
+
+### Hours
+- To be filled by project owner.

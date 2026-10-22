@@ -1,0 +1,31 @@
+{
+  "id": "PB-02_pcff__FM04__drop_bond_header_kept",
+  "file": "data/corrupted/PB-02_pcff__FM04__drop_bond_header_kept.data",
+  "sha256": "a7341287a04f767450a7558b1533554aeebf93a5bc87ef1d4b2c7304d07b4fe4",
+  "parent_id": "PB-02_pcff",
+  "parent_file": "data/reference/pce_builder/PB-02_pcff.data",
+  "parent_sha256": "8a63ca3d80baf8ef5bef8ee2aaf01034b04f3abb6f66e64525e2f439756cf235",
+  "failure_mode": "FM04",
+  "operator": "fm04_loud",
+  "variant": "drop_bond_header_kept",
+  "description": "delete one bond row, header unchanged",
+  "params": {
+    "deleted_bond": [
+      "452",
+      "13",
+      "442",
+      "443"
+    ]
+  },
+  "expected_failing_properties": [
+    "P1.1"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.1"
+  ],
+  "expected_lammps_behaviour": "Loud",
+  "header_consistent": false,
+  "declared_config": "configs/interface_pcff_pce.yaml",
+  "overrides": {}
+}

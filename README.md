@@ -20,6 +20,8 @@ python -m builders.pce examples/pce/hpeg.json --ff cvff --out runs/pce          
 python -m builders.minerals tob11_unit_cell --supercell 2 2 1 --ff pcff --out runs/minerals
 python -m builders.minerals --list                                                      # all INTERFACE models
 python scripts/pce_examples.py            # docs/PCE_BUILDER.md  (every example, both force fields, validated)
+python scripts/build_eval_set.py          # eval set v2: eval/tasks/*.json + data/reference/eval_v2/ + docs/EVAL_SET.md
+# eval/split.json is frozen (scripts/make_split.py, 2026-10-22); success is defined in docs/METRICS.md
 python scripts/build_mineral_references.py   # docs/MINERALS.md (every cement mineral, both force fields)
 ```
 

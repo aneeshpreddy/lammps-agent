@@ -108,3 +108,37 @@ def test_pppm_build_crash_is_attributed_to_build():
     assert res.lammps["full_fallback"]["outcome"] == "CLEAN"
     assert res.get("P3.2").verdict == "PASS" and res.get("P3.2").warnings
     assert res.get("P3.4").verdict == "PASS" and "LAMMPS build" in res.get("P3.4").details["attribution"]
+
+
+def _cfg_mode(make_cfg, mode):
+    cfg = make_cfg()
+    cfg["declared"]["tc_mode"] = mode
+    return cfg
+
+
+def test_graph_mode_ignores_positions_and_numbering(write, make_cfg):
+    ref = write(VALID)
+    # move the second water by 1 Å and swap IDs 2/3: same molecules, different geometry and numbering
+    text = VALID.replace("4 2 1 -0.8476 6.000 6.000 6.000", "4 2 1 -0.8476 7.000 6.000 6.000") \
+        .replace("5 2 2 0.4238 6.816 6.577 6.000", "5 2 2 0.4238 7.816 6.577 6.000") \
+        .replace("6 2 2 0.4238 5.184 6.577 6.000", "6 2 2 0.4238 6.184 6.577 6.000")
+    for mode in ("graph", "chemistry"):
+        res = validate(write(text), _cfg_mode(make_cfg, mode), reference=ref, run_tier3=False)
+        assert res.get("TC.2").verdict == "PASS", (mode, res.get("TC.2").message)
+    res = validate(write(text), make_cfg(), reference=ref, run_tier3=False)      # positions mode notices
+    assert res.get("TC.2").verdict == "FAIL"
+
+
+def test_graph_and_chemistry_detect_changed_charge(write, make_cfg):
+    ref = write(VALID)
+    text = VALID.replace("6 2 2 0.4238", "6 2 2 0.4338").replace("5 2 2 0.4238", "5 2 2 0.4138")
+    for mode in ("graph", "chemistry"):
+        res = validate(write(text), _cfg_mode(make_cfg, mode), reference=ref, run_tier3=False)
+        assert res.get("TC.2").verdict == "FAIL", mode
+
+
+def test_graph_detects_changed_connectivity(write, make_cfg):
+    ref = write(VALID)
+    text = VALID.replace("4 1 4 6\n", "4 1 5 6\n")       # H-H bond instead of O-H: same counts
+    res = validate(write(text), _cfg_mode(make_cfg, "graph"), reference=ref, run_tier3=False)
+    assert res.get("TC.2").verdict == "FAIL"

@@ -1,0 +1,30 @@
+{
+  "id": "c3s_unit_cell_minimized_cvff__FM10__tilt_over_skewed_same_lattice",
+  "file": "data/corrupted/c3s_unit_cell_minimized_cvff__FM10__tilt_over_skewed_same_lattice.data",
+  "sha256": "3b58740570c87dd77821b11f3434016bd61196313fe70d25a5a69325703a2790",
+  "parent_id": "c3s_unit_cell_minimized_cvff",
+  "parent_file": "data/reference/minerals/c3s_unit_cell_minimized_cvff.data",
+  "parent_sha256": "f0e54cf3c3ca0736bcc90da57f87c02233f6000c7a528f3b80e68e275acd984f",
+  "failure_mode": "FM10",
+  "operator": "fm10_skew",
+  "variant": "tilt_over_skewed_same_lattice",
+  "description": "add lx to xy: the same lattice, but beyond the documented tilt bound",
+  "params": {
+    "xy_before": 0.0,
+    "xy_after": -12.1846
+  },
+  "expected_failing_properties": [
+    "P2.8"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.8"
+  ],
+  "expected_lammps_behaviour": "Warn on a different criterion (or none)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_minerals.yaml",
+  "overrides": {
+    "density_family": "c3s_unit_cell_minimized",
+    "box_kind": "triclinic"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "c3s_unit_cell_minimized_cvff__FM10__tilt_zeroed",
+  "file": "data/corrupted/c3s_unit_cell_minimized_cvff__FM10__tilt_zeroed.data",
+  "sha256": "7a1c7985a16b783be1f0aae19f018fb42ce58cd3abe5d12761da79856f327431",
+  "parent_id": "c3s_unit_cell_minimized_cvff",
+  "parent_file": "data/reference/minerals/c3s_unit_cell_minimized_cvff.data",
+  "parent_sha256": "f0e54cf3c3ca0736bcc90da57f87c02233f6000c7a528f3b80e68e275acd984f",
+  "failure_mode": "FM10",
+  "operator": "fm10_zero",
+  "variant": "tilt_zeroed",
+  "description": "set all tilt factors to zero",
+  "params": {},
+  "expected_failing_properties": [
+    "P2.2",
+    "P2.3",
+    "P2.4"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.2",
+    "P2.3",
+    "P2.4"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_minerals.yaml",
+  "overrides": {
+    "density_family": "c3s_unit_cell_minimized",
+    "box_kind": "triclinic"
+  }
+}

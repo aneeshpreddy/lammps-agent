@@ -1,0 +1,30 @@
+{
+  "id": "PB-02_cvff__FM04__angles_dihedrals_impropers_dropped",
+  "file": "data/corrupted/PB-02_cvff__FM04__angles_dihedrals_impropers_dropped.data",
+  "sha256": "9f53a115e88883dfa8aefeeaf4e89b102ebe47b7bc3f12c30dc1b903c38d5620",
+  "parent_id": "PB-02_cvff",
+  "parent_file": "data/reference/pce_builder/PB-02_cvff.data",
+  "parent_sha256": "8027f299287cb810213d7bb21b5d1e257e264d23e03e5610f769a3888aeb8efe",
+  "failure_mode": "FM04",
+  "operator": "fm04_higher",
+  "variant": "angles_dihedrals_impropers_dropped",
+  "description": "delete every Angles/Dihedrals/Impropers row and set their header counts to 0 (what an ASE lammps-data round trip does, docs/R13_ASE_ROUNDTRIP.md)",
+  "params": {
+    "Impropers": 27,
+    "Dihedrals": 2070,
+    "Angles": 1674
+  },
+  "expected_failing_properties": [
+    "P1.17",
+    "TC.2"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.17",
+    "TC.2"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_pce.yaml",
+  "overrides": {}
+}
