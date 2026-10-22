@@ -2,7 +2,7 @@
   "calibration_id": "tobermorite_interface",
   "version": 1,
   "status": "PROVISIONAL_DEFAULT",
-  "date": "2026-10-20",
+  "date": "2026-10-22",
   "derivation_version": "calibrate.py v1 (2026-10-16)",
   "references": [
     {
@@ -30,6 +30,7 @@
       "family": "tobermorite14"
     }
   ],
+  "contact_sources": [],
   "bond_length": {
     "measured": "minimum-image bond length per atom-type-name pair (\u00c5)",
     "derivation": "[min x (1-0.1), max x (1+0.1)] over the references",
@@ -290,6 +291,64 @@
       "lo": 2.22728,
       "hi": 2.227731,
       "basis": "Crystal: every supercell of the tobermorite 14 \u00c5 model has exactly the unit-cell density, and the unit and rectangular cells agree. The \u00b11e-4 relative margin covers box lengths printed to >= 6 significant digits; it is a representation tolerance, not a physical one (PROPERTIES \u00a78.5 rule 3)."
+    }
+  },
+  "bond_r0": {
+    "measured": "mean bond length of each bond type / that type's own r0 (Bond Coeffs or coeff file)",
+    "derivation": "per atom-type pair: [min - 0.03, max + 0.03] of the observed ratios; other pairs: |ratio - 1| <= max(0.03, 2.0 x largest observed |ratio - 1|)",
+    "basis": "structures sit systematically off r0 (crystal geometry vs force-field fit, crowded centres), but each pair's ratio is stable; a coefficient row moved to another bond type changes it",
+    "observed_max_abs_deviation": 0.0479,
+    "default_tau_rel": 0.0959,
+    "pairs": {
+      "h*|o*": {
+        "n_types": 4,
+        "min": 1.0141,
+        "max": 1.0173,
+        "lo": 0.9841,
+        "hi": 1.0473
+      },
+      "hoy|oc14": {
+        "n_types": 4,
+        "min": 0.9951,
+        "max": 1.01,
+        "lo": 0.9651,
+        "hi": 1.04
+      },
+      "oc12|sc2": {
+        "n_types": 4,
+        "min": 0.9723,
+        "max": 0.9839,
+        "lo": 0.9423,
+        "hi": 1.0139
+      },
+      "oc12|sc3": {
+        "n_types": 4,
+        "min": 0.9521,
+        "max": 0.9535,
+        "lo": 0.9221,
+        "hi": 0.9835
+      },
+      "oc13|sc2": {
+        "n_types": 4,
+        "min": 0.9889,
+        "max": 0.9974,
+        "lo": 0.9589,
+        "hi": 1.0274
+      },
+      "oc14|sc3": {
+        "n_types": 4,
+        "min": 0.9804,
+        "max": 0.9833,
+        "lo": 0.9504,
+        "hi": 1.0133
+      },
+      "oc22|sc3": {
+        "n_types": 2,
+        "min": 0.9604,
+        "max": 0.9604,
+        "lo": 0.9304,
+        "hi": 0.9904
+      }
     }
   },
   "mass": {

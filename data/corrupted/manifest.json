@@ -2532,9 +2532,10 @@
       "failure_mode": "FM22",
       "variant": "bond_coeff_values_permuted",
       "expected_failing_properties": [
+        "P2.9",
         "TC.2"
       ],
-      "expected_tier": "TC",
+      "expected_tier": 2,
       "expected_lammps_behaviour": "Silent"
     },
     {
@@ -3132,9 +3133,10 @@
       "failure_mode": "FM22",
       "variant": "bond_coeff_values_permuted",
       "expected_failing_properties": [
+        "P2.9",
         "TC.2"
       ],
-      "expected_tier": "TC",
+      "expected_tier": 2,
       "expected_lammps_behaviour": "Silent"
     },
     {
@@ -3732,9 +3734,10 @@
       "failure_mode": "FM22",
       "variant": "bond_coeff_values_permuted",
       "expected_failing_properties": [
+        "P2.9",
         "TC.2"
       ],
-      "expected_tier": "TC",
+      "expected_tier": 2,
       "expected_lammps_behaviour": "Silent"
     },
     {
@@ -4332,9 +4335,10 @@
       "failure_mode": "FM22",
       "variant": "bond_coeff_values_permuted",
       "expected_failing_properties": [
+        "P2.9",
         "TC.2"
       ],
-      "expected_tier": "TC",
+      "expected_tier": 2,
       "expected_lammps_behaviour": "Silent"
     },
     {
@@ -4880,9 +4884,10 @@
       "failure_mode": "FM22",
       "variant": "bond_coeff_values_permuted",
       "expected_failing_properties": [
+        "P2.9",
         "TC.2"
       ],
-      "expected_tier": "TC",
+      "expected_tier": 2,
       "expected_lammps_behaviour": "Silent"
     },
     {
@@ -5428,9 +5433,10 @@
       "failure_mode": "FM22",
       "variant": "bond_coeff_values_permuted",
       "expected_failing_properties": [
+        "P2.9",
         "TC.2"
       ],
-      "expected_tier": "TC",
+      "expected_tier": 2,
       "expected_lammps_behaviour": "Silent"
     },
     {
@@ -5988,9 +5994,10 @@
       "failure_mode": "FM22",
       "variant": "bond_coeff_values_permuted",
       "expected_failing_properties": [
+        "P2.9",
         "TC.2"
       ],
-      "expected_tier": "TC",
+      "expected_tier": 2,
       "expected_lammps_behaviour": "Silent"
     },
     {
@@ -6548,9 +6555,10 @@
       "failure_mode": "FM22",
       "variant": "bond_coeff_values_permuted",
       "expected_failing_properties": [
+        "P2.9",
         "TC.2"
       ],
-      "expected_tier": "TC",
+      "expected_tier": 2,
       "expected_lammps_behaviour": "Silent"
     },
     {
@@ -7108,9 +7116,10 @@
       "failure_mode": "FM22",
       "variant": "bond_coeff_values_permuted",
       "expected_failing_properties": [
+        "P2.9",
         "TC.2"
       ],
-      "expected_tier": "TC",
+      "expected_tier": 2,
       "expected_lammps_behaviour": "Silent"
     },
     {
@@ -7668,9 +7677,10 @@
       "failure_mode": "FM22",
       "variant": "bond_coeff_values_permuted",
       "expected_failing_properties": [
+        "P2.9",
         "TC.2"
       ],
-      "expected_tier": "TC",
+      "expected_tier": 2,
       "expected_lammps_behaviour": "Silent"
     },
     {
@@ -9120,9 +9130,10 @@
       "failure_mode": "FM22",
       "variant": "bond_coeff_values_permuted",
       "expected_failing_properties": [
+        "P2.9",
         "TC.2"
       ],
-      "expected_tier": "TC",
+      "expected_tier": 2,
       "expected_lammps_behaviour": "Silent"
     },
     {
@@ -9602,9 +9613,10 @@
       "failure_mode": "FM22",
       "variant": "bond_coeff_values_permuted",
       "expected_failing_properties": [
+        "P2.9",
         "TC.2"
       ],
-      "expected_tier": "TC",
+      "expected_tier": 2,
       "expected_lammps_behaviour": "Silent"
     },
     {
@@ -10136,9 +10148,10 @@
       "failure_mode": "FM22",
       "variant": "bond_coeff_values_permuted",
       "expected_failing_properties": [
+        "P2.9",
         "TC.2"
       ],
-      "expected_tier": "TC",
+      "expected_tier": 2,
       "expected_lammps_behaviour": "Silent"
     },
     {
@@ -10670,9 +10683,10 @@
       "failure_mode": "FM22",
       "variant": "bond_coeff_values_permuted",
       "expected_failing_properties": [
+        "P2.9",
         "TC.2"
       ],
-      "expected_tier": "TC",
+      "expected_tier": 2,
       "expected_lammps_behaviour": "Silent"
     },
     {

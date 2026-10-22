@@ -1,10 +1,10 @@
 {
   "id": "PB-01_cvff__FM17__atom_moved_onto_another",
   "file": "data/corrupted/PB-01_cvff__FM17__atom_moved_onto_another.data",
-  "sha256": "6d372917e96230a566e9cf2aa7f919c23e635b1de823193f17a84bb42e98edfc",
+  "sha256": "3bd1698d994af5c68c4b5dccbdf3510ff56bf614c69c5e790dcecfea7a51d021",
   "parent_id": "PB-01_cvff",
   "parent_file": "data/reference/pce_builder/PB-01_cvff.data",
-  "parent_sha256": "71f2a6c87ed6e663ece9da4740c796b0885449f901b03a71fc5d2e06e55a36f7",
+  "parent_sha256": "5390b3183bd8f439bc8b2c057ac5eb712d0e7b546f85140d3dbe49231949349a",
   "failure_mode": "FM17",
   "operator": "fm17",
   "variant": "atom_moved_onto_another",

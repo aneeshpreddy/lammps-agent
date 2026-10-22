@@ -1,10 +1,10 @@
 {
   "id": "PB-01_pcff__FM32__coeff_type_row_duplicated",
   "file": "data/corrupted/PB-01_pcff__FM32__coeff_type_row_duplicated.data",
-  "sha256": "9b3150a150e03b1baae020a19a207c1ece4fa2d113a4f37754610339ec9655e8",
+  "sha256": "f1048a1222418e0a5cf479b5e88c243095b2cc46003dcc1619647096075bb382",
   "parent_id": "PB-01_pcff",
   "parent_file": "data/reference/pce_builder/PB-01_pcff.data",
-  "parent_sha256": "220d302f3c2fccdecfe3e210b4e65eef042364017ca4db284c25d4de0cc63c75",
+  "parent_sha256": "8d798d31412def5c24237b95e2e4126927a3b986b1d212aaef889414a2facad2",
   "failure_mode": "FM32",
   "operator": "fm32",
   "variant": "coeff_type_row_duplicated",

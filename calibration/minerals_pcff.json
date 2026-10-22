@@ -2,7 +2,7 @@
   "calibration_id": "minerals_pcff",
   "version": 1,
   "status": "PROVISIONAL_DEFAULT",
-  "date": "2026-10-20",
+  "date": "2026-10-22",
   "derivation_version": "calibrate.py v1 (2026-10-16)",
   "references": [
     {
@@ -1105,6 +1105,274 @@
       "lo": 2.22728,
       "hi": 2.227726,
       "basis": "Crystal model: every supercell has the model's density exactly; \u00b11e-4 relative is a representation tolerance (PROPERTIES \u00a78.5 rule 3), not a physical one."
+    }
+  },
+  "bond_r0": {
+    "measured": "mean bond length of each bond type / that type's own r0 (Bond Coeffs or coeff file)",
+    "derivation": "per atom-type pair: [min - 0.03, max + 0.03] of the observed ratios; other pairs: |ratio - 1| <= max(0.03, 2.0 x largest observed |ratio - 1|)",
+    "basis": "structures sit systematically off r0 (crystal geometry vs force-field fit, crowded centres), but each pair's ratio is stable; a coefficient row moved to another bond type changes it",
+    "observed_max_abs_deviation": 0.1203,
+    "default_tau_rel": 0.2406,
+    "pairs": {
+      "ac1|oc3": {
+        "n_types": 7,
+        "min": 0.8797,
+        "max": 0.8914,
+        "lo": 0.8497,
+        "hi": 0.9214
+      },
+      "ac1|oc4": {
+        "n_types": 7,
+        "min": 0.9629,
+        "max": 0.9673,
+        "lo": 0.9329,
+        "hi": 0.9973
+      },
+      "ac2|oc10": {
+        "n_types": 4,
+        "min": 0.9187,
+        "max": 0.9467,
+        "lo": 0.8887,
+        "hi": 0.9767
+      },
+      "ac2|oc5": {
+        "n_types": 4,
+        "min": 0.9457,
+        "max": 0.9756,
+        "lo": 0.9157,
+        "hi": 1.0056
+      },
+      "ac2|oc6": {
+        "n_types": 4,
+        "min": 0.9451,
+        "max": 0.9756,
+        "lo": 0.9151,
+        "hi": 1.0056
+      },
+      "ac2|oc7": {
+        "n_types": 4,
+        "min": 0.9451,
+        "max": 0.9756,
+        "lo": 0.9151,
+        "hi": 1.0056
+      },
+      "ac2|oc8": {
+        "n_types": 4,
+        "min": 0.9187,
+        "max": 0.9467,
+        "lo": 0.8887,
+        "hi": 0.9767
+      },
+      "ac2|oc9": {
+        "n_types": 4,
+        "min": 0.9187,
+        "max": 0.9467,
+        "lo": 0.8887,
+        "hi": 0.9767
+      },
+      "ac3|oc16": {
+        "n_types": 3,
+        "min": 0.9721,
+        "max": 0.9721,
+        "lo": 0.9421,
+        "hi": 1.0021
+      },
+      "ac3|oc17": {
+        "n_types": 3,
+        "min": 0.9721,
+        "max": 0.9721,
+        "lo": 0.9421,
+        "hi": 1.0021
+      },
+      "ac3|oc18": {
+        "n_types": 3,
+        "min": 0.9721,
+        "max": 0.9721,
+        "lo": 0.9421,
+        "hi": 1.0021
+      },
+      "ac3|oc19": {
+        "n_types": 3,
+        "min": 0.9721,
+        "max": 0.9721,
+        "lo": 0.9421,
+        "hi": 1.0021
+      },
+      "ac3|oc20": {
+        "n_types": 3,
+        "min": 0.9721,
+        "max": 0.9721,
+        "lo": 0.9421,
+        "hi": 1.0021
+      },
+      "ac3|oc21": {
+        "n_types": 3,
+        "min": 0.9721,
+        "max": 0.9721,
+        "lo": 0.9421,
+        "hi": 1.0021
+      },
+      "h*|o*": {
+        "n_types": 17,
+        "min": 1.0057,
+        "max": 1.0206,
+        "lo": 0.9757,
+        "hi": 1.0506
+      },
+      "hoc|oc10": {
+        "n_types": 4,
+        "min": 1.0042,
+        "max": 1.0208,
+        "lo": 0.9742,
+        "hi": 1.0508
+      },
+      "hoc|oc4": {
+        "n_types": 3,
+        "min": 1.0055,
+        "max": 1.0107,
+        "lo": 0.9755,
+        "hi": 1.0407
+      },
+      "hoc|oc5": {
+        "n_types": 8,
+        "min": 1.0067,
+        "max": 1.0297,
+        "lo": 0.9767,
+        "hi": 1.0597
+      },
+      "hoc|oc6": {
+        "n_types": 4,
+        "min": 1.0067,
+        "max": 1.0215,
+        "lo": 0.9767,
+        "hi": 1.0515
+      },
+      "hoc|oc7": {
+        "n_types": 4,
+        "min": 1.0067,
+        "max": 1.0215,
+        "lo": 0.9767,
+        "hi": 1.0515
+      },
+      "hoc|oc8": {
+        "n_types": 4,
+        "min": 1.0042,
+        "max": 1.0208,
+        "lo": 0.9742,
+        "hi": 1.0508
+      },
+      "hoc|oc9": {
+        "n_types": 4,
+        "min": 1.0042,
+        "max": 1.0208,
+        "lo": 0.9742,
+        "hi": 1.0508
+      },
+      "hoy|oc14": {
+        "n_types": 9,
+        "min": 0.9951,
+        "max": 1.01,
+        "lo": 0.9651,
+        "hi": 1.04
+      },
+      "hoy|oc16": {
+        "n_types": 3,
+        "min": 1.0036,
+        "max": 1.0038,
+        "lo": 0.9736,
+        "hi": 1.0338
+      },
+      "hoy|oc17": {
+        "n_types": 3,
+        "min": 1.0037,
+        "max": 1.0038,
+        "lo": 0.9737,
+        "hi": 1.0338
+      },
+      "hoy|oc18": {
+        "n_types": 3,
+        "min": 1.0037,
+        "max": 1.0038,
+        "lo": 0.9737,
+        "hi": 1.0338
+      },
+      "hoy|oc19": {
+        "n_types": 3,
+        "min": 1.0039,
+        "max": 1.004,
+        "lo": 0.9739,
+        "hi": 1.034
+      },
+      "hoy|oc20": {
+        "n_types": 3,
+        "min": 1.0041,
+        "max": 1.0043,
+        "lo": 0.9741,
+        "hi": 1.0343
+      },
+      "hoy|oc21": {
+        "n_types": 3,
+        "min": 1.0041,
+        "max": 1.0042,
+        "lo": 0.9741,
+        "hi": 1.0342
+      },
+      "oc11|s'": {
+        "n_types": 4,
+        "min": 0.9903,
+        "max": 0.9909,
+        "lo": 0.9603,
+        "hi": 1.0209
+      },
+      "oc12|sc2": {
+        "n_types": 9,
+        "min": 0.964,
+        "max": 0.9839,
+        "lo": 0.934,
+        "hi": 1.0139
+      },
+      "oc12|sc3": {
+        "n_types": 9,
+        "min": 0.9521,
+        "max": 0.9735,
+        "lo": 0.9221,
+        "hi": 1.0035
+      },
+      "oc13|sc2": {
+        "n_types": 9,
+        "min": 0.9876,
+        "max": 0.9974,
+        "lo": 0.9576,
+        "hi": 1.0274
+      },
+      "oc14|sc3": {
+        "n_types": 9,
+        "min": 0.9773,
+        "max": 0.9835,
+        "lo": 0.9473,
+        "hi": 1.0135
+      },
+      "oc15|s_m": {
+        "n_types": 3,
+        "min": 0.9658,
+        "max": 0.981,
+        "lo": 0.9358,
+        "hi": 1.011
+      },
+      "oc1|sc1": {
+        "n_types": 4,
+        "min": 0.9498,
+        "max": 0.9573,
+        "lo": 0.9198,
+        "hi": 0.9873
+      },
+      "oc22|sc3": {
+        "n_types": 5,
+        "min": 0.9604,
+        "max": 0.9944,
+        "lo": 0.9304,
+        "hi": 1.0244
+      }
     }
   },
   "mass": {

@@ -571,7 +571,7 @@ def _coeff_rows(d, name):
     return [(i, *split_comment(line)) for i, line in d.section_rows(name)] if d.section_index(name) else []
 
 
-@operator("FM22", "bond_coeff_values_permuted", ["TC.2"], "TC", "Silent",
+@operator("FM22", "bond_coeff_values_permuted", ["P2.9", "TC.2"], 2, "Silent",
           "swap the parameter values (not the IDs or comments) of the first two Bond Coeffs rows",
           spec_expect=["P1.7", "TC.2"])
 def fm22_vals(d, c):

@@ -47,7 +47,7 @@
   ],
   "note": "2122 atoms",
   "reference": "data/reference/eval_v2/p04.data",
-  "reference_sha256": "3ce8b9db4845364a61a02901df63ee75fa27a33285ea1a33a2f9fde49787fc00",
+  "reference_sha256": "8070ba5712a5890d3a31e88d107b58d54a0702e6c4c31bbca70053e599bbc913",
   "expected_counts": {
     "atoms": 2122
   }

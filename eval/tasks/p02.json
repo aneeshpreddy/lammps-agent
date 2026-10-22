@@ -46,7 +46,7 @@
   ],
   "note": "class I, deterministic sequence",
   "reference": "data/reference/eval_v2/p02.data",
-  "reference_sha256": "3ad2b5c1db42a779e89eec7b95534c5c685f636d57d2ee359ca9971fbb526142",
+  "reference_sha256": "ae83a52d5f37ba35ddbc0dea9aa5d5e792c3f4db6ddb0c982ff9ab91cb037eb3",
   "expected_counts": {
     "atoms": 128
   }

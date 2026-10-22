@@ -66,16 +66,16 @@
     1.497
   ],
   "data_file": "data/reference/pce_builder/PB-02_cvff.data",
-  "data_sha256": "8027f299287cb810213d7bb21b5d1e257e264d23e03e5610f769a3888aeb8efe",
+  "data_sha256": "51922c04d81f5688b89c4343718e2f260fb8b519ed86abea5e9a9f53b361b306",
   "msi2lmp_missing_kinds": [],
   "msi2lmp_missing_messages": 0,
   "cross_terms_zeroed": false,
   "relaxed": true,
   "stages": [
-    "soft A=10.0",
-    "soft A=40.0",
-    "soft A=100.0",
-    "lj/cut/coul/cut 10.0"
+    "soft A=10.0 (1-4 excluded)",
+    "soft A=40.0 (1-4 excluded)",
+    "soft A=100.0 (1-4 excluded)",
+    "lj/cut/coul/cut 10.0, dielectric 80"
   ],
-  "final_energy_kcal_mol": -1137.97915833635
+  "final_energy_kcal_mol": 457.60026292269
 }

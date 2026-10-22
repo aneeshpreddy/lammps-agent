@@ -31,7 +31,7 @@
   ],
   "note": "COOH typing in class II is a trap (o_2/ho2, not oh/ho)",
   "reference": "data/reference/eval_v2/p06.data",
-  "reference_sha256": "7e0c51c4232191cfc81674e8b20b7b163aff51d26e8e3e900b2e105785fb06ee",
+  "reference_sha256": "6566b229da93fa37b20860aa1055c049cdac53fc2af89d6826eefcf3470acbac",
   "expected_counts": {
     "atoms": 362
   }

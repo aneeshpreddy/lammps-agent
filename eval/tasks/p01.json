@@ -46,7 +46,7 @@
   ],
   "note": "same chemistry as the group's EMC file REF-04",
   "reference": "data/reference/eval_v2/p01.data",
-  "reference_sha256": "f0711079cac40013cbb5ecb492b5e96b05401707df64f3f65c1a8725bcbcc18b",
+  "reference_sha256": "ed0cfba5439d78364a73de3d12a813731d3490045f73fd7779b6355e603b65d0",
   "expected_counts": {
     "atoms": 40
   }

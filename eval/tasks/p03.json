@@ -47,7 +47,7 @@
   ],
   "note": "the group's c12e12p15 (REF-01) architecture",
   "reference": "data/reference/eval_v2/p03.data",
-  "reference_sha256": "482af1c8a9e0c51c4f448dfa3541723e0bf3f92c6974a5fcbb3bfda0a91cf404",
+  "reference_sha256": "7affbfb9694e03fc4154bfab9ac8a37073753da43479067fea653f114bd73479",
   "expected_counts": {
     "atoms": 1478
   }

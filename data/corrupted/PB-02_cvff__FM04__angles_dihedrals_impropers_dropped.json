@@ -1,10 +1,10 @@
 {
   "id": "PB-02_cvff__FM04__angles_dihedrals_impropers_dropped",
   "file": "data/corrupted/PB-02_cvff__FM04__angles_dihedrals_impropers_dropped.data",
-  "sha256": "9f53a115e88883dfa8aefeeaf4e89b102ebe47b7bc3f12c30dc1b903c38d5620",
+  "sha256": "1668cf03436793a5e51f217c42a0455231f89b80186bca363b23b8637adbcabb",
   "parent_id": "PB-02_cvff",
   "parent_file": "data/reference/pce_builder/PB-02_cvff.data",
-  "parent_sha256": "8027f299287cb810213d7bb21b5d1e257e264d23e03e5610f769a3888aeb8efe",
+  "parent_sha256": "51922c04d81f5688b89c4343718e2f260fb8b519ed86abea5e9a9f53b361b306",
   "failure_mode": "FM04",
   "operator": "fm04_higher",
   "variant": "angles_dihedrals_impropers_dropped",

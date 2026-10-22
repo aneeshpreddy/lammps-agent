@@ -46,7 +46,7 @@
   ],
   "note": "diacid backbone, class I",
   "reference": "data/reference/eval_v2/p08.data",
-  "reference_sha256": "bd4226e4f6137e972a3422b0460b8c2008460d39b3e2bbaa9eb84dbd1c52a108",
+  "reference_sha256": "fe6164290b197268cf384cfe745ff1a2c094418c6fd9ff98a6aeadf9523b64e5",
   "expected_counts": {
     "atoms": 1301
   }

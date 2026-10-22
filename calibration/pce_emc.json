@@ -2,7 +2,7 @@
   "calibration_id": "pce_emc",
   "version": 1,
   "status": "PROVISIONAL",
-  "date": "2026-10-20",
+  "date": "2026-10-22",
   "derivation_version": "calibrate.py v1 (2026-10-16)",
   "references": [
     {
@@ -30,6 +30,7 @@
       "family": "pce_emc_dilute"
     }
   ],
+  "contact_sources": [],
   "bond_length": {
     "measured": "minimum-image bond length per atom-type-name pair (\u00c5)",
     "derivation": "[min x (1-0.1), max x (1+0.1)] over the references",
@@ -456,6 +457,120 @@
         "REF-04": 0.059008
       },
       "basis": "isolated chain(s) in a mostly empty periodic box: no bulk density to check"
+    }
+  },
+  "bond_r0": {
+    "measured": "mean bond length of each bond type / that type's own r0 (Bond Coeffs or coeff file)",
+    "derivation": "per atom-type pair: [min - 0.03, max + 0.03] of the observed ratios; other pairs: |ratio - 1| <= max(0.03, 2.0 x largest observed |ratio - 1|)",
+    "basis": "structures sit systematically off r0 (crystal geometry vs force-field fit, crowded centres), but each pair's ratio is stable; a coefficient row moved to another bond type changes it",
+    "observed_max_abs_deviation": 0.0315,
+    "default_tau_rel": 0.063,
+    "pairs": {
+      "c3'|c43": {
+        "n_types": 4,
+        "min": 0.9882,
+        "max": 1.0163,
+        "lo": 0.9582,
+        "hi": 1.0463
+      },
+      "c3'|o1=": {
+        "n_types": 4,
+        "min": 0.991,
+        "max": 1.0085,
+        "lo": 0.961,
+        "hi": 1.0385
+      },
+      "c3'|o2s": {
+        "n_types": 4,
+        "min": 0.9728,
+        "max": 1.002,
+        "lo": 0.9428,
+        "hi": 1.032
+      },
+      "c3-|c43": {
+        "n_types": 4,
+        "min": 1.0106,
+        "max": 1.0227,
+        "lo": 0.9806,
+        "hi": 1.0527
+      },
+      "c3-|o1-": {
+        "n_types": 4,
+        "min": 0.9977,
+        "max": 1.0076,
+        "lo": 0.9677,
+        "hi": 1.0376
+      },
+      "c43|h1": {
+        "n_types": 4,
+        "min": 0.9744,
+        "max": 1.0012,
+        "lo": 0.9444,
+        "hi": 1.0312
+      },
+      "c4o|c4o": {
+        "n_types": 4,
+        "min": 0.9991,
+        "max": 1.0119,
+        "lo": 0.9691,
+        "hi": 1.0419
+      },
+      "c4o|h1": {
+        "n_types": 4,
+        "min": 0.9981,
+        "max": 1.0001,
+        "lo": 0.9681,
+        "hi": 1.0301
+      },
+      "c4o|o2e": {
+        "n_types": 4,
+        "min": 0.9896,
+        "max": 1.0065,
+        "lo": 0.9596,
+        "hi": 1.0365
+      },
+      "c4o|o2h": {
+        "n_types": 4,
+        "min": 0.9832,
+        "max": 1.0207,
+        "lo": 0.9532,
+        "hi": 1.0507
+      },
+      "c4o|o2s": {
+        "n_types": 4,
+        "min": 1.0088,
+        "max": 1.0315,
+        "lo": 0.9788,
+        "hi": 1.0615
+      },
+      "c4|c4": {
+        "n_types": 4,
+        "min": 0.9868,
+        "max": 1.0158,
+        "lo": 0.9568,
+        "hi": 1.0458
+      },
+      "c4|c43": {
+        "n_types": 4,
+        "min": 1.0023,
+        "max": 1.0228,
+        "lo": 0.9723,
+        "hi": 1.0528
+      },
+      "c4|h1": {
+        "n_types": 4,
+        "min": 0.997,
+        "max": 1.0093,
+        "lo": 0.967,
+        "hi": 1.0393
+      },
+      "h1o|o2h": {
+        "n_types": 4,
+        "min": 0.998,
+        "max": 1.0216,
+        "lo": 0.968,
+        "hi": 1.0516
+      }
     }
   },
   "mass": {

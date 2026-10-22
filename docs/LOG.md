@@ -310,3 +310,20 @@ No work is recorded for 5–15 October; everything below was done on 2026-10-16.
 
 ### Hours
 - To be filled by project owner.
+
+---
+
+## 2026-10-22 (later) — P2.9 bond coefficients vs geometry; builder relaxation fix (AI-assisted)
+
+### Done
+- **New P2.9** (`validator/tier2.py`): for each bond type, (mean bond length / its own r0) must lie in the window calibrated for its atom-type pair, else within a default tolerance (calibration `bond_r0` block in every `calibration/*.json`). FM22 (coefficient values moved to another bond type) is now caught by Tiers 0–2 in 12 of 14 cases, up from 0; the 2 left swap rows whose r0 differ by about 1 % (TC.2 catches them). 103 tests pass.
+- **Builder defect found and fixed:** measuring P2.9 showed the PCE builder's vacuum relaxation stretched backbone C–C bonds by up to 11 %, caused by unscreened carboxylate repulsion. `builders/relax.py` now excludes 1-4 pairs in the soft stage and uses dielectric 80 in the force-field stage (geometry preparation only; the charges in the file are unchanged). All builder outputs were rebuilt: PB-01/02 parents, the PCE examples (20/20 PASS) and the eval v2 PCE references (16/16 PASS, self-match, byte-identical rebuild).
+- **Matrix:** 870 corrupted files, 0 missed, 860 caught by Tiers 0–2 (was 848), 10 only by TC.2 (6 × FM19 and 1 × FM23 on vacuum boxes, 2 × FM22 near-equal r0, 1 × FM06 on monosulfate); 34/34 positive controls pass.
+- **Split re-frozen after the reference rebuild** (no system had been scored): membership unchanged (dev = m02 m03 m05 m07 p02 p04 p05 p06 p07 p08; test = m01 m04 m06 p01 p03 p09); the file changed only through the task reference hashes.
+  **New `eval/split.json` SHA-256: 6bcfa9a36beeb7995ee8b4566a891753eaa5d6b86c3fdb899b0151a6626a4545** (supersedes b1e632ad…).
+
+### Tomorrow
+- Harness `eval/harness.py` + oracle/corrupter checks.
+
+### Hours
+- To be filled by project owner.

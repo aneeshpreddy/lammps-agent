@@ -66,7 +66,7 @@
     1.497
   ],
   "data_file": "data/reference/pce_builder/PB-02_pcff.data",
-  "data_sha256": "8a63ca3d80baf8ef5bef8ee2aaf01034b04f3abb6f66e64525e2f439756cf235",
+  "data_sha256": "38e6e6dec874e9d322aa48f679273c3312bd34831e4b5a6f59ad0c814a4e5f7d",
   "msi2lmp_missing_kinds": [
     "angleangle",
     "angleangledihedral",
@@ -80,10 +80,10 @@
   "cross_terms_zeroed": true,
   "relaxed": true,
   "stages": [
-    "soft A=10.0",
-    "soft A=40.0",
-    "soft A=100.0",
-    "lj/class2/coul/cut 10.0"
+    "soft A=10.0 (1-4 excluded)",
+    "soft A=40.0 (1-4 excluded)",
+    "soft A=100.0 (1-4 excluded)",
+    "lj/class2/coul/cut 10.0, dielectric 80"
   ],
-  "final_energy_kcal_mol": -23.6103044581078
+  "final_energy_kcal_mol": 105.057746978267
 }

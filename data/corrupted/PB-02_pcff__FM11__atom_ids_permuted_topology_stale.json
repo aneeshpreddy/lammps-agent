@@ -1,10 +1,10 @@
 {
   "id": "PB-02_pcff__FM11__atom_ids_permuted_topology_stale",
   "file": "data/corrupted/PB-02_pcff__FM11__atom_ids_permuted_topology_stale.data",
-  "sha256": "dd722a26483021b8504e80b117f90665bfa6d43f74d4963711ef868d3233c9ea",
+  "sha256": "eb265a657e05cd8d0d9f5dd27c82b50df190141b4f40c50db7e1f1b059bcee68",
   "parent_id": "PB-02_pcff",
   "parent_file": "data/reference/pce_builder/PB-02_pcff.data",
-  "parent_sha256": "8a63ca3d80baf8ef5bef8ee2aaf01034b04f3abb6f66e64525e2f439756cf235",
+  "parent_sha256": "38e6e6dec874e9d322aa48f679273c3312bd34831e4b5a6f59ad0c814a4e5f7d",
   "failure_mode": "FM11",
   "operator": "fm11",
   "variant": "atom_ids_permuted_topology_stale",

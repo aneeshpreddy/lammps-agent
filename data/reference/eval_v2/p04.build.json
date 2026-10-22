@@ -60,7 +60,7 @@
     0.592
   ],
   "data_file": "data/reference/eval_v2/p04.data",
-  "data_sha256": "3ce8b9db4845364a61a02901df63ee75fa27a33285ea1a33a2f9fde49787fc00",
+  "data_sha256": "8070ba5712a5890d3a31e88d107b58d54a0702e6c4c31bbca70053e599bbc913",
   "msi2lmp_missing_kinds": [
     "angleangle",
     "angleangledihedral",
@@ -74,10 +74,10 @@
   "cross_terms_zeroed": true,
   "relaxed": true,
   "stages": [
-    "soft A=10.0",
-    "soft A=40.0",
-    "soft A=100.0",
-    "lj/class2/coul/cut 10.0"
+    "soft A=10.0 (1-4 excluded)",
+    "soft A=40.0 (1-4 excluded)",
+    "soft A=100.0 (1-4 excluded)",
+    "lj/class2/coul/cut 10.0, dielectric 80"
   ],
-  "final_energy_kcal_mol": 5050.30060268322
+  "final_energy_kcal_mol": 351.088285807931
 }

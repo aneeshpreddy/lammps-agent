@@ -48,7 +48,7 @@
   ],
   "note": "multi-chain system",
   "reference": "data/reference/eval_v2/p09.data",
-  "reference_sha256": "42c2067951058d09c9129f1223bb9f9354bb7e4346bc59c13ea96445f2bf67d9",
+  "reference_sha256": "4ae87047ffa0ab17b25dfef8fcdb2d1353b91cb9b781c983b7dbd9647900f434",
   "expected_counts": {
     "atoms": 915
   }

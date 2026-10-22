@@ -2,7 +2,7 @@
   "id": "p09",
   "role": "EVAL_REFERENCE_V2",
   "file": "data/reference/eval_v2/p09.data",
-  "sha256": "42c2067951058d09c9129f1223bb9f9354bb7e4346bc59c13ea96445f2bf67d9",
+  "sha256": "4ae87047ffa0ab17b25dfef8fcdb2d1353b91cb9b781c983b7dbd9647900f434",
   "declared_config": "configs/interface_pcff_pce.yaml",
   "overrides": {
     "tc_mode": "graph",
@@ -76,7 +76,7 @@
       1.416,
       1.497
     ],
-    "data_sha256": "42c2067951058d09c9129f1223bb9f9354bb7e4346bc59c13ea96445f2bf67d9",
+    "data_sha256": "4ae87047ffa0ab17b25dfef8fcdb2d1353b91cb9b781c983b7dbd9647900f434",
     "msi2lmp_missing_kinds": [
       "angleangle",
       "angleangledihedral",
@@ -90,11 +90,11 @@
     "cross_terms_zeroed": true,
     "relaxed": true,
     "stages": [
-      "soft A=10.0",
-      "soft A=40.0",
-      "soft A=100.0",
-      "lj/class2/coul/cut 10.0"
+      "soft A=10.0 (1-4 excluded)",
+      "soft A=40.0 (1-4 excluded)",
+      "soft A=100.0 (1-4 excluded)",
+      "lj/class2/coul/cut 10.0, dielectric 80"
     ],
-    "final_energy_kcal_mol": -23.6103044581078
+    "final_energy_kcal_mol": 105.057746978267
   }
 }

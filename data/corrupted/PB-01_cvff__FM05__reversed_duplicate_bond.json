@@ -1,10 +1,10 @@
 {
   "id": "PB-01_cvff__FM05__reversed_duplicate_bond",
   "file": "data/corrupted/PB-01_cvff__FM05__reversed_duplicate_bond.data",
-  "sha256": "0c070cbb2fef22d16e596cd531795ea2aa0837e25727c5aa75fb4e50c8232427",
+  "sha256": "36a967cc1f039d45fe418351ac4da1c8e278545786a6beb40df2500fb7db20e8",
   "parent_id": "PB-01_cvff",
   "parent_file": "data/reference/pce_builder/PB-01_cvff.data",
-  "parent_sha256": "71f2a6c87ed6e663ece9da4740c796b0885449f901b03a71fc5d2e06e55a36f7",
+  "parent_sha256": "5390b3183bd8f439bc8b2c057ac5eb712d0e7b546f85140d3dbe49231949349a",
   "failure_mode": "FM05",
   "operator": "fm05",
   "variant": "reversed_duplicate_bond",

@@ -1,10 +1,10 @@
 {
   "id": "PB-02_cvff__FM08__coords_x1.5_box_kept",
   "file": "data/corrupted/PB-02_cvff__FM08__coords_x1.5_box_kept.data",
-  "sha256": "cea07748dc6726868252e505de55b739eba9cd0346bedbce54ac744d9843e81a",
+  "sha256": "6b37786c67eeb326824b9152b291984707da4304fa82ebf18239bed403b62c84",
   "parent_id": "PB-02_cvff",
   "parent_file": "data/reference/pce_builder/PB-02_cvff.data",
-  "parent_sha256": "8027f299287cb810213d7bb21b5d1e257e264d23e03e5610f769a3888aeb8efe",
+  "parent_sha256": "51922c04d81f5688b89c4343718e2f260fb8b519ed86abea5e9a9f53b361b306",
   "failure_mode": "FM08",
   "operator": "fm08",
   "variant": "coords_x1.5_box_kept",

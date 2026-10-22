@@ -60,16 +60,16 @@
     1.473
   ],
   "data_file": "data/reference/eval_v2/p02.data",
-  "data_sha256": "3ad2b5c1db42a779e89eec7b95534c5c685f636d57d2ee359ca9971fbb526142",
+  "data_sha256": "ae83a52d5f37ba35ddbc0dea9aa5d5e792c3f4db6ddb0c982ff9ab91cb037eb3",
   "msi2lmp_missing_kinds": [],
   "msi2lmp_missing_messages": 0,
   "cross_terms_zeroed": false,
   "relaxed": true,
   "stages": [
-    "soft A=10.0",
-    "soft A=40.0",
-    "soft A=100.0",
-    "lj/cut/coul/cut 10.0"
+    "soft A=10.0 (1-4 excluded)",
+    "soft A=40.0 (1-4 excluded)",
+    "soft A=100.0 (1-4 excluded)",
+    "lj/cut/coul/cut 10.0, dielectric 80"
   ],
-  "final_energy_kcal_mol": -327.446572101675
+  "final_energy_kcal_mol": 79.7985399279309
 }

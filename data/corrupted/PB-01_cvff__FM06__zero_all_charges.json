@@ -1,10 +1,10 @@
 {
   "id": "PB-01_cvff__FM06__zero_all_charges",
   "file": "data/corrupted/PB-01_cvff__FM06__zero_all_charges.data",
-  "sha256": "526043bbdb112e62ed063a7f185168a7b24ca9b69e1904c92142e5c87e281159",
+  "sha256": "fd66608c05f1e149ab1e6eb1d8a1963ace5b80393006fdc27a48e3dab65e864d",
   "parent_id": "PB-01_cvff",
   "parent_file": "data/reference/pce_builder/PB-01_cvff.data",
-  "parent_sha256": "71f2a6c87ed6e663ece9da4740c796b0885449f901b03a71fc5d2e06e55a36f7",
+  "parent_sha256": "5390b3183bd8f439bc8b2c057ac5eb712d0e7b546f85140d3dbe49231949349a",
   "failure_mode": "FM06",
   "operator": "fm06_zero",
   "variant": "zero_all_charges",

@@ -10,7 +10,9 @@ from typing import Dict, List, Optional
 
 import numpy as np
 
-from .config import declared, element_table, load_calibration
+import re
+
+from .config import declared, element_table, load_calibration, resolve
 from .elements import STANDARD_MASS, nearest_element
 from .geometry import AMU_PER_A3_TO_G_PER_CM3, pairs_within, tilt_checks
 from .model import Model, bond_graph_components
@@ -22,9 +24,11 @@ MAXEX = 10
 DEPENDS = {
     "P2.1": [], "P2.2": ["P1.5"], "P2.3": ["P1.2", "P1.3", "P1.5"], "P2.4": ["P1.3", "P1.5"],
     "P2.5": ["P1.3", "P1.4"], "P2.6": ["P1.4"], "P2.7": ["P1.5", "P1.9"], "P2.8": [],
+    "P2.9": ["P1.5", "P1.7"],
 }
 NAMES = {"P2.1": "net_charge", "P2.2": "cell_consistency", "P2.3": "atom_overlap", "P2.4": "bond_lengths",
-         "P2.5": "density", "P2.6": "mass_to_element", "P2.7": "bond_image_consistency", "P2.8": "tilt_bound"}
+         "P2.5": "density", "P2.6": "mass_to_element", "P2.7": "bond_image_consistency", "P2.8": "tilt_bound",
+         "P2.9": "bond_coeffs_vs_geometry"}
 
 
 def _c(prop, verdict, msg="", details=None, warnings=None, cal=None):
@@ -333,8 +337,92 @@ def p2_8_tilt(pf, m: Model, cfg, cal) -> CheckResult:
     return _c("P2.8", PASS, "", det, warnings=viol, cal="exact")
 
 
+# ---- P2.9 (new in v0.7) ------------------------------------------------------------------------
+R0_INDEX = {"harmonic": 1, "class2": 0, "morse": 2}          # position of r0 among the bond coefficients
+
+
+def bond_r0(pf: ParsedFile, cfg) -> Dict[int, float]:
+    """r0 per bond type from the DATA FILE's Bond Coeffs, else from the declared coefficient file."""
+    style = (declared(cfg).get("styles") or {}).get("bond", "harmonic")
+    k = R0_INDEX.get(style.split("/")[0])
+    if k is None:
+        return {}
+    out = {}
+    sec = pf.section("Bond Coeffs")
+    if sec is not None:
+        for r in sec.rows:
+            try:
+                out[int(r.tokens[0])] = float(r.tokens[1 + k])
+            except (IndexError, ValueError):
+                pass
+        return out
+    cf = declared(cfg).get("coeff_file")
+    if cf:
+        try:
+            for ln in open(resolve(cf)):
+                mm = re.match(r"\s*bond_coeff\s+(\d+)\s+([^#]*)", ln)
+                if mm:
+                    vals = mm.group(2).split()
+                    out[int(mm.group(1))] = float(vals[k])
+        except (OSError, IndexError, ValueError):
+            pass
+    return out
+
+
+def p2_9_bond_coeffs(pf, m: Model, cfg, cal) -> CheckResult:
+    """Each bond type's own r0 must agree with the bonds of that type: mean length / r0 inside the window
+    calibrated for that atom-type pair (or the default tolerance). Catches coefficient rows assigned to
+    the wrong bond type (FM22) whenever their r0 differ; a swap of force constants alone is invisible."""
+    b = m.topology.get("Bonds")
+    if b is None or not len(b.ids):
+        return _c("P2.9", NOT_APPLICABLE, "no bonds")
+    if m.cell is None:
+        return _c("P2.9", NOT_EVALUATED, "box not defined")
+    r0 = bond_r0(pf, cfg)
+    if not r0:
+        return _c("P2.9", NOT_EVALUATED, "no bond coefficients available (Bond Coeffs absent and no declared coeff_file)")
+    calr = (cal or {}).get("bond_r0")
+    if not calr:
+        return _c("P2.9", NOT_CALIBRATED, "no calibrated length/r0 windows")
+    idx = m.index_of()
+    ii = np.array([idx[int(a)] for a in b.atoms[:, 0]])
+    jj = np.array([idx[int(a)] for a in b.atoms[:, 1]])
+    L = m.cell.min_image_distances(m.xyz[jj] - m.xyz[ii])
+    names = m.type_names or {}
+    viol, judged_default, rows = [], 0, []
+    for t in np.unique(b.types):
+        t = int(t)
+        if r0.get(t, 0.0) <= 0:
+            continue
+        sel = b.types == t
+        k = int(np.nonzero(sel)[0][0])
+        key = "|".join(sorted((str(names.get(int(m.types[ii[k]]), "?")), str(names.get(int(m.types[jj[k]]), "?")))))
+        ratio = float(L[sel].mean()) / r0[t]
+        w = calr.get("pairs", {}).get(key)
+        if w is None:
+            tau = calr.get("default_tau_rel")
+            if tau is None:
+                continue
+            lo, hi = 1 - tau, 1 + tau
+            judged_default += 1
+        else:
+            lo, hi = w["lo"], w["hi"]
+        rows.append((t, key, ratio))
+        if not (lo <= ratio <= hi):
+            viol.append({"bond_type": t, "pair": key, "mean_length": round(float(L[sel].mean()), 4), "r0": r0[t],
+                         "ratio": round(ratio, 4), "window": [round(lo, 4), round(hi, 4)]})
+    det = {"bond_types_checked": len(rows), "judged_by_default_tolerance": judged_default, "violations": viol[:MAXEX]}
+    if viol:
+        v = max(viol, key=lambda x: abs(x["ratio"] - 1))
+        return _c("P2.9", FAIL, f"{len(viol)} bond type(s) whose bonds do not match their own r0; worst: type {v['bond_type']} "
+                  f"({v['pair']}) mean {v['mean_length']} Å vs r0 {v['r0']} Å (ratio {v['ratio']}, window {v['window']})",
+                  det, cal=_cal_tag(cal))
+    return _c("P2.9", PASS, "", det, cal=_cal_tag(cal))
+
+
 TIER2 = {"P2.1": p2_1_charge, "P2.2": p2_2_cell, "P2.3": p2_3_overlap, "P2.4": p2_4_bonds,
-         "P2.5": p2_5_density, "P2.6": p2_6_masses, "P2.7": p2_7_image_consistency, "P2.8": p2_8_tilt}
+         "P2.5": p2_5_density, "P2.6": p2_6_masses, "P2.7": p2_7_image_consistency, "P2.8": p2_8_tilt,
+         "P2.9": p2_9_bond_coeffs}
 
 
 def run_tier2(pf: ParsedFile, m: Model, cfg, tier1: List[CheckResult]) -> List[CheckResult]:

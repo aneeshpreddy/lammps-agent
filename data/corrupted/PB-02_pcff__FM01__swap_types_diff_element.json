@@ -1,10 +1,10 @@
 {
   "id": "PB-02_pcff__FM01__swap_types_diff_element",
   "file": "data/corrupted/PB-02_pcff__FM01__swap_types_diff_element.data",
-  "sha256": "f7a1e4942e8e7955a819b7f262bfaa625e99bc74921a8fe6cf8c38dcd13a6699",
+  "sha256": "7be4f02ed664b3ca481ddfda2c7292d3af1dfca229f946a946b0c5fec33734e0",
   "parent_id": "PB-02_pcff",
   "parent_file": "data/reference/pce_builder/PB-02_pcff.data",
-  "parent_sha256": "8a63ca3d80baf8ef5bef8ee2aaf01034b04f3abb6f66e64525e2f439756cf235",
+  "parent_sha256": "38e6e6dec874e9d322aa48f679273c3312bd34831e4b5a6f59ad0c814a4e5f7d",
   "failure_mode": "FM01",
   "operator": "fm01_diff",
   "variant": "swap_types_diff_element",

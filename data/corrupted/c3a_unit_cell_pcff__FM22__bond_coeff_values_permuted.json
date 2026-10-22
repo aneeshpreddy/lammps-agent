@@ -11,9 +11,10 @@
   "description": "swap the parameter values (not the IDs or comments) of the first two Bond Coeffs rows",
   "params": {},
   "expected_failing_properties": [
+    "P2.9",
     "TC.2"
   ],
-  "expected_tier": "TC",
+  "expected_tier": 2,
   "spec_expected_properties": [
     "P1.7",
     "TC.2"

@@ -31,7 +31,7 @@
   ],
   "note": "1517 atoms, gradient sequence",
   "reference": "data/reference/eval_v2/p07.data",
-  "reference_sha256": "ebbe0f514486980fcd56b5fd277251b2e4ee965e2877f9e69cc1a3d6baad0c0d",
+  "reference_sha256": "39e496cfaed33d1eac9c990dbc4a567552c02675181d44239adfb79e8302e3b5",
   "expected_counts": {
     "atoms": 1517
   }

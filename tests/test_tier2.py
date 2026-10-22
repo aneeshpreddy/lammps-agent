@@ -142,3 +142,21 @@ def test_p2_1_statistical_floor_catches_missing_hydrogen(write, make_cfg):
     stat = validate(write(text), make_cfg(density_family="x", net_charge={"required": True, "target": 0.0, "floor": "statistical"}), run_tier3=False)
     assert worst.get("P2.1").verdict == "PASS"
     assert stat.get("P2.1").verdict == "FAIL"
+
+
+def test_p2_9_bond_coefficients_must_match_geometry(write, make_cfg):
+    # bonds stay at 1.0 A but their coefficient row now says r0 = 1.3 (row taken from another bond type)
+    res = run(write, make_cfg, replace_line(VALID, "1 554.1349 1.0 # h*,o*", "1 554.1349 1.3 # h*,o*"))
+    assert failing(res) == {"P2.9"}, res.summary()
+    assert "ratio" in res.get("P2.9").message
+
+
+def test_p2_9_uses_default_tolerance_for_unknown_pairs(write, make_cfg):
+    cfg = make_cfg()
+    import json
+    cal = json.load(open(cfg["declared"]["calibration"]))
+    cal["bond_r0"]["pairs"] = {}
+    open(cfg["declared"]["calibration"], "w").write(json.dumps(cal))
+    res = validate(write(VALID), cfg, run_tier3=False)
+    assert res.get("P2.9").verdict == "PASS"
+    assert res.get("P2.9").details["judged_by_default_tolerance"] == 1

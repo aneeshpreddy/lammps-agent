@@ -113,6 +113,7 @@ CALIBRATION = {
     "density": {"test_water": {"applicable": True, "lo": 0.01, "hi": 0.05}},
     "mass": {"tau_m_amu": 0.01},
     "cell": {"tau_centroid": 0.05},
+    "bond_r0": {"pairs": {"h*|o*": {"lo": 0.97, "hi": 1.03}}, "default_tau_rel": 0.06},
 }
 
 

@@ -2,7 +2,7 @@
   "id": "p06",
   "role": "EVAL_REFERENCE_V2",
   "file": "data/reference/eval_v2/p06.data",
-  "sha256": "7e0c51c4232191cfc81674e8b20b7b163aff51d26e8e3e900b2e105785fb06ee",
+  "sha256": "6566b229da93fa37b20860aa1055c049cdac53fc2af89d6826eefcf3470acbac",
   "declared_config": "configs/interface_pcff_pce.yaml",
   "overrides": {
     "tc_mode": "chemistry",
@@ -77,7 +77,7 @@
     "grower_min_nonbonded_distance_A": [
       0.886
     ],
-    "data_sha256": "7e0c51c4232191cfc81674e8b20b7b163aff51d26e8e3e900b2e105785fb06ee",
+    "data_sha256": "6566b229da93fa37b20860aa1055c049cdac53fc2af89d6826eefcf3470acbac",
     "msi2lmp_missing_kinds": [
       "angleangle",
       "angleangledihedral",
@@ -88,11 +88,11 @@
     "cross_terms_zeroed": true,
     "relaxed": true,
     "stages": [
-      "soft A=10.0",
-      "soft A=40.0",
-      "soft A=100.0",
-      "lj/class2/coul/cut 10.0"
+      "soft A=10.0 (1-4 excluded)",
+      "soft A=40.0 (1-4 excluded)",
+      "soft A=100.0 (1-4 excluded)",
+      "lj/class2/coul/cut 10.0, dielectric 80"
     ],
-    "final_energy_kcal_mol": -294.739037542045
+    "final_energy_kcal_mol": -56.5363612865332
   }
 }

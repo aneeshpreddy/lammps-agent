@@ -1,19 +1,20 @@
 {
   "id": "PB-02_cvff__FM22__bond_coeff_values_permuted",
   "file": "data/corrupted/PB-02_cvff__FM22__bond_coeff_values_permuted.data",
-  "sha256": "6fc4d5e8affc36f1cb62e16b5b2a30813c64aa4f3474b4638815681ddd211831",
+  "sha256": "b3655b4765b576b6ec8fcdc6b7f93fffbd3955253838fc4b2ecf92d2ec088cd4",
   "parent_id": "PB-02_cvff",
   "parent_file": "data/reference/pce_builder/PB-02_cvff.data",
-  "parent_sha256": "8027f299287cb810213d7bb21b5d1e257e264d23e03e5610f769a3888aeb8efe",
+  "parent_sha256": "51922c04d81f5688b89c4343718e2f260fb8b519ed86abea5e9a9f53b361b306",
   "failure_mode": "FM22",
   "operator": "fm22_vals",
   "variant": "bond_coeff_values_permuted",
   "description": "swap the parameter values (not the IDs or comments) of the first two Bond Coeffs rows",
   "params": {},
   "expected_failing_properties": [
+    "P2.9",
     "TC.2"
   ],
-  "expected_tier": "TC",
+  "expected_tier": 2,
   "spec_expected_properties": [
     "P1.7",
     "TC.2"

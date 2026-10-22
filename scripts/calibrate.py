@@ -27,7 +27,7 @@ from validator.model import bond_graph_components, build_model  # noqa: E402
 from validator.parser import parse_file  # noqa: E402
 from validator.config import element_table  # noqa: E402
 from validator.registry import config_for, load_sidecar  # noqa: E402
-from validator.tier2 import bonded_index_pairs  # noqa: E402
+from validator.tier2 import bond_r0, bonded_index_pairs  # noqa: E402
 
 DERIVATION_VERSION = "calibrate.py v1 (2026-10-16)"
 BOND_MARGIN_REL = 0.10      # widen [min, max] of reference bond lengths by 10 % each side
@@ -35,7 +35,9 @@ OVERLAP_MARGIN_REL = 0.25   # d_min = 75 % of the closest non-bonded contact see
 CONTACT_SEARCH_A = 4.0      # element pairs with no contact below this distance stay uncalibrated
 DENSITY_MARGIN_REL = 0.02   # PLACEHOLDER pending an owner requirement (see basis text)
 TAU_M_AMU = 0.01            # mass tolerance per type
-CENTROID_FACTOR = 3.0       # tau_centroid = max(0.02, ceil_0.01(3 x largest observed excursion))
+CENTROID_FACTOR = 3.0
+R0_PAIR_MARGIN = 0.03       # P2.9: +- 0.03 on the observed (mean length / r0) ratio of each type pair
+R0_DEFAULT_FACTOR = 2.0     # P2.9 default tolerance: 2 x the largest |ratio - 1| seen in the set (min 0.03)       # tau_centroid = max(0.02, ceil_0.01(3 x largest observed excursion))
 
 SETS = {
     "pce": {"out": "calibration/pce_emc.json", "id": "pce_emc", "status": "PROVISIONAL",
@@ -100,6 +102,7 @@ def main(which: str):
     refs = []
     bonds = defaultdict(list)
     ebonds = defaultdict(list)
+    r0_ratios = defaultdict(list)
     contact = {}
     density = defaultdict(list)
     centroid_exc = []
@@ -125,6 +128,15 @@ def main(which: str):
                 bonds[key].append(float(l))
                 ekey = "|".join(sorted((el_table[names[int(m.types[ii[k]])]], el_table[names[int(m.types[jj[k]])]])))
                 ebonds[ekey].append(float(l))
+            r0 = bond_r0(pf, cfg)
+            for t in np.unique(b.types):
+                t = int(t)
+                if r0.get(t, 0) <= 0:
+                    continue
+                sel = b.types == t
+                k0 = int(np.nonzero(sel)[0][0])
+                key = "|".join(sorted((names[int(m.types[ii[k0]])], names[int(m.types[jj[k0]])])))
+                r0_ratios[key].append(float(L[sel].mean()) / r0[t])
         # closest non-bonded (all pairs except 1-2) contact per element pair
         bonded = bonded_index_pairs(m)
         I, J, D = pairs_within(m.cell, m.xyz, CONTACT_SEARCH_A)
@@ -210,6 +222,20 @@ def main(which: str):
         dens[fam] = {"applicable": True, "values": {r: round(v, 6) for r, v in vals}, "margin_rel": mr,
                      "lo": round(lo * (1 - mr), 6), "hi": round(hi * (1 + mr), 6), "basis": basis}
     dens.update(spec.get("extra_density", {}))
+    allr = [x for v in r0_ratios.values() for x in v]
+    r0_block = None
+    if allr:
+        worst = max(abs(x - 1) for x in allr)
+        r0_block = {"measured": "mean bond length of each bond type / that type's own r0 (Bond Coeffs or coeff file)",
+                    "derivation": f"per atom-type pair: [min - {R0_PAIR_MARGIN}, max + {R0_PAIR_MARGIN}] of the observed ratios; "
+                                  f"other pairs: |ratio - 1| <= max(0.03, {R0_DEFAULT_FACTOR} x largest observed |ratio - 1|)",
+                    "basis": "structures sit systematically off r0 (crystal geometry vs force-field fit, crowded centres), "
+                             "but each pair's ratio is stable; a coefficient row moved to another bond type changes it",
+                    "observed_max_abs_deviation": round(worst, 4),
+                    "default_tau_rel": round(max(0.03, R0_DEFAULT_FACTOR * worst), 4),
+                    "pairs": {k: {"n_types": len(v), "min": round(min(v), 4), "max": round(max(v), 4),
+                                  "lo": round(min(v) - R0_PAIR_MARGIN, 4), "hi": round(max(v) + R0_PAIR_MARGIN, 4)}
+                              for k, v in sorted(r0_ratios.items())}}
     out = {
         "calibration_id": spec["id"], "version": 1, "status": spec["status"],
         "date": _dt.date.today().isoformat(), "derivation_version": DERIVATION_VERSION,
@@ -233,6 +259,7 @@ def main(which: str):
                              "references are unrelaxed builds whose closest contacts are already short, so the "
                              "threshold is placed well below them", "margin_rel": OVERLAP_MARGIN_REL, "pairs": overlap},
         "density": dens,
+        "bond_r0": r0_block,
         "mass": {"tau_m_amu": TAU_M_AMU, "measured": "|Masses value - standard atomic weight of the mapped element|",
                  "basis": "FF mass tables print 2-5 decimals and use older IUPAC editions (e.g. H 1.00794/1.00797, "
                           "Ca 40.08, Si 28.086); the largest such difference for the elements in scope is 0.002 amu. "

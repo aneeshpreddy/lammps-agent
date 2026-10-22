@@ -1,10 +1,10 @@
 {
   "id": "PB-02_cvff__FM31__masses_row_duplicated",
   "file": "data/corrupted/PB-02_cvff__FM31__masses_row_duplicated.data",
-  "sha256": "5e3a3eedcbb958cbfce3927fa84a5ba75ffd7e1adac43dbcd8051605462a2720",
+  "sha256": "4fc6c9921d2fc4d8a864055f73cb21247768e2ea70e03aa65f7093f053a9ff68",
   "parent_id": "PB-02_cvff",
   "parent_file": "data/reference/pce_builder/PB-02_cvff.data",
-  "parent_sha256": "8027f299287cb810213d7bb21b5d1e257e264d23e03e5610f769a3888aeb8efe",
+  "parent_sha256": "51922c04d81f5688b89c4343718e2f260fb8b519ed86abea5e9a9f53b361b306",
   "failure_mode": "FM31",
   "operator": "fm31",
   "variant": "masses_row_duplicated",

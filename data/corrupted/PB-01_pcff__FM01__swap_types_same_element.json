@@ -1,10 +1,10 @@
 {
   "id": "PB-01_pcff__FM01__swap_types_same_element",
   "file": "data/corrupted/PB-01_pcff__FM01__swap_types_same_element.data",
-  "sha256": "9d43239291aec66c8d6bf47d26a38f7a4d3c35e8f3634e5cb5331c850e4ddd4d",
+  "sha256": "aff40a0e423710d340d988737cb12503acc5f9ca559e74f2327d1ae70a14b228",
   "parent_id": "PB-01_pcff",
   "parent_file": "data/reference/pce_builder/PB-01_pcff.data",
-  "parent_sha256": "220d302f3c2fccdecfe3e210b4e65eef042364017ca4db284c25d4de0cc63c75",
+  "parent_sha256": "8d798d31412def5c24237b95e2e4126927a3b986b1d212aaef889414a2facad2",
   "failure_mode": "FM01",
   "operator": "fm01_same",
   "variant": "swap_types_same_element",

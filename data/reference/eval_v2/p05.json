@@ -2,7 +2,7 @@
   "id": "p05",
   "role": "EVAL_REFERENCE_V2",
   "file": "data/reference/eval_v2/p05.data",
-  "sha256": "b1baee8d67ad5d0f72e7b310da595611665350bbdb11153516fd8771c2a06e39",
+  "sha256": "5f914f804608cb6a6c28c9ae36067e9b7b6e3c343721417b791bfaee6cd38c50",
   "declared_config": "configs/interface_cvff_pce.yaml",
   "overrides": {
     "tc_mode": "graph",
@@ -71,17 +71,17 @@
     "grower_min_nonbonded_distance_A": [
       0.897
     ],
-    "data_sha256": "b1baee8d67ad5d0f72e7b310da595611665350bbdb11153516fd8771c2a06e39",
+    "data_sha256": "5f914f804608cb6a6c28c9ae36067e9b7b6e3c343721417b791bfaee6cd38c50",
     "msi2lmp_missing_kinds": [],
     "msi2lmp_missing_messages": 0,
     "cross_terms_zeroed": false,
     "relaxed": true,
     "stages": [
-      "soft A=10.0",
-      "soft A=40.0",
-      "soft A=100.0",
-      "lj/cut/coul/cut 10.0"
+      "soft A=10.0 (1-4 excluded)",
+      "soft A=40.0 (1-4 excluded)",
+      "soft A=100.0 (1-4 excluded)",
+      "lj/cut/coul/cut 10.0, dielectric 80"
     ],
-    "final_energy_kcal_mol": 850.736974075925
+    "final_energy_kcal_mol": 825.038316800497
   }
 }

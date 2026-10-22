@@ -1,10 +1,10 @@
 {
   "id": "PB-01_cvff__FM18__atom_displaced_3A",
   "file": "data/corrupted/PB-01_cvff__FM18__atom_displaced_3A.data",
-  "sha256": "6820183aa1abc19de890de4880e1c9207457ad3752b37ea1febe9f316a47a76b",
+  "sha256": "de676358d630b71f028875cda84b894ddb7438c5bf17b2c25279ced4816e07a3",
   "parent_id": "PB-01_cvff",
   "parent_file": "data/reference/pce_builder/PB-01_cvff.data",
-  "parent_sha256": "71f2a6c87ed6e663ece9da4740c796b0885449f901b03a71fc5d2e06e55a36f7",
+  "parent_sha256": "5390b3183bd8f439bc8b2c057ac5eb712d0e7b546f85140d3dbe49231949349a",
   "failure_mode": "FM18",
   "operator": "fm18",
   "variant": "atom_displaced_3A",

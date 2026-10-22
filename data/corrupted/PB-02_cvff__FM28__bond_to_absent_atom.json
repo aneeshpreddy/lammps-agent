@@ -1,10 +1,10 @@
 {
   "id": "PB-02_cvff__FM28__bond_to_absent_atom",
   "file": "data/corrupted/PB-02_cvff__FM28__bond_to_absent_atom.data",
-  "sha256": "fe4e1ff464bf6db1259b650c78c808c6a98a887f7b77acc172cf13699de8e471",
+  "sha256": "68b4c36d1e1058d32def1685b1bf7f30cf8c69a53de59d37557e2f79eff906f7",
   "parent_id": "PB-02_cvff",
   "parent_file": "data/reference/pce_builder/PB-02_cvff.data",
-  "parent_sha256": "8027f299287cb810213d7bb21b5d1e257e264d23e03e5610f769a3888aeb8efe",
+  "parent_sha256": "51922c04d81f5688b89c4343718e2f260fb8b519ed86abea5e9a9f53b361b306",
   "failure_mode": "FM28",
   "operator": "fm28",
   "variant": "bond_to_absent_atom",

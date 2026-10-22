@@ -1,10 +1,10 @@
 {
   "id": "PB-01_pcff__FM13__duplicate_atom_new_id",
   "file": "data/corrupted/PB-01_pcff__FM13__duplicate_atom_new_id.data",
-  "sha256": "beac456ae4948b2cdffb3a16a556a881f384f4a2c234a9274869ddede6a27991",
+  "sha256": "74923b2835ad7f8ec0ed48f0f7b82fc7df2e3b0da04caff42d14543a72054ba3",
   "parent_id": "PB-01_pcff",
   "parent_file": "data/reference/pce_builder/PB-01_pcff.data",
-  "parent_sha256": "220d302f3c2fccdecfe3e210b4e65eef042364017ca4db284c25d4de0cc63c75",
+  "parent_sha256": "8d798d31412def5c24237b95e2e4126927a3b986b1d212aaef889414a2facad2",
   "failure_mode": "FM13",
   "operator": "fm13_new",
   "variant": "duplicate_atom_new_id",

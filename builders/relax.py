@@ -1,8 +1,13 @@
 """Remove close contacts left by the grower: LAMMPS energy minimisation in two stages.
 
 Stage 1 replaces the pair style with a soft-core potential (finite at r = 0, so even coincident
-atoms separate), stage 2 restores the force field's own Lennard-Jones + cut-off Coulomb pair style
-with the Pair Coeffs from the DATA FILE. Bonded terms are the force field's throughout. The relaxed
+atoms separate); 1-4 pairs are excluded there, otherwise the 3 Å soft radius pushes atoms three bonds
+apart and stretches the bonds between them. Stage 2 restores the force field's own Lennard-Jones +
+cut-off Coulomb pair style with the Pair Coeffs from the DATA FILE, 1-4 terms at full strength, and a
+relative dielectric of 80: in vacuum, unscreened carboxylate-carboxylate repulsion stretches a
+polyanion backbone by up to ~11 % (measured, LOG 2026-10-22); screening removes this artefact
+(results match a Coulomb-free minimisation). The dielectric is used for geometry preparation only:
+the charges written in the DATA FILE are not changed. Bonded terms are the force field's throughout. The relaxed
 coordinates and image flags are copied back into the original msi2lmp file by atom ID, so types,
 charges, topology, coefficients and comments stay byte-identical; only coordinates change.
 """
@@ -54,8 +59,11 @@ neigh_modify delay 0 every 1 check yes one 5000 page 500000
 thermo_style custom step pe ebond eangle edihed evdwl ecoul
 thermo 500
 min_style cg
+special_bonds lj/coul 0 0 0
 pair_style soft 3.0
 {soft}
+special_bonds lj/coul 0 0 1
+dielectric 80.0
 pair_style {st['pair_cut']}
 {chr(10).join(pcs)}
 minimize 1.0e-6 1.0e-8 5000 50000
@@ -94,5 +102,5 @@ write_dump all custom relaxed.dump id x y z ix iy iz modify sort id format float
     for k2, ln in enumerate(log.splitlines()):
         if ln.strip().startswith("Energy initial, next-to-last, final"):
             finals.append(log.splitlines()[k2 + 1].split())
-    return {"relaxed": True, "stages": [f"soft A={a}" for a in soft_stages] + [st["pair_cut"]],
+    return {"relaxed": True, "stages": [f"soft A={a} (1-4 excluded)" for a in soft_stages] + [st["pair_cut"] + ", dielectric 80"],
             "final_energy_kcal_mol": float(finals[-1][2]) if finals else None}

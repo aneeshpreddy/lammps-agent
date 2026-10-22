@@ -1,10 +1,10 @@
 {
   "id": "PB-01_cvff__FM23__box_origin_reset",
   "file": "data/corrupted/PB-01_cvff__FM23__box_origin_reset.data",
-  "sha256": "d8d79954ea4f358d05273bd4c2f0bc1891cae479445da4c34f09ae12e2f72131",
+  "sha256": "2aec1d4e007b194a8849e118d365ca1116370a46d90a59db98f4f551943241e6",
   "parent_id": "PB-01_cvff",
   "parent_file": "data/reference/pce_builder/PB-01_cvff.data",
-  "parent_sha256": "71f2a6c87ed6e663ece9da4740c796b0885449f901b03a71fc5d2e06e55a36f7",
+  "parent_sha256": "5390b3183bd8f439bc8b2c057ac5eb712d0e7b546f85140d3dbe49231949349a",
   "failure_mode": "FM23",
   "operator": "fm23",
   "variant": "box_origin_reset",

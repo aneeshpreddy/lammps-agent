@@ -2,7 +2,7 @@
   "calibration_id": "minerals_cvff",
   "version": 1,
   "status": "PROVISIONAL_DEFAULT",
-  "date": "2026-10-20",
+  "date": "2026-10-22",
   "derivation_version": "calibrate.py v1 (2026-10-16)",
   "references": [
     {
@@ -320,6 +320,43 @@
       "lo": 3.149756,
       "hi": 3.150386,
       "basis": "Crystal model: every supercell has the model's density exactly; \u00b11e-4 relative is a representation tolerance (PROPERTIES \u00a78.5 rule 3), not a physical one."
+    }
+  },
+  "bond_r0": {
+    "measured": "mean bond length of each bond type / that type's own r0 (Bond Coeffs or coeff file)",
+    "derivation": "per atom-type pair: [min - 0.03, max + 0.03] of the observed ratios; other pairs: |ratio - 1| <= max(0.03, 2.0 x largest observed |ratio - 1|)",
+    "basis": "structures sit systematically off r0 (crystal geometry vs force-field fit, crowded centres), but each pair's ratio is stable; a coefficient row moved to another bond type changes it",
+    "observed_max_abs_deviation": 0.1203,
+    "default_tau_rel": 0.2406,
+    "pairs": {
+      "ac1|oc3": {
+        "n_types": 4,
+        "min": 0.8797,
+        "max": 0.8876,
+        "lo": 0.8497,
+        "hi": 0.9176
+      },
+      "ac1|oc4": {
+        "n_types": 4,
+        "min": 0.9632,
+        "max": 0.9673,
+        "lo": 0.9332,
+        "hi": 0.9973
+      },
+      "hoc|oc5": {
+        "n_types": 1,
+        "min": 1.0297,
+        "max": 1.0297,
+        "lo": 0.9997,
+        "hi": 1.0597
+      },
+      "oc1|sc1": {
+        "n_types": 4,
+        "min": 0.9498,
+        "max": 0.9573,
+        "lo": 0.9198,
+        "hi": 0.9873
+      }
     }
   },
   "mass": {
