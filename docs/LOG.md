@@ -277,3 +277,13 @@ No work is recorded for 5–15 October; everything below was done on 2026-10-16.
 
 ### Hours
 - To be filled by project owner.
+
+---
+
+## 2026-10-22 — GATE 1 decision: PASSED (owner)
+
+- **Decision:** Gate 1 passed, confirmed by the project owner on 2026-10-22 after checking the five criteria (plan Day 16).
+- **Criteria:** Tiers 0–3 implemented · every failure mode caught (448/448 corrupted files rejected, 0 missed; `VALIDATOR_RESULTS.md`) · all reference files pass · tests green (98 passed) · code pushed (private repo `github.com/aneeshpreddy/lammps-agent`, tag `validator-v1`).
+- **Caveats carried forward:** Tier 2 tolerances are provisional (supervisor to confirm the margins); the corruption matrix has not yet been rerun on the system class set on 2026-10-20 (class I CVFF PCEs, non-tobermorite minerals); a position-free TC comparison for PCE is still to be built (needed for METRICS.md).
+- **Supervisor sign-off:** not yet recorded; forward the repo link.
+- **Next:** rerun the corruption matrix with builder PCEs (both force fields) and mineral references as parents; then the eval set, METRICS.md and the dev/test split.
