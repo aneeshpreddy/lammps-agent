@@ -376,3 +376,32 @@ No work is recorded for 5–15 October; everything below was done on 2026-10-16.
 
 ### Hours
 - To be filled by project owner.
+
+---
+
+## 2026-10-27 (evening) — Plan Days 26–27 done early: tool layer, logging, tool tests (AI-assisted)
+
+The scored baseline run (Day 25 analysis) waits on an API key, so the tool layer was built first. It needs no LLM.
+
+### Done
+- **Tool layer** (`tools/`, `docs/TOOLS.md`, `tools-v1`). Three tools, each with a strict schema (`strict: true`):
+  - `build_data_file`: the baseline's builder spec → DATA FILE + plain facts (counts, elements, net charge, box, sequences / surface details);
+  - `get_model_info`: the plan's `get_type_map`, per cement-mineral model and force field: cell, composition, atom-type and charge table, slab normal;
+  - `get_reference_example`: 6 known-good worked examples.
+  `run_generation_script(code)` is replaced by `build_data_file(spec)` (design decision E). The validator is not a tool.
+- Every tool checks its arguments again (`tools/schema_check.py`), never raises (errors come back as `is_error` results), is deterministic and safe to retry (each build goes to a new folder), and logs one JSON line per call (ts, call, tool, arguments, ok, result summary, duration).
+- **Checks** (`scripts/tool_checks.py`, no LLM): all 6 reference examples build and PASS Tiers 0–3. `get_model_info` answers 35 model/force-field pairs and refuses the other 21 with the reason. The log is complete.
+- **Tests:** `tests/test_tools.py` (7). It includes a guard that no reference example shares its key parameters with any eval task. **119 tests pass.**
+
+### Disclosure
+- The first run of the example-vs-task guard failed, and pytest printed part of the task fingerprint set. It showed the mineral model and supercell of some test-split tasks; it did not show their inputs or any results. Only the developer (the AI assistant) saw it; no evaluated system or prompt did. The test now passes only example names to its assertion. The composite example was moved to the monosulfate (002) surface. Tool and prompt content were not changed in response to what was shown.
+
+### Not Done
+- **Scored baseline dev run and its failure analysis** (Day 25): waiting on `ANTHROPIC_API_KEY`.
+- **Per-tool timeouts:** plan Day 31 (bounds).
+
+### Tomorrow
+- With a key: run the baseline, then analyse it (BASELINE_RESULTS.md, failure categories). Without one: start the loop skeleton (`agents/loop.py`) against a scripted mock model, so the API is needed only for real runs. Gate 2 is on 31 Oct.
+
+### Hours
+- To be filled by project owner.
