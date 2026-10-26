@@ -1,0 +1,89 @@
+{
+  "name": "p09",
+  "spec": {
+    "name": "p09",
+    "monomers": {
+      "A": {
+        "kind": "acid",
+        "alpha_methyl": false,
+        "deprotonated": true
+      },
+      "E": {
+        "kind": "ester_peg",
+        "alpha_methyl": false,
+        "eo_units": 10,
+        "end": "OCH3"
+      }
+    },
+    "composition": {
+      "A": 6,
+      "E": 3
+    },
+    "sequence": "block",
+    "end_groups": [
+      "CH3",
+      "CH3"
+    ],
+    "n_chains": 3,
+    "counterion": "Ca2+",
+    "box": {
+      "padding": 2.0
+    },
+    "force_field": "pcff",
+    "seed": 2,
+    "conformation": "random",
+    "relax": true
+  },
+  "force_field": "PCFF-INTERFACE (INTERFACE FF 1.5, class II)",
+  "frc": "INTERFACE_FF_1_5/FORCE_FIELDS/pcff_interface_v1_5.frc",
+  "sequences": [
+    "AAAAAAEEE",
+    "AAAAAAEEE",
+    "AAAAAAEEE"
+  ],
+  "chain_charges": [
+    -6,
+    -6,
+    -6
+  ],
+  "counterions": 9,
+  "natoms": 915,
+  "elements": {
+    "C": 276,
+    "O": 144,
+    "H": 486,
+    "Ca": 9
+  },
+  "net_charge": 0.0,
+  "box": [
+    106.3806,
+    35.8927,
+    34.252
+  ],
+  "grower_min_nonbonded_distance_A": [
+    1.269,
+    1.416,
+    1.497
+  ],
+  "data_file": "data/reference/eval_v3/p09.data",
+  "data_sha256": "ad089ba4acdb7a3ef06a36af85ea78fd9f1f686d224cb12ee1825fcfb7fb5532",
+  "msi2lmp_missing_kinds": [
+    "angleangle",
+    "angleangledihedral",
+    "angledihedral",
+    "bondangle",
+    "bondbond",
+    "endbonddihedral",
+    "midbonddihedral"
+  ],
+  "msi2lmp_missing_messages": 75,
+  "cross_terms_zeroed": true,
+  "relaxed": true,
+  "stages": [
+    "soft A=10.0 (1-4 excluded)",
+    "soft A=40.0 (1-4 excluded)",
+    "soft A=100.0 (1-4 excluded)",
+    "lj/class2/coul/cut 10.0, dielectric 80"
+  ],
+  "final_energy_kcal_mol": 106.458047345586
+}

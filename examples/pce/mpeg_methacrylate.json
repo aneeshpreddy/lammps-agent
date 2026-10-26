@@ -3,4 +3,4 @@
  "monomers": {"A": {"kind": "acid", "alpha_methyl": true, "deprotonated": true},
               "E": {"kind": "ester_peg", "alpha_methyl": true, "eo_units": 23, "end": "OCH3"}},
  "composition": {"A": 30, "E": 10}, "sequence": "random", "end_groups": ["H", "H"],
- "n_chains": 1, "counterion": "Na+", "box": {"padding": 12.0}, "force_field": "pcff", "seed": 11}
+ "n_chains": 1, "counterion": "Na+", "box": {"padding": 2.0}, "force_field": "pcff", "seed": 11}

@@ -1,0 +1,30 @@
+{
+  "id": "CP-01_cvff__FM08__coords_x1.5_box_kept",
+  "file": "data/corrupted/CP-01_cvff__FM08__coords_x1.5_box_kept.data",
+  "sha256": "e900c5c30f7e40b84beef4a9561f90bc1507ea884aa0f6d1d07b5c491801b6d2",
+  "parent_id": "CP-01_cvff",
+  "parent_file": "data/reference/composite/CP-01_cvff.data",
+  "parent_sha256": "4d93c5513995fac4c69e53fdbe28cc4e196e73d036bb133dafe702e1d3185f26",
+  "failure_mode": "FM08",
+  "operator": "fm08",
+  "variant": "coords_x1.5_box_kept",
+  "description": "multiply all coordinates by 1.5, box unchanged",
+  "params": {
+    "factor": 1.5
+  },
+  "expected_failing_properties": [
+    "P2.2",
+    "P2.3",
+    "P2.4"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.2",
+    "P2.3",
+    "P2.4"
+  ],
+  "expected_lammps_behaviour": "Silent (periodic remap)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_composite.yaml",
+  "overrides": {}
+}

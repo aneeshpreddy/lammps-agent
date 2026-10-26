@@ -1,0 +1,39 @@
+{
+  "name": "m06",
+  "model": "tob11_unit_cell",
+  "model_dir": "CEMENT_MINERALS",
+  "model_sha256": {
+    "car": "b292f2b1881079563e72f01cbe22d8611bcfdd2769f5b83cbff392d5294c097f",
+    "mdf": "af947e51ec8e61c2e6f4006d08051488f48e80ca952bf0e67fef339256421997"
+  },
+  "supercell": [
+    1,
+    2,
+    1
+  ],
+  "force_field": "PCFF-INTERFACE (INTERFACE FF 1.5, class II)",
+  "frc_sha256": "3ad5a1be7334c646ed6cb813b769d0e89a1aa03fe695013e940626b7df922693",
+  "lammps": "LAMMPS (22 Jul 2025 - Update 6)",
+  "tilt_reduction": {
+    "k": -1,
+    "m": 0,
+    "n": 0
+  },
+  "tilt_reduced_after_supercell": true,
+  "comments_restored": 43,
+  "natoms": 176,
+  "data_file": "/Users/ani.bob/Downloads/UGRP/lammps-agent/data/reference/eval_v3/m06.data",
+  "data_sha256": "2b8a64e9c5ac7a292739b594dbd34d1b77e4b38571f9afb7602050045fa0c648",
+  "missing_kinds": [
+    "angleangle",
+    "angleangledihedral",
+    "angledihedral",
+    "bondangle",
+    "bondbond",
+    "endbonddihedral",
+    "midbonddihedral"
+  ],
+  "cross_terms_zeroed": true,
+  "allowed_missing_kinds": [],
+  "simulation_ready": true
+}

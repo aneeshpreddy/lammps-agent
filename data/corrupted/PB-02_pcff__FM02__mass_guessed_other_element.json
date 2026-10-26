@@ -1,10 +1,10 @@
 {
   "id": "PB-02_pcff__FM02__mass_guessed_other_element",
   "file": "data/corrupted/PB-02_pcff__FM02__mass_guessed_other_element.data",
-  "sha256": "60344afe932a5b2d1e84d8879d1b2ed56789f208148d2416afcee9510cf9e9b0",
+  "sha256": "ed3e489fbcd72a52f9e3a8447b616e70f39004d05cb5601c1a2c6151435b1295",
   "parent_id": "PB-02_pcff",
   "parent_file": "data/reference/pce_builder/PB-02_pcff.data",
-  "parent_sha256": "38e6e6dec874e9d322aa48f679273c3312bd34831e4b5a6f59ad0c814a4e5f7d",
+  "parent_sha256": "9a799d35a425095ba29a797344f5959a9aab56b8a5ee1422d4ea8c12eec5c29d",
   "failure_mode": "FM02",
   "operator": "fm02",
   "variant": "mass_guessed_other_element",

@@ -1,0 +1,29 @@
+{
+  "id": "CP-01_cvff__FM12__counter_ion_removed",
+  "file": "data/corrupted/CP-01_cvff__FM12__counter_ion_removed.data",
+  "sha256": "1316ea20adfb131175656187e3f508c6e987345ade6966c18564c52e21e56628",
+  "parent_id": "CP-01_cvff",
+  "parent_file": "data/reference/composite/CP-01_cvff.data",
+  "parent_sha256": "4d93c5513995fac4c69e53fdbe28cc4e196e73d036bb133dafe702e1d3185f26",
+  "failure_mode": "FM12",
+  "operator": "fm12_ion",
+  "variant": "counter_ion_removed",
+  "description": "delete the unbonded atom with the largest |q| (a counter-ion) and adjust the header",
+  "params": {
+    "atom": 972,
+    "abs_q": 1.5
+  },
+  "expected_failing_properties": [
+    "P2.1",
+    "TC.2"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.1",
+    "TC.2"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_composite.yaml",
+  "overrides": {}
+}

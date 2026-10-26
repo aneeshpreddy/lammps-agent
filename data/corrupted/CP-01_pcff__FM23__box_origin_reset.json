@@ -1,0 +1,26 @@
+{
+  "id": "CP-01_pcff__FM23__box_origin_reset",
+  "file": "data/corrupted/CP-01_pcff__FM23__box_origin_reset.data",
+  "sha256": "f9a348230449a20d6925ce11455f060cc8b206da6e0d8176932cf624619da876",
+  "parent_id": "CP-01_pcff",
+  "parent_file": "data/reference/composite/CP-01_pcff.data",
+  "parent_sha256": "018611dab7224f0f58ec208b2c5c40d21aa33cb14c613b08e2b53aab9ea7c97d",
+  "failure_mode": "FM23",
+  "operator": "fm23",
+  "variant": "box_origin_reset",
+  "description": "move the box so its origin is 0 (or shift it by half a box if it already is); atoms unchanged",
+  "params": {
+    "shift_x": 0.703300962
+  },
+  "expected_failing_properties": [
+    "P2.2"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.2"
+  ],
+  "expected_lammps_behaviour": "Silent (periodic)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_composite.yaml",
+  "overrides": {}
+}

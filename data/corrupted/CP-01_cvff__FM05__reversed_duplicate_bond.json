@@ -1,0 +1,31 @@
+{
+  "id": "CP-01_cvff__FM05__reversed_duplicate_bond",
+  "file": "data/corrupted/CP-01_cvff__FM05__reversed_duplicate_bond.data",
+  "sha256": "503295cb129a51744cef772c8ce78ff0ef201c559b5d488d06d5fd6dc6dadf74",
+  "parent_id": "CP-01_cvff",
+  "parent_file": "data/reference/composite/CP-01_cvff.data",
+  "parent_sha256": "4d93c5513995fac4c69e53fdbe28cc4e196e73d036bb133dafe702e1d3185f26",
+  "failure_mode": "FM05",
+  "operator": "fm05",
+  "variant": "reversed_duplicate_bond",
+  "description": "append a reversed copy of an existing bond and raise the header count",
+  "params": {
+    "duplicated_bond": [
+      "1",
+      "1",
+      "4",
+      "11"
+    ]
+  },
+  "expected_failing_properties": [
+    "P1.6"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.6"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_composite.yaml",
+  "overrides": {}
+}

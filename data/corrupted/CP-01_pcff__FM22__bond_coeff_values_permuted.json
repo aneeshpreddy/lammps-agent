@@ -1,0 +1,26 @@
+{
+  "id": "CP-01_pcff__FM22__bond_coeff_values_permuted",
+  "file": "data/corrupted/CP-01_pcff__FM22__bond_coeff_values_permuted.data",
+  "sha256": "ba6c9f541230527f60d68ad553406a9df86f8c04021e84d1c39d795e8079d44f",
+  "parent_id": "CP-01_pcff",
+  "parent_file": "data/reference/composite/CP-01_pcff.data",
+  "parent_sha256": "018611dab7224f0f58ec208b2c5c40d21aa33cb14c613b08e2b53aab9ea7c97d",
+  "failure_mode": "FM22",
+  "operator": "fm22_vals",
+  "variant": "bond_coeff_values_permuted",
+  "description": "swap the parameter values (not the IDs or comments) of the first two Bond Coeffs rows",
+  "params": {},
+  "expected_failing_properties": [
+    "P2.9",
+    "TC.2"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P1.7",
+    "TC.2"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_composite.yaml",
+  "overrides": {}
+}

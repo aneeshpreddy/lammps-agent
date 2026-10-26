@@ -2,7 +2,7 @@
   "calibration_id": "pce_emc",
   "version": 1,
   "status": "PROVISIONAL",
-  "date": "2026-10-22",
+  "date": "2026-10-26",
   "derivation_version": "calibrate.py v1 (2026-10-16)",
   "references": [
     {
@@ -448,7 +448,7 @@
       "margin_rel": 0.02,
       "lo": 0.98,
       "hi": 1.02,
-      "basis": "REF-01, REF-02 were built by EMC at the requested density1 = 1 g/cm3 (REF-0x.params) and both measure 1.0000 g/cm3. The \u00b12 % margin is NOT reference-derived (two identical values give no spread): it is a PLACEHOLDER for an owner requirement (PROPERTIES \u00a78.5 rule 4) and must be confirmed or replaced."
+      "basis": "REF-01, REF-02 were built by EMC at the requested density1 = 1 g/cm3 (REF-0x.params) and both measure 1.0000 g/cm3. The \u00b12 % margin is NOT reference-derived (two identical values give no spread): it is an owner requirement (PROPERTIES \u00a78.5 rule 4), proposed by the project and accepted by the supervisor on 2026-10-26."
     },
     "pce_emc_dilute": {
       "applicable": false,

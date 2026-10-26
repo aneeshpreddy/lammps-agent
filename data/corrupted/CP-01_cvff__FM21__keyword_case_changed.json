@@ -1,0 +1,24 @@
+{
+  "id": "CP-01_cvff__FM21__keyword_case_changed",
+  "file": "data/corrupted/CP-01_cvff__FM21__keyword_case_changed.data",
+  "sha256": "267d44fdc39de442aa37b25b07ecbd2c3a5faa890293253e45f9685593920b19",
+  "parent_id": "CP-01_cvff",
+  "parent_file": "data/reference/composite/CP-01_cvff.data",
+  "parent_sha256": "4d93c5513995fac4c69e53fdbe28cc4e196e73d036bb133dafe702e1d3185f26",
+  "failure_mode": "FM21",
+  "operator": "fm21_case",
+  "variant": "keyword_case_changed",
+  "description": "'Masses' written as 'masses'",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.2"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.2"
+  ],
+  "expected_lammps_behaviour": "Loud (Unknown identifier)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_composite.yaml",
+  "overrides": {}
+}

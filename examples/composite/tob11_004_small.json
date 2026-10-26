@@ -1,0 +1,7 @@
+{"name": "tob11_004_small", "force_field": "pcff",
+ "surface": {"model": "tob11_004_surface", "supercell": "auto"},
+ "pce": {"monomers": {"A": {"kind": "acid", "alpha_methyl": false, "deprotonated": true},
+                      "E": {"kind": "ester_peg", "alpha_methyl": true, "eo_units": 4, "end": "OCH3"}},
+         "composition": {"A": 4, "E": 2}, "sequence": "alternating", "end_groups": ["CH3", "CH3"],
+         "counterion": "Ca2+", "seed": 7},
+ "height": 3.0, "orientation": "flat"}

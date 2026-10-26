@@ -1,0 +1,29 @@
+{
+  "id": "CP-01_pcff__FM15__masses_values_permuted",
+  "file": "data/corrupted/CP-01_pcff__FM15__masses_values_permuted.data",
+  "sha256": "9d9ce2db893c8fe7288a233ff5de3a0be74673781a81042f609b46332fc2d6c8",
+  "parent_id": "CP-01_pcff",
+  "parent_file": "data/reference/composite/CP-01_pcff.data",
+  "parent_sha256": "018611dab7224f0f58ec208b2c5c40d21aa33cb14c613b08e2b53aab9ea7c97d",
+  "failure_mode": "FM15",
+  "operator": "fm15",
+  "variant": "masses_values_permuted",
+  "description": "swap the mass values of the first two Masses rows with different masses",
+  "params": {
+    "types": [
+      1,
+      2
+    ]
+  },
+  "expected_failing_properties": [
+    "P2.6"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.6"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_composite.yaml",
+  "overrides": {}
+}

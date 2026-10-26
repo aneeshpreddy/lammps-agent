@@ -4,7 +4,8 @@ TC.2 has three comparison modes (declared `tc_mode`, normally set per task; METR
   positions  — atoms matched by minimum-image position (default; references built by the same route)
   graph      — position-free: the multiset of molecules, each identified by a Weisfeiler-Lehman hash
                of its typed, charged bond graph, must be identical; optional cell comparison
-               (`tc_compare_cell`). For deterministic structures built in a different geometry
+               (`tc_compare_cell`: true = all lengths and tilts; a list of axes = only those lengths,
+               e.g. the lateral axes of a slab with an adsorbate). For deterministic structures built in a different geometry
                (minerals, PCE with explicit/alternating/block sequences).
   chemistry  — position- and sequence-free: per molecule, the multiset of (atom type, charge), the
                net charge and the counts of bond type-signatures must match. For random-sequence PCE,
@@ -244,11 +245,18 @@ def tc2_position_free(pf, m: Model, cfg, ref_path: str, mode: str) -> CheckResul
     if a != b:
         diffs.append(f"{what}: {sum((a - b).values())} molecule(s) not in the reference, "
                      f"{sum((b - a).values())} reference molecule(s) not reproduced (of {sum(b.values())})")
-    if declared(cfg).get("tc_compare_cell") and m.cell is not None and r.cell is not None:
+    cc = declared(cfg).get("tc_compare_cell")
+    if cc and m.cell is not None and r.cell is not None:
+        # true: all lengths and tilts; a list of axes (e.g. ["x", "y"]): only those lengths, for slabs whose
+        # length along the surface normal depends on the adsorbate's height
         tol = 1e-3
-        if np.max(np.abs(m.cell.lengths - r.cell.lengths)) > tol or np.max(np.abs(m.cell.tilt - r.cell.tilt)) > tol:
-            diffs.append(f"cell: lengths {np.round(m.cell.lengths, 4).tolist()} tilt {np.round(m.cell.tilt, 4).tolist()} vs "
-                         f"reference {np.round(r.cell.lengths, 4).tolist()} {np.round(r.cell.tilt, 4).tolist()}")
+        ax = [0, 1, 2] if cc is True else ["xyz".index(a) for a in cc]
+        bad_len = np.max(np.abs(m.cell.lengths[ax] - r.cell.lengths[ax])) > tol
+        bad_tilt = cc is True and np.max(np.abs(m.cell.tilt - r.cell.tilt)) > tol
+        if bad_len or bad_tilt:
+            diffs.append(f"cell ({'all' if cc is True else ','.join(cc)}): lengths {np.round(m.cell.lengths, 4).tolist()} "
+                         f"tilt {np.round(m.cell.tilt, 4).tolist()} vs reference {np.round(r.cell.lengths, 4).tolist()} "
+                         f"{np.round(r.cell.tilt, 4).tolist()}")
     det = {"reference": ref_path, "reference_sha256": rpf.sha256, "mode": mode, "differences": diffs[:MAXEX],
            "molecules": sum(b.values())}
     return CheckResult(name, prop, "TC", FAIL if diffs else PASS,

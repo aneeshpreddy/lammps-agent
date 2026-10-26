@@ -1,0 +1,24 @@
+{
+  "id": "CP-01_cvff__FM06__zero_all_charges",
+  "file": "data/corrupted/CP-01_cvff__FM06__zero_all_charges.data",
+  "sha256": "a93218b177a3d0a95a1a1da55fb9dd332e1c14401b7b10fec0e190078972b41e",
+  "parent_id": "CP-01_cvff",
+  "parent_file": "data/reference/composite/CP-01_cvff.data",
+  "parent_sha256": "4d93c5513995fac4c69e53fdbe28cc4e196e73d036bb133dafe702e1d3185f26",
+  "failure_mode": "FM06",
+  "operator": "fm06_zero",
+  "variant": "zero_all_charges",
+  "description": "set every charge to zero",
+  "params": {},
+  "expected_failing_properties": [
+    "P2.1"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.1"
+  ],
+  "expected_lammps_behaviour": "Warn (Using kspace solver on system with no charge)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_composite.yaml",
+  "overrides": {}
+}

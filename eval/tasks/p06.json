@@ -3,7 +3,7 @@
   "difficulty": "representative",
   "domain": "pce",
   "force_field": "pcff",
-  "input": "Build a LAMMPS data file in the class II PCFF-INTERFACE force field (INTERFACE FF 1.5) for a PCE with 6 butenyl-ether side chains of 4 ethylene-oxide units (OH-terminated) and 12 acrylic acid units of which half are deprotonated (the rest stay COOH), random sequence, sodium counter-ions.",
+  "input": "Build a LAMMPS data file in the class II PCFF-INTERFACE force field (INTERFACE FF 1.5) for a PCE with 6 butenyl-ether side chains of 4 ethylene-oxide units (OH-terminated) and 12 acrylic acid units of which half are deprotonated (the rest stay COOH), random sequence, sodium counter-ions. Put the system in a periodic box only slightly larger than the atoms (about 2 Å of empty space on every side).",
   "hidden_spec": {
     "builder": "pce",
     "n_side_chains": 6,
@@ -19,7 +19,7 @@
     "force_field": "pcff",
     "name": "p06",
     "box": {
-      "padding": 10.0
+      "padding": 2.0
     }
   },
   "declared_config": "configs/interface_pcff_pce.yaml",
@@ -30,8 +30,8 @@
     "FM02"
   ],
   "note": "COOH typing in class II is a trap (o_2/ho2, not oh/ho)",
-  "reference": "data/reference/eval_v2/p06.data",
-  "reference_sha256": "6566b229da93fa37b20860aa1055c049cdac53fc2af89d6826eefcf3470acbac",
+  "reference": "data/reference/eval_v3/p06.data",
+  "reference_sha256": "1100260c64804d60ddaefea2da90f33d535963fc09145ada6245bec64124e239",
   "expected_counts": {
     "atoms": 362
   }

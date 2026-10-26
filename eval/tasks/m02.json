@@ -25,7 +25,7 @@
     "FM22"
   ],
   "note": "triclinic, tilt reduction needed",
-  "reference": "data/reference/eval_v2/m02.data",
+  "reference": "data/reference/eval_v3/m02.data",
   "reference_sha256": "c3d34dacb9fff5f0e0431f9938105e95bc920aa5b32ffcf6e7d9b6df99d0f9fe",
   "expected_counts": {
     "atoms": 88

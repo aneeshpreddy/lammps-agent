@@ -120,3 +120,23 @@ def test_built_pce_passes_validation(tmp_path, ff):
     build(ArchitectureSpec.from_json(d), str(tmp_path))
     res = validate(str(tmp_path / "small.data"), load_config(declared=f"configs/interface_{ff}_pce.yaml"))
     assert res.passed, res.summary()
+
+
+def test_composite_slab_normal_and_orientation():
+    import numpy as np
+    from builders.composite import Data, orient, slab_geometry
+    ref = os.path.join(ROOT, "data", "reference", "minerals")
+    for f, axis in (("tob11_004_surface_pcff.data", 2), ("c3s_040_surface_cvff.data", 1), ("tob11_100_surface_pcff.data", 0)):
+        g = slab_geometry(Data(os.path.join(ref, f)))
+        assert g["axis"] == axis, f
+        assert g["gap"] > 20 and g["thickness"] > 5
+    with pytest.raises(ValueError, match="not a slab"):
+        slab_geometry(Data(os.path.join(ref, "tob11_rectangular_cell_pcff.data")))
+    rng = np.random.default_rng(0)
+    xyz = rng.normal(size=(200, 3)) * [1.0, 6.0, 3.0]
+    for normal in range(3):
+        out = orient(xyz, normal, "flat")
+        ext = out.max(0) - out.min(0)
+        assert np.argmin(ext) == normal
+        d0 = np.linalg.norm(xyz[1:] - xyz[0], axis=1)
+        assert np.allclose(np.linalg.norm(out[1:] - out[0], axis=1), d0)    # rigid rotation

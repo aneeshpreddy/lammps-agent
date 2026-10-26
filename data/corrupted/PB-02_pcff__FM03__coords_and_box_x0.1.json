@@ -1,10 +1,10 @@
 {
   "id": "PB-02_pcff__FM03__coords_and_box_x0.1",
   "file": "data/corrupted/PB-02_pcff__FM03__coords_and_box_x0.1.data",
-  "sha256": "9df105702fda06da52d756d358cfeab2830387013377b230d6bb1154a0d03aae",
+  "sha256": "e837be9f51642f17a4c92b3b393b6a67a807cbacf9e7dfbc51a38a67fed8a90f",
   "parent_id": "PB-02_pcff",
   "parent_file": "data/reference/pce_builder/PB-02_pcff.data",
-  "parent_sha256": "38e6e6dec874e9d322aa48f679273c3312bd34831e4b5a6f59ad0c814a4e5f7d",
+  "parent_sha256": "9a799d35a425095ba29a797344f5959a9aab56b8a5ee1422d4ea8c12eec5c29d",
   "failure_mode": "FM03",
   "operator": "fm03_down",
   "variant": "coords_and_box_x0.1",

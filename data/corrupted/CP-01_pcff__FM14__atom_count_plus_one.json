@@ -1,0 +1,24 @@
+{
+  "id": "CP-01_pcff__FM14__atom_count_plus_one",
+  "file": "data/corrupted/CP-01_pcff__FM14__atom_count_plus_one.data",
+  "sha256": "f883f56de7716d4f16c7726c9f446ed611f3386ed360fbb44bf9b6299b3513fd",
+  "parent_id": "CP-01_pcff",
+  "parent_file": "data/reference/composite/CP-01_pcff.data",
+  "parent_sha256": "018611dab7224f0f58ec208b2c5c40d21aa33cb14c613b08e2b53aab9ea7c97d",
+  "failure_mode": "FM14",
+  "operator": "fm14",
+  "variant": "atom_count_plus_one",
+  "description": "raise the header atom count by one",
+  "params": {},
+  "expected_failing_properties": [
+    "P1.1"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.1"
+  ],
+  "expected_lammps_behaviour": "Loud",
+  "header_consistent": false,
+  "declared_config": "configs/interface_pcff_composite.yaml",
+  "overrides": {}
+}

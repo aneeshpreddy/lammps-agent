@@ -1,0 +1,33 @@
+{
+  "id": "m07",
+  "difficulty": "hard",
+  "domain": "mineral",
+  "force_field": "pcff",
+  "input": "Build a LAMMPS data file for a 2x2x1 supercell of the INTERFACE FF monosulfate (AFm) cell in the class II PCFF-INTERFACE force field (INTERFACE FF 1.5).",
+  "hidden_spec": {
+    "builder": "minerals",
+    "model": "monosulfate_cell_221",
+    "supercell": [
+      2,
+      2,
+      1
+    ],
+    "force_field": "pcff"
+  },
+  "declared_config": "configs/interface_pcff_minerals.yaml",
+  "tc_mode": "graph",
+  "tc_compare_cell": true,
+  "exercises": [
+    "FM10",
+    "FM11",
+    "FM14",
+    "FM18",
+    "FM22"
+  ],
+  "note": "hexagonal supercell, 1272 atoms",
+  "reference": "data/reference/eval_v2/m07.data",
+  "reference_sha256": "07bfb27b29de5b4cac0cae7301929c0ed686f54cf92586b48e31c0c4f9966943",
+  "expected_counts": {
+    "atoms": 1272
+  }
+}

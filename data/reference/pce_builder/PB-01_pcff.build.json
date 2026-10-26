@@ -34,7 +34,7 @@
     "n_chains": 1,
     "counterion": "Na+",
     "box": {
-      "padding": 10.0
+      "padding": 2.0
     },
     "force_field": "pcff",
     "seed": 21,
@@ -59,15 +59,15 @@
   },
   "net_charge": -0.0,
   "box": [
-    43.1427,
-    43.7617,
-    44.8942
+    26.3206,
+    30.543,
+    35.0899
   ],
   "grower_min_nonbonded_distance_A": [
     0.886
   ],
   "data_file": "data/reference/pce_builder/PB-01_pcff.data",
-  "data_sha256": "8d798d31412def5c24237b95e2e4126927a3b986b1d212aaef889414a2facad2",
+  "data_sha256": "5771bb4d9e1f0ab5372cdc7ef95e68e07b466b4ba10e3600d6b16b3326f4e122",
   "msi2lmp_missing_kinds": [
     "angleangle",
     "angleangledihedral",
@@ -83,5 +83,5 @@
     "soft A=100.0 (1-4 excluded)",
     "lj/class2/coul/cut 10.0, dielectric 80"
   ],
-  "final_energy_kcal_mol": -56.5363612865332
+  "final_energy_kcal_mol": -1.07289050915728
 }

@@ -25,7 +25,7 @@
     "FM22"
   ],
   "note": "supercell along a: LAMMPS replicate trap",
-  "reference": "data/reference/eval_v2/m03.data",
+  "reference": "data/reference/eval_v3/m03.data",
   "reference_sha256": "a271ac6e31cdf86f678b7ae3770e18afde5f02e06fefb123ec1b509f2c022114",
   "expected_counts": {
     "atoms": 416

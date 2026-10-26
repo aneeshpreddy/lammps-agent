@@ -3,7 +3,7 @@
   "difficulty": "hard",
   "domain": "pce",
   "force_field": "pcff",
-  "input": "Build a LAMMPS data file in the class II PCFF-INTERFACE force field (INTERFACE FF 1.5) with three identical block copolymer chains, each 6 acrylate (carboxylate) units followed by 3 acrylate ester units with methoxy-capped PEG-10 side chains, methyl end caps, neutralised with calcium ions.",
+  "input": "Build a LAMMPS data file in the class II PCFF-INTERFACE force field (INTERFACE FF 1.5) with three identical block copolymer chains, each 6 acrylate (carboxylate) units followed by 3 acrylate ester units with methoxy-capped PEG-10 side chains, methyl end caps, neutralised with calcium ions. Put the system in a periodic box only slightly larger than the atoms (about 2 Å of empty space on every side).",
   "hidden_spec": {
     "builder": "pce",
     "monomers": {
@@ -34,7 +34,7 @@
     "force_field": "pcff",
     "name": "p09",
     "box": {
-      "padding": 10.0
+      "padding": 2.0
     }
   },
   "declared_config": "configs/interface_pcff_pce.yaml",
@@ -47,8 +47,8 @@
     "FM13"
   ],
   "note": "multi-chain system",
-  "reference": "data/reference/eval_v2/p09.data",
-  "reference_sha256": "4ae87047ffa0ab17b25dfef8fcdb2d1353b91cb9b781c983b7dbd9647900f434",
+  "reference": "data/reference/eval_v3/p09.data",
+  "reference_sha256": "ad089ba4acdb7a3ef06a36af85ea78fd9f1f686d224cb12ee1825fcfb7fb5532",
   "expected_counts": {
     "atoms": 915
   }

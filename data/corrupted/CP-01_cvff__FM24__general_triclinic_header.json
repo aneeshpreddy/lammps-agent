@@ -1,0 +1,24 @@
+{
+  "id": "CP-01_cvff__FM24__general_triclinic_header",
+  "file": "data/corrupted/CP-01_cvff__FM24__general_triclinic_header.data",
+  "sha256": "4210885dcc7669aa0ac8bb73bf9003a4d7541c99d4924d799198bbe2e0af6dba",
+  "parent_id": "CP-01_cvff",
+  "parent_file": "data/reference/composite/CP-01_cvff.data",
+  "parent_sha256": "4d93c5513995fac4c69e53fdbe28cc4e196e73d036bb133dafe702e1d3185f26",
+  "failure_mode": "FM24",
+  "operator": "fm24",
+  "variant": "general_triclinic_header",
+  "description": "add an 'avec' line (general-triclinic keyword, unsupported in scope)",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.5"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.5"
+  ],
+  "expected_lammps_behaviour": "Accepted by this LAMMPS (out of project scope)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_composite.yaml",
+  "overrides": {}
+}

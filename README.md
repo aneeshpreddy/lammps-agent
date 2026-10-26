@@ -2,15 +2,15 @@
 
 A deterministic validator for LAMMPS DATA FILEs (`read_data` input). It is the first component of an agentic system that will generate those files for cementitious systems. The validator does not use the LLM, and it does not use the converters it checks (ASE, pymatgen, msi2lmp): it has its own parser, built from the LAMMPS `read_data` source.
 
-Specification: `docs/SPEC.md`, `docs/PROPERTIES.md` (42 properties in Tiers 0–3, plus 2 task-correctness properties), `docs/FAILURE_MODES.md` (35 failure modes). Current results: `docs/VALIDATOR_RESULTS.md`.
+Specification: `docs/SPEC.md`, `docs/PROPERTIES.md` (44 properties in Tiers 0–3, plus 2 task-correctness properties), `docs/FAILURE_MODES.md` (35 failure modes). Current results: `docs/VALIDATOR_RESULTS.md`.
 
 | Tier | Question | Examples |
 |---|---|---|
 | 0 | Can the file be parsed? | header keywords, section names, numeric syntax, Atoms columns, 254-character lines, missing box lines |
 | 1 | Is it internally consistent? | counts vs rows, unique IDs, topology references, Masses and Coeff rows, image flags, topology-type signatures, bonded-term completeness |
-| 2 | Is it physically plausible? | net charge, cell consistency, overlaps, bond lengths, density, mass ↔ element, image consistency, tilt bound |
+| 2 | Is it physically plausible? | net charge, cell consistency, overlaps, bond lengths, density, mass ↔ element, image consistency, tilt bound, bond coefficients vs geometry, box margin |
 | 3 | Does LAMMPS accept it under the declared configuration? | `read_data … nocoeff`; the full force field + `run 0`; warning policy; crash/timeout classification |
-| TC | Does it match the request or a reference? | position-matched comparison with a trusted reference |
+| TC | Does it match the request or a reference? | comparison with a trusted reference: by position, by molecular graph, or by chemistry (position- and sequence-free) |
 
 ## Structure builders (agent tools)
 
@@ -19,13 +19,15 @@ python -m builders.pce examples/pce/mpeg_methacrylate.json --ff pcff --out runs/
 python -m builders.pce examples/pce/hpeg.json --ff cvff --out runs/pce                  # class I
 python -m builders.minerals tob11_unit_cell --supercell 2 2 1 --ff pcff --out runs/minerals
 python -m builders.minerals --list                                                      # all INTERFACE models
+python -m builders.composite examples/composite/tob11_004_small.json --out runs/composite  # PCE on a mineral surface
 python scripts/pce_examples.py            # docs/PCE_BUILDER.md  (every example, both force fields, validated)
-python scripts/build_eval_set.py          # eval set v2: eval/tasks/*.json + data/reference/eval_v2/ + docs/EVAL_SET.md
-# eval/split.json is frozen (scripts/make_split.py, 2026-10-22); success is defined in docs/METRICS.md
+python scripts/composite_examples.py      # docs/COMPOSITE.md    (PCE on surfaces, both force fields, validated)
+python scripts/build_eval_set.py          # eval set v3: eval/tasks/*.json + data/reference/eval_v3/ + docs/EVAL_SET.md
+# eval/split.json is frozen (scripts/make_split.py; extended 2026-10-26 with --extend); success: docs/METRICS.md
 python scripts/build_mineral_references.py   # docs/MINERALS.md (every cement mineral, both force fields)
 ```
 
-Force fields: CVFF-INTERFACE (class I) and PCFF-INTERFACE (class II), INTERFACE FF 1.5. The builders refuse to write a file when the force field lacks a parameter (other than class II cross terms) or when msi2lmp writes a non-finite value.
+PCE files are written in a box slightly bigger than the atoms (2 Å per face; supervisor 2026-10-26, checked by P2.10). Force fields: CVFF-INTERFACE (class I) and PCFF-INTERFACE (class II), INTERFACE FF 1.5. The builders refuse to write a file when the force field lacks a parameter (other than class II cross terms) or when msi2lmp writes a non-finite value.
 
 ## Install
 

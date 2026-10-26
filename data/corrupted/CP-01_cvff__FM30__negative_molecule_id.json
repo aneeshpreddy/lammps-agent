@@ -1,0 +1,24 @@
+{
+  "id": "CP-01_cvff__FM30__negative_molecule_id",
+  "file": "data/corrupted/CP-01_cvff__FM30__negative_molecule_id.data",
+  "sha256": "d0d1731153fe8979993af947fefee2e384d505ea6121f521fcc9a71f6aa2ebe4",
+  "parent_id": "CP-01_cvff",
+  "parent_file": "data/reference/composite/CP-01_cvff.data",
+  "parent_sha256": "4d93c5513995fac4c69e53fdbe28cc4e196e73d036bb133dafe702e1d3185f26",
+  "failure_mode": "FM30",
+  "operator": "fm30",
+  "variant": "negative_molecule_id",
+  "description": "set one molecule ID to -1",
+  "params": {},
+  "expected_failing_properties": [
+    "P1.8"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.8"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_composite.yaml",
+  "overrides": {}
+}

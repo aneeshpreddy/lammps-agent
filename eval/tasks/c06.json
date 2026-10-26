@@ -1,0 +1,66 @@
+{
+  "id": "c06",
+  "difficulty": "hard",
+  "domain": "composite",
+  "force_field": "cvff",
+  "input": "Build a LAMMPS data file in the class I CVFF-INTERFACE force field (INTERFACE FF 1.5) for an alternating APEG-maleic PCE 3 Å above the (010) surface of tricalcium aluminate (the INTERFACE FF C3A slab model with both surface layers together, one slab cell), keeping the chain in its built orientation: 3 maleate units (both carboxyls deprotonated) alternating with 3 allyl-ether PEG units of 6 ethylene-oxide units (OH-terminated); one methyl and one hydrogen chain end; sodium counter-ions.",
+  "hidden_spec": {
+    "builder": "composite",
+    "surface": {
+      "model": "c3a_010_surface_together",
+      "supercell": [
+        1,
+        1,
+        1
+      ]
+    },
+    "pce": {
+      "monomers": {
+        "M": {
+          "kind": "diacid",
+          "deprotonated": 2
+        },
+        "P": {
+          "kind": "ether_peg",
+          "alpha_methyl": false,
+          "spacer": 1,
+          "eo_units": 6,
+          "end": "OH"
+        }
+      },
+      "composition": {
+        "M": 3,
+        "P": 3
+      },
+      "sequence": "alternating",
+      "end_groups": [
+        "CH3",
+        "H"
+      ],
+      "counterion": "Na+",
+      "seed": 9
+    },
+    "height": 3.0,
+    "orientation": "as_built",
+    "force_field": "cvff",
+    "name": "c06"
+  },
+  "declared_config": "configs/interface_cvff_composite.yaml",
+  "tc_mode": "graph",
+  "tc_compare_cell": [
+    "x",
+    "z"
+  ],
+  "exercises": [
+    "FM06",
+    "FM11",
+    "FM17",
+    "FM22"
+  ],
+  "note": "class I, diacid, 4421 atoms",
+  "reference": "data/reference/eval_v3/c06.data",
+  "reference_sha256": "f01165e99161ef6f6538f202832b58b2a185359a55d27e971667a54d22c45c48",
+  "expected_counts": {
+    "atoms": 4421
+  }
+}

@@ -24,7 +24,7 @@
     "FM22"
   ],
   "note": "class I mineral, 264 atoms",
-  "reference": "data/reference/eval_v2/m05.data",
+  "reference": "data/reference/eval_v3/m05.data",
   "reference_sha256": "1b2ecddeef9896ed2b915b4caf7d3e5fbdabd202ea2e74529d7bd66a4422abcf",
   "expected_counts": {
     "atoms": 264

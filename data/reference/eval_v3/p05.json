@@ -1,0 +1,87 @@
+{
+  "id": "p05",
+  "role": "EVAL_REFERENCE_V3",
+  "file": "data/reference/eval_v3/p05.data",
+  "sha256": "d7c5963807b7489209ddcb7a331d1bc9668059b439ffd508efea38f691b90497",
+  "declared_config": "configs/interface_cvff_pce.yaml",
+  "overrides": {
+    "tc_mode": "graph",
+    "tc_compare_cell": false
+  },
+  "trust_status": "built by builders/ (deterministic); validated through Tier 3",
+  "build": {
+    "name": "p05",
+    "spec": {
+      "name": "p05",
+      "monomers": {
+        "S": {
+          "kind": "ether_peg",
+          "alpha_methyl": true,
+          "spacer": 1,
+          "eo_units": 25,
+          "end": "OH"
+        },
+        "A": {
+          "kind": "acid",
+          "alpha_methyl": false,
+          "deprotonated": true
+        }
+      },
+      "composition": {
+        "S": 8,
+        "A": 32
+      },
+      "sequence": "alternating",
+      "end_groups": [
+        "CH3",
+        "CH3"
+      ],
+      "n_chains": 1,
+      "counterion": "Na+",
+      "box": {
+        "padding": 2.0
+      },
+      "force_field": "cvff",
+      "seed": 3,
+      "conformation": "random",
+      "relax": true
+    },
+    "force_field": "CVFF-INTERFACE (INTERFACE FF 1.5, class I)",
+    "frc": "INTERFACE_FF_1_5/FORCE_FIELDS/cvff_interface_v1_5.frc",
+    "sequences": [
+      "AASAAAASAAAASAAAASAAAASAAAASAAAASAAAASAA"
+    ],
+    "chain_charges": [
+      -32
+    ],
+    "counterions": 32,
+    "natoms": 1800,
+    "elements": {
+      "C": 530,
+      "O": 272,
+      "H": 966,
+      "Na": 32
+    },
+    "net_charge": 0.0,
+    "box": [
+      64.8261,
+      54.6536,
+      69.431
+    ],
+    "grower_min_nonbonded_distance_A": [
+      0.897
+    ],
+    "data_sha256": "d7c5963807b7489209ddcb7a331d1bc9668059b439ffd508efea38f691b90497",
+    "msi2lmp_missing_kinds": [],
+    "msi2lmp_missing_messages": 0,
+    "cross_terms_zeroed": false,
+    "relaxed": true,
+    "stages": [
+      "soft A=10.0 (1-4 excluded)",
+      "soft A=40.0 (1-4 excluded)",
+      "soft A=100.0 (1-4 excluded)",
+      "lj/cut/coul/cut 10.0, dielectric 80"
+    ],
+    "final_energy_kcal_mol": 780.541392216904
+  }
+}

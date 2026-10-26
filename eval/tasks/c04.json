@@ -1,0 +1,51 @@
+{
+  "id": "c04",
+  "difficulty": "representative",
+  "domain": "composite",
+  "force_field": "cvff",
+  "input": "Build a LAMMPS data file in the class I CVFF-INTERFACE force field (INTERFACE FF 1.5) for an HPEG-type PCE lying flat 3 Å above the hydroxylated (040) surface of tricalcium silicate (the INTERFACE FF model, 2x2 slab cells laterally): 4 methallyl-ether PEG side chains of 10 ethylene-oxide units (OH-terminated) and 8 acrylic acid units (all deprotonated), random sequence, sodium counter-ions.",
+  "hidden_spec": {
+    "builder": "composite",
+    "surface": {
+      "model": "c3s_040_surface_hydroxylated",
+      "supercell": [
+        2,
+        1,
+        2
+      ]
+    },
+    "pce": {
+      "n_side_chains": 4,
+      "n_acid": 8,
+      "side_chain_length": 10,
+      "anchor": "HPEG",
+      "acid": "acrylic",
+      "side_chain_end": "OH",
+      "sequence": "random",
+      "counterion": "Na+",
+      "seed": 3
+    },
+    "height": 3.0,
+    "orientation": "flat",
+    "force_field": "cvff",
+    "name": "c04"
+  },
+  "declared_config": "configs/interface_cvff_composite.yaml",
+  "tc_mode": "chemistry",
+  "tc_compare_cell": [
+    "x",
+    "z"
+  ],
+  "exercises": [
+    "FM06",
+    "FM11",
+    "FM17",
+    "FM22"
+  ],
+  "note": "normal along y: lateral cells along x and z",
+  "reference": "data/reference/eval_v3/c04.data",
+  "reference_sha256": "45322a08076e0151e055a08c45e2130dcb91043762bd95f59025cf31a6136165",
+  "expected_counts": {
+    "atoms": 4732
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "id": "c05",
+  "role": "EVAL_REFERENCE_V3",
+  "file": "data/reference/eval_v3/c05.data",
+  "sha256": "8c3ead3935e919dc394416e76b9d301f73023ea05be43e756888be8b139b987d",
+  "declared_config": "configs/interface_pcff_composite.yaml",
+  "overrides": {
+    "tc_mode": "graph",
+    "tc_compare_cell": [
+      "x",
+      "y"
+    ]
+  },
+  "trust_status": "built by builders/ (deterministic); validated through Tier 3",
+  "build": {
+    "name": "c05",
+    "force_field": "PCFF-INTERFACE (INTERFACE FF 1.5, class II)",
+    "surface_model": "ettr_008_surface",
+    "supercell": [
+      2,
+      1,
+      1
+    ],
+    "surface_normal": "z",
+    "slab_thickness_A": 24.0816,
+    "height_A": 4.0,
+    "orientation": "flat",
+    "lateral_gap_A": 4.0,
+    "vacuum_above_A": 10.0,
+    "pce_extent_A": [
+      38.091,
+      26.633,
+      17.401
+    ],
+    "closest_pce_slab_distance_A": 5.4789,
+    "box": [
+      78.0116,
+      45.04,
+      80.0
+    ],
+    "natoms": 8492,
+    "slab_atoms": 8192,
+    "pce_atoms": 300,
+    "pce": {
+      "sequences": [
+        "AAAAEE",
+        "AAAAEE"
+      ],
+      "chain_charges": [
+        -4,
+        -4
+      ],
+      "counterions": 4,
+      "elements": {
+        "C": 92,
+        "O": 48,
+        "H": 156,
+        "Ca": 4
+      },
+      "net_charge": 0.0
+    },
+    "pce_spec": {
+      "name": "c05_pce",
+      "monomers": {
+        "A": {
+          "kind": "acid",
+          "alpha_methyl": false,
+          "deprotonated": true
+        },
+        "E": {
+          "kind": "ester_peg",
+          "alpha_methyl": false,
+          "eo_units": 6,
+          "end": "OCH3"
+        }
+      },
+      "composition": {
+        "A": 4,
+        "E": 2
+      },
+      "sequence": "block",
+      "end_groups": [
+        "CH3",
+        "CH3"
+      ],
+      "n_chains": 2,
+      "counterion": "Ca2+",
+      "box": {
+        "padding": 2.0
+      },
+      "force_field": "pcff",
+      "seed": 2,
+      "conformation": "random",
+      "relax": true
+    },
+    "slab_build": {
+      "model": "ettr_008_surface",
+      "supercell": [
+        2,
+        1,
+        1
+      ],
+      "model_sha256": {
+        "car": "89ae9d5383d3659e0174c33d05bbb13d96d1ebe5dfcb568c6f109b8bd0d41884",
+        "mdf": "28eec880113215a60214aa8dd9a82e23a39be14d2edcf99a66551a342f24ce3c"
+      },
+      "lammps": "LAMMPS (22 Jul 2025 - Update 6)"
+    },
+    "data_sha256": "8c3ead3935e919dc394416e76b9d301f73023ea05be43e756888be8b139b987d"
+  }
+}

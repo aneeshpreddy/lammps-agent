@@ -1,0 +1,27 @@
+{
+  "id": "CP-01_cvff__FM17__atom_moved_onto_another",
+  "file": "data/corrupted/CP-01_cvff__FM17__atom_moved_onto_another.data",
+  "sha256": "6b7425e12089344c519eb1cfafd03d178563a51584bd0866dc73d12b08af24d8",
+  "parent_id": "CP-01_cvff",
+  "parent_file": "data/reference/composite/CP-01_cvff.data",
+  "parent_sha256": "4d93c5513995fac4c69e53fdbe28cc4e196e73d036bb133dafe702e1d3185f26",
+  "failure_mode": "FM17",
+  "operator": "fm17",
+  "variant": "atom_moved_onto_another",
+  "description": "move an unbonded or terminal atom onto the position of a non-bonded atom 0.3 \u00c5 away",
+  "params": {
+    "moved": 1028,
+    "onto": 1
+  },
+  "expected_failing_properties": [
+    "P2.3"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.3"
+  ],
+  "expected_lammps_behaviour": "Silent at read_data; PE may be inf at run",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_composite.yaml",
+  "overrides": {}
+}

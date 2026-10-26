@@ -1,0 +1,31 @@
+{
+  "name": "m05",
+  "model": "c3a_unit_cell",
+  "model_dir": "CEMENT_MINERALS",
+  "model_sha256": {
+    "car": "c8041e94bd1de48503a7c7118ff1fbb0bd45b6393b826a1c0f0f45c268890a05",
+    "mdf": "b0e137095cd72bbdd30feb366d4a2309b2c9e1b0e17ebb44cba1902985975fdb"
+  },
+  "supercell": [
+    1,
+    1,
+    1
+  ],
+  "force_field": "CVFF-INTERFACE (INTERFACE FF 1.5, class I)",
+  "frc_sha256": "d64323ed1c6f0e399e5cff1ef74595477e8c4b3f4fadedf88b01f2e1eed7bc48",
+  "lammps": "LAMMPS (22 Jul 2025 - Update 6)",
+  "tilt_reduction": {
+    "k": 0,
+    "m": 0,
+    "n": 0
+  },
+  "tilt_reduced_after_supercell": false,
+  "comments_restored": 16,
+  "natoms": 264,
+  "data_file": "/Users/ani.bob/Downloads/UGRP/lammps-agent/data/reference/eval_v3/m05.data",
+  "data_sha256": "1b2ecddeef9896ed2b915b4caf7d3e5fbdabd202ea2e74529d7bd66a4422abcf",
+  "missing_kinds": [],
+  "cross_terms_zeroed": false,
+  "allowed_missing_kinds": [],
+  "simulation_ready": true
+}

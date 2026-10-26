@@ -1,0 +1,110 @@
+{
+  "id": "c04",
+  "role": "EVAL_REFERENCE_V3",
+  "file": "data/reference/eval_v3/c04.data",
+  "sha256": "45322a08076e0151e055a08c45e2130dcb91043762bd95f59025cf31a6136165",
+  "declared_config": "configs/interface_cvff_composite.yaml",
+  "overrides": {
+    "tc_mode": "chemistry",
+    "tc_compare_cell": [
+      "x",
+      "z"
+    ]
+  },
+  "trust_status": "built by builders/ (deterministic); validated through Tier 3",
+  "build": {
+    "name": "c04",
+    "force_field": "CVFF-INTERFACE (INTERFACE FF 1.5, class I)",
+    "surface_model": "c3s_040_surface_hydroxylated",
+    "supercell": [
+      2,
+      1,
+      2
+    ],
+    "surface_normal": "y",
+    "slab_thickness_A": 27.2635,
+    "height_A": 3.0,
+    "orientation": "flat",
+    "lateral_gap_A": 4.0,
+    "vacuum_above_A": 10.0,
+    "pce_extent_A": [
+      38.706,
+      31.915,
+      40.965
+    ],
+    "closest_pce_slab_distance_A": 4.1867,
+    "box": [
+      48.7384,
+      122.8529,
+      50.5496
+    ],
+    "natoms": 4732,
+    "slab_atoms": 4320,
+    "pce_atoms": 412,
+    "pce": {
+      "sequences": [
+        "AASASSAAAASA"
+      ],
+      "chain_charges": [
+        -8
+      ],
+      "counterions": 8,
+      "elements": {
+        "C": 122,
+        "O": 60,
+        "H": 222,
+        "Na": 8
+      },
+      "net_charge": -0.0
+    },
+    "pce_spec": {
+      "name": "c04_pce",
+      "monomers": {
+        "S": {
+          "kind": "ether_peg",
+          "alpha_methyl": true,
+          "spacer": 1,
+          "eo_units": 10,
+          "end": "OH"
+        },
+        "A": {
+          "kind": "acid",
+          "alpha_methyl": false,
+          "deprotonated": true
+        }
+      },
+      "composition": {
+        "S": 4,
+        "A": 8
+      },
+      "sequence": "random",
+      "end_groups": [
+        "CH3",
+        "CH3"
+      ],
+      "n_chains": 1,
+      "counterion": "Na+",
+      "box": {
+        "padding": 2.0
+      },
+      "force_field": "cvff",
+      "seed": 3,
+      "conformation": "random",
+      "relax": true
+    },
+    "slab_build": {
+      "model": "c3s_040_surface_hydroxylated",
+      "supercell": [
+        2,
+        1,
+        2
+      ],
+      "model_sha256": {
+        "car": "58ba26f0fd9ff50af12801f383b02d847e22ef05866d2eaab1bf9dea382aacc6",
+        "mdf": "c9162f67cdb2419316dd27e137555bf630d6872a8a558a0bf0c2ff8551a8d486"
+      },
+      "lammps": "LAMMPS (22 Jul 2025 - Update 6)"
+    },
+    "data_sha256": "45322a08076e0151e055a08c45e2130dcb91043762bd95f59025cf31a6136165"
+  }
+}

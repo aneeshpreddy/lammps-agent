@@ -25,7 +25,7 @@
     "FM22"
   ],
   "note": "hexagonal supercell, 1272 atoms",
-  "reference": "data/reference/eval_v2/m07.data",
+  "reference": "data/reference/eval_v3/m07.data",
   "reference_sha256": "07bfb27b29de5b4cac0cae7301929c0ed686f54cf92586b48e31c0c4f9966943",
   "expected_counts": {
     "atoms": 1272

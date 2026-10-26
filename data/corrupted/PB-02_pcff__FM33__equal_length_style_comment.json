@@ -1,10 +1,10 @@
 {
   "id": "PB-02_pcff__FM33__equal_length_style_comment",
   "file": "data/corrupted/PB-02_pcff__FM33__equal_length_style_comment.data",
-  "sha256": "d0cffaf6f3e91ea8328ecc52d6702ace8c354006276924ec7599c2af01d50926",
+  "sha256": "5f096b414472c6e7d60104d83e264a0326fa99653dfa739089ad0f23dadec891",
   "parent_id": "PB-02_pcff",
   "parent_file": "data/reference/pce_builder/PB-02_pcff.data",
-  "parent_sha256": "38e6e6dec874e9d322aa48f679273c3312bd34831e4b5a6f59ad0c814a4e5f7d",
+  "parent_sha256": "9a799d35a425095ba29a797344f5959a9aab56b8a5ee1422d4ea8c12eec5c29d",
   "failure_mode": "FM33",
   "operator": "fm33",
   "variant": "equal_length_style_comment",

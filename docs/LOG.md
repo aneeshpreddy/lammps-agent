@@ -327,3 +327,27 @@ No work is recorded for 5–15 October; everything below was done on 2026-10-16.
 
 ### Hours
 - To be filled by project owner.
+
+---
+
+## 2026-10-26 — Supervisor replies; composite builder; tight PCE box; eval set v3 (AI-assisted)
+
+### Done
+- **Supervisor replies recorded** (SPEC v0.7 §7.17): Q1 "main chains" = backbone length; Q2 PCE on a mineral surface is in scope now ("yes a combined builder"); Q3 Tier 2 margins accepted, with the PCE "inside a box … slightly bigger than the bounds of the atoms"; Q4 no reply (Homebrew build stays the reference); Q5 EMC PCE files used in production simulations (REFERENCE_EVIDENCE.md §C).
+- **Tight PCE box** (`builders/pce.py` `fit_box`): relax in a roomy box (12 Å padding), then shrink to the atom bounds + 2 Å per face. **New P2.10 box margin** (1–5 Å per face, PROVISIONAL reading of "slightly"), declared in `interface_{pcff,cvff}_pce.yaml` v0.2. PCE examples 20/20 PASS (PCE_BUILDER.md).
+- **`builders/composite.py`**: a PCE on any INTERFACE slab model, both force fields; normal = axis with the largest empty gap; flat or as built; height above the top face; `auto` lateral supercell; DATA FILE merge with ID offsets, coefficients copied unchanged. Configs `interface_{pcff,cvff}_composite.yaml`, calibration `composite_{ff}.json` (EMC + mineral references, ion contact sources, cross-pair fallback). COMPOSITE.md: 5/5 built composites PASS; tobermorite in class I refused (no parameters).
+- **TC.2** `tc_compare_cell` accepts a list of axes (lateral cell only for composites).
+- **Eval set v3** (22 tasks: 7 minerals, 9 PCE, 6 composites c01–c06; references in `data/reference/eval_v3/`, all PASS, self-match, byte-identical rebuild). PCE task inputs now ask for the tight box. v2 tasks kept in `eval/tasks_v2/`. **METRICS.md v1.1** (no system scored yet).
+- **Split extended** (`make_split.py --extend`): existing assignments kept; composite dev = c01 c04 c06, test = c02 c03 c05.
+  **`eval/split.json` (version 2) SHA-256: 063c2ddad24be986bf16dd3b8a549c3681871837d133d20340416003d6cb5fe4** (supersedes 6bcfa9a3…).
+- **Matrix:** 948 corrupted files from 22 parents (+ CP-01 pcff/cvff), 0 missed, 942 caught by Tiers 0–2, 6 TC-only; 36/36 positive controls. 106 tests pass.
+
+### Not Done
+- Harness `eval/harness.py` with oracle/corrupter checks (plan Day 21) and the baseline (Day 23): about 3 days behind.
+- Adsorption height/orientation are not part of TC.2 (stated limitation, METRICS v1.1).
+
+### Tomorrow
+- Harness + oracle/corrupter checks, then the single-call baseline on the dev split.
+
+### Hours
+- To be filled by project owner.

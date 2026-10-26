@@ -1,10 +1,10 @@
 {
   "id": "PB-01_cvff__FM13__duplicate_row_same_id",
   "file": "data/corrupted/PB-01_cvff__FM13__duplicate_row_same_id.data",
-  "sha256": "87c501de3b872a816a635997b41d94937e84849df5bbf831e258396195301bae",
+  "sha256": "02e3078ad46e7076fd72fdaca1e7ed2b84143f7dff51b3c71712b1da8f98ce10",
   "parent_id": "PB-01_cvff",
   "parent_file": "data/reference/pce_builder/PB-01_cvff.data",
-  "parent_sha256": "5390b3183bd8f439bc8b2c057ac5eb712d0e7b546f85140d3dbe49231949349a",
+  "parent_sha256": "70999788d8b0af33ff7f3a2f34c681e9a645ecd1f2e1ab9f32e225bf8194e9bc",
   "failure_mode": "FM13",
   "operator": "fm13_same",
   "variant": "duplicate_row_same_id",

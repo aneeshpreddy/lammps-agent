@@ -2,7 +2,7 @@
   "calibration_id": "pce_builder",
   "version": 1,
   "status": "PROVISIONAL",
-  "date": "2026-10-22",
+  "date": "2026-10-26",
   "derivation_version": "calibrate.py v1 (2026-10-16)",
   "references": [
     {
@@ -533,7 +533,7 @@
     },
     "pce_builder": {
       "applicable": false,
-      "basis": "builders/pce.py places chains in a padded vacuum box: no bulk density to check"
+      "basis": "builders/pce.py writes isolated chains in a box slightly bigger than the atoms (supervisor 2026-10-26; P2.10 checks the margin): no bulk density to check"
     }
   },
   "bond_r0": {

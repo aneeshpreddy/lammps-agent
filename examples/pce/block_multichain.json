@@ -3,4 +3,4 @@
  "monomers": {"A": {"kind": "acid", "alpha_methyl": false, "deprotonated": true},
               "E": {"kind": "ester_peg", "alpha_methyl": false, "eo_units": 10, "end": "OCH3"}},
  "composition": {"A": 6, "E": 3}, "sequence": "block", "end_groups": ["CH3", "CH3"],
- "n_chains": 3, "counterion": "Ca2+", "box": {"padding": 10.0}, "force_field": "pcff", "seed": 2}
+ "n_chains": 3, "counterion": "Ca2+", "box": {"padding": 2.0}, "force_field": "pcff", "seed": 2}

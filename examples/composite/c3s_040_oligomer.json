@@ -1,0 +1,7 @@
+{"name": "c3s_040_oligomer", "force_field": "pcff",
+ "surface": {"model": "c3s_040_surface", "supercell": [1, 1, 1]},
+ "pce": {"monomers": {"A": {"kind": "acid", "alpha_methyl": false, "deprotonated": true},
+                      "E": {"kind": "ester_peg", "alpha_methyl": false, "eo_units": 3, "end": "OH"}},
+         "composition": {"A": 2, "E": 1}, "sequence": "block", "end_groups": ["CH3", "CH3"],
+         "counterion": "Na+", "seed": 4},
+ "height": 3.0, "orientation": "flat"}

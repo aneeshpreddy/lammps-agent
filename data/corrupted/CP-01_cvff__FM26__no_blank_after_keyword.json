@@ -1,0 +1,24 @@
+{
+  "id": "CP-01_cvff__FM26__no_blank_after_keyword",
+  "file": "data/corrupted/CP-01_cvff__FM26__no_blank_after_keyword.data",
+  "sha256": "c1facdda5d374495fca3ced118d755965788a37d4282dd7fef6cccda80e29248",
+  "parent_id": "CP-01_cvff",
+  "parent_file": "data/reference/composite/CP-01_cvff.data",
+  "parent_sha256": "4d93c5513995fac4c69e53fdbe28cc4e196e73d036bb133dafe702e1d3185f26",
+  "failure_mode": "FM26",
+  "operator": "fm26",
+  "variant": "no_blank_after_keyword",
+  "description": "remove the blank line after the 'Bonds' keyword",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.7"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.7"
+  ],
+  "expected_lammps_behaviour": "Loud in tested cases",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_composite.yaml",
+  "overrides": {}
+}

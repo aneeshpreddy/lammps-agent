@@ -3,7 +3,7 @@
   "difficulty": "easy",
   "domain": "pce",
   "force_field": "cvff",
-  "input": "Build a LAMMPS data file in the class I CVFF-INTERFACE force field (INTERFACE FF 1.5) for a small comb copolymer: 4 acrylate (carboxylate) units and 2 methoxy-tetra(ethylene glycol) methacrylate units, side chains spread evenly along the backbone, methyl end caps, neutralised with Ca2+.",
+  "input": "Build a LAMMPS data file in the class I CVFF-INTERFACE force field (INTERFACE FF 1.5) for a small comb copolymer: 4 acrylate (carboxylate) units and 2 methoxy-tetra(ethylene glycol) methacrylate units, side chains spread evenly along the backbone, methyl end caps, neutralised with Ca2+. Put the system in a periodic box only slightly larger than the atoms (about 2 Å of empty space on every side).",
   "hidden_spec": {
     "builder": "pce",
     "monomers": {
@@ -33,7 +33,7 @@
     "force_field": "cvff",
     "name": "p02",
     "box": {
-      "padding": 10.0
+      "padding": 2.0
     }
   },
   "declared_config": "configs/interface_cvff_pce.yaml",
@@ -45,8 +45,8 @@
     "FM22"
   ],
   "note": "class I, deterministic sequence",
-  "reference": "data/reference/eval_v2/p02.data",
-  "reference_sha256": "ae83a52d5f37ba35ddbc0dea9aa5d5e792c3f4db6ddb0c982ff9ab91cb037eb3",
+  "reference": "data/reference/eval_v3/p02.data",
+  "reference_sha256": "40f31350f18fba2bf22336443b4b1d99e94c97e9374407885b3d14a7cf1544e6",
   "expected_counts": {
     "atoms": 128
   }

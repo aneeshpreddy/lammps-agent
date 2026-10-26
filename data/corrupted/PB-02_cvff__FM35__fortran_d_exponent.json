@@ -1,10 +1,10 @@
 {
   "id": "PB-02_cvff__FM35__fortran_d_exponent",
   "file": "data/corrupted/PB-02_cvff__FM35__fortran_d_exponent.data",
-  "sha256": "eba124f0475a510294b349da81380f561fb703f9b87ae1a33832875b5aaa3ea8",
+  "sha256": "00a88d0a4e99c662476656ca5f6ad746ab5673942be18c69570e54c31ad647fa",
   "parent_id": "PB-02_cvff",
   "parent_file": "data/reference/pce_builder/PB-02_cvff.data",
-  "parent_sha256": "51922c04d81f5688b89c4343718e2f260fb8b519ed86abea5e9a9f53b361b306",
+  "parent_sha256": "d71331689a67b8ebbd8ca305b45c5f7a7d2b7c33f9f14b046650ee50d06184a5",
   "failure_mode": "FM35",
   "operator": "fm35",
   "variant": "fortran_d_exponent",

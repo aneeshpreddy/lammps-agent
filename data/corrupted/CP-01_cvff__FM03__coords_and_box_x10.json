@@ -1,0 +1,30 @@
+{
+  "id": "CP-01_cvff__FM03__coords_and_box_x10",
+  "file": "data/corrupted/CP-01_cvff__FM03__coords_and_box_x10.data",
+  "sha256": "4ea030e1fb2f60ba1063d28724fcc99e2f632f4d9f2516786d016385a2658477",
+  "parent_id": "CP-01_cvff",
+  "parent_file": "data/reference/composite/CP-01_cvff.data",
+  "parent_sha256": "4d93c5513995fac4c69e53fdbe28cc4e196e73d036bb133dafe702e1d3185f26",
+  "failure_mode": "FM03",
+  "operator": "fm03_up",
+  "variant": "coords_and_box_x10",
+  "description": "multiply coordinates and box by 10 (length unit confusion, e.g. nm read as \u00c5)",
+  "params": {
+    "factor": 10.0
+  },
+  "expected_failing_properties": [
+    "P2.3",
+    "P2.4",
+    "P2.5"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.3",
+    "P2.4",
+    "P2.5"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_composite.yaml",
+  "overrides": {}
+}

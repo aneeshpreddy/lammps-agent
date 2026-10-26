@@ -1,0 +1,28 @@
+{
+  "id": "CP-01_cvff__FM27__surplus_final_row",
+  "file": "data/corrupted/CP-01_cvff__FM27__surplus_final_row.data",
+  "sha256": "1753e261ecd05590a4b366d0e806a299287ec1991f09592ee9d1936c36372982",
+  "parent_id": "CP-01_cvff",
+  "parent_file": "data/reference/composite/CP-01_cvff.data",
+  "parent_sha256": "4d93c5513995fac4c69e53fdbe28cc4e196e73d036bb133dafe702e1d3185f26",
+  "failure_mode": "FM27",
+  "operator": "fm27",
+  "variant": "surplus_final_row",
+  "description": "lower the count of the last section by one, so its final row is surplus",
+  "params": {
+    "section": "Impropers"
+  },
+  "expected_failing_properties": [
+    "P0.11",
+    "P1.1"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.11",
+    "P1.1"
+  ],
+  "expected_lammps_behaviour": "Silent (one surplus row at EOF is ignored)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_composite.yaml",
+  "overrides": {}
+}

@@ -1,0 +1,26 @@
+{
+  "id": "CP-01_cvff__FM06__flip_largest_charge",
+  "file": "data/corrupted/CP-01_cvff__FM06__flip_largest_charge.data",
+  "sha256": "8acf5c28d0aa6f7a51b90626b43fa639c74217199eb15709f2393994078ff1ce",
+  "parent_id": "CP-01_cvff",
+  "parent_file": "data/reference/composite/CP-01_cvff.data",
+  "parent_sha256": "4d93c5513995fac4c69e53fdbe28cc4e196e73d036bb133dafe702e1d3185f26",
+  "failure_mode": "FM06",
+  "operator": "fm06_flip",
+  "variant": "flip_largest_charge",
+  "description": "flip the sign of the largest-magnitude charge",
+  "params": {
+    "atom": 1
+  },
+  "expected_failing_properties": [
+    "P2.1"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.1"
+  ],
+  "expected_lammps_behaviour": "Silent (Warn only with kspace and |Q|>1e-5)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_composite.yaml",
+  "overrides": {}
+}

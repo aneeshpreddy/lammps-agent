@@ -24,7 +24,7 @@
     "FM18"
   ],
   "note": "hexagonal cell, water and hydroxide",
-  "reference": "data/reference/eval_v2/m04.data",
+  "reference": "data/reference/eval_v3/m04.data",
   "reference_sha256": "386fe43b8c650056350f78793d3421e899c55eca1d02649fe774edc79be979da",
   "expected_counts": {
     "atoms": 512

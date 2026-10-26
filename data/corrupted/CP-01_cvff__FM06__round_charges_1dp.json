@@ -1,0 +1,24 @@
+{
+  "id": "CP-01_cvff__FM06__round_charges_1dp",
+  "file": "data/corrupted/CP-01_cvff__FM06__round_charges_1dp.data",
+  "sha256": "f79044322ba287c6cbbe485467512e17646b5491e016493303ca249a6ac58e9c",
+  "parent_id": "CP-01_cvff",
+  "parent_file": "data/reference/composite/CP-01_cvff.data",
+  "parent_sha256": "4d93c5513995fac4c69e53fdbe28cc4e196e73d036bb133dafe702e1d3185f26",
+  "failure_mode": "FM06",
+  "operator": "fm06_round",
+  "variant": "round_charges_1dp",
+  "description": "round every charge to one decimal place (individual charges lost; total may stay near zero)",
+  "params": {},
+  "expected_failing_properties": [
+    "TC.2"
+  ],
+  "expected_tier": "TC",
+  "spec_expected_properties": [
+    "P2.1"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_composite.yaml",
+  "overrides": {}
+}

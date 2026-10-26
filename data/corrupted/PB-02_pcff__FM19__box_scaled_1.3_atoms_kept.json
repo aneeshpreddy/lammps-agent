@@ -1,10 +1,10 @@
 {
   "id": "PB-02_pcff__FM19__box_scaled_1.3_atoms_kept",
   "file": "data/corrupted/PB-02_pcff__FM19__box_scaled_1.3_atoms_kept.data",
-  "sha256": "a35935262b63d6644951c9df36abc84f88f8678e909db2731128ed24705f21ce",
+  "sha256": "a297ce5c6a23039c2ebbaab3ae76d471a43360386688ef9cc10b6bce7c9a0345",
   "parent_id": "PB-02_pcff",
   "parent_file": "data/reference/pce_builder/PB-02_pcff.data",
-  "parent_sha256": "38e6e6dec874e9d322aa48f679273c3312bd34831e4b5a6f59ad0c814a4e5f7d",
+  "parent_sha256": "9a799d35a425095ba29a797344f5959a9aab56b8a5ee1422d4ea8c12eec5c29d",
   "failure_mode": "FM19",
   "operator": "fm19",
   "variant": "box_scaled_1.3_atoms_kept",

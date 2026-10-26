@@ -1,10 +1,10 @@
 {
   "id": "PB-01_pcff__FM24__general_triclinic_header",
   "file": "data/corrupted/PB-01_pcff__FM24__general_triclinic_header.data",
-  "sha256": "a8e3987b97773f21928fd202ac2dd8a82dc4bb412f2aa919cabd2bb0ee1dca41",
+  "sha256": "431ccb9ccba9569cf410a1c372650ce50c71dbb99759c29885e6008d35537be5",
   "parent_id": "PB-01_pcff",
   "parent_file": "data/reference/pce_builder/PB-01_pcff.data",
-  "parent_sha256": "8d798d31412def5c24237b95e2e4126927a3b986b1d212aaef889414a2facad2",
+  "parent_sha256": "5771bb4d9e1f0ab5372cdc7ef95e68e07b466b4ba10e3600d6b16b3326f4e122",
   "failure_mode": "FM24",
   "operator": "fm24",
   "variant": "general_triclinic_header",

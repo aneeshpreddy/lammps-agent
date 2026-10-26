@@ -1,0 +1,95 @@
+{
+  "name": "c01",
+  "force_field": "PCFF-INTERFACE (INTERFACE FF 1.5, class II)",
+  "surface_model": "tob11_004_surface",
+  "supercell": [
+    2,
+    1,
+    1
+  ],
+  "surface_normal": "z",
+  "slab_thickness_A": 32.0703,
+  "height_A": 3.0,
+  "orientation": "flat",
+  "lateral_gap_A": 4.0,
+  "vacuum_above_A": 10.0,
+  "pce_extent_A": [
+    19.451,
+    15.729,
+    9.772
+  ],
+  "closest_pce_slab_distance_A": 3.7958,
+  "box": [
+    45.0592,
+    22.155,
+    87.461
+  ],
+  "natoms": 3296,
+  "slab_atoms": 3168,
+  "pce_atoms": 128,
+  "pce": {
+    "sequences": [
+      "AEAAEA"
+    ],
+    "chain_charges": [
+      -4
+    ],
+    "counterions": 2,
+    "elements": {
+      "C": 40,
+      "O": 20,
+      "H": 66,
+      "Ca": 2
+    },
+    "net_charge": -0.0
+  },
+  "pce_spec": {
+    "name": "c01_pce",
+    "monomers": {
+      "A": {
+        "kind": "acid",
+        "alpha_methyl": false,
+        "deprotonated": true
+      },
+      "E": {
+        "kind": "ester_peg",
+        "alpha_methyl": true,
+        "eo_units": 4,
+        "end": "OCH3"
+      }
+    },
+    "composition": {
+      "A": 4,
+      "E": 2
+    },
+    "sequence": "alternating",
+    "end_groups": [
+      "CH3",
+      "CH3"
+    ],
+    "n_chains": 1,
+    "counterion": "Ca2+",
+    "box": {
+      "padding": 2.0
+    },
+    "force_field": "pcff",
+    "seed": 7,
+    "conformation": "random",
+    "relax": true
+  },
+  "slab_build": {
+    "model": "tob11_004_surface",
+    "supercell": [
+      2,
+      1,
+      1
+    ],
+    "model_sha256": {
+      "car": "e72ac13e70840ac41a1cc61b365eb8225e58cef4706b7e812b3445a5730025b0",
+      "mdf": "f1be4d6742ad3e920b6f4d9f304c51f78281108c7472ac8a015e0783f5cc456f"
+    },
+    "lammps": "LAMMPS (22 Jul 2025 - Update 6)"
+  },
+  "data_file": "data/reference/eval_v3/c01.data",
+  "data_sha256": "7d056c4177a5f4bbf7dbf3615411f6b5d03e81ba2cb0da98b8a97097e109a2e8"
+}

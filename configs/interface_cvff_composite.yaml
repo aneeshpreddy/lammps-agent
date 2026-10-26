@@ -1,0 +1,60 @@
+# Declared validation configuration for a PCE on an INTERFACE FF 1.5 cement-mineral surface, written by
+# builders/composite.py in CVFF-INTERFACE (class I) — C3S and C3A surfaces only.
+# STATUS: PROVISIONAL_DEFAULT (supervisor 2026-10-26: "yes a combined builder").
+config_id: interface-cvff-composite
+config_version: 0.1
+status: PROVISIONAL_DEFAULT
+derived_from: [REF-01..REF-04 (EMC PCE), data/reference/minerals/*_cvff, ion contact sources]
+
+units: real                       # OD-C3  INTERFACE/PCFF parameters are in real units
+atom_style: full                  # OD-C1  charges + molecule IDs + bonds
+boundary: [p, p, p]               # OD-G   bulk crystals
+box_kind: orthogonal              # INTERFACE surface models are orthogonal slabs
+masses_location: data_file        # S-Q1
+coeffs_location: data_file        # S-Q2   write_data / msi2lmp put every coefficient in the file
+required_coeff_sections: [Pair Coeffs, Bond Coeffs, Angle Coeffs]
+image_flag_policy: optional       # S-Q3
+coordinate_wrapping: wrapped      # references are wrapped into the cell
+image_consistency: not_applicable # infinite periodic bonded crystal (RD: consistent flags impossible)
+units_hint_policy: optional       # S-Q7   write_data writes 'units = real' on line 1; checked if present
+encoding_policy: ascii_lf         # OD-M
+tilt_policy: doc                  # OD-N: hexagonal cells (ettringite, monosulfate) always meet LAMMPS's efficiency criterion |xy|/ly = 1/sqrt(3) > 0.5 even when fully reduced; the documented bound is the validity test
+tilt_violation: fail              # references are tilt-reduced; generated files must be too
+net_charge:                       # OD-H   INTERFACE model cells are neutral
+  required: true
+  target: 0.0
+  tolerance_e: null
+  floor: statistical              # PROPERTIES §8.5 rule 3 as amended in v0.5
+charged_system: true
+molecule_bond_policy: report      # msi2lmp molecule IDs are Materials Studio residues, not bonded clusters
+bonded_term_consistency: required
+bonded_term_completeness: required
+improper_completeness: false
+improper_center_index: 1
+topology_signature_policy: consistent
+allowed_sections: [Atoms, Velocities, Masses, Bonds, Angles, Dihedrals, Impropers,
+                   Pair Coeffs, PairIJ Coeffs, Bond Coeffs, Angle Coeffs, Dihedral Coeffs, Improper Coeffs]
+coeff_param_counts: {Pair Coeffs: 2, Bond Coeffs: 2, Angle Coeffs: 2, Dihedral Coeffs: 3, Improper Coeffs: 3}
+styles: {pair: lj/cut/coul/long, bond: harmonic, angle: harmonic, dihedral: harmonic, improper: cvff, kspace: ewald}
+type_name_elements_frc: ../INTERFACE_FF_1_5/FORCE_FIELDS/cvff_interface_v1_5.frc   # OD-J: element column of the declared .frc
+coeff_file: null
+system_family: composite
+density_family: composite         # slab + vacuum + adsorbate: no bulk density (calibration)
+calibration: calibration/composite_cvff.json
+tier3:
+  structure_template: templates/accept_structure.in
+  full_template: templates/interface_cvff_full.in
+  warning_allow_list:
+    # Tier 3b template artefact ('run 0' without an integrator).
+    - "No fixes with time integration, atoms won't move"
+    # Hexagonal cells (gamma = 120 deg): |xy|/ly = 1/sqrt(3) for every reduced cell; LAMMPS's efficiency
+    # warning, not a validity problem. Over-skew is still caught by P2.8's documented bound.
+    - "Triclinic box skew is large. LAMMPS will run inefficiently."
+    # Infinite periodic bonded crystal: RD read_data, "If your system is an infinite periodic crystal
+    # with bonds then it is impossible to have fully consistent image flags".
+    - "Inconsistent image flags"
+    - "Bond/angle/dihedral extent > half of periodic box length"
+  run_mode: serial
+  # Ewald, not PPPM: PPPM segfaults on most tobermorite supercells with this build (FAILURE_MODES §9.6).
+  kspace: "kspace_style ewald 1.0e-4"
+  crash_fallback_kspace: null

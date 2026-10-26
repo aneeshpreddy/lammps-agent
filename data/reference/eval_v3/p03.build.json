@@ -1,0 +1,83 @@
+{
+  "name": "p03",
+  "spec": {
+    "name": "p03",
+    "monomers": {
+      "A": {
+        "kind": "acid",
+        "alpha_methyl": false,
+        "deprotonated": true
+      },
+      "E": {
+        "kind": "ester_peg",
+        "alpha_methyl": false,
+        "eo_units": 15,
+        "end": "OH"
+      }
+    },
+    "composition": {
+      "A": 12,
+      "E": 12
+    },
+    "sequence": "random",
+    "end_groups": [
+      "CH3",
+      "CH3"
+    ],
+    "n_chains": 1,
+    "counterion": "Ca2+",
+    "box": {
+      "padding": 2.0
+    },
+    "force_field": "pcff",
+    "seed": 1,
+    "conformation": "random",
+    "relax": true
+  },
+  "force_field": "PCFF-INTERFACE (INTERFACE FF 1.5, class II)",
+  "frc": "INTERFACE_FF_1_5/FORCE_FIELDS/pcff_interface_v1_5.frc",
+  "sequences": [
+    "AEAEEEEEEAAEAAAAAAAEEEAE"
+  ],
+  "chain_charges": [
+    -12
+  ],
+  "counterions": 6,
+  "natoms": 1478,
+  "elements": {
+    "C": 434,
+    "O": 228,
+    "H": 810,
+    "Ca": 6
+  },
+  "net_charge": 0.0,
+  "box": [
+    64.8313,
+    44.8877,
+    50.4068
+  ],
+  "grower_min_nonbonded_distance_A": [
+    0.944
+  ],
+  "data_file": "data/reference/eval_v3/p03.data",
+  "data_sha256": "67c85daeba580425b7d64d60330ee109d85791dc929a52f909ca5e98a1b007c7",
+  "msi2lmp_missing_kinds": [
+    "angleangle",
+    "angleangledihedral",
+    "angledihedral",
+    "bondangle",
+    "bondbond",
+    "endbonddihedral",
+    "midbonddihedral"
+  ],
+  "msi2lmp_missing_messages": 98,
+  "cross_terms_zeroed": true,
+  "relaxed": true,
+  "stages": [
+    "soft A=10.0 (1-4 excluded)",
+    "soft A=40.0 (1-4 excluded)",
+    "soft A=100.0 (1-4 excluded)",
+    "lj/class2/coul/cut 10.0, dielectric 80"
+  ],
+  "final_energy_kcal_mol": -18.3231310443803
+}

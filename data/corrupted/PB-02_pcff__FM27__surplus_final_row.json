@@ -1,10 +1,10 @@
 {
   "id": "PB-02_pcff__FM27__surplus_final_row",
   "file": "data/corrupted/PB-02_pcff__FM27__surplus_final_row.data",
-  "sha256": "a8f7e7a3d8d1d482c35023b59a0ccd4265e8dc71ab65bbc0b2c4d3c21186c565",
+  "sha256": "8b6203daf10c8bfe0b25e8733520a738ed9c941f85e4897f0cbdefaa86bda33d",
   "parent_id": "PB-02_pcff",
   "parent_file": "data/reference/pce_builder/PB-02_pcff.data",
-  "parent_sha256": "38e6e6dec874e9d322aa48f679273c3312bd34831e4b5a6f59ad0c814a4e5f7d",
+  "parent_sha256": "9a799d35a425095ba29a797344f5959a9aab56b8a5ee1422d4ea8c12eec5c29d",
   "failure_mode": "FM27",
   "operator": "fm27",
   "variant": "surplus_final_row",

@@ -1,0 +1,109 @@
+{
+  "id": "c02",
+  "role": "EVAL_REFERENCE_V3",
+  "file": "data/reference/eval_v3/c02.data",
+  "sha256": "eb1ee4cd0e35425b27d7d6c69fc984f2f0f52e38a172b3b67e6270c2b14e7c9c",
+  "declared_config": "configs/interface_cvff_composite.yaml",
+  "overrides": {
+    "tc_mode": "graph",
+    "tc_compare_cell": [
+      "x",
+      "z"
+    ]
+  },
+  "trust_status": "built by builders/ (deterministic); validated through Tier 3",
+  "build": {
+    "name": "c02",
+    "force_field": "CVFF-INTERFACE (INTERFACE FF 1.5, class I)",
+    "surface_model": "c3s_040_surface",
+    "supercell": [
+      1,
+      1,
+      1
+    ],
+    "surface_normal": "y",
+    "slab_thickness_A": 21.1373,
+    "height_A": 3.0,
+    "orientation": "flat",
+    "lateral_gap_A": 4.0,
+    "vacuum_above_A": 10.0,
+    "pce_extent_A": [
+      14.504,
+      7.352,
+      10.99
+    ],
+    "closest_pce_slab_distance_A": 3.8246,
+    "box": [
+      24.3692,
+      121.1044,
+      25.2748
+    ],
+    "natoms": 1028,
+    "slab_atoms": 972,
+    "pce_atoms": 56,
+    "pce": {
+      "sequences": [
+        "AAE"
+      ],
+      "chain_charges": [
+        -2
+      ],
+      "counterions": 2,
+      "elements": {
+        "C": 17,
+        "O": 9,
+        "H": 28,
+        "Na": 2
+      },
+      "net_charge": 0.0
+    },
+    "pce_spec": {
+      "name": "c02_pce",
+      "monomers": {
+        "A": {
+          "kind": "acid",
+          "alpha_methyl": false,
+          "deprotonated": true
+        },
+        "E": {
+          "kind": "ester_peg",
+          "alpha_methyl": false,
+          "eo_units": 3,
+          "end": "OH"
+        }
+      },
+      "composition": {
+        "A": 2,
+        "E": 1
+      },
+      "sequence": "block",
+      "end_groups": [
+        "CH3",
+        "CH3"
+      ],
+      "n_chains": 1,
+      "counterion": "Na+",
+      "box": {
+        "padding": 2.0
+      },
+      "force_field": "cvff",
+      "seed": 4,
+      "conformation": "random",
+      "relax": true
+    },
+    "slab_build": {
+      "model": "c3s_040_surface",
+      "supercell": [
+        1,
+        1,
+        1
+      ],
+      "model_sha256": {
+        "car": "6db61742c9be4c1b44303d4721bdfb192b72b5426210fd6543ecad9e92c28a0f",
+        "mdf": "992ef208ad18725c5605654c6317b26dd3af9fee94ca3a1cf975ac95f8357831"
+      },
+      "lammps": "LAMMPS (22 Jul 2025 - Update 6)"
+    },
+    "data_sha256": "eb1ee4cd0e35425b27d7d6c69fc984f2f0f52e38a172b3b67e6270c2b14e7c9c"
+  }
+}

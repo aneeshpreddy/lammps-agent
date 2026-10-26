@@ -23,7 +23,7 @@
     "FM18"
   ],
   "note": "replication along b pushes xy beyond lx/2",
-  "reference": "data/reference/eval_v2/m06.data",
+  "reference": "data/reference/eval_v3/m06.data",
   "reference_sha256": "2b8a64e9c5ac7a292739b594dbd34d1b77e4b38571f9afb7602050045fa0c648",
   "expected_counts": {
     "atoms": 176

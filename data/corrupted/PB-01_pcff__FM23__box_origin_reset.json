@@ -1,16 +1,16 @@
 {
   "id": "PB-01_pcff__FM23__box_origin_reset",
   "file": "data/corrupted/PB-01_pcff__FM23__box_origin_reset.data",
-  "sha256": "08271bd7b40d3bf40ad62214d5ad87d5322bce925b04838eeae4ec8cb273e7c6",
+  "sha256": "bc46e10ab04d707733c678ef1d5437c95354ec925e852d158f26bd8b19febd5e",
   "parent_id": "PB-01_pcff",
   "parent_file": "data/reference/pce_builder/PB-01_pcff.data",
-  "parent_sha256": "8d798d31412def5c24237b95e2e4126927a3b986b1d212aaef889414a2facad2",
+  "parent_sha256": "5771bb4d9e1f0ab5372cdc7ef95e68e07b466b4ba10e3600d6b16b3326f4e122",
   "failure_mode": "FM23",
   "operator": "fm23",
   "variant": "box_origin_reset",
   "description": "move the box so its origin is 0 (or shift it by half a box if it already is); atoms unchanged",
   "params": {
-    "shift_x": 21.57135
+    "shift_x": 13.160306214
   },
   "expected_failing_properties": [
     "P2.2"

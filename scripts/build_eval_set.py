@@ -1,14 +1,17 @@
-"""Eval set v2 (plan Days 17-19, revised for the system class of 2026-10-20: PCE of any architecture +
-INTERFACE cement minerals, in CVFF-INTERFACE (class I) and PCFF-INTERFACE (class II)).
+"""Eval set v3 (plan Days 17-19; system class of 2026-10-20 extended by the supervisor's replies of
+2026-10-26): PCE of any architecture, INTERFACE cement minerals, and PCE on a mineral surface
+(builders/composite.py), in CVFF-INTERFACE (class I) and PCFF-INTERFACE (class II). PCE boxes are
+"slightly bigger than the bounds of the atoms" (2 Å per face, P2.10).
 
-  python scripts/build_eval_set.py   -> eval/tasks/<id>.json, data/reference/eval_v2/<id>.data (+ .json)
+  python scripts/build_eval_set.py   -> eval/tasks/<id>.json, data/reference/eval_v3/<id>.data (+ .json)
                                        docs/EVAL_SET.md
 
 Each task: a natural-language request (what the system under test receives), a hidden structured
 spec (for building the reference and checking), the declared validation configuration, the TC.2
 comparison mode (METRICS.md), and the reference DATA FILE built by the builders. Every reference must
 PASS Tiers 0-3, match itself under its TC mode, and rebuild byte-identically (determinism).
-v1 tasks (tobermorite only, 2026-10-19) are kept in eval/tasks_v1/ for the record.
+v1 tasks (tobermorite only, 2026-10-19) are kept in eval/tasks_v1/, v2 (2026-10-22, PCE in a 10 Å
+vacuum padding, no composite tasks) in eval/tasks_v2/ with references in data/reference/eval_v2/.
 """
 from __future__ import annotations
 
@@ -22,15 +25,18 @@ import tempfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ROOT)
+from builders.composite import build as build_composite  # noqa: E402
 from builders.minerals import build_mineral  # noqa: E402
-from builders.pce import ArchitectureSpec, build as build_pce  # noqa: E402
+from builders.pce import DEFAULT_PADDING, ArchitectureSpec, build as build_pce  # noqa: E402
 from validator import load_config, validate  # noqa: E402
 
-OUT = os.path.join(ROOT, "data", "reference", "eval_v2")
+OUT = os.path.join(ROOT, "data", "reference", "eval_v3")
 TASKS_DIR = os.path.join(ROOT, "eval", "tasks")
 FF_NAME = {"pcff": "the class II PCFF-INTERFACE force field (INTERFACE FF 1.5)",
            "cvff": "the class I CVFF-INTERFACE force field (INTERFACE FF 1.5)"}
 ACID = {"kind": "acid", "alpha_methyl": False, "deprotonated": True}
+BOX = " Put the system in a periodic box only slightly larger than the atoms (about 2 Å of empty space on every side)."
+CONFIG = {"mineral": "minerals", "pce": "pce", "composite": "composite"}
 
 TASKS = [
     # ---------------- minerals ----------------
@@ -142,6 +148,76 @@ TASKS = [
               "(carboxylate) units followed by 3 acrylate ester units with methoxy-capped PEG-10 side chains, "
               "methyl end caps, neutralised with calcium ions.",
      "exercises": ["FM05", "FM06", "FM12", "FM13"], "note": "multi-chain system"},
+    # ---------------- PCE on a mineral surface (supervisor 2026-10-26) ----------------
+    {"id": "c01", "difficulty": "easy", "domain": "composite", "ff": "pcff",
+     "composite": {"surface": {"model": "tob11_004_surface", "supercell": [2, 1, 1]},
+                   "pce": {"monomers": {"A": ACID, "E": {"kind": "ester_peg", "alpha_methyl": True, "eo_units": 4, "end": "OCH3"}},
+                           "composition": {"A": 4, "E": 2}, "sequence": "alternating", "end_groups": ["CH3", "CH3"],
+                           "counterion": "Ca2+", "seed": 7},
+                   "height": 3.0, "orientation": "flat"},
+     "input": "Build a LAMMPS data file in {ff} for a PCE lying flat 3 Å above the (004) surface of tobermorite 11 Å "
+              "(the INTERFACE FF surface model, two slab cells along x): 4 acrylate (carboxylate) units and 2 "
+              "methoxy-tetra(ethylene glycol) methacrylate units, side chains spread evenly along the backbone, "
+              "methyl end caps, neutralised with Ca2+.",
+     "exercises": ["FM06", "FM11", "FM13", "FM17", "FM22"], "note": "the p02 chain on tobermorite; merge of two typed files"},
+    {"id": "c02", "difficulty": "easy", "domain": "composite", "ff": "cvff",
+     "composite": {"surface": {"model": "c3s_040_surface", "supercell": [1, 1, 1]},
+                   "pce": {"monomers": {"A": ACID, "E": {"kind": "ester_peg", "alpha_methyl": False, "eo_units": 3, "end": "OH"}},
+                           "composition": {"A": 2, "E": 1}, "sequence": "block", "end_groups": ["CH3", "CH3"],
+                           "counterion": "Na+", "seed": 4},
+                   "height": 3.0, "orientation": "flat"},
+     "input": "Build a LAMMPS data file in {ff} for a short PCE oligomer lying flat 3 Å above the (040) surface of "
+              "tricalcium silicate (the INTERFACE FF C3S surface model, one slab cell): 2 acrylate (carboxylate) units "
+              "followed by 1 acrylate ester unit with a hydroxyl-terminated tri(ethylene glycol) side chain, methyl end "
+              "caps, sodium counter-ions.",
+     "exercises": ["FM06", "FM11", "FM17", "FM22"], "note": "class I composite; surface normal is y"},
+    {"id": "c03", "difficulty": "representative", "domain": "composite", "ff": "pcff",
+     "composite": {"surface": {"model": "tob14_001_surface", "supercell": [2, 3, 1]},
+                   "pce": {"monomers": {"A": {"kind": "acid", "alpha_methyl": True, "deprotonated": True},
+                                        "E": {"kind": "ester_peg", "alpha_methyl": True, "eo_units": 10, "end": "OCH3"}},
+                           "composition": {"A": 8, "E": 4}, "sequence": "random", "end_groups": ["H", "H"],
+                           "counterion": "Na+", "seed": 12},
+                   "height": 3.0, "orientation": "flat"},
+     "input": "Build a LAMMPS data file in {ff} for an MPEG-type PCE lying flat 3 Å above the (001) surface of "
+              "tobermorite 14 Å (the INTERFACE FF surface model, 2x3 slab cells laterally): 8 methacrylate units "
+              "(deprotonated) and 4 MPEG methacrylate side chains of 10 ethylene-oxide units (methoxy-terminated), "
+              "random sequence, hydrogen chain ends, sodium counter-ions.",
+     "exercises": ["FM04", "FM06", "FM11", "FM17", "FM22"], "note": "7926 atoms"},
+    {"id": "c04", "difficulty": "representative", "domain": "composite", "ff": "cvff",
+     "composite": {"surface": {"model": "c3s_040_surface_hydroxylated", "supercell": [2, 1, 2]},
+                   "pce": {"params": {"n_side_chains": 4, "n_acid": 8, "side_chain_length": 10, "anchor": "HPEG",
+                                      "acid": "acrylic", "side_chain_end": "OH", "sequence": "random",
+                                      "counterion": "Na+", "seed": 3}},
+                   "height": 3.0, "orientation": "flat"},
+     "input": "Build a LAMMPS data file in {ff} for an HPEG-type PCE lying flat 3 Å above the hydroxylated (040) "
+              "surface of tricalcium silicate (the INTERFACE FF model, 2x2 slab cells laterally): 4 methallyl-ether "
+              "PEG side chains of 10 ethylene-oxide units (OH-terminated) and 8 acrylic acid units (all "
+              "deprotonated), random sequence, sodium counter-ions.",
+     "exercises": ["FM06", "FM11", "FM17", "FM22"], "note": "normal along y: lateral cells along x and z"},
+    {"id": "c05", "difficulty": "hard", "domain": "composite", "ff": "pcff",
+     "composite": {"surface": {"model": "ettr_008_surface", "supercell": [2, 1, 1]},
+                   "pce": {"monomers": {"A": ACID, "E": {"kind": "ester_peg", "alpha_methyl": False, "eo_units": 6, "end": "OCH3"}},
+                           "composition": {"A": 4, "E": 2}, "sequence": "block", "end_groups": ["CH3", "CH3"],
+                           "n_chains": 2, "counterion": "Ca2+", "seed": 2},
+                   "height": 4.0, "orientation": "flat"},
+     "input": "Build a LAMMPS data file in {ff} with two identical PCE chains lying flat 4 Å above the (008) surface "
+              "of ettringite (the INTERFACE FF surface model, two slab cells along x); each chain is 4 acrylate "
+              "(carboxylate) units followed by 2 acrylate ester units with methoxy-capped PEG-6 side chains, methyl "
+              "end caps; neutralise with calcium ions.",
+     "exercises": ["FM05", "FM06", "FM11", "FM13", "FM17"], "note": "8492 atoms, two chains, water-rich slab"},
+    {"id": "c06", "difficulty": "hard", "domain": "composite", "ff": "cvff",
+     "composite": {"surface": {"model": "c3a_010_surface_together", "supercell": [1, 1, 1]},
+                   "pce": {"monomers": {"M": {"kind": "diacid", "deprotonated": 2},
+                                        "P": {"kind": "ether_peg", "alpha_methyl": False, "spacer": 1, "eo_units": 6, "end": "OH"}},
+                           "composition": {"M": 3, "P": 3}, "sequence": "alternating", "end_groups": ["CH3", "H"],
+                           "counterion": "Na+", "seed": 9},
+                   "height": 3.0, "orientation": "as_built"},
+     "input": "Build a LAMMPS data file in {ff} for an alternating APEG-maleic PCE 3 Å above the (010) surface of "
+              "tricalcium aluminate (the INTERFACE FF C3A slab model with both surface layers together, one slab "
+              "cell), keeping the chain in its built orientation: 3 maleate units (both carboxyls deprotonated) "
+              "alternating with 3 allyl-ether PEG units of 6 ethylene-oxide units (OH-terminated); one methyl and "
+              "one hydrogen chain end; sodium counter-ions.",
+     "exercises": ["FM06", "FM11", "FM17", "FM22"], "note": "class I, diacid, 4421 atoms"},
 ]
 
 
@@ -152,20 +228,33 @@ def _sha(p):
 def pce_spec(t):
     d = dict(t["pce"].get("params") or t["pce"])
     d.update(force_field=t["ff"], name=t["id"])
-    d.setdefault("box", {"padding": 10.0})
+    d.setdefault("box", {"padding": DEFAULT_PADDING})
     return d
 
 
-def tc_mode(t):
+def composite_spec(t):
+    c = dict(t["composite"])
+    c["pce"] = dict(c["pce"].get("params") or c["pce"])
+    c.update(force_field=t["ff"], name=t["id"])
+    return c
+
+
+def tc_mode(t, rec=None):
     if t["domain"] == "mineral":
         return "graph", True
-    seq = (t["pce"].get("params") or t["pce"]).get("sequence", "random")
-    return ("chemistry" if seq in ("random", "gradient") else "graph"), False
+    pce = t["pce"] if t["domain"] == "pce" else t["composite"]["pce"]
+    seq = (pce.get("params") or pce).get("sequence", "random")
+    mode = "chemistry" if seq in ("random", "gradient") else "graph"
+    if t["domain"] == "composite":      # lateral cell only: the normal length grows with the adsorbate
+        return mode, [a for a in "xyz" if a != rec["surface_normal"]]
+    return mode, False
 
 
 def build_one(t, outdir):
     if t["domain"] == "mineral":
         rec = build_mineral(t["mineral"]["model"], tuple(t["mineral"]["supercell"]), t["ff"], outdir, t["id"])
+    elif t["domain"] == "composite":
+        rec = build_composite(composite_spec(t), outdir)
     else:
         rec = build_pce(ArchitectureSpec.from_json(pce_spec(t)), outdir)
         for ext in ("car", "mdf"):
@@ -175,8 +264,8 @@ def build_one(t, outdir):
 
 def main():
     os.makedirs(OUT, exist_ok=True)
-    if os.path.isdir(TASKS_DIR) and not os.path.isdir(os.path.join(ROOT, "eval", "tasks_v1")):
-        shutil.move(TASKS_DIR, os.path.join(ROOT, "eval", "tasks_v1"))
+    if os.path.isdir(TASKS_DIR) and not os.path.isdir(os.path.join(ROOT, "eval", "tasks_v2")):
+        shutil.copytree(TASKS_DIR, os.path.join(ROOT, "eval", "tasks_v2"))
     os.makedirs(TASKS_DIR, exist_ok=True)
     rows = []
     for t in TASKS:
@@ -185,12 +274,12 @@ def main():
             os.chmod(path, 0o644)
         rec = build_one(t, OUT)
         os.chmod(path, 0o444)
-        mode, cell = tc_mode(t)
-        config = f"configs/interface_{t['ff']}_{'minerals' if t['domain'] == 'mineral' else 'pce'}.yaml"
+        mode, cell = tc_mode(t, rec)
+        config = f"configs/interface_{t['ff']}_{CONFIG[t['domain']]}.yaml"
         overrides = {"tc_mode": mode, "tc_compare_cell": cell}
         if t["domain"] == "mineral":
             overrides["density_family"] = t["mineral"]["model"]
-        meta = {"id": t["id"], "role": "EVAL_REFERENCE_V2", "file": os.path.relpath(path, ROOT), "sha256": _sha(path),
+        meta = {"id": t["id"], "role": "EVAL_REFERENCE_V3", "file": os.path.relpath(path, ROOT), "sha256": _sha(path),
                 "declared_config": config, "overrides": overrides,
                 "trust_status": "built by builders/ (deterministic); validated through Tier 3",
                 "build": {k: v for k, v in rec.items() if k not in ("data_file",)}}
@@ -203,9 +292,10 @@ def main():
             build_one(t, td)
             reproducible = _sha(os.path.join(td, t["id"] + ".data")) == _sha(path)
         task = {"id": t["id"], "difficulty": t["difficulty"], "domain": t["domain"], "force_field": t["ff"],
-                "input": t["input"].format(ff=FF_NAME[t["ff"]]),
+                "input": t["input"].format(ff=FF_NAME[t["ff"]]) + (BOX if t["domain"] == "pce" else ""),
                 "hidden_spec": ({"builder": "minerals", **t["mineral"], "force_field": t["ff"]} if t["domain"] == "mineral"
-                                else {"builder": "pce", **pce_spec(t)}),
+                                else {"builder": "pce", **pce_spec(t)} if t["domain"] == "pce"
+                                else {"builder": "composite", **composite_spec(t)}),
                 "declared_config": config, "tc_mode": mode, "tc_compare_cell": cell,
                 "exercises": t["exercises"], "note": t["note"],
                 "reference": os.path.relpath(path, ROOT), "reference_sha256": _sha(path),
@@ -221,13 +311,15 @@ def main():
 
 
 def report(rows):
-    L = ["# Eval set v2 — task instances\n",
-         f"Generated by `scripts/build_eval_set.py` on {_dt.date.today().isoformat()}. System class of 2026-10-20 (SPEC §7.16): "
-         "PCE superplasticisers of any architecture and INTERFACE cement minerals, in CVFF-INTERFACE (class I) and "
-         "PCFF-INTERFACE (class II). Each `eval/tasks/<id>.json` holds the natural-language **input** (all the system "
-         "under test receives), a **hidden_spec**, the declared configuration, the TC.2 comparison mode and the "
-         "**reference** (`data/reference/eval_v2/`). Success is defined in `METRICS.md`; the dev/test split is in "
-         "`eval/split.json`. v1 (tobermorite only, 2026-10-19) is kept in `eval/tasks_v1/`.\n",
+    L = ["# Eval set v3 — task instances\n",
+         f"Generated by `scripts/build_eval_set.py` on {_dt.date.today().isoformat()}. System class of 2026-10-20 (SPEC §7.16), "
+         "extended by the supervisor's replies of 2026-10-26: PCE superplasticisers of any architecture (in a box "
+         "slightly bigger than the atoms), INTERFACE cement minerals, and PCE on a cement-mineral surface, in "
+         "CVFF-INTERFACE (class I) and PCFF-INTERFACE (class II). Each `eval/tasks/<id>.json` holds the natural-language "
+         "**input** (all the system under test receives), a **hidden_spec**, the declared configuration, the TC.2 "
+         "comparison mode and the **reference** (`data/reference/eval_v3/`). Success is defined in `METRICS.md`; the "
+         "dev/test split is in `eval/split.json`. v1 (tobermorite only, 2026-10-19) is kept in `eval/tasks_v1/`, v2 "
+         "(2026-10-22) in `eval/tasks_v2/` and `data/reference/eval_v2/`.\n",
          "| Task | Difficulty | Domain | FF | Atoms | Reference verdict | TC mode | Self-match | Rebuild identical | Note |",
          "|---|---|---|---|---|---|---|---|---|---|"]
     for r in rows:

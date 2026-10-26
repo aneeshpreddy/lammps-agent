@@ -1,0 +1,24 @@
+{
+  "id": "CP-01_pcff__FM33__equal_length_style_comment",
+  "file": "data/corrupted/CP-01_pcff__FM33__equal_length_style_comment.data",
+  "sha256": "1fff93124120306920d80efd394b944526464f6080fffff3a063a45969d2c4be",
+  "parent_id": "CP-01_pcff",
+  "parent_file": "data/reference/composite/CP-01_pcff.data",
+  "parent_sha256": "018611dab7224f0f58ec208b2c5c40d21aa33cb14c613b08e2b53aab9ea7c97d",
+  "failure_mode": "FM33",
+  "operator": "fm33",
+  "variant": "equal_length_style_comment",
+  "description": "label the Atoms section '# bond' (same length as 'full')",
+  "params": {},
+  "expected_failing_properties": [
+    "P1.11"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.11"
+  ],
+  "expected_lammps_behaviour": "Silent (equal-length names)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_composite.yaml",
+  "overrides": {}
+}

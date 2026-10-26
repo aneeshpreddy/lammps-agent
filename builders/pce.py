@@ -16,7 +16,10 @@ examples/pce/*.json):
   end_groups   [head, tail], each "CH3" or "H"
   n_chains     number of identical-architecture chains (each with its own sequence draw)
   counterion   "Ca2+" | "Na+" | "K+" | null
-  box          {"padding": 10.0} or {"lengths": [Lx, Ly, Lz]}
+  box          {"padding": 2.0} or {"lengths": [Lx, Ly, Lz]}. Padding (default 2 Å, supervisor
+               2026-10-26: "a box slightly bigger than the bounds of the atoms of PCE"): the system is
+               relaxed in a roomy box (RELAX_PADDING), then the box is shrunk to the atom bounds plus
+               the padding on every side (fit_box), centred on the origin, image flags zero.
   force_field  "pcff" (PCFF-INTERFACE, class II) | "cvff" (CVFF-INTERFACE, class I)
 
 Convenience form (expanded into monomers + composition by architecture_from_params):
@@ -53,6 +56,8 @@ MSI2LMP = os.path.join(REPO, "build", "msi2lmp", "msi2lmp")
 MSI2LMP_SRC = "/opt/homebrew/opt/lammps/share/lammps/tools/msi2lmp/src"
 CROSS_TERMS = {"bondbond", "bondangle", "angleangle", "angleangledihedral", "angledihedral",
                "endbonddihedral", "midbonddihedral", "bondbond13"}
+DEFAULT_PADDING = 2.0     # Å of empty space on every side of the final box
+RELAX_PADDING = 12.0      # Å during relaxation: periodic images >= 24 Å apart, beyond the 10 Å pair cut-off
 ION = {"Ca2+": ("Ca", "ION_Ca", 2.0), "Na+": ("Na", "ION_Na", 1.0), "K+": ("K", "ION_K", 1.0)}
 
 
@@ -66,7 +71,7 @@ class ArchitectureSpec:
     end_groups: List[str] = field(default_factory=lambda: ["CH3", "CH3"])
     n_chains: int = 1
     counterion: Optional[str] = "Ca2+"
-    box: dict = field(default_factory=lambda: {"padding": 10.0})
+    box: dict = field(default_factory=lambda: {"padding": DEFAULT_PADDING})
     force_field: str = "pcff"
     seed: int = 1
     conformation: str = "random"       # "random" coil-like growth or "extended" (all-trans preference)
@@ -386,12 +391,51 @@ def place_system(spec: ArchitectureSpec, chains: List[Mol], charges: List[int], 
         if np.any(hi - lo > L - 2.0):
             raise ValueError(f"system extent {np.round(hi - lo, 1)} does not fit in box {L}")
     else:
-        L = (hi - lo) + 2 * float(spec.box.get("padding", 10.0))
+        pad = RELAX_PADDING if spec.relax else float(spec.box.get("padding", DEFAULT_PADDING))
+        L = (hi - lo) + 2 * pad
     centre = (lo + hi) / 2
     for m in molecules:          # box centred on the origin (msi2lmp -nocenter): [-L/2, L/2)
         for a in m.atoms:
             a.xyz = a.xyz - centre
     return molecules, L, len(ions)
+
+
+def fit_box(data_path: str, padding: float) -> dict:
+    """Shrink an orthogonal box to the atom bounds + padding on every side, centred on the origin.
+
+    Coordinates are unwrapped with the image flags first, so every molecule ends whole inside the box and
+    the image flags are written as zero. Only coordinates, image flags and the box lines change."""
+    lines = open(data_path).read().splitlines()
+    box = {}
+    for k, ln in enumerate(lines[:40]):
+        t = ln.split()
+        if len(t) == 4 and t[2:] in (["xlo", "xhi"], ["ylo", "yhi"], ["zlo", "zhi"]):
+            box[t[2][0]] = (k, float(t[0]), float(t[1]))
+        if "xy xz yz" in ln:
+            raise ValueError("fit_box needs an orthogonal box")
+    L = np.array([box[a][2] - box[a][1] for a in "xyz"])
+    start = next(i for i, ln in enumerate(lines) if ln.strip().startswith("Atoms")) + 2
+    rows, i = [], start
+    while i < len(lines) and lines[i].strip():
+        body, _, com = lines[i].partition("#")
+        t = body.split()
+        x = np.array([float(v) for v in t[4:7]])
+        img = np.array([int(v) for v in t[7:10]]) if len(t) >= 10 else np.zeros(3, int)
+        rows.append((i, t[:4], x + img * L, com.strip()))
+        i += 1
+    xyz = np.array([r[2] for r in rows])
+    lo, hi = xyz.min(0), xyz.max(0)
+    Lnew = (hi - lo) + 2 * padding
+    centre = (lo + hi) / 2
+    for i, head, x, com in rows:
+        x = x - centre
+        lines[i] = "  ".join(head + [f"{v:.10f}" for v in x] + ["0", "0", "0"]) + (f"  # {com}" if com else "")
+    for a, n in zip("xyz", Lnew):
+        k = box[a][0]
+        lines[k] = f"   {-n / 2:15.9f} {n / 2:15.9f} {a}lo {a}hi"
+    with open(data_path, "w") as fh:
+        fh.write("\n".join(lines) + "\n")
+    return {"box": [round(float(v), 4) for v in Lnew], "box_padding_A": padding}
 
 
 def non_finite_lines(path: str):
@@ -462,6 +506,9 @@ def build(spec: ArchitectureSpec, outdir: str) -> dict:
     if spec.relax:
         from .relax import relax
         rec.update(relax(root + ".data", spec.force_field))
+    if "lengths" not in spec.box:
+        fitted = fit_box(root + ".data", float(spec.box.get("padding", DEFAULT_PADDING)))
+        L = np.array(fitted["box"])
     natoms = sum(len(m.atoms) for m in molecules)
     q_sum = float(sum(a.q for m in molecules for a in m.atoms))
     mind = [m.min_nonbonded_distance()[0] for m in chains]

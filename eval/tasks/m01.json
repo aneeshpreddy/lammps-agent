@@ -25,7 +25,7 @@
     "FM22"
   ],
   "note": "class I mineral; no dihedrals",
-  "reference": "data/reference/eval_v2/m01.data",
+  "reference": "data/reference/eval_v3/m01.data",
   "reference_sha256": "3106fcd3fa47a38b258c6c1990e7dea71a5902cc8f232ce85524036a97dac2b8",
   "expected_counts": {
     "atoms": 54

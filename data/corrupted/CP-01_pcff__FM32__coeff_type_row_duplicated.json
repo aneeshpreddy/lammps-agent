@@ -1,0 +1,24 @@
+{
+  "id": "CP-01_pcff__FM32__coeff_type_row_duplicated",
+  "file": "data/corrupted/CP-01_pcff__FM32__coeff_type_row_duplicated.data",
+  "sha256": "778712e5e63c3c11fe137744faeea43628b9c42957b1c474e00cd421a056719f",
+  "parent_id": "CP-01_pcff",
+  "parent_file": "data/reference/composite/CP-01_pcff.data",
+  "parent_sha256": "018611dab7224f0f58ec208b2c5c40d21aa33cb14c613b08e2b53aab9ea7c97d",
+  "failure_mode": "FM32",
+  "operator": "fm32",
+  "variant": "coeff_type_row_duplicated",
+  "description": "replace the second Bond Coeffs row with a copy of the first (type 1 twice, type 2 missing)",
+  "params": {},
+  "expected_failing_properties": [
+    "P1.7"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.7"
+  ],
+  "expected_lammps_behaviour": "Silent under nocoeff; Loud@run",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_composite.yaml",
+  "overrides": {}
+}

@@ -1,0 +1,28 @@
+{
+  "id": "CP-01_pcff__FM27__surplus_final_row",
+  "file": "data/corrupted/CP-01_pcff__FM27__surplus_final_row.data",
+  "sha256": "0106006693208db511ea9fb46e867adef0ddada259925c0a1106699475675818",
+  "parent_id": "CP-01_pcff",
+  "parent_file": "data/reference/composite/CP-01_pcff.data",
+  "parent_sha256": "018611dab7224f0f58ec208b2c5c40d21aa33cb14c613b08e2b53aab9ea7c97d",
+  "failure_mode": "FM27",
+  "operator": "fm27",
+  "variant": "surplus_final_row",
+  "description": "lower the count of the last section by one, so its final row is surplus",
+  "params": {
+    "section": "Impropers"
+  },
+  "expected_failing_properties": [
+    "P0.11",
+    "P1.1"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.11",
+    "P1.1"
+  ],
+  "expected_lammps_behaviour": "Silent (one surplus row at EOF is ignored)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_composite.yaml",
+  "overrides": {}
+}

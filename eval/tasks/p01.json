@@ -3,7 +3,7 @@
   "difficulty": "easy",
   "domain": "pce",
   "force_field": "pcff",
-  "input": "Build a LAMMPS data file in the class II PCFF-INTERFACE force field (INTERFACE FF 1.5) for a short PCE oligomer: one acrylate (carboxylate) unit and one acrylate ester unit carrying a hydroxyl-terminated di(ethylene glycol) chain, methyl end caps, neutralised with one Na+.",
+  "input": "Build a LAMMPS data file in the class II PCFF-INTERFACE force field (INTERFACE FF 1.5) for a short PCE oligomer: one acrylate (carboxylate) unit and one acrylate ester unit carrying a hydroxyl-terminated di(ethylene glycol) chain, methyl end caps, neutralised with one Na+. Put the system in a periodic box only slightly larger than the atoms (about 2 Å of empty space on every side).",
   "hidden_spec": {
     "builder": "pce",
     "monomers": {
@@ -33,7 +33,7 @@
     "force_field": "pcff",
     "name": "p01",
     "box": {
-      "padding": 10.0
+      "padding": 2.0
     }
   },
   "declared_config": "configs/interface_pcff_pce.yaml",
@@ -45,8 +45,8 @@
     "FM22"
   ],
   "note": "same chemistry as the group's EMC file REF-04",
-  "reference": "data/reference/eval_v2/p01.data",
-  "reference_sha256": "ed0cfba5439d78364a73de3d12a813731d3490045f73fd7779b6355e603b65d0",
+  "reference": "data/reference/eval_v3/p01.data",
+  "reference_sha256": "f48214a0fc2df533b6ac3c1aea1fbc87ba8fefb212c16287c1f0e5c776cdb529",
   "expected_counts": {
     "atoms": 40
   }

@@ -1,0 +1,26 @@
+{
+  "id": "CP-01_pcff__FM13__duplicate_row_same_id",
+  "file": "data/corrupted/CP-01_pcff__FM13__duplicate_row_same_id.data",
+  "sha256": "2266ebcfbb962b02083b1a918cb7698fcf21fb5e5d1d1c3fbc92bb0c0becf7a0",
+  "parent_id": "CP-01_pcff",
+  "parent_file": "data/reference/composite/CP-01_pcff.data",
+  "parent_sha256": "018611dab7224f0f58ec208b2c5c40d21aa33cb14c613b08e2b53aab9ea7c97d",
+  "failure_mode": "FM13",
+  "operator": "fm13_same",
+  "variant": "duplicate_row_same_id",
+  "description": "duplicate one Atoms row (same ID) and raise the atom count",
+  "params": {
+    "atom": 1028
+  },
+  "expected_failing_properties": [
+    "P1.2"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.2"
+  ],
+  "expected_lammps_behaviour": "Silent if max ID >= natoms, else Loud",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_composite.yaml",
+  "overrides": {}
+}

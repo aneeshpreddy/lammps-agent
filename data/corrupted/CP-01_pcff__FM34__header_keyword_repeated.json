@@ -1,0 +1,24 @@
+{
+  "id": "CP-01_pcff__FM34__header_keyword_repeated",
+  "file": "data/corrupted/CP-01_pcff__FM34__header_keyword_repeated.data",
+  "sha256": "ce23b8a896dc35f7933d3ee81308351cb99cb35801ba8b7ae44378f9920e9667",
+  "parent_id": "CP-01_pcff",
+  "parent_file": "data/reference/composite/CP-01_pcff.data",
+  "parent_sha256": "018611dab7224f0f58ec208b2c5c40d21aa33cb14c613b08e2b53aab9ea7c97d",
+  "failure_mode": "FM34",
+  "operator": "fm34",
+  "variant": "header_keyword_repeated",
+  "description": "repeat the 'atoms' header line with the count minus one",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.10"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.10"
+  ],
+  "expected_lammps_behaviour": "Silent (last value wins)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_composite.yaml",
+  "overrides": {}
+}

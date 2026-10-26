@@ -1,0 +1,26 @@
+{
+  "id": "CP-01_pcff__FM22__bond_coeff_rows_relabelled",
+  "file": "data/corrupted/CP-01_pcff__FM22__bond_coeff_rows_relabelled.data",
+  "sha256": "f9a2440b390553c4d5b2d11be52e20c26381e44892eb81c9715552f5b904b4c5",
+  "parent_id": "CP-01_pcff",
+  "parent_file": "data/reference/composite/CP-01_pcff.data",
+  "parent_sha256": "018611dab7224f0f58ec208b2c5c40d21aa33cb14c613b08e2b53aab9ea7c97d",
+  "failure_mode": "FM22",
+  "operator": "fm22_ids",
+  "variant": "bond_coeff_rows_relabelled",
+  "description": "swap the type IDs of the first two Bond Coeffs rows (values and comments move together)",
+  "params": {},
+  "expected_failing_properties": [
+    "P1.16",
+    "TC.2"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.16",
+    "TC.2"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_composite.yaml",
+  "overrides": {}
+}

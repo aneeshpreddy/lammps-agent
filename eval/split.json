@@ -1,9 +1,12 @@
 {
-  "version": 1,
+  "version": 2,
   "created": "2026-10-22",
   "seed": 20261022,
   "rule": "stratified by (domain, difficulty); round(n/3), min 1, per stratum to test; both force fields in test",
   "dev": [
+    "c01",
+    "c04",
+    "c06",
     "m02",
     "m03",
     "m05",
@@ -16,6 +19,9 @@
     "p08"
   ],
   "test": [
+    "c02",
+    "c03",
+    "c05",
     "m01",
     "m04",
     "m06",
@@ -24,21 +30,41 @@
     "p09"
   ],
   "tasks_sha256": {
-    "m01": "30b5fe6c7d199af6bc75131e17eca0e435f5b6fe9f101cddb583783e23f121f9",
-    "m02": "5e0d6bc8835675b02f71b34b3863fe3f58c8cdb687d06352466c6861eaae9746",
-    "m03": "465b92fba7f77e13d53d3f27f2b1d95cb4abfc57ed92879b7323526605a36978",
-    "m04": "01790492aaf5eff1a51dc17856e8110ce2da6539d8d3d0c4747b56983f0f218c",
-    "m05": "1dfd933cc3c12b2af2ed006fb3627efd3b9111e7c7a617b1f71df9a8d60a00e9",
-    "m06": "5d44c79429a8740ce4e756dcfb35f5a1d54b0ff684f9d8fc5d2a68ca4ef75024",
-    "m07": "30a5371aa35d8e32bb751428fe1b69660cedcd6adafbb3af8424c160f838f42f",
-    "p01": "279be5eb12f432e92b8da9834ad40e384664a4579d04368228e68ff33d062221",
-    "p02": "efbd6554365a6d77c7785938d41bb239f8ce567c217c414aee38cbf1912f0433",
-    "p03": "e86a1f85d3893c0faf854b185a05024a4bec7f7116f789dc9c8ed84aa7399db2",
-    "p04": "713b3f88d8f7b74a707480e5d785d460ff3eb2446ea53f768fd14dd697eb0e97",
-    "p05": "a5908fc19065e843cc86de5abda1d09bb9d769d4b54267a4383d63cbc3d2f983",
-    "p06": "fb8681aecd982ba8649908e4d632d57cf65afcbc97e4a68f52f2acbd41bf7e66",
-    "p07": "09b3d3c3e90127e017a0c1ad2b5c307ed262d1be70d38987d3d2b1529732f7b5",
-    "p08": "536e9027c69bae4d646278206d30f75e7d2ed2d0887c69e7c79c3a5f4db08d8a",
-    "p09": "cef187c58015b7c55279c48ade351f772d50f17fac0561359688c971f2674211"
+    "c01": "84c1592173d81c37041215542dae95fce71498483f5cf45d4c534875e204e089",
+    "c02": "74efabf70cfe4b2e642bf7878ba655e94079119b184eb2e7a984c8c7fdfbdd9d",
+    "c03": "633ecfc07e970a5bf5a6375eea08bbf2b45b283e448a4fce293c94b2c8581989",
+    "c04": "06dd11629e3d0762025d2381cc6b3d673d9c04cf7a306b085a3d33a0847dfd95",
+    "c05": "0d12da0893cec68125e1fd0a0fe2cabecfa947eaf807528baadae2422431afe5",
+    "c06": "74296e500c285e8b86971f0effd279add4da1eae3b14179cf0650cc9fd33e8de",
+    "m01": "3da8016927046f4e85f9700b0c5509645efabf5c88c39522194e54eb3b72783a",
+    "m02": "168cd82fb886d1215dfa0fc4ba6e20fa6a8c0b28ba5fb6b4dae5bb078bf042dc",
+    "m03": "7f83d2ea0735a16ceb45bf62bb2c5bf406ba36cd03fa2afbfc5b3909a02dd3e1",
+    "m04": "e443d492306f3abacbe0c51a23e227f4cb8cbbfd3862c6e93359e2c7c8feec2d",
+    "m05": "61251812516b0b739564a0d50fa790aad444b1a2d4066880c52e510d33f1c998",
+    "m06": "0772fa84416cd94bc6bfa53fd43a2e310defcaca2aa9b0677f483dcd54c5c4d8",
+    "m07": "87ab21482b0eead3f2788dc3725847cd9465290ff0f121d2dc66c2f2bd4794d4",
+    "p01": "13caec95f644c8ad83ef87de56a94be1d5bdb5644a5736d303631cba9d5d977e",
+    "p02": "2c31e89d80fccc1f3b80d6f7978f2ce944aee2f1de4f2b1d3398ed3e3086ac11",
+    "p03": "b5fe3dad72194a51a5751bc809aaa9558882a61e30d04fafb2f746792e25f7dc",
+    "p04": "e37e98b3b659855bddc1062c1c4789cb0546dfbfd76622f2633a8ba75b08bf6e",
+    "p05": "f08d3d5142fafcb19603e38e40e1b9185f1a8fba2e049a007bc878f9b3a066a0",
+    "p06": "6a214d68ee988f9b2eab8c35932a642c2ed9fcdc053093a7ef3a0e5e9068c0db",
+    "p07": "6fde48e7079468bfa05aa0b13f007ebedb9f8895b99fe75a651cf271683a2e7a",
+    "p08": "46622cd4a1fe7b4d6b08c97026573247c06e12bf929c121147e6e7aea4b9e6cf",
+    "p09": "3c00c599262c15a0069175a6681da1d758590ca9f6747f4d9e813599c70dcddf"
+  },
+  "extended": {
+    "date": "2026-10-26",
+    "seed": 20261023,
+    "new_tasks": [
+      "c01",
+      "c02",
+      "c03",
+      "c04",
+      "c05",
+      "c06"
+    ],
+    "supersedes_sha256": "6bcfa9a36beeb7995ee8b4566a891753eaa5d6b86c3fdb899b0151a6626a4545",
+    "rule": "existing assignments kept; new tasks drawn by the same rule within their own strata"
   }
 }

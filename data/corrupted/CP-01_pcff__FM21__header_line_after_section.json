@@ -1,0 +1,24 @@
+{
+  "id": "CP-01_pcff__FM21__header_line_after_section",
+  "file": "data/corrupted/CP-01_pcff__FM21__header_line_after_section.data",
+  "sha256": "edf56e03f7acea7862c5b1fa099ae349616654ff6c8867254a724ec0702e8f71",
+  "parent_id": "CP-01_pcff",
+  "parent_file": "data/reference/composite/CP-01_pcff.data",
+  "parent_sha256": "018611dab7224f0f58ec208b2c5c40d21aa33cb14c613b08e2b53aab9ea7c97d",
+  "failure_mode": "FM21",
+  "operator": "fm21_misplaced",
+  "variant": "header_line_after_section",
+  "description": "move the 'atom types' header line to just after the Masses section",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.1"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.1"
+  ],
+  "expected_lammps_behaviour": "Loud (Unknown identifier)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_composite.yaml",
+  "overrides": {}
+}

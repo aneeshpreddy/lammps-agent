@@ -1,0 +1,31 @@
+{
+  "id": "CP-01_cvff__FM04__drop_bond_header_kept",
+  "file": "data/corrupted/CP-01_cvff__FM04__drop_bond_header_kept.data",
+  "sha256": "171fea1d43af36045f3a9c149a533beb688b3abf84bc9dc241ccb7fd3bce58a8",
+  "parent_id": "CP-01_cvff",
+  "parent_file": "data/reference/composite/CP-01_cvff.data",
+  "parent_sha256": "4d93c5513995fac4c69e53fdbe28cc4e196e73d036bb133dafe702e1d3185f26",
+  "failure_mode": "FM04",
+  "operator": "fm04_loud",
+  "variant": "drop_bond_header_kept",
+  "description": "delete one bond row, header unchanged",
+  "params": {
+    "deleted_bond": [
+      "243",
+      "1",
+      "504",
+      "511"
+    ]
+  },
+  "expected_failing_properties": [
+    "P1.1"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.1"
+  ],
+  "expected_lammps_behaviour": "Loud",
+  "header_consistent": false,
+  "declared_config": "configs/interface_cvff_composite.yaml",
+  "overrides": {}
+}

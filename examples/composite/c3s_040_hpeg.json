@@ -1,0 +1,5 @@
+{"name": "c3s_040_hpeg", "force_field": "cvff",
+ "surface": {"model": "c3s_040_surface", "supercell": "auto"},
+ "pce": {"n_side_chains": 4, "n_acid": 8, "side_chain_length": 10, "anchor": "HPEG", "acid": "acrylic",
+         "side_chain_end": "OH", "sequence": "random", "counterion": "Na+", "seed": 3},
+ "height": 3.0, "orientation": "flat"}

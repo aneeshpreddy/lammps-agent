@@ -1,10 +1,10 @@
 {
   "id": "PB-02_cvff__FM30__negative_molecule_id",
   "file": "data/corrupted/PB-02_cvff__FM30__negative_molecule_id.data",
-  "sha256": "7effd97effc22b433a383258cdca21ccd00b527bf66cf22649dbfdbf3d4f224a",
+  "sha256": "57411f97af452c126828abf903638d2ca4841529e35477bad5d3d866f456816d",
   "parent_id": "PB-02_cvff",
   "parent_file": "data/reference/pce_builder/PB-02_cvff.data",
-  "parent_sha256": "51922c04d81f5688b89c4343718e2f260fb8b519ed86abea5e9a9f53b361b306",
+  "parent_sha256": "d71331689a67b8ebbd8ca305b45c5f7a7d2b7c33f9f14b046650ee50d06184a5",
   "failure_mode": "FM30",
   "operator": "fm30",
   "variant": "negative_molecule_id",

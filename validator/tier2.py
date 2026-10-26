@@ -24,11 +24,11 @@ MAXEX = 10
 DEPENDS = {
     "P2.1": [], "P2.2": ["P1.5"], "P2.3": ["P1.2", "P1.3", "P1.5"], "P2.4": ["P1.3", "P1.5"],
     "P2.5": ["P1.3", "P1.4"], "P2.6": ["P1.4"], "P2.7": ["P1.5", "P1.9"], "P2.8": [],
-    "P2.9": ["P1.5", "P1.7"],
+    "P2.9": ["P1.5", "P1.7"], "P2.10": [],
 }
 NAMES = {"P2.1": "net_charge", "P2.2": "cell_consistency", "P2.3": "atom_overlap", "P2.4": "bond_lengths",
          "P2.5": "density", "P2.6": "mass_to_element", "P2.7": "bond_image_consistency", "P2.8": "tilt_bound",
-         "P2.9": "bond_coeffs_vs_geometry"}
+         "P2.9": "bond_coeffs_vs_geometry", "P2.10": "box_margin"}
 
 
 def _c(prop, verdict, msg="", details=None, warnings=None, cal=None):
@@ -420,9 +420,35 @@ def p2_9_bond_coeffs(pf, m: Model, cfg, cal) -> CheckResult:
     return _c("P2.9", PASS, "", det, cal=_cal_tag(cal))
 
 
+def p2_10_box_margin(pf, m: Model, cfg, cal) -> CheckResult:
+    """Isolated molecules in a box "slightly bigger than the bounds of the atoms" (supervisor 2026-10-26):
+    on every face, the empty space between the box and the (image-unwrapped) atoms lies in the declared
+    [min_A, max_A]. A negative margin means atoms stick out of the box (molecule not whole inside)."""
+    req = declared(cfg).get("box_margin")
+    if not req:
+        return _c("P2.10", NOT_APPLICABLE, "no box-margin requirement declared")
+    if m.cell is None:
+        return _c("P2.10", NOT_EVALUATED, "box not defined")
+    if m.cell.triclinic:
+        return _c("P2.10", NOT_EVALUATED, "box-margin requirement is defined for orthogonal boxes only")
+    xyz = m.xyz + (m.image * m.cell.lengths if m.image is not None else 0.0)
+    lo = xyz.min(0) - m.cell.origin
+    hi = m.cell.origin + m.cell.lengths - xyz.max(0)
+    margins = {f"{a}{side}": round(float(v), 4) for side, arr in (("lo", lo), ("hi", hi)) for a, v in zip("xyz", arr)}
+    lo_ok, hi_ok = float(req["min_A"]), float(req["max_A"])
+    bad = {k: v for k, v in margins.items() if not (lo_ok <= v <= hi_ok)}
+    det = {"margins_A": margins, "window_A": [lo_ok, hi_ok], "basis": req.get("basis")}
+    if bad:
+        k, v = min(bad.items(), key=lambda kv: kv[1]) if any(v < lo_ok for v in bad.values()) else max(bad.items(), key=lambda kv: kv[1])
+        what = "atoms extend beyond the box" if v < 0 else ("too little" if v < lo_ok else "too much") + " empty space"
+        return _c("P2.10", FAIL, f"{what} at face {k}: margin {v:.3f} Å outside [{lo_ok}, {hi_ok}] Å "
+                  f"({len(bad)} of 6 faces)", det)
+    return _c("P2.10", PASS, "", det)
+
+
 TIER2 = {"P2.1": p2_1_charge, "P2.2": p2_2_cell, "P2.3": p2_3_overlap, "P2.4": p2_4_bonds,
          "P2.5": p2_5_density, "P2.6": p2_6_masses, "P2.7": p2_7_image_consistency, "P2.8": p2_8_tilt,
-         "P2.9": p2_9_bond_coeffs}
+         "P2.9": p2_9_bond_coeffs, "P2.10": p2_10_box_margin}
 
 
 def run_tier2(pf: ParsedFile, m: Model, cfg, tier1: List[CheckResult]) -> List[CheckResult]:

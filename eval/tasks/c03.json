@@ -1,0 +1,67 @@
+{
+  "id": "c03",
+  "difficulty": "representative",
+  "domain": "composite",
+  "force_field": "pcff",
+  "input": "Build a LAMMPS data file in the class II PCFF-INTERFACE force field (INTERFACE FF 1.5) for an MPEG-type PCE lying flat 3 Å above the (001) surface of tobermorite 14 Å (the INTERFACE FF surface model, 2x3 slab cells laterally): 8 methacrylate units (deprotonated) and 4 MPEG methacrylate side chains of 10 ethylene-oxide units (methoxy-terminated), random sequence, hydrogen chain ends, sodium counter-ions.",
+  "hidden_spec": {
+    "builder": "composite",
+    "surface": {
+      "model": "tob14_001_surface",
+      "supercell": [
+        2,
+        3,
+        1
+      ]
+    },
+    "pce": {
+      "monomers": {
+        "A": {
+          "kind": "acid",
+          "alpha_methyl": true,
+          "deprotonated": true
+        },
+        "E": {
+          "kind": "ester_peg",
+          "alpha_methyl": true,
+          "eo_units": 10,
+          "end": "OCH3"
+        }
+      },
+      "composition": {
+        "A": 8,
+        "E": 4
+      },
+      "sequence": "random",
+      "end_groups": [
+        "H",
+        "H"
+      ],
+      "counterion": "Na+",
+      "seed": 12
+    },
+    "height": 3.0,
+    "orientation": "flat",
+    "force_field": "pcff",
+    "name": "c03"
+  },
+  "declared_config": "configs/interface_pcff_composite.yaml",
+  "tc_mode": "chemistry",
+  "tc_compare_cell": [
+    "x",
+    "y"
+  ],
+  "exercises": [
+    "FM04",
+    "FM06",
+    "FM11",
+    "FM17",
+    "FM22"
+  ],
+  "note": "7926 atoms",
+  "reference": "data/reference/eval_v3/c03.data",
+  "reference_sha256": "2376e6079be9ec2c33cd888b012eb695a881297f1cad2d0d59ac2ad0d6bc0a70",
+  "expected_counts": {
+    "atoms": 7926
+  }
+}

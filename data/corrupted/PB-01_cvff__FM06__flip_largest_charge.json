@@ -1,10 +1,10 @@
 {
   "id": "PB-01_cvff__FM06__flip_largest_charge",
   "file": "data/corrupted/PB-01_cvff__FM06__flip_largest_charge.data",
-  "sha256": "04d3d6edddb2491ac3773e0811d3090164f15768c266f6b1459feae10fb4de24",
+  "sha256": "650d28979ef7b34b3ee2ed9a7efde79498c2a27f2371980409292f6519704da2",
   "parent_id": "PB-01_cvff",
   "parent_file": "data/reference/pce_builder/PB-01_cvff.data",
-  "parent_sha256": "5390b3183bd8f439bc8b2c057ac5eb712d0e7b546f85140d3dbe49231949349a",
+  "parent_sha256": "70999788d8b0af33ff7f3a2f34c681e9a645ecd1f2e1ab9f32e225bf8194e9bc",
   "failure_mode": "FM06",
   "operator": "fm06_flip",
   "variant": "flip_largest_charge",

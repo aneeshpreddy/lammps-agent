@@ -1,10 +1,10 @@
 {
   "id": "PB-02_cvff__FM07__written_as_molecular_style",
   "file": "data/corrupted/PB-02_cvff__FM07__written_as_molecular_style.data",
-  "sha256": "e50ec3a50cda62a3876f608fb11d456dd9389c305eb8e53fa61893a6523f2455",
+  "sha256": "8589abd541809f5e501018d7cd2c88e641573028dc28098a8420a2e85cb64973",
   "parent_id": "PB-02_cvff",
   "parent_file": "data/reference/pce_builder/PB-02_cvff.data",
-  "parent_sha256": "51922c04d81f5688b89c4343718e2f260fb8b519ed86abea5e9a9f53b361b306",
+  "parent_sha256": "d71331689a67b8ebbd8ca305b45c5f7a7d2b7c33f9f14b046650ee50d06184a5",
   "failure_mode": "FM07",
   "operator": "fm07_mol",
   "variant": "written_as_molecular_style",

@@ -1,0 +1,28 @@
+{
+  "id": "CP-01_pcff__FM19__box_scaled_1.3_atoms_kept",
+  "file": "data/corrupted/CP-01_pcff__FM19__box_scaled_1.3_atoms_kept.data",
+  "sha256": "b832866dc6fe6752a5f4507ce968e8a7db33338de99886affc9d73246eea8fb8",
+  "parent_id": "CP-01_pcff",
+  "parent_file": "data/reference/composite/CP-01_pcff.data",
+  "parent_sha256": "018611dab7224f0f58ec208b2c5c40d21aa33cb14c613b08e2b53aab9ea7c97d",
+  "failure_mode": "FM19",
+  "operator": "fm19",
+  "variant": "box_scaled_1.3_atoms_kept",
+  "description": "scale the box by 1.3 about its origin; atoms unchanged",
+  "params": {
+    "factor": 1.3
+  },
+  "expected_failing_properties": [
+    "P2.5",
+    "P2.2"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.5",
+    "P2.2"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_composite.yaml",
+  "overrides": {}
+}

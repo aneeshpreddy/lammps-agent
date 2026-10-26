@@ -2,7 +2,7 @@
   "id": "PB-02_pcff",
   "role": "BUILDER_OUTPUT_PARENT",
   "file": "data/reference/pce_builder/PB-02_pcff.data",
-  "sha256": "38e6e6dec874e9d322aa48f679273c3312bd34831e4b5a6f59ad0c814a4e5f7d",
+  "sha256": "9a799d35a425095ba29a797344f5959a9aab56b8a5ee1422d4ea8c12eec5c29d",
   "source": "builders/pce.py examples/pce/block_multichain.json (force_field pcff, seed 2)",
   "declared_config": "configs/interface_pcff_pce.yaml",
   "overrides": {},

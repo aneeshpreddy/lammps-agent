@@ -1,0 +1,86 @@
+{
+  "id": "p02",
+  "role": "EVAL_REFERENCE_V3",
+  "file": "data/reference/eval_v3/p02.data",
+  "sha256": "40f31350f18fba2bf22336443b4b1d99e94c97e9374407885b3d14a7cf1544e6",
+  "declared_config": "configs/interface_cvff_pce.yaml",
+  "overrides": {
+    "tc_mode": "graph",
+    "tc_compare_cell": false
+  },
+  "trust_status": "built by builders/ (deterministic); validated through Tier 3",
+  "build": {
+    "name": "p02",
+    "spec": {
+      "name": "p02",
+      "monomers": {
+        "A": {
+          "kind": "acid",
+          "alpha_methyl": false,
+          "deprotonated": true
+        },
+        "E": {
+          "kind": "ester_peg",
+          "alpha_methyl": true,
+          "eo_units": 4,
+          "end": "OCH3"
+        }
+      },
+      "composition": {
+        "A": 4,
+        "E": 2
+      },
+      "sequence": "alternating",
+      "end_groups": [
+        "CH3",
+        "CH3"
+      ],
+      "n_chains": 1,
+      "counterion": "Ca2+",
+      "box": {
+        "padding": 2.0
+      },
+      "force_field": "cvff",
+      "seed": 7,
+      "conformation": "random",
+      "relax": true
+    },
+    "force_field": "CVFF-INTERFACE (INTERFACE FF 1.5, class I)",
+    "frc": "INTERFACE_FF_1_5/FORCE_FIELDS/cvff_interface_v1_5.frc",
+    "sequences": [
+      "AEAAEA"
+    ],
+    "chain_charges": [
+      -4
+    ],
+    "counterions": 2,
+    "natoms": 128,
+    "elements": {
+      "C": 40,
+      "O": 20,
+      "H": 66,
+      "Ca": 2
+    },
+    "net_charge": -0.0,
+    "box": [
+      21.8611,
+      19.7159,
+      20.8462
+    ],
+    "grower_min_nonbonded_distance_A": [
+      1.473
+    ],
+    "data_sha256": "40f31350f18fba2bf22336443b4b1d99e94c97e9374407885b3d14a7cf1544e6",
+    "msi2lmp_missing_kinds": [],
+    "msi2lmp_missing_messages": 0,
+    "cross_terms_zeroed": false,
+    "relaxed": true,
+    "stages": [
+      "soft A=10.0 (1-4 excluded)",
+      "soft A=40.0 (1-4 excluded)",
+      "soft A=100.0 (1-4 excluded)",
+      "lj/cut/coul/cut 10.0, dielectric 80"
+    ],
+    "final_energy_kcal_mol": 79.7985399104975
+  }
+}

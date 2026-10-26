@@ -3,4 +3,4 @@
  "monomers": {"M": {"kind": "diacid", "deprotonated": 2},
               "P": {"kind": "ether_peg", "alpha_methyl": false, "spacer": 1, "eo_units": 20, "end": "OH"}},
  "composition": {"M": 8, "P": 8}, "sequence": "alternating", "end_groups": ["CH3", "H"],
- "n_chains": 1, "counterion": "Na+", "box": {"padding": 10.0}, "force_field": "pcff", "seed": 9}
+ "n_chains": 1, "counterion": "Na+", "box": {"padding": 2.0}, "force_field": "pcff", "seed": 9}

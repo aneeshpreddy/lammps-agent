@@ -1,0 +1,24 @@
+{
+  "id": "CP-01_pcff__FM06__zero_all_charges",
+  "file": "data/corrupted/CP-01_pcff__FM06__zero_all_charges.data",
+  "sha256": "d90ec1336343f4d4719a60a60260a274bdbb393986409935299ffa77f678f3a6",
+  "parent_id": "CP-01_pcff",
+  "parent_file": "data/reference/composite/CP-01_pcff.data",
+  "parent_sha256": "018611dab7224f0f58ec208b2c5c40d21aa33cb14c613b08e2b53aab9ea7c97d",
+  "failure_mode": "FM06",
+  "operator": "fm06_zero",
+  "variant": "zero_all_charges",
+  "description": "set every charge to zero",
+  "params": {},
+  "expected_failing_properties": [
+    "P2.1"
+  ],
+  "expected_tier": 2,
+  "spec_expected_properties": [
+    "P2.1"
+  ],
+  "expected_lammps_behaviour": "Warn (Using kspace solver on system with no charge)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_composite.yaml",
+  "overrides": {}
+}

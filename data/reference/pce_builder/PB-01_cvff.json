@@ -2,7 +2,7 @@
   "id": "PB-01_cvff",
   "role": "BUILDER_OUTPUT_PARENT",
   "file": "data/reference/pce_builder/PB-01_cvff.data",
-  "sha256": "5390b3183bd8f439bc8b2c057ac5eb712d0e7b546f85140d3dbe49231949349a",
+  "sha256": "70999788d8b0af33ff7f3a2f34c681e9a645ecd1f2e1ab9f32e225bf8194e9bc",
   "source": "builders/pce.py examples/pce/vpeg_partial.json (force_field cvff, seed 21)",
   "declared_config": "configs/interface_cvff_pce.yaml",
   "overrides": {},

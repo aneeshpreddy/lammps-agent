@@ -160,3 +160,14 @@ def test_p2_9_uses_default_tolerance_for_unknown_pairs(write, make_cfg):
     res = validate(write(VALID), cfg, run_tier3=False)
     assert res.get("P2.9").verdict == "PASS"
     assert res.get("P2.9").details["judged_by_default_tolerance"] == 1
+
+
+def test_p2_10_box_margin(write, make_cfg):
+    # VALID: margins x 1.184/5.184, y 2.0/5.423, z 2.0/6.0 Å
+    assert run(write, make_cfg, VALID).get("P2.10").verdict == "NOT_APPLICABLE"
+    assert run(write, make_cfg, VALID, box_margin={"min_A": 1.0, "max_A": 7.0}).get("P2.10").verdict == "PASS"
+    res = run(write, make_cfg, VALID, box_margin={"min_A": 1.0, "max_A": 5.0})
+    assert failing(res) == {"P2.10"} and "too much empty space at face zhi" in res.get("P2.10").message
+    res = run(write, make_cfg, replace_line(VALID, "0.0 12.0 xlo xhi", "1.5 12.0 xlo xhi"),
+              box_margin={"min_A": 1.0, "max_A": 12.0})
+    assert res.get("P2.10").verdict == "FAIL" and "beyond the box at face xlo" in res.get("P2.10").message

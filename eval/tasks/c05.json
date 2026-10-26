@@ -1,0 +1,68 @@
+{
+  "id": "c05",
+  "difficulty": "hard",
+  "domain": "composite",
+  "force_field": "pcff",
+  "input": "Build a LAMMPS data file in the class II PCFF-INTERFACE force field (INTERFACE FF 1.5) with two identical PCE chains lying flat 4 Å above the (008) surface of ettringite (the INTERFACE FF surface model, two slab cells along x); each chain is 4 acrylate (carboxylate) units followed by 2 acrylate ester units with methoxy-capped PEG-6 side chains, methyl end caps; neutralise with calcium ions.",
+  "hidden_spec": {
+    "builder": "composite",
+    "surface": {
+      "model": "ettr_008_surface",
+      "supercell": [
+        2,
+        1,
+        1
+      ]
+    },
+    "pce": {
+      "monomers": {
+        "A": {
+          "kind": "acid",
+          "alpha_methyl": false,
+          "deprotonated": true
+        },
+        "E": {
+          "kind": "ester_peg",
+          "alpha_methyl": false,
+          "eo_units": 6,
+          "end": "OCH3"
+        }
+      },
+      "composition": {
+        "A": 4,
+        "E": 2
+      },
+      "sequence": "block",
+      "end_groups": [
+        "CH3",
+        "CH3"
+      ],
+      "n_chains": 2,
+      "counterion": "Ca2+",
+      "seed": 2
+    },
+    "height": 4.0,
+    "orientation": "flat",
+    "force_field": "pcff",
+    "name": "c05"
+  },
+  "declared_config": "configs/interface_pcff_composite.yaml",
+  "tc_mode": "graph",
+  "tc_compare_cell": [
+    "x",
+    "y"
+  ],
+  "exercises": [
+    "FM05",
+    "FM06",
+    "FM11",
+    "FM13",
+    "FM17"
+  ],
+  "note": "8492 atoms, two chains, water-rich slab",
+  "reference": "data/reference/eval_v3/c05.data",
+  "reference_sha256": "8c3ead3935e919dc394416e76b9d301f73023ea05be43e756888be8b139b987d",
+  "expected_counts": {
+    "atoms": 8492
+  }
+}

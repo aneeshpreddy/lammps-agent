@@ -1,0 +1,83 @@
+{
+  "name": "p01",
+  "spec": {
+    "name": "p01",
+    "monomers": {
+      "A": {
+        "kind": "acid",
+        "alpha_methyl": false,
+        "deprotonated": true
+      },
+      "E": {
+        "kind": "ester_peg",
+        "alpha_methyl": false,
+        "eo_units": 2,
+        "end": "OH"
+      }
+    },
+    "composition": {
+      "A": 1,
+      "E": 1
+    },
+    "sequence": "random",
+    "end_groups": [
+      "CH3",
+      "CH3"
+    ],
+    "n_chains": 1,
+    "counterion": "Na+",
+    "box": {
+      "padding": 2.0
+    },
+    "force_field": "pcff",
+    "seed": 4,
+    "conformation": "random",
+    "relax": true
+  },
+  "force_field": "PCFF-INTERFACE (INTERFACE FF 1.5, class II)",
+  "frc": "INTERFACE_FF_1_5/FORCE_FIELDS/pcff_interface_v1_5.frc",
+  "sequences": [
+    "EA"
+  ],
+  "chain_charges": [
+    -1
+  ],
+  "counterions": 1,
+  "natoms": 40,
+  "elements": {
+    "C": 12,
+    "O": 6,
+    "H": 21,
+    "Na": 1
+  },
+  "net_charge": 0.0,
+  "box": [
+    13.0867,
+    13.1958,
+    11.0553
+  ],
+  "grower_min_nonbonded_distance_A": [
+    1.809
+  ],
+  "data_file": "data/reference/eval_v3/p01.data",
+  "data_sha256": "f48214a0fc2df533b6ac3c1aea1fbc87ba8fefb212c16287c1f0e5c776cdb529",
+  "msi2lmp_missing_kinds": [
+    "angleangle",
+    "angleangledihedral",
+    "angledihedral",
+    "bondangle",
+    "bondbond",
+    "endbonddihedral",
+    "midbonddihedral"
+  ],
+  "msi2lmp_missing_messages": 97,
+  "cross_terms_zeroed": true,
+  "relaxed": true,
+  "stages": [
+    "soft A=10.0 (1-4 excluded)",
+    "soft A=40.0 (1-4 excluded)",
+    "soft A=100.0 (1-4 excluded)",
+    "lj/class2/coul/cut 10.0, dielectric 80"
+  ],
+  "final_energy_kcal_mol": 15.211407488289
+}

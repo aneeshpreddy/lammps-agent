@@ -1,10 +1,10 @@
 {
   "id": "PB-02_cvff__FM20__row_over_254_chars",
   "file": "data/corrupted/PB-02_cvff__FM20__row_over_254_chars.data",
-  "sha256": "43b158eff3254bf70ae3c9906f453a8686483e131f348df3a56b5a677e903d19",
+  "sha256": "1e257293f2172ac2cf7f683383e9f8133a8d6ecd61746bfe6f91ea749a26ba88",
   "parent_id": "PB-02_cvff",
   "parent_file": "data/reference/pce_builder/PB-02_cvff.data",
-  "parent_sha256": "51922c04d81f5688b89c4343718e2f260fb8b519ed86abea5e9a9f53b361b306",
+  "parent_sha256": "d71331689a67b8ebbd8ca305b45c5f7a7d2b7c33f9f14b046650ee50d06184a5",
   "failure_mode": "FM20",
   "operator": "fm20",
   "variant": "row_over_254_chars",

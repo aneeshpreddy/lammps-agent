@@ -1,0 +1,24 @@
+{
+  "id": "CP-01_pcff__FM29__velocities_duplicate_id",
+  "file": "data/corrupted/CP-01_pcff__FM29__velocities_duplicate_id.data",
+  "sha256": "0fadf1a5f1a433bf74b434f9b22b73b40e4742f943a2cea09b468d00eed67cb7",
+  "parent_id": "CP-01_pcff",
+  "parent_file": "data/reference/composite/CP-01_pcff.data",
+  "parent_sha256": "018611dab7224f0f58ec208b2c5c40d21aa33cb14c613b08e2b53aab9ea7c97d",
+  "failure_mode": "FM29",
+  "operator": "fm29",
+  "variant": "velocities_duplicate_id",
+  "description": "append a Velocities section in which the last atom ID is listed twice and the first atom has no row",
+  "params": {},
+  "expected_failing_properties": [
+    "P1.14"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.14"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_composite.yaml",
+  "overrides": {}
+}

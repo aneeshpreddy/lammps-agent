@@ -38,6 +38,7 @@ PARENTS = ["data/reference/REF-01.data", "data/reference/REF-02.data", "data/ref
            "data/reference/pce_builder/PB-01_cvff.data",
            "data/reference/pce_builder/PB-02_pcff.data",
            "data/reference/pce_builder/PB-02_cvff.data",
+           "data/reference/composite/CP-01_pcff.data", "data/reference/composite/CP-01_cvff.data",
            "data/reference/minerals/c3s_unit_cell_minimized_pcff.data",
            "data/reference/minerals/c3s_unit_cell_minimized_cvff.data",
            "data/reference/minerals/c3a_unit_cell_pcff.data",

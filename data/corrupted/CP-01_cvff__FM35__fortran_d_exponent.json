@@ -1,0 +1,24 @@
+{
+  "id": "CP-01_cvff__FM35__fortran_d_exponent",
+  "file": "data/corrupted/CP-01_cvff__FM35__fortran_d_exponent.data",
+  "sha256": "324832ea3b4ca1445c3b1633632353d2e8f9d9b63d3a41a723fc06213ca173a9",
+  "parent_id": "CP-01_cvff",
+  "parent_file": "data/reference/composite/CP-01_cvff.data",
+  "parent_sha256": "4d93c5513995fac4c69e53fdbe28cc4e196e73d036bb133dafe702e1d3185f26",
+  "failure_mode": "FM35",
+  "operator": "fm35",
+  "variant": "fortran_d_exponent",
+  "description": "write the first Masses value with a Fortran D exponent",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.3"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.3"
+  ],
+  "expected_lammps_behaviour": "Loud",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_composite.yaml",
+  "overrides": {}
+}

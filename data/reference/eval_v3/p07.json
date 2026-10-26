@@ -1,0 +1,89 @@
+{
+  "id": "p07",
+  "role": "EVAL_REFERENCE_V3",
+  "file": "data/reference/eval_v3/p07.data",
+  "sha256": "4cd74ac889bc627c761d7f3e75467bc6adbe33897e28001128706534986f0c2f",
+  "declared_config": "configs/interface_pcff_pce.yaml",
+  "overrides": {
+    "tc_mode": "chemistry",
+    "tc_compare_cell": false
+  },
+  "trust_status": "built by builders/ (deterministic); validated through Tier 3",
+  "build": {
+    "name": "p07",
+    "spec": {
+      "name": "p07",
+      "monomers": {
+        "S": {
+          "kind": "ether_peg",
+          "alpha_methyl": true,
+          "spacer": 2,
+          "eo_units": 30,
+          "end": "OH"
+        },
+        "A": {
+          "kind": "acid",
+          "alpha_methyl": false,
+          "deprotonated": true
+        }
+      },
+      "composition": {
+        "S": 6,
+        "A": 18
+      },
+      "sequence": "gradient",
+      "end_groups": [
+        "CH3",
+        "CH3"
+      ],
+      "n_chains": 1,
+      "counterion": "Ca2+",
+      "box": {
+        "padding": 2.0
+      },
+      "force_field": "pcff",
+      "seed": 5,
+      "conformation": "random",
+      "relax": true
+    },
+    "force_field": "PCFF-INTERFACE (INTERFACE FF 1.5, class II)",
+    "frc": "INTERFACE_FF_1_5/FORCE_FIELDS/pcff_interface_v1_5.frc",
+    "sequences": [
+      "AAAAAAAAAAAAAAAAAASSSSSS"
+    ],
+    "chain_charges": [
+      -18
+    ],
+    "counterions": 9,
+    "natoms": 1517,
+    "elements": {
+      "C": 446,
+      "O": 222,
+      "H": 840,
+      "Ca": 9
+    },
+    "net_charge": 0.0,
+    "box": [
+      63.5051,
+      45.2696,
+      65.5484
+    ],
+    "grower_min_nonbonded_distance_A": [
+      0.591
+    ],
+    "data_sha256": "4cd74ac889bc627c761d7f3e75467bc6adbe33897e28001128706534986f0c2f",
+    "msi2lmp_missing_kinds": [
+      "angleangle"
+    ],
+    "msi2lmp_missing_messages": 1,
+    "cross_terms_zeroed": true,
+    "relaxed": true,
+    "stages": [
+      "soft A=10.0 (1-4 excluded)",
+      "soft A=40.0 (1-4 excluded)",
+      "soft A=100.0 (1-4 excluded)",
+      "lj/class2/coul/cut 10.0, dielectric 80"
+    ],
+    "final_energy_kcal_mol": -925.723401510336
+  }
+}

@@ -1,7 +1,13 @@
 # METRICS — how systems are scored on the eval set (plan Day 20)
 
-Version 1.0, 2026-10-22. Frozen together with `eval/split.json`. Changing any definition below after
-the first scored run requires a new version and re-scoring every system already reported.
+Version 1.1, 2026-10-26. Frozen together with `eval/split.json` (version 2). Changing any definition below
+after the first scored run requires a new version and re-scoring every system already reported.
+
+**v1.1 changes (before any scored run; supervisor replies of 2026-10-26, SPEC §7.17):** eval set v3 adds the
+domain `composite` (PCE on a mineral surface, tasks c01–c06); TC.2 compares only the lateral cell for
+composites; PCE tasks now ask for a box slightly larger than the atoms, which P2.10 checks as part of
+"valid"; the split was extended (existing assignments kept, new tasks drawn by the same rule); results are
+broken down by three domains. v1.0 (2026-10-22) is in git history.
 
 ## 1. What a system receives and returns
 
@@ -21,9 +27,15 @@ A run of task *t* **succeeds** iff both hold:
 
 | `tc_mode` | Used for | Equivalent when |
 |---|---|---|
-| `graph` | minerals (with `tc_compare_cell`), PCE with a deterministic sequence (alternating, block, explicit) | same header counts (atoms, bonds, angles, dihedrals, impropers); identical multiset of molecules, each identified by a Weisfeiler–Lehman hash (24 rounds) of its bond graph labelled by atom-type name and charge (3 decimals); for minerals also the same cell lengths and tilt within 1e-3 Å |
-| `chemistry` | PCE with a random or gradient sequence | same header counts; per molecule the same multiset of (atom-type name, charge), the same net charge and the same counts of bonded type pairs. Positions and monomer order are free: any draw of the requested architecture is correct |
-| `positions` | not used in v2 (kept for tasks whose geometry is fixed by the request) | atoms matched by minimum-image position; types, charges, topology, coefficients and cell equal |
+| `graph` | minerals (with `tc_compare_cell`), PCE and composites with a deterministic sequence (alternating, block, explicit) | same header counts (atoms, bonds, angles, dihedrals, impropers); identical multiset of molecules, each identified by a Weisfeiler–Lehman hash (24 rounds) of its bond graph labelled by atom-type name and charge (3 decimals); for minerals also the same cell lengths and tilt within 1e-3 Å |
+| `chemistry` | PCE and composites with a random or gradient sequence | same header counts; per molecule the same multiset of (atom-type name, charge), the same net charge and the same counts of bonded type pairs. Positions and monomer order are free: any draw of the requested architecture is correct |
+| `positions` | not used in v2/v3 (kept for tasks whose geometry is fixed by the request) | atoms matched by minimum-image position; types, charges, topology, coefficients and cell equal |
+
+Cell comparison (`tc_compare_cell`): `true` for minerals (all lengths and tilts within 1e-3 Å); for
+composites the list of the two lateral axes (the slab's lateral cell within 1e-3 Å; the length along the
+surface normal may grow with the adsorbate and is not compared). The adsorption height and orientation are
+not part of TC.2 in v3: a PCE placed elsewhere in the box with the right chemistry and a valid file counts
+as correct (a stated limitation of the benchmark).
 
 Neither criterion alone is enough: a file can pass every tier and still be the wrong system, and a correct
 system written with a defect fails Tier 0–3 (plan Day 20 "watch out").
@@ -35,8 +47,8 @@ system written with a defect fails Tier 0–3 (plan Day 20 "watch out").
 - **Per-task success rate** = successes / repeats. **System success rate** = mean of per-task rates
   (each task weighs the same), reported with the **spread across repeats**: for repeat *k*, the success
   fraction over tasks; report mean ± standard deviation of those *k* fractions and the min–max.
-- Report the rate overall and broken down by **difficulty**, **domain** (pce / mineral) and **force
-  field** (class I / class II).
+- Report the rate overall and broken down by **difficulty**, **domain** (pce / mineral / composite) and
+  **force field** (class I / class II).
 - **pass@k** (k = repeats): fraction of tasks with at least one success — reported, never as the headline.
 
 ## 4. Diagnostic metrics
@@ -60,7 +72,8 @@ system written with a defect fails Tier 0–3 (plan Day 20 "watch out").
   and their dates; LAMMPS build (`docs/lammps_build.txt`, Homebrew 22 Jul 2025 – Update 6, serial).
 - Model ID, date, sampling parameters, system prompt version (hash), tool definitions (hash), limits
   (steps, attempts, tokens, time).
-- `eval/split.json` hash (LOG.md 2026-10-22).
+- `eval/split.json` hash: version 2, sha256 063c2ddad24be986bf16dd3b8a549c3681871837d133d20340416003d6cb5fe4
+  (LOG.md 2026-10-26; supersedes 6bcfa9a3… of 2026-10-22).
 
 ## 6. Rules
 

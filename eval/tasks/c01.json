@@ -1,0 +1,67 @@
+{
+  "id": "c01",
+  "difficulty": "easy",
+  "domain": "composite",
+  "force_field": "pcff",
+  "input": "Build a LAMMPS data file in the class II PCFF-INTERFACE force field (INTERFACE FF 1.5) for a PCE lying flat 3 Å above the (004) surface of tobermorite 11 Å (the INTERFACE FF surface model, two slab cells along x): 4 acrylate (carboxylate) units and 2 methoxy-tetra(ethylene glycol) methacrylate units, side chains spread evenly along the backbone, methyl end caps, neutralised with Ca2+.",
+  "hidden_spec": {
+    "builder": "composite",
+    "surface": {
+      "model": "tob11_004_surface",
+      "supercell": [
+        2,
+        1,
+        1
+      ]
+    },
+    "pce": {
+      "monomers": {
+        "A": {
+          "kind": "acid",
+          "alpha_methyl": false,
+          "deprotonated": true
+        },
+        "E": {
+          "kind": "ester_peg",
+          "alpha_methyl": true,
+          "eo_units": 4,
+          "end": "OCH3"
+        }
+      },
+      "composition": {
+        "A": 4,
+        "E": 2
+      },
+      "sequence": "alternating",
+      "end_groups": [
+        "CH3",
+        "CH3"
+      ],
+      "counterion": "Ca2+",
+      "seed": 7
+    },
+    "height": 3.0,
+    "orientation": "flat",
+    "force_field": "pcff",
+    "name": "c01"
+  },
+  "declared_config": "configs/interface_pcff_composite.yaml",
+  "tc_mode": "graph",
+  "tc_compare_cell": [
+    "x",
+    "y"
+  ],
+  "exercises": [
+    "FM06",
+    "FM11",
+    "FM13",
+    "FM17",
+    "FM22"
+  ],
+  "note": "the p02 chain on tobermorite; merge of two typed files",
+  "reference": "data/reference/eval_v3/c01.data",
+  "reference_sha256": "7d056c4177a5f4bbf7dbf3615411f6b5d03e81ba2cb0da98b8a97097e109a2e8",
+  "expected_counts": {
+    "atoms": 3296
+  }
+}

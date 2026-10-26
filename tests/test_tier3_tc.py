@@ -142,3 +142,17 @@ def test_graph_detects_changed_connectivity(write, make_cfg):
     text = VALID.replace("4 1 4 6\n", "4 1 5 6\n")       # H-H bond instead of O-H: same counts
     res = validate(write(text), _cfg_mode(make_cfg, "graph"), reference=ref, run_tier3=False)
     assert res.get("TC.2").verdict == "FAIL"
+
+
+def test_cell_comparison_on_selected_axes(write, make_cfg):
+    ref = write(VALID)
+    taller = VALID.replace("0.0 12.0 zlo zhi", "0.0 15.0 zlo zhi")     # only the normal (z) length differs
+    cfg = _cfg_mode(make_cfg, "chemistry")
+    cfg["declared"]["tc_compare_cell"] = ["x", "y"]
+    assert validate(write(taller), cfg, reference=ref, run_tier3=False).get("TC.2").verdict == "PASS"
+    cfg["declared"]["tc_compare_cell"] = True
+    res = validate(write(taller), cfg, reference=ref, run_tier3=False)
+    assert res.get("TC.2").verdict == "FAIL" and "cell (all)" in res.get("TC.2").message
+    wider = VALID.replace("0.0 12.0 xlo xhi", "0.0 13.0 xlo xhi")
+    cfg["declared"]["tc_compare_cell"] = ["x", "y"]
+    assert validate(write(wider), cfg, reference=ref, run_tier3=False).get("TC.2").verdict == "FAIL"

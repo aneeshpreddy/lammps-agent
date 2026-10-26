@@ -1,0 +1,24 @@
+{
+  "id": "CP-01_cvff__FM33__equal_length_style_comment",
+  "file": "data/corrupted/CP-01_cvff__FM33__equal_length_style_comment.data",
+  "sha256": "744f87cf9a087c3c06e11f075eae9695c34c3441c6583f336342f2b1e35d2aed",
+  "parent_id": "CP-01_cvff",
+  "parent_file": "data/reference/composite/CP-01_cvff.data",
+  "parent_sha256": "4d93c5513995fac4c69e53fdbe28cc4e196e73d036bb133dafe702e1d3185f26",
+  "failure_mode": "FM33",
+  "operator": "fm33",
+  "variant": "equal_length_style_comment",
+  "description": "label the Atoms section '# bond' (same length as 'full')",
+  "params": {},
+  "expected_failing_properties": [
+    "P1.11"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.11"
+  ],
+  "expected_lammps_behaviour": "Silent (equal-length names)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_composite.yaml",
+  "overrides": {}
+}

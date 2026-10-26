@@ -1,0 +1,26 @@
+{
+  "id": "CP-01_pcff__FM28__bond_to_absent_atom",
+  "file": "data/corrupted/CP-01_pcff__FM28__bond_to_absent_atom.data",
+  "sha256": "efeacd2c6f2680d0a37e0924255b8e3cff19316c58f4ccc85a18e21abb2c4165",
+  "parent_id": "CP-01_pcff",
+  "parent_file": "data/reference/composite/CP-01_pcff.data",
+  "parent_sha256": "018611dab7224f0f58ec208b2c5c40d21aa33cb14c613b08e2b53aab9ea7c97d",
+  "failure_mode": "FM28",
+  "operator": "fm28",
+  "variant": "bond_to_absent_atom",
+  "description": "delete the Atoms row of the second atom of a bond (ID < max ID), leaving the topology",
+  "params": {
+    "deleted_atom": 11
+  },
+  "expected_failing_properties": [
+    "P1.5"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.5"
+  ],
+  "expected_lammps_behaviour": "Crash (SIGSEGV) or Loud",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_composite.yaml",
+  "overrides": {}
+}

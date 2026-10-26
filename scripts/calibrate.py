@@ -33,7 +33,7 @@ DERIVATION_VERSION = "calibrate.py v1 (2026-10-16)"
 BOND_MARGIN_REL = 0.10      # widen [min, max] of reference bond lengths by 10 % each side
 OVERLAP_MARGIN_REL = 0.25   # d_min = 75 % of the closest non-bonded contact seen in the references
 CONTACT_SEARCH_A = 4.0      # element pairs with no contact below this distance stay uncalibrated
-DENSITY_MARGIN_REL = 0.02   # PLACEHOLDER pending an owner requirement (see basis text)
+DENSITY_MARGIN_REL = 0.02   # not reference-derived; accepted by the supervisor 2026-10-26 (see basis text)
 TAU_M_AMU = 0.01            # mass tolerance per type
 CENTROID_FACTOR = 3.0
 R0_PAIR_MARGIN = 0.03       # P2.9: +- 0.03 on the observed (mean length / r0) ratio of each type pair
@@ -46,8 +46,8 @@ SETS = {
             "density_basis": {
                 "pce_emc_dense": "REF-01, REF-02 were built by EMC at the requested density1 = 1 g/cm3 (REF-0x.params) "
                                  "and both measure 1.0000 g/cm3. The ±2 % margin is NOT reference-derived (two "
-                                 "identical values give no spread): it is a PLACEHOLDER for an owner requirement "
-                                 "(PROPERTIES §8.5 rule 4) and must be confirmed or replaced.",
+                                 "identical values give no spread): it is an owner requirement (PROPERTIES §8.5 "
+                                 "rule 4), proposed by the project and accepted by the supervisor on 2026-10-26.",
                 "pce_emc_dilute": None}},
     "tobermorite": {"out": "calibration/tobermorite_interface.json", "id": "tobermorite_interface",
                     "status": "PROVISIONAL_DEFAULT",
@@ -73,8 +73,9 @@ SETS = {
                                         "data/reference/REF-07.data", "data/reference/REF-08.data"],
                     "contact_ions": ["Na", "K", "Ca"],
                     "extra_density": {"pce_builder": {"applicable": False,
-                                                      "basis": "builders/pce.py places chains in a padded vacuum box: "
-                                                               "no bulk density to check"}}},
+                                                      "basis": "builders/pce.py writes isolated chains in a box slightly "
+                                                               "bigger than the atoms (supervisor 2026-10-26; P2.10 checks "
+                                                               "the margin): no bulk density to check"}}},
     "fixture": {"out": "calibration/tobermorite_fixture.json", "id": "tobermorite_fixture", "status": "SYNTHETIC",
                 "files": ["data/fixtures/FIX-T11.data", "data/fixtures/FIX-T14.data"],
                 "density_basis": {
@@ -97,8 +98,28 @@ def mineral_set(ff: str) -> dict:
             "files": files, "density_margin_rel": 1e-4, "density_basis": basis}
 
 
+def composite_set(ff: str) -> dict:
+    """PCE on a mineral surface: the union of the PCE (EMC) and mineral references of that force field, with
+    the ion contact sources. Cross pairs (PCE atom - slab atom) that no reference holds stay uncalibrated:
+    get the cross-pair fallback (see main)."""
+    m = mineral_set(ff)
+    files = SETS["pce_builder"]["files"] + m["files"]
+    return {"out": f"calibration/composite_{ff}.json", "id": f"composite_{ff}", "status": "PROVISIONAL_DEFAULT",
+            "files": files, "density_margin_rel": 1e-4, "density_basis": {},
+            "contact_sources": SETS["pce_builder"]["contact_sources"], "contact_ions": SETS["pce_builder"]["contact_ions"],
+            "cross_pair_fallback": True,
+            "extra_density": {"composite": {"applicable": False,
+                                            "basis": "mineral slab + vacuum + adsorbed PCE (builders/composite.py): "
+                                                     "no bulk density to check"}}}
+
+
 def main(which: str):
-    spec = SETS[which] if which in SETS else mineral_set(which.split("_", 1)[1])
+    if which in SETS:
+        spec = SETS[which]
+    elif which.startswith("composite_"):
+        spec = composite_set(which.split("_", 1)[1])
+    else:
+        spec = mineral_set(which.split("_", 1)[1])
     refs = []
     bonds = defaultdict(list)
     ebonds = defaultdict(list)
@@ -199,6 +220,20 @@ def main(which: str):
                           "hi": round(float(v.max()) * (1 + BOND_MARGIN_REL), 4)}
     overlap = {k: {"observed_min": round(v["observed_min"], 4), "d_min": round(v["observed_min"] * (1 - OVERLAP_MARGIN_REL), 4),
                    "closest_pair_in": v["reference"], "atom_ids": v["atom_ids"]} for k, v in sorted(contact.items())}
+    if spec.get("cross_pair_fallback"):
+        # PCE-slab element pairs that no reference contains (e.g. Ca|Na, C|Si): d_min = the smallest calibrated
+        # d_min of any pair containing either element. Permissive by construction (it never exceeds what the
+        # references allow for those elements), so it targets only gross overlaps — P2.3's purpose.
+        els = sorted({e for k in overlap for e in k.split("|")})
+        for i, a in enumerate(els):
+            for b in els[i:]:
+                key = "|".join(sorted((a, b)))
+                if key in overlap:
+                    continue
+                cands = [(v["d_min"], k) for k, v in overlap.items() if "fallback_from" not in v and ({a, b} & set(k.split("|")))]
+                d, src = min(cands)
+                overlap[key] = {"observed_min": None, "d_min": d, "fallback_from": src}
+        overlap = dict(sorted(overlap.items()))
     # separation check: a widened bond window must stay below the closest non-bonded contact of that element pair
     sep = []
     el_of_name = {}
@@ -254,7 +289,10 @@ def main(which: str):
                         "separation_ok": all(s["ok"] for s in sep)},
         "overlap": {"measured": "minimum-image distance of non-bonded pairs (all pairs except 1-2 bonds), per element pair (Å)",
                     "derivation": f"d_min = (1-{OVERLAP_MARGIN_REL}) x closest such contact in the references; "
-                                  f"element pairs with no contact below {CONTACT_SEARCH_A} Å are uncalibrated",
+                                  f"element pairs with no contact below {CONTACT_SEARCH_A} Å are uncalibrated"
+                                  + ("; composite sets: a pair absent from every reference takes the smallest d_min of the "
+                                     "calibrated pairs containing either of its elements ('fallback_from')"
+                                     if spec.get("cross_pair_fallback") else ""),
                     "basis": "P2.3 targets gross overlaps (coincident/duplicated sites, collapsed geometry); the "
                              "references are unrelaxed builds whose closest contacts are already short, so the "
                              "threshold is placed well below them", "margin_rel": OVERLAP_MARGIN_REL, "pairs": overlap},

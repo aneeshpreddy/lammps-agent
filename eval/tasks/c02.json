@@ -1,0 +1,66 @@
+{
+  "id": "c02",
+  "difficulty": "easy",
+  "domain": "composite",
+  "force_field": "cvff",
+  "input": "Build a LAMMPS data file in the class I CVFF-INTERFACE force field (INTERFACE FF 1.5) for a short PCE oligomer lying flat 3 Å above the (040) surface of tricalcium silicate (the INTERFACE FF C3S surface model, one slab cell): 2 acrylate (carboxylate) units followed by 1 acrylate ester unit with a hydroxyl-terminated tri(ethylene glycol) side chain, methyl end caps, sodium counter-ions.",
+  "hidden_spec": {
+    "builder": "composite",
+    "surface": {
+      "model": "c3s_040_surface",
+      "supercell": [
+        1,
+        1,
+        1
+      ]
+    },
+    "pce": {
+      "monomers": {
+        "A": {
+          "kind": "acid",
+          "alpha_methyl": false,
+          "deprotonated": true
+        },
+        "E": {
+          "kind": "ester_peg",
+          "alpha_methyl": false,
+          "eo_units": 3,
+          "end": "OH"
+        }
+      },
+      "composition": {
+        "A": 2,
+        "E": 1
+      },
+      "sequence": "block",
+      "end_groups": [
+        "CH3",
+        "CH3"
+      ],
+      "counterion": "Na+",
+      "seed": 4
+    },
+    "height": 3.0,
+    "orientation": "flat",
+    "force_field": "cvff",
+    "name": "c02"
+  },
+  "declared_config": "configs/interface_cvff_composite.yaml",
+  "tc_mode": "graph",
+  "tc_compare_cell": [
+    "x",
+    "z"
+  ],
+  "exercises": [
+    "FM06",
+    "FM11",
+    "FM17",
+    "FM22"
+  ],
+  "note": "class I composite; surface normal is y",
+  "reference": "data/reference/eval_v3/c02.data",
+  "reference_sha256": "eb1ee4cd0e35425b27d7d6c69fc984f2f0f52e38a172b3b67e6270c2b14e7c9c",
+  "expected_counts": {
+    "atoms": 1028
+  }
+}

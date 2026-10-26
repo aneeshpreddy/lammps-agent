@@ -1,10 +1,10 @@
 {
   "id": "PB-01_cvff__FM19__box_scaled_1.3_atoms_kept",
   "file": "data/corrupted/PB-01_cvff__FM19__box_scaled_1.3_atoms_kept.data",
-  "sha256": "123a55d8ab35ba708d9c77800e27a98bccdd3329dd195098e5cea34bfb03e556",
+  "sha256": "b75654295a05938ba892fc8cba383a9002aa62e706385062d62173670e48961f",
   "parent_id": "PB-01_cvff",
   "parent_file": "data/reference/pce_builder/PB-01_cvff.data",
-  "parent_sha256": "5390b3183bd8f439bc8b2c057ac5eb712d0e7b546f85140d3dbe49231949349a",
+  "parent_sha256": "70999788d8b0af33ff7f3a2f34c681e9a645ecd1f2e1ab9f32e225bf8194e9bc",
   "failure_mode": "FM19",
   "operator": "fm19",
   "variant": "box_scaled_1.3_atoms_kept",

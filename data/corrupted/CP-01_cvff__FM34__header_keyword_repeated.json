@@ -1,0 +1,24 @@
+{
+  "id": "CP-01_cvff__FM34__header_keyword_repeated",
+  "file": "data/corrupted/CP-01_cvff__FM34__header_keyword_repeated.data",
+  "sha256": "ba98cc4946a58a4bea9a44a20b6ce6aa33ed36f1f1c37dd0a5ed73aee5b243c4",
+  "parent_id": "CP-01_cvff",
+  "parent_file": "data/reference/composite/CP-01_cvff.data",
+  "parent_sha256": "4d93c5513995fac4c69e53fdbe28cc4e196e73d036bb133dafe702e1d3185f26",
+  "failure_mode": "FM34",
+  "operator": "fm34",
+  "variant": "header_keyword_repeated",
+  "description": "repeat the 'atoms' header line with the count minus one",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.10"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.10"
+  ],
+  "expected_lammps_behaviour": "Silent (last value wins)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_cvff_composite.yaml",
+  "overrides": {}
+}

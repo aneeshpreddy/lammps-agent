@@ -1,0 +1,24 @@
+{
+  "id": "CP-01_cvff__FM14__atom_count_plus_one",
+  "file": "data/corrupted/CP-01_cvff__FM14__atom_count_plus_one.data",
+  "sha256": "fa60b6695033fe0b8eacef75c536dc73c0f08e923ee80f74e7b46a43f5ecca53",
+  "parent_id": "CP-01_cvff",
+  "parent_file": "data/reference/composite/CP-01_cvff.data",
+  "parent_sha256": "4d93c5513995fac4c69e53fdbe28cc4e196e73d036bb133dafe702e1d3185f26",
+  "failure_mode": "FM14",
+  "operator": "fm14",
+  "variant": "atom_count_plus_one",
+  "description": "raise the header atom count by one",
+  "params": {},
+  "expected_failing_properties": [
+    "P1.1"
+  ],
+  "expected_tier": 1,
+  "spec_expected_properties": [
+    "P1.1"
+  ],
+  "expected_lammps_behaviour": "Loud",
+  "header_consistent": false,
+  "declared_config": "configs/interface_cvff_composite.yaml",
+  "overrides": {}
+}

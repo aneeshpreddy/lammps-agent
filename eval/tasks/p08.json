@@ -3,7 +3,7 @@
   "difficulty": "hard",
   "domain": "pce",
   "force_field": "cvff",
-  "input": "Build a LAMMPS data file in the class I CVFF-INTERFACE force field (INTERFACE FF 1.5) for an alternating APEG-maleic PCE: 8 maleate units (both carboxyls deprotonated) alternating with 8 allyl-ether PEG units of 20 ethylene-oxide units (OH-terminated); one methyl and one hydrogen chain end; sodium counter-ions.",
+  "input": "Build a LAMMPS data file in the class I CVFF-INTERFACE force field (INTERFACE FF 1.5) for an alternating APEG-maleic PCE: 8 maleate units (both carboxyls deprotonated) alternating with 8 allyl-ether PEG units of 20 ethylene-oxide units (OH-terminated); one methyl and one hydrogen chain end; sodium counter-ions. Put the system in a periodic box only slightly larger than the atoms (about 2 Å of empty space on every side).",
   "hidden_spec": {
     "builder": "pce",
     "monomers": {
@@ -33,7 +33,7 @@
     "force_field": "cvff",
     "name": "p08",
     "box": {
-      "padding": 10.0
+      "padding": 2.0
     }
   },
   "declared_config": "configs/interface_cvff_pce.yaml",
@@ -45,8 +45,8 @@
     "FM22"
   ],
   "note": "diacid backbone, class I",
-  "reference": "data/reference/eval_v2/p08.data",
-  "reference_sha256": "fe6164290b197268cf384cfe745ff1a2c094418c6fd9ff98a6aeadf9523b64e5",
+  "reference": "data/reference/eval_v3/p08.data",
+  "reference_sha256": "63bf16505c807329f41f33f06856bce028700a3e0d8860832ab82e0fa3d3550e",
   "expected_counts": {
     "atoms": 1301
   }

@@ -27,7 +27,7 @@
     "n_chains": 3,
     "counterion": "Ca2+",
     "box": {
-      "padding": 10.0
+      "padding": 2.0
     },
     "force_field": "cvff",
     "seed": 2,
@@ -56,9 +56,9 @@
   },
   "net_charge": -0.0,
   "box": [
-    121.5233,
-    52.1951,
-    47.1828
+    108.3994,
+    38.4015,
+    34.0363
   ],
   "grower_min_nonbonded_distance_A": [
     1.269,
@@ -66,7 +66,7 @@
     1.497
   ],
   "data_file": "data/reference/pce_builder/PB-02_cvff.data",
-  "data_sha256": "51922c04d81f5688b89c4343718e2f260fb8b519ed86abea5e9a9f53b361b306",
+  "data_sha256": "d71331689a67b8ebbd8ca305b45c5f7a7d2b7c33f9f14b046650ee50d06184a5",
   "msi2lmp_missing_kinds": [],
   "msi2lmp_missing_messages": 0,
   "cross_terms_zeroed": false,
@@ -77,5 +77,5 @@
     "soft A=100.0 (1-4 excluded)",
     "lj/cut/coul/cut 10.0, dielectric 80"
   ],
-  "final_energy_kcal_mol": 457.60026292269
+  "final_energy_kcal_mol": 457.600262921999
 }

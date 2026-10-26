@@ -1,0 +1,24 @@
+{
+  "id": "CP-01_pcff__FM20__row_over_254_chars",
+  "file": "data/corrupted/CP-01_pcff__FM20__row_over_254_chars.data",
+  "sha256": "ca7794959e96b2d576d1f242c5f7a361f651e0083884af6ce02ef0f4c25bdf01",
+  "parent_id": "CP-01_pcff",
+  "parent_file": "data/reference/composite/CP-01_pcff.data",
+  "parent_sha256": "018611dab7224f0f58ec208b2c5c40d21aa33cb14c613b08e2b53aab9ea7c97d",
+  "failure_mode": "FM20",
+  "operator": "fm20",
+  "variant": "row_over_254_chars",
+  "description": "pad the first Atoms row's z coordinate with 250 trailing digits",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.6"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.6"
+  ],
+  "expected_lammps_behaviour": "Silent (truncated at 254 characters)",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_composite.yaml",
+  "overrides": {}
+}

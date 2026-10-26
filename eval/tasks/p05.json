@@ -3,7 +3,7 @@
   "difficulty": "representative",
   "domain": "pce",
   "force_field": "cvff",
-  "input": "Build a LAMMPS data file in the class I CVFF-INTERFACE force field (INTERFACE FF 1.5) for an HPEG-type PCE: 8 methallyl-ether PEG side chains of 25 ethylene-oxide units (OH-terminated) copolymerised with 32 acrylic acid units (all deprotonated), side chains evenly spaced, sodium counter-ions.",
+  "input": "Build a LAMMPS data file in the class I CVFF-INTERFACE force field (INTERFACE FF 1.5) for an HPEG-type PCE: 8 methallyl-ether PEG side chains of 25 ethylene-oxide units (OH-terminated) copolymerised with 32 acrylic acid units (all deprotonated), side chains evenly spaced, sodium counter-ions. Put the system in a periodic box only slightly larger than the atoms (about 2 Å of empty space on every side).",
   "hidden_spec": {
     "builder": "pce",
     "n_side_chains": 8,
@@ -19,7 +19,7 @@
     "force_field": "cvff",
     "name": "p05",
     "box": {
-      "padding": 10.0
+      "padding": 2.0
     }
   },
   "declared_config": "configs/interface_cvff_pce.yaml",
@@ -31,8 +31,8 @@
     "FM22"
   ],
   "note": "ether anchor, class I",
-  "reference": "data/reference/eval_v2/p05.data",
-  "reference_sha256": "5f914f804608cb6a6c28c9ae36067e9b7b6e3c343721417b791bfaee6cd38c50",
+  "reference": "data/reference/eval_v3/p05.data",
+  "reference_sha256": "d7c5963807b7489209ddcb7a331d1bc9668059b439ffd508efea38f691b90497",
   "expected_counts": {
     "atoms": 1800
   }
