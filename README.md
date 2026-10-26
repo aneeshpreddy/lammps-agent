@@ -27,6 +27,16 @@ python scripts/build_eval_set.py          # eval set v3: eval/tasks/*.json + dat
 python scripts/build_mineral_references.py   # docs/MINERALS.md (every cement mineral, both force fields)
 ```
 
+## Evaluation harness and baseline
+
+```bash
+python scripts/harness_checks.py                                  # docs/HARNESS.md: oracle / corrupters / mock baseline on dev
+python -m agents.baseline --show-prompt                           # the baseline's system prompt and output schema
+python -m eval.harness --system baseline --split dev --repeats 3 --write-doc docs/BASELINE_RESULTS.md   # needs ANTHROPIC_API_KEY
+```
+
+The harness refuses the test split before 16 Nov and checks the split and task files against the frozen hashes (METRICS.md). Design and settings of the baseline: `docs/BASELINE.md`.
+
 PCE files are written in a box slightly bigger than the atoms (2 Å per face; supervisor 2026-10-26, checked by P2.10). Force fields: CVFF-INTERFACE (class I) and PCFF-INTERFACE (class II), INTERFACE FF 1.5. The builders refuse to write a file when the force field lacks a parameter (other than class II cross terms) or when msi2lmp writes a non-finite value.
 
 ## Install

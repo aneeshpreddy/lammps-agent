@@ -77,5 +77,12 @@
     "soft A=100.0 (1-4 excluded)",
     "lj/cut/coul/cut 10.0, dielectric 80"
   ],
-  "final_energy_kcal_mol": 457.600262921999
+  "final_energy_kcal_mol": 457.600262921999,
+  "conformation_attempts": 1,
+  "bond_strain": [
+    {
+      "worst_type_mean_deviation": 0.0233,
+      "max_bond_ratio": 1.028
+    }
+  ]
 }

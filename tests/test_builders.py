@@ -140,3 +140,18 @@ def test_composite_slab_normal_and_orientation():
         assert np.argmin(ext) == normal
         d0 = np.linalg.norm(xyz[1:] - xyz[0], axis=1)
         assert np.allclose(np.linalg.norm(out[1:] - out[0], axis=1), d0)    # rigid rotation
+
+
+def test_bond_strain_accepts_references_and_flags_stretched_bonds(tmp_path):
+    from builders.pce import bond_strain, strained
+    ref = os.path.join(ROOT, "data", "reference", "eval_v3", "p07.data")
+    st = bond_strain(ref)
+    assert not strained(st), st
+    lines = open(ref).read().splitlines()
+    k = next(i for i, ln in enumerate(lines) if ln.startswith("Bond Coeffs")) + 2
+    t = lines[k].split()
+    t[1] = f"{float(t[1]) * 0.85:.4f}"         # bond type 1 r0 shortened by 15 %: its bonds now look stretched
+    lines[k] = " ".join(t)
+    p = tmp_path / "x.data"
+    p.write_text("\n".join(lines) + "\n")
+    assert strained(bond_strain(str(p)))

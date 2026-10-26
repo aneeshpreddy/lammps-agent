@@ -1,0 +1,11 @@
+{
+  "date": "2026-10-27",
+  "source": "https://platform.claude.com/docs/en/about-claude/pricing (and models/overview), fetched 2026-10-27",
+  "unit": "USD per million tokens, Claude API, standard (non-batch, global inference)",
+  "models": {
+    "claude-opus-5-5": {"input": 4.0, "output": 20.0, "cache_write_5m": 5.0, "cache_write_1h": 8.0, "cache_read": 0.20},
+    "claude-sonnet-5-5": {"input": 2.0, "output": 10.0, "cache_write_5m": 2.5, "cache_write_1h": 4.0, "cache_read": 0.10},
+    "claude-haiku-5-5": {"input": 0.10, "output": 0.50, "cache_write_5m": 0.125, "cache_write_1h": 0.20, "cache_read": 0.01,
+                         "note": "prompts up to 100,000 tokens"}
+  }
+}

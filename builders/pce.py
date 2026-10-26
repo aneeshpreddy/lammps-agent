@@ -58,6 +58,12 @@ CROSS_TERMS = {"bondbond", "bondangle", "angleangle", "angleangledihedral", "ang
                "endbonddihedral", "midbonddihedral", "bondbond13"}
 DEFAULT_PADDING = 2.0     # Å of empty space on every side of the final box
 RELAX_PADDING = 12.0      # Å during relaxation: periodic images >= 24 Å apart, beyond the 10 Å pair cut-off
+# Relaxed-structure acceptance (bond_strain): every bond type's mean length within 5 % of its r0 and no bond
+# longer than 1.10 r0. All builds of 2026-10-26 lie at <= 4.2 % and <= 1.065 (crowded quaternary carbons);
+# the tangled conformation that motivated the check sat at 7.8 % and 1.17.
+STRAIN_TYPE_MEAN = 0.05
+STRAIN_MAX_BOND = 1.10
+MAX_CONFORMATIONS = 5
 ION = {"Ca2+": ("Ca", "ION_Ca", 2.0), "Na+": ("Na", "ION_Na", 1.0), "K+": ("K", "ION_K", 1.0)}
 
 
@@ -485,7 +491,43 @@ def run_msi2lmp(root: str, ff: str, out_data: str) -> dict:
             "cross_terms_zeroed": bool(missing)}
 
 
+def bond_strain(data_path: str) -> dict:
+    """Deviation of bond lengths from each bond type's own r0 (Bond Coeffs: class2 r0 first, harmonic second).
+    A random-coil conformation can relax into a tangle that leaves bonds stretched (found by P2.9, 2026-10-27:
+    a TPEG chain with every quaternary-carbon backbone bond at 1.57-1.81 Å for r0 1.53 Å)."""
+    lines = open(data_path).read().splitlines()
+    k = next(i for i, ln in enumerate(lines) if ln.startswith("Bond Coeffs"))
+    style_pos = 0 if "class2" in lines[k] else 1
+    r0, i = {}, k + 2
+    while lines[i].strip():
+        t = lines[i].split("#")[0].split()
+        r0[t[0]] = float(t[1 + style_pos])
+        i += 1
+    xyz = {}
+    i = next(i for i, ln in enumerate(lines) if ln.startswith("Atoms")) + 2
+    while i < len(lines) and lines[i].strip():
+        t = lines[i].split("#")[0].split()
+        xyz[t[0]] = np.array([float(v) for v in t[4:7]])
+        i += 1
+    by_type: Dict[str, list] = {}
+    i = next(i for i, ln in enumerate(lines) if ln.strip() == "Bonds") + 2
+    while i < len(lines) and lines[i].strip():
+        t = lines[i].split()
+        by_type.setdefault(t[1], []).append(np.linalg.norm(xyz[t[3]] - xyz[t[2]]) / r0[t[1]])
+        i += 1
+    means = {t: float(np.mean(v)) for t, v in by_type.items()}
+    return {"worst_type_mean_deviation": round(max(abs(m - 1) for m in means.values()), 4),
+            "max_bond_ratio": round(float(max(max(v) for v in by_type.values())), 4)}
+
+
+def strained(st: dict) -> bool:
+    return st["worst_type_mean_deviation"] > STRAIN_TYPE_MEAN or st["max_bond_ratio"] > STRAIN_MAX_BOND
+
+
 def build(spec: ArchitectureSpec, outdir: str) -> dict:
+    """Attempt 0 grows every chain with the spec's seed (sequence and conformation from one generator). If the
+    relaxed structure is strained (bond_strain), the conformations are regrown with generator [seed, k] for
+    attempt k, keeping the attempt-0 sequences, up to MAX_CONFORMATIONS attempts."""
     os.makedirs(outdir, exist_ok=True)
     rng = np.random.default_rng(spec.seed)
     chains, charges, seqs = [], [], []
@@ -495,17 +537,35 @@ def build(spec: ArchitectureSpec, outdir: str) -> dict:
         chains.append(m)
         charges.append(q)
         seqs.append(seq)
-    molecules, L, n_ions = place_system(spec, chains, charges, rng)
     root = os.path.join(outdir, spec.name)
-    with tempfile.TemporaryDirectory() as wd:
-        tmp_root = os.path.join(wd, spec.name)
-        write_car_mdf(molecules, L, tmp_root, title=f"{spec.name} built by builders/pce.py")
-        for ext in ("car", "mdf"):
-            shutil.copyfile(f"{tmp_root}.{ext}", f"{root}.{ext}")
-        rec = run_msi2lmp(tmp_root, spec.force_field, root + ".data")
-    if spec.relax:
+    strain_log = []
+    for attempt in range(MAX_CONFORMATIONS):
+        if attempt:
+            rng = np.random.default_rng([spec.seed, attempt])
+            chains, charges = [], []
+            for c, seq in enumerate(seqs, start=1):
+                m, q = build_chain(spec, seq, c, rng)
+                chains.append(m)
+                charges.append(q)
+        molecules, L, n_ions = place_system(spec, chains, charges, rng)
+        with tempfile.TemporaryDirectory() as wd:
+            tmp_root = os.path.join(wd, spec.name)
+            write_car_mdf(molecules, L, tmp_root, title=f"{spec.name} built by builders/pce.py")
+            for ext in ("car", "mdf"):
+                shutil.copyfile(f"{tmp_root}.{ext}", f"{root}.{ext}")
+            rec = run_msi2lmp(tmp_root, spec.force_field, root + ".data")
+        if not spec.relax:
+            break
         from .relax import relax
         rec.update(relax(root + ".data", spec.force_field))
+        st = bond_strain(root + ".data")
+        strain_log.append(st)
+        if not strained(st):
+            break
+    else:
+        raise RuntimeError(f"every one of {MAX_CONFORMATIONS} conformations relaxed into a strained structure "
+                           f"(last: {strain_log[-1]}); refusing to write stretched bonds")
+    rec.update({"conformation_attempts": len(strain_log) or 1, "bond_strain": strain_log})
     if "lengths" not in spec.box:
         fitted = fit_box(root + ".data", float(spec.box.get("padding", DEFAULT_PADDING)))
         L = np.array(fitted["box"])
