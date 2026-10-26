@@ -351,3 +351,28 @@ No work is recorded for 5–15 October; everything below was done on 2026-10-16.
 
 ### Hours
 - To be filled by project owner.
+
+---
+
+## 2026-10-27 — Plan Days 21–24 caught up: harness, sanity checks, single-call baseline (AI-assisted)
+
+### Done
+- **Evaluation harness** (`eval/harness.py`, METRICS v1.1): `evaluate(system, tasks, repeats)` → `results.json` + `summary.md`. Every metric of METRICS §3–4 is computed: success, spread across repeats, pass@k, breakdowns, failure categories, FM incidence, tokens, cost and latency. Fixed conditions are recorded (git commit, config versions, calibration hashes, LAMMPS build, split hash, model settings). Systems receive only `{id, input}`. The split and task files are checked against the frozen hashes, and the test split is refused before 16 Nov.
+- **Sanity checks** (`scripts/harness_checks.py`, `docs/HARNESS.md`; dev split, 13 tasks × 3 repeats). All four pass:
+  - oracle 1.00;
+  - baseline with a mock perfect model 1.00, so the baseline's output schema and conversion to builder specs handle every dev task;
+  - file corrupter: success 0.00, validity 0.00 (8 operators);
+  - spec corrupter: success 0.00, validity 1.00 (all caught by TC.2).
+  The recorded commit f851fb3 shows "dirty" only because of a docs edit.
+- **Single-call baseline** (`agents/baseline.py`, `docs/BASELINE.md`): one `claude-opus-5-5` call (effort medium, structured output, refusal fallback off) → builder spec → `builders/dispatch.py`. The system prompt is generated from the builder docs and the model database. Model ID and prices were taken from the docs today (`eval/pricing.json`: $4 / $20 per MTok). `anthropic` 0.125.0 added to requirements.
+- **Builder defect found by the spec corrupter** (FAILURE_MODES §9.6 item 19): a TPEG chain with 31 EO units relaxed into a tangle with c–c2 bonds up to 1.81 Å, and P2.9 rejected it. `builders/pce.py` now checks bond strain after relaxation and regrows the conformation (same sequence, new seed, up to 5 times). All existing references rebuild byte-identically, so the split is unchanged.
+- 112 tests pass.
+
+### Not Done
+- **Scored baseline run on the dev split:** no API credentials on this machine (`ANTHROPIC_API_KEY` unset, no `ant` profile). One command once a key is set: `python -m eval.harness --system baseline --split dev --repeats 3 --write-doc docs/BASELINE_RESULTS.md` (about $3–5).
+
+### Tomorrow (plan: baseline analysis, then the tool layer)
+- Run the baseline on dev; read its failures by category; start the tool layer.
+
+### Hours
+- To be filled by project owner.
