@@ -28,8 +28,10 @@ FILE_CORRUPTIONS = [("FM06", "zero_all_charges"), ("FM04", "drop_bond_header_adj
 
 def _build(task, workdir, spec=None):
     try:
-        path, rec = build_from_spec(spec or task["hidden_spec"], workdir, task["id"])
-        return {"data_file": path, "trace": {"build": {k: rec.get(k) for k in ("natoms", "data_sha256")}}}
+        spec = spec or task["hidden_spec"]
+        path, rec = build_from_spec(spec, workdir, task["id"])
+        return {"data_file": path, "trace": {"build": {k: rec.get(k) for k in ("natoms", "data_sha256")},
+                                             "builder_spec": spec}}
     except Exception as e:
         return {"data_file": None, "builder_refused": True, "error": f"{type(e).__name__}: {e}"}
 
@@ -101,7 +103,8 @@ class SpecCorrupter:
     meta = {"name": "corrupt-spec", "kind": "builds a slightly different system (harness sanity check for TC.2)"}
 
     def __call__(self, task, workdir, repeat=0):
-        out = _build(task, workdir, perturb_spec(task["hidden_spec"]))
+        spec = perturb_spec(task["hidden_spec"])
+        out = _build(task, workdir, spec)
         out.setdefault("trace", {})["perturbation"] = "see eval/systems.py perturb_spec"
         return out
 

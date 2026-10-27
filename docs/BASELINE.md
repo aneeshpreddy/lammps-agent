@@ -51,19 +51,34 @@ The agent loop (2–13 Nov) will add tools and validator feedback on top of the 
 
 ## Run it
 
+The model is chosen in one place: the `model:` block of `config.yaml` (provider, model ID, effort, date). It stays PROVISIONAL until model access is decided with the supervisor (27 Oct). If the model changes, record the new ID and its prices from the docs on that day (`eval/pricing.json`) before running.
+
 The API key is read from the environment and never written to a file (CLAUDE.md rule):
 
 ```bash
 cd lammps-agent && source .venv/bin/activate
-export ANTHROPIC_API_KEY=...            # or: ant auth login
-python -m eval.harness --system baseline --split dev --repeats 3 --write-doc docs/BASELINE_RESULTS.md
+read -s ANTHROPIC_API_KEY && export ANTHROPIC_API_KEY      # paste at the silent prompt; or: ant auth login
+python scripts/api_smoke.py                                  # 1 tiny call: checks key, credit and model ID
+python -m eval.harness --system baseline --split dev --repeats 3 --out runs/eval/baseline_dev
+python -m eval.analyse runs/eval/baseline_dev --write-doc docs/BASELINE_RESULTS.md
 ```
 
 - **Scope:** 13 dev tasks × 3 repeats = 39 calls.
-- **Cost estimate:** about 4 k input and 2–6 k output tokens (including thinking) per call, so **about $0.10 per call and $3–5 for the dev run** (prices of 2026-10-27). The run reports the measured cost.
+- **Cost estimate:** about 4 k input and 2–6 k output tokens (including thinking) per call, so **about $0.10 per call and $3–5 for the dev run** with Opus 5.5 (about half that with Sonnet 5.5; prices of 2026-10-27). The run reports the measured cost.
+- **Without credentials** the run stops at the first call with a message. No partial results are written as failed runs.
+- **Saved per run** (plan Day 24): `system_prompt.txt` (the exact system prompt), and per task and repeat a `trace.json` with the request ID, the raw response text, the parsed answer, the builder spec, the score and the failing checks with their messages. The output DATA FILE is saved next to the trace. `results.json` and `summary.md` aggregate them.
+- **Failure analysis** (plan Day 25, `eval/analyse.py`). The analysis writes `analysis.md` in the run folder and, with `--write-doc`, `docs/BASELINE_RESULTS.md`. It contains:
+  - the success rate;
+  - the tier distribution;
+  - the failure categories;
+  - every failure, with its validator messages and a field-by-field difference between the model's spec and the hidden spec (monomers compared by chemistry, not label);
+  - a **suggested** gap type: formatting, knowledge, reasoning, pipeline, validator or infrastructure.
+
+  The plan asks for the gap types to be confirmed by reading the failures (step 2), so the suggestions are a starting point.
+  - Checked on the sanity systems: the spec corrupter gives 13 of 13 "reasoning", each with the exact perturbation; the file corrupter gives 13 of 13 "pipeline".
 - **Test split:** not run before 16 Nov (the harness refuses).
 
 ## Status (2026-10-27)
 
 - **Ready:** the code, the schema glue and the harness. With a mock "perfect model" that answers with the hidden spec, the baseline's own code path scores 1.00 on the dev split (`docs/HARNESS.md`). Its schema can therefore express every dev task, and its conversion to builder specs is faithful.
-- **Not run:** no API credentials are available on this machine (`ANTHROPIC_API_KEY` unset, no `ant` profile). The scored dev run is the one command above.
+- **Not run:** no model access yet (`ANTHROPIC_API_KEY` unset). The supervisor is deciding how model access will be provided: a paid key, institute cloud credits, or a free open-weight model (27 Oct). Once decided, the scored dev run and its analysis are the commands above.

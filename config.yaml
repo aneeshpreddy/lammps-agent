@@ -17,5 +17,9 @@ validator:
   run_tier3: true                 # Tier 3 runs whenever Tier 0 passes (PROPERTIES §8.2 item 4)
   run_tier3_full: true            # Tier 3b (full force field + run 0) when the declared config supports it
 
-model:
-  model_id: null                  # filled on 26 Oct from the models overview (R16), with the date
+model:                            # read by agents/baseline.py (and the agent loop): change the model here only
+  provider: anthropic             # anthropic (Claude API key); others to be added once model access is decided
+  model_id: claude-opus-5-5       # Claude API ID from the models overview, 2026-10-27
+  effort: medium                  # the model's documented default, set explicitly
+  recorded: 2026-10-27
+  status: PROVISIONAL — model access not decided yet (supervisor, 2026-10-27); prices in eval/pricing.json

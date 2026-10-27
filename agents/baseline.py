@@ -27,8 +27,14 @@ sys.path.insert(0, ROOT)
 from builders.dispatch import build_from_spec  # noqa: E402
 from builders.pce import architecture_from_params  # noqa: E402
 
-MODEL = "claude-opus-5-5"            # Claude API ID, models overview 2026-10-27
-EFFORT = "medium"                    # the model's documented default, set explicitly
+def model_config() -> dict:
+    """The `model:` block of config.yaml: the one place where the model is chosen (plan Day 23)."""
+    import yaml
+    return yaml.safe_load(open(os.path.join(ROOT, "config.yaml"))).get("model") or {}
+
+
+MODEL = model_config().get("model_id") or "claude-opus-5-5"    # config.yaml; Claude API ID, models overview 2026-10-27
+EFFORT = model_config().get("effort") or "medium"               # the model's documented default, set explicitly
 MAX_TOKENS = 16000
 PROMPT_VERSION = "baseline-v1 (2026-10-27)"
 UGRP = os.path.dirname(ROOT)
@@ -274,6 +280,10 @@ class BaselineSystem:
                 answer, usage, trace = self._call(task["input"])
             except anthropic.AuthenticationError:
                 raise SystemExit("No valid Anthropic credentials: set ANTHROPIC_API_KEY (or run `ant auth login`).")
+            except TypeError as e:      # no credentials at all: stop the run instead of failing every task
+                if "authentication method" in str(e):
+                    raise SystemExit("No Anthropic credentials: set ANTHROPIC_API_KEY (or run `ant auth login`).")
+                raise
             except (anthropic.APIStatusError, anthropic.APIConnectionError) as e:
                 return {"data_file": None, "error": f"API: {type(e).__name__}: {e}", "usage": {}, "trace": {}}
             except json.JSONDecodeError as e:

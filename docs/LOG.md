@@ -405,3 +405,43 @@ The scored baseline run (Day 25 analysis) waits on an API key, so the tool layer
 
 ### Hours
 - To be filled by project owner.
+
+---
+
+## 2026-10-27 (night) — Plan Days 23–28: everything that does not need a model (AI-assisted)
+
+### Done
+- **Model access** (Days 23–24 prep).
+  - `config.yaml` `model:` is now the one place the model is chosen (`agents/baseline.py` reads it). It is PROVISIONAL until the supervisor decides how model access is provided (paid key, institute cloud credits, or a free open-weight model). The options were written up for the supervisor today.
+  - `scripts/api_smoke.py` is the plan's ten-line smoke test.
+  - Without credentials, the smoke test and the baseline stop at the first call with a message. A run can no longer record every task as a failure because a key is missing.
+  - Every run now saves its exact `system_prompt.txt`. The baseline's prompt is unchanged (same SHA-256).
+- **Failure analysis** (Day 25, `eval/analyse.py`). It reports, for any run folder:
+  - success, tier distribution and categories;
+  - every failure with its validator messages and a field-by-field spec difference from the hidden spec (monomers by chemistry, not label; convenience form expanded);
+  - a suggested gap type: formatting, knowledge, reasoning, pipeline, validator or infrastructure.
+
+  On the sanity systems it gives exactly the expected answers: spec corrupter 13 of 13 reasoning, each diff naming the perturbation; file corrupter 13 of 13 pipeline. The harness now stores failing-check messages per run, which the correction cycle (Day 30) will reuse. The sanity systems record the spec they built.
+- **Tests:** `tests/test_analyse.py` (4), including a round trip of every dev hidden spec through the baseline's answer schema with no spec difference. **123 tests pass.** Harness sanity checks rerun after the harness change (docs/HARNESS.md).
+
+### Gate 2 readiness (gate on Sat 31 Oct; prepared 27 Oct, the decision is the owner's)
+
+| Pass criterion (plan Day 28) | Status |
+|---|---|
+| Baseline number recorded | **Not yet:** needs model access |
+| Failures categorised | Tooling ready and checked on the sanity systems; needs the run |
+| Tools built and tested | **Done** (27 Oct, docs/TOOLS.md) |
+
+**Revised plan to discuss with the supervisor** (plan Day 28: "tell your supervisor, with a revised plan"):
+- **If model access is decided by Thu 29 Oct:** smoke test, baseline dev run (~1 h) and analysis on the same day, then reading the failures (~2 h). Gate 2 is met on time, and `baseline-v1` is tagged after the run.
+- **If it is decided later:** Gate 2 is met on the tools criterion only, and the baseline number follows within a working day of access. The agent loop starts on 2 Nov as planned, against a scripted mock model.
+- **Hard deadline: access by Mon 9 Nov** (first full dev-split run of the agent). After that, the evaluation window (16–18 Nov) is at risk.
+
+### Not Done
+- The scored baseline run, its reading, and the `baseline-v1` tag: waiting on model access.
+
+### Tomorrow
+- With model access: smoke test, then the baseline run and the analysis. Without it: nothing on the plan before 2 Nov needs doing. The agent loop (Days 29–33) can start early against a mock model.
+
+### Hours
+- To be filled by project owner.

@@ -103,7 +103,10 @@ def score(task: dict, out: dict) -> dict:
                 "tier_reached": res.tier_reached, "failing": sorted(c.property for c in res.failing()),
                 "not_pass": sorted(f"{c.property}:{c.verdict}" for c in res.checks
                                    if c.verdict not in ("PASS", "NOT_APPLICABLE")),
-                "first_failing": first_failing(res), "data_sha256": _sha(path),
+                "first_failing": first_failing(res),
+                "failing_details": [{"property": c.property, "tier": c.tier, "message": (c.message or "")[:300]}
+                                    for c in res.checks if c.verdict == "FAIL"],
+                "data_sha256": _sha(path),
                 "validation_s": round(res.elapsed_s, 2)})
     row["success"] = row["valid"] and row["tc2"] == "PASS"
     if row["success"]:
@@ -214,6 +217,9 @@ def aggregate(runs: List[dict], tasks: List[dict], repeats: int) -> dict:
 
 def evaluate(system, tasks: List[dict], repeats: int, outdir: str, log=print) -> dict:
     os.makedirs(outdir, exist_ok=True)
+    if isinstance(getattr(system, "system", None), str):    # the exact system prompt of this run (plan Day 24)
+        with open(os.path.join(outdir, "system_prompt.txt"), "w") as fh:
+            fh.write(system.system)
     table = prices()
     model = getattr(system, "meta", {}).get("model")
     runs = []
