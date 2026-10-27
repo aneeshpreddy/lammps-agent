@@ -205,6 +205,8 @@ def aggregate(runs: List[dict], tasks: List[dict], repeats: int) -> dict:
         "builder_refusals": sum(bool(r.get("builder_refused")) for r in runs),
         "recovery_rate": (round(sum(r["success"] for r in agent) / len(agent), 4) if agent else None),
         "mean_attempts": round(float(np.mean([r.get("attempts", 1) for r in runs])), 3),
+        "escalations": sum(bool(r.get("escalated")) for r in runs),
+        "stop_reasons": dict(Counter((r.get("stop") or "").split(" (")[0] for r in runs if r.get("stop"))),
         "tokens_per_task": {k: round(float(np.mean([r["usage"].get(k, 0) for r in runs])), 1)
                             for k in ("input_tokens", "output_tokens", "cache_creation_input_tokens", "cache_read_input_tokens")},
         "cost_per_task_usd": round(float(np.mean(costs)), 5) if costs else None,
@@ -240,7 +242,8 @@ def evaluate(system, tasks: List[dict], repeats: int, outdir: str, log=print) ->
                         "force_field": t["force_field"], "usage": usage, "cost_usd": cost_usd(model, usage, table),
                         "latency_s": round(time.time() - t0, 2), "generation_s": round(gen_s, 2),
                         "builder_refused": bool(out.get("builder_refused")), "error": out.get("error"),
-                        "attempts": out.get("attempts", 1)})
+                        "attempts": out.get("attempts", 1), "stop": out.get("stop"),
+                        "escalated": bool(out.get("escalated"))})
             with open(os.path.join(wd, "trace.json"), "w") as fh:
                 json.dump({"output": {k2: v for k2, v in out.items() if k2 != "trace"}, "trace": out.get("trace"),
                            "score": row}, fh, indent=2, default=str)
@@ -290,12 +293,12 @@ def main(argv=None):
     from eval.systems import make_system
     ap = argparse.ArgumentParser(prog="python -m eval.harness", description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--system", required=True, help="oracle | corrupt-file | corrupt-spec | baseline")
+    ap.add_argument("--system", required=True, help="oracle | corrupt-file | corrupt-spec | baseline | agent | agent-nofeedback | agent-tiers01")
     ap.add_argument("--split", default="dev")
     ap.add_argument("--repeats", type=int, default=3)
     ap.add_argument("--tasks", nargs="*", help="subset of task IDs (within the split)")
     ap.add_argument("--out", help="output directory (default runs/eval/<system>_<split>_<timestamp>)")
-    ap.add_argument("--mock", help="baseline only: 'perfect' replaces the model with the hidden spec (glue test)")
+    ap.add_argument("--mock", help="'perfect' (baseline, agent) replaces the model with the hidden spec; agent also: fix | stubborn | runaway (agents/mock.py)")
     ap.add_argument("--write-doc", help="also write the summary to this Markdown file (e.g. docs/BASELINE_RESULTS.md)")
     a = ap.parse_args(argv)
     tasks = load_tasks(a.split, a.tasks)

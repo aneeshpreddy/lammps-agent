@@ -28,6 +28,13 @@ CHECKS = [
      "success ≤ 0.05 and validity ≤ 0.05"),
     ("corrupt-spec", None, lambda a: a["system_success_rate"] <= 0.05 and a["validity_rate"] >= 0.95,
      "success ≤ 0.05 and validity ≥ 0.95"),
+    # agent loop with scripted mock models (agents/mock.py): checks the loop's control flow, not a model
+    ("agent", "perfect", lambda a: a["system_success_rate"] == 1.0 and a["mean_attempts"] == 1.0,
+     "success = 1.00 in 1 attempt"),
+    ("agent", "fix", lambda a: a["system_success_rate"] == 1.0 and a["recovery_rate"] == 1.0
+     and a["mean_attempts"] == round(1 + 9 / 13, 3), "success = 1.00; the 9 PCE/composite tasks recover in attempt 2"),
+    ("agent", "stubborn", lambda a: a["system_success_rate"] == round(4 / 13, 4)
+     and a["escalations"] == round(9 / 13 * a["runs"]), "success = 4/13 (minerals); the 9 PCE/composite tasks escalate"),
 ]
 
 
@@ -64,7 +71,11 @@ def write(rows, tasks, repeats):
             "baseline-mock-perfect": "the baseline's code path (schema → builder spec → build) with a mock model that "
                                      "answers with the hidden spec",
             "corrupt-file": "oracle file + one corruption operator (scripts/mutate.py), rotating over 8 operators",
-            "corrupt-spec": "builds a slightly different system (one more cell / EO unit / unit)"}
+            "corrupt-spec": "builds a slightly different system (one more cell / EO unit / unit)",
+            "agent-mock-perfect": "the agent loop with a mock model: example lookup, build of the hidden spec, stop",
+            "agent-mock-fix": "the agent loop with a mock model whose first build has a defect the validator catches "
+                              "(PCE without counter-ions) or the builder refuses (mistyped mineral model); fixed after feedback",
+            "agent-mock-stubborn": "the agent loop with a mock model that repeats its defective build whatever the feedback"}
     for name, crit, agg, ok, _, out in rows:
         cats = ", ".join(f"{k} {v}" for k, v in agg["failure_categories"].items()) or "—"
         L.append(f"| {name} | {what.get(name, '')} | {crit} | {agg['system_success_rate']:.3f} | {agg['validity_rate']:.3f} | "
@@ -74,7 +85,9 @@ def write(rows, tasks, repeats):
           "output schema can express every dev task and that its conversion to builder specs is faithful, so a "
           "baseline failure is the model's, not the glue's. The file corrupter shows that invalid files are not "
           "scored as successes; the spec corrupter shows that valid files of the wrong system are not either (TC.2 "
-          "does its job)."]
+          "does its job). The three agent checks show that the loop validates every attempt, turns a caught defect "
+          "into feedback that leads to a fix and a scored success, and stops a model that repeats its failure "
+          "(escalation) — all with scripted models, so they check the loop, not a model."]
     with open(os.path.join(ROOT, "docs", "HARNESS.md"), "w") as fh:
         fh.write("\n".join(L) + "\n")
 

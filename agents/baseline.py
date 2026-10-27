@@ -191,12 +191,19 @@ def model_catalogue() -> str:
     return "\n".join(lines)
 
 
-def system_prompt() -> str:
-    return f"""You turn a request for a LAMMPS DATA FILE into a structured spec for deterministic structure builders. \
+BASELINE_INTRO = """You turn a request for a LAMMPS DATA FILE into a structured spec for deterministic structure builders. \
 You do not write the file: the builders do (INTERFACE FF 1.5, msi2lmp typing and charges, LAMMPS-checked). \
-Return only the JSON spec defined by the output schema; the "notes" field may hold one or two sentences of reasoning.
+Return only the JSON spec defined by the output schema; the "notes" field may hold one or two sentences of reasoning."""
 
-## Force fields
+
+def system_prompt() -> str:
+    return BASELINE_INTRO + "\n\n" + knowledge()
+
+
+def knowledge() -> str:
+    """Force fields, builders, monomers and the model catalogue: shared word for word with the agent loop,
+    so the two systems differ only in tools, feedback and retries."""
+    return f"""## Force fields
 - "pcff" = PCFF-INTERFACE (class II). Covers every cement-mineral model below and all PCE chemistry.
 - "cvff" = CVFF-INTERFACE (class I). Covers PCE chemistry, but among minerals only the C3S and C3A models listed with cvff below.
 Use the force field the request names.

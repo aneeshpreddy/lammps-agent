@@ -445,3 +445,34 @@ The scored baseline run (Day 25 analysis) waits on an API key, so the tool layer
 
 ### Hours
 - To be filled by project owner.
+
+---
+
+## 2026-10-27 (late) — Plan Days 29–33 built early: agent loop against scripted mock models (AI-assisted)
+
+Owner's goal (27 Oct): finish by 14–15 Nov. The loop needs no model to build, so it was built now. A compressed timeline is in the conversation notes. It depends on model access by about 3 Nov and on moving the test-open date to the code freeze; that date change is the owner's decision and has not been taken.
+
+### Done
+- **Agent loop** (`agents/loop.py`, `docs/AGENT.md`, `loop-v1`).
+  - Plain-Python tool-use loop, with K = 3 attempts.
+  - The orchestrator validates every attempt's last build (Tiers 0–3, configuration from what was built, never the task's reference).
+  - Feedback is concise (property, tier, message, LAMMPS errors), with three modes for the ablation: full (C), none (B: "try again"), tiers01 (D).
+  - Bounds: steps, attempts, tokens, wall-clock, per-tool timeout (`config.yaml` `agent:`, PROVISIONAL).
+  - Non-convergence: a fingerprint per attempt; a "reconsider" hint on the second identical one, escalation on the third.
+  - Full `trace.jsonl` per run, and `replay()`, which reproduces a run exactly from its folder.
+  - Prompt caching on the system block and the conversation.
+- **Same knowledge as the baseline.** The baseline prompt was split into intro + `knowledge()`. The agent uses the same `knowledge()` word for word, and the baseline prompt is byte-identical (same SHA-256).
+- **Scripted mock models** (`agents/mock.py`: perfect, fix, stubborn, runaway). Harness systems `agent`, `agent-nofeedback`, `agent-tiers01`. The harness also records stop reasons and escalations.
+- **Tests:** `tests/test_loop.py` (11). **134 tests pass.** Harness checks extended with three agent mock checks (docs/HARNESS.md).
+
+### Found while building (docs/AGENT.md, "Known limitation")
+- The validator inside the loop can only catch invalid files. A valid file of the wrong system (wrong model, supercell, EO length, anchor) passes inside the loop and fails only TC.2 in the harness. If baseline failures are mostly TC-only, the B-vs-C ablation may show little difference. That is a possible finding to anticipate, and the baseline analysis will tell. Options are listed in AGENT.md, to be decided on dev data only.
+
+### Not Done
+- Any run with a real model (access pending). Loop limits and prompt are untuned (dev runs, from ~3 Nov if access arrives).
+
+### Tomorrow
+- Waiting on model access and on the test-open-date decision. Without them: ablation tables and figure scripts, so the 16–18 Nov (or earlier) evaluation days are only run → tables.
+
+### Hours
+- To be filled by project owner.

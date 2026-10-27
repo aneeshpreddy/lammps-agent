@@ -100,7 +100,7 @@ class ToolBox:
         self.n_calls = 0
         self.n_builds = 0
         self.last_build = None          # path of the last successful build: the attempt's output
-        self.builds = []                # every build: {"build", "ok", "data_file" | "error"}
+        self.builds = []                # every build: {"build", "ok", "data_file" + "spec" | "error"}
 
     # -- dispatch ------------------------------------------------------------------------------
     def run(self, name: str, args) -> dict:
@@ -121,6 +121,10 @@ class ToolBox:
                     res = {"ok": False, "error": f"{type(e).__name__}: {str(e)[:500]}"}
         self._log(name, args, res, time.time() - t0)
         return res
+
+    def spec_of(self, data_file: str) -> dict:
+        """The builder spec that produced a build (the orchestrator picks the validation config from it)."""
+        return next(b["spec"] for b in self.builds if b.get("data_file") == data_file)
 
     def tool_result(self, block) -> dict:
         """A tool_use block (SDK object or dict) -> the tool_result block that answers it."""
@@ -145,7 +149,7 @@ class ToolBox:
         except Exception as e:
             entry["error"] = f"builder: {type(e).__name__}: {str(e)[:500]}"
             return {"ok": False, "build": name, "stage": "builder", "error": entry["error"]}
-        entry.update(ok=True, data_file=path)
+        entry.update(ok=True, data_file=path, spec=spec)
         self.last_build = path
         return {"ok": True, "build": name, "builder": spec["builder"], "facts": data_facts(path),
                 "builder_details": _details(spec["builder"], rec)}

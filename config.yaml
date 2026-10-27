@@ -23,3 +23,11 @@ model:                            # read by agents/baseline.py (and the agent lo
   effort: medium                  # the model's documented default, set explicitly
   recorded: 2026-10-27
   status: PROVISIONAL — model access not decided yet (supervisor, 2026-10-27); prices in eval/pricing.json
+
+agent:                            # agents/loop.py (plan Days 29-33); PROVISIONAL limits, tuned on dev runs only
+  max_attempts: 3                 # K: validation rounds per task (plan Day 30)
+  max_steps_per_attempt: 12       # model calls per attempt
+  max_tokens_per_task: 400000     # input + cache + output tokens, summed over the task
+  max_wall_s: 1200                # per task
+  tool_timeout_s: 300             # per tool call (a composite build takes ~11 s)
+  feedback: full                  # full | tiers01 | none (ablation B: "try again" only)
