@@ -516,3 +516,11 @@ Model access is still with the supervisor (expected in 1–2 days). Haiku 5.5 wa
 
 ### Hours
 - To be filled by project owner.
+
+### 2026-10-28 (later): write-up draft and reproduction steps (plan Days 44–45 groundwork)
+- **`docs/REPORT_DRAFT.md`.** Every section that needs no model run is drafted: problem, scope, validator and its validation, task set and metrics, harness checks, systems (A–E), related work, limitations, future work, and a reproduction appendix. Results, abstract and model are marked [RESULTS] / [MODEL].
+- **Prior work re-checked against the papers (R18–R21, 2026-10-28).** SPEC §7.6 corrected:
+  - R20's title is "An Extensible Agentic Framework…" (Paimon);
+  - its deterministic structure summary was not found and was removed;
+  - R18's "1 of 80" is now quoted from its abstract.
+- **README.** New "Reproduce the results from a clean checkout" section. The old validator block has its counts updated.

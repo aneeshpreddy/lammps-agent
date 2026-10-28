@@ -43,6 +43,17 @@ The harness refuses the test split before 16 Nov and checks the split and task f
 
 PCE files are written in a box slightly bigger than the atoms (2 Å per face; supervisor 2026-10-26, checked by P2.10). Force fields: CVFF-INTERFACE (class I) and PCFF-INTERFACE (class II), INTERFACE FF 1.5. The builders refuse to write a file when the force field lacks a parameter (other than class II cross terms) or when msi2lmp writes a non-finite value.
 
+## Reproduce the results from a clean checkout
+
+1. Install (below), including LAMMPS, and check that `pytest -q` passes.
+2. Validator table: `python scripts/run_matrix.py` regenerates `docs/VALIDATOR_RESULTS.md`. It takes about 15 minutes, for 996 files.
+3. Harness checks: `python scripts/harness_checks.py` regenerates `docs/HARNESS.md`. These use no model.
+4. Model runs: set `ANTHROPIC_API_KEY` in the environment, never in a file. Check it with `python scripts/api_smoke.py`. The model is the one in `config.yaml` → `model:`.
+5. Development experiment: `python -m eval.experiment run --split dev --systems baseline agent-nofeedback agent --write-doc docs/RESULTS_DEV.md`.
+6. Test experiment: `python scripts/freeze_config.py --check` must report no change since the freeze. Then run the same command with `--split test` and `--write-doc docs/RESULTS_TEST.md`.
+
+Prices come from `eval/pricing.json`, which is dated. Results differ between runs because model sampling is not deterministic; the tables report the spread across repeats. Everything else (builders, validator, scoring) is deterministic.
+
 ## Install
 
 ```bash
@@ -85,16 +96,16 @@ Every result follows the `ValidationResult` schema (plan Appendix B). Each check
 - `calibration/*.json`: the Tier 2 tolerances, with the reference IDs, SHA-256 checksums and the basis for each value. Rebuild them with `python scripts/calibrate.py`.
 - Each data file has a sidecar `<name>.json` that names its declared configuration and per-file overrides (for example the coefficient file).
 
-## Reproduce the results
+## Regenerate the validator's inputs (details for step 2 above)
 
 ```bash
-pytest -q                              # 77 unit tests (Tier 3 tests need lmp_serial)
+pytest -q                              # unit tests (Tier 3 tests need lmp_serial)
 python scripts/make_fixtures.py        # triclinic fixtures from the raw msi2lmp output
 python scripts/build_references.py base eval crosscheck   # tobermorite references REF-05..08, eval refs t01–t14
 python scripts/evidence_runs.py        # docs/REFERENCE_EVIDENCE.md (short MD + extensivity, ~1 min)
 python scripts/calibrate.py            # calibration/pce_emc.json, calibration/tobermorite_fixture.json
-python scripts/mutate.py               # data/corrupted/: 264 negative controls + manifest.json
-python scripts/run_matrix.py           # docs/VALIDATOR_RESULTS.md, docs/validator_matrix.csv  (~2 min)
+python scripts/mutate.py               # data/corrupted/: negative controls (948 on 2026-10-26) + manifest.json
+python scripts/run_matrix.py           # docs/VALIDATOR_RESULTS.md, docs/validator_matrix.csv  (~15 min)
 python scripts/reproduce_r13.py        # docs/R13_ASE_ROUNDTRIP.md (ASE round trip)
 ```
 
