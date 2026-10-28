@@ -15,9 +15,14 @@ Plain Python, no agent framework, so the control flow is visible (plan Day 29):
   fingerprint twice -> the feedback asks for a different approach; three times -> escalate (stop).
   Traces (plan Day 33): <workdir>/trace.jsonl holds every model response (thinking included), tool call and
   result, validation and feedback; builds stay in <workdir>/build_<n>/; replay() re-runs a run from its folder.
+  Escalation (plan Day 38): a run that ends without an accepted build writes <workdir>/REPORT.md (the last
+  output, its failing checks, every attempt and what changed between builds), so it is never mistaken for a
+  good file. Guard rails: nothing is written into data/reference/; an existing run folder is not overwritten
+  unless overwrite=True; no tool submits jobs or runs commands (the three tools are the whole interface).
 
 Feedback modes (plan Day 42 ablation): "full" (C), "none" (B: "try again" only, no validator detail, no
-strategy hint), "tiers01" (optional D: only Tier 0-1 failures are described).
+strategy hint), "tiers01" (optional D: only Tier 0-1 failures are described). checks=True is variant E
+(C + build summary + request check, agents/checks.py); off by default.
 
 The model sees the same domain knowledge as the baseline (agents/baseline.py knowledge(), word for word) and
 the same builder spec (as the build_data_file input), so the systems differ only by tools, feedback and retries.
@@ -40,7 +45,9 @@ from types import SimpleNamespace
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ROOT)
 from agents.baseline import EFFORT, MAX_TOKENS, MODEL, knowledge  # noqa: E402
-from tools.toolbox import TOOLS_VERSION, ToolBox, definitions  # noqa: E402
+from agents.checks import (CHECKS_VERSION, REQ_PROMPT, REQ_SCHEMA, built_values, compare,  # noqa: E402
+                           extract_requirements, mismatch_lines)
+from tools.toolbox import TOOLS_VERSION, ToolBox, definitions, guard_workdir  # noqa: E402
 from validator import load_config, validate  # noqa: E402
 
 LOOP_VERSION = "loop-v1 (2026-10-27)"
@@ -85,15 +92,17 @@ def fingerprint(res) -> tuple:
     return tuple(sorted((c.property, str(c.tier)) for c in not_passing(res)))
 
 
-def feedback_text(build: str, attempt: int, k: int, res, mode: str, repeated: bool) -> str:
+def feedback_text(build: str, attempt: int, k: int, res, mode: str, repeated: bool, mismatches: list = None) -> str:
     """The observation sent back after a failed attempt (plan Day 30: name, tier, message, key numbers,
-    LAMMPS ERROR lines; not the whole log)."""
+    LAMMPS ERROR lines; not the whole log). mismatches: variant E's request check (agents/checks.py)."""
     if mode == "none":
         return "The last build did not pass validation. Try again."
     head = f"Validation of {build} (attempt {attempt} of {k}): not accepted."
     if res is None:
         lines = [f"Attempt {attempt} of {k} ended without a successful build. Build the requested system with "
                  "build_data_file."]
+    elif res.passed:
+        lines = [f"Validation of {build} (attempt {attempt} of {k}): the file is valid, but not accepted."]
     else:
         bad = not_passing(res)
         shown = [c for c in bad if mode == "full" or c.tier in (0, 1)]
@@ -109,11 +118,72 @@ def feedback_text(build: str, attempt: int, k: int, res, mode: str, repeated: bo
         if errs:
             lines.append("LAMMPS errors:")
             lines += [f"- {str(e)[:300]}" for e in errs]
-        lines.append("Change the spec and rebuild with build_data_file; when the new build is right, stop calling tools.")
+        if not mismatches:
+            lines.append("Change the spec and rebuild with build_data_file; when the new build is right, stop calling tools.")
+    if mismatches:
+        lines.append("It does not match what the request states:")
+        lines += mismatch_lines(mismatches)
+        lines.append("Re-read the request and rebuild with build_data_file. If you are sure the build is what the request "
+                     "asks for, build it again unchanged; it is then accepted if it is valid.")
     if repeated and mode != "none":
         lines.append("This is the same result as an earlier attempt. Do not patch the last spec again: reconsider the "
                      "approach. Re-read the request, check the model or monomers with the lookup tools, then build again.")
     return "\n".join(lines)
+
+
+def _flat(d, prefix=""):
+    if not isinstance(d, dict):
+        return {prefix: d}
+    out = {}
+    for k, v in d.items():
+        out.update(_flat(v, f"{prefix}.{k}" if prefix else k))
+    return out
+
+
+def spec_changes(before: dict, after: dict) -> list:
+    """What changed between two build_data_file inputs, field by field."""
+    a, b = _flat(before), _flat(after)
+    return [f"{k}: {json.dumps(a.get(k))} -> {json.dumps(b.get(k))}" for k in sorted(set(a) | set(b))
+            if a.get(k) != b.get(k)]
+
+
+def report_text(task: dict, stop: str, attempts: list, builds: list, build_attempt: dict, last_res,
+                out_file, workdir: str) -> str:
+    """REPORT.md for a run that ended without an accepted build (plan Day 38)."""
+    rel = os.path.relpath(out_file, workdir) if out_file else None
+    L = [f"# Not accepted: {task['id']}", "", "**Request:**", ""]
+    L += ["> " + line for line in task["input"].splitlines()]
+    L += ["", f"**Outcome:** {stop}.", "",
+          f"**The last build (`{rel}`) did NOT pass validation. Do not use it without review.**" if rel
+          else "**No file was built.**", "", "## Attempts", "",
+          "| Attempt | Model calls | Ended | Build | Verdict | Checks that did not pass |", "|---|---|---|---|---|---|"]
+    for a in attempts:
+        fp = ", ".join(f[0] if isinstance(f, (list, tuple)) else f for f in a["fingerprint"])
+        L.append(f"| {a['attempt']} | {a['steps']} | {a['ended']} | {a['file'] or '—'} | {a['verdict']} | {fp or '—'} |")
+    if last_res is not None:
+        L += ["", "## The last build: checks that did not pass", ""]
+        L += [f"- **{c.property}** (tier {c.tier}, {c.verdict}): {(c.message or '').strip()[:500]}" for c in not_passing(last_res)]
+        errs = [e for e in (last_res.lammps or {}).get("errors", []) if e][:5]
+        if errs:
+            L += ["", "LAMMPS errors:", ""] + [f"- `{str(e)[:300]}`" for e in errs]
+    L += ["", "## What was tried", ""]
+    prev = None
+    for b in builds:
+        head = f"- `{b['build']}` (attempt {build_attempt.get(b['build'], '?')}): "
+        inp = b.get("input") or {}
+        if prev is None:
+            what = f"builder {inp.get('builder')}, force field {inp.get('force_field')}"
+        else:
+            ch = spec_changes(prev, inp)
+            what = "changed " + "; ".join(ch) if ch else "the same input as the previous build"
+        L.append(head + what + ("" if b["ok"] else f" — **refused**: {b.get('error', '')[:300]}"))
+        prev = inp
+    if not builds:
+        L.append("- no build_data_file call")
+    L += ["", "## For a human", "",
+          "- Compare the request with the failing checks above; every build is kept in `build_<n>/`.",
+          "- The full record (model responses, tool calls, validations, feedback) is `trace.jsonl`."]
+    return "\n".join(L) + "\n"
 
 
 # ---------------------------------------------------------------------------------------------
@@ -194,19 +264,23 @@ class AgentSystem:
     """system(task_view, workdir, repeat) for eval/harness.py."""
 
     def __init__(self, feedback: str = None, mock: str = None, client=None, model: str = MODEL,
-                 effort: str = EFFORT, limits: dict = None):
+                 effort: str = EFFORT, limits: dict = None, overwrite: bool = False, checks: bool = None):
         import yaml
-        cfg_fb = (yaml.safe_load(open(os.path.join(ROOT, "config.yaml"))).get("agent") or {}).get("feedback", "full")
-        self.feedback = feedback or cfg_fb
+        cfg = yaml.safe_load(open(os.path.join(ROOT, "config.yaml"))).get("agent") or {}
+        self.feedback = feedback or cfg.get("feedback", "full")
         if self.feedback not in FEEDBACK_MODES:
             raise ValueError(f"feedback must be one of {FEEDBACK_MODES}")
-        self.mock, self._client = mock, client
+        self.checks = bool(cfg.get("checks", False) if checks is None else checks)
+        if self.checks and self.feedback != "full":
+            raise ValueError("variant E (checks) is defined on top of full feedback (C)")
+        self.mock, self._client, self.overwrite = mock, client, overwrite
         self.needs_hidden = bool(mock)
         self.model, self.effort = model, effort
         self.limits = {**load_limits(), **(limits or {})}
         self.system = agent_system_prompt()
         self.tools = definitions()
         name = {"full": "agent", "none": "agent-nofeedback", "tiers01": "agent-tiers01"}[self.feedback]
+        name = "agent-checked" if self.checks else name
         self.meta = {"name": name + (f"-mock-{mock}" if mock else ""), "kind": "tool-use loop + validator feedback",
                      "model": None if mock else model, "effort": effort,
                      "thinking": "adaptive (always on for this model)", "max_tokens": MAX_TOKENS,
@@ -214,7 +288,12 @@ class AgentSystem:
                      "tools_version": TOOLS_VERSION,
                      "system_prompt_sha256": hashlib.sha256(self.system.encode()).hexdigest(),
                      "tools_sha256": hashlib.sha256(json.dumps(self.tools, sort_keys=True).encode()).hexdigest(),
-                     "tool_choice": "auto (forced tool choice is not supported by this model)"}
+                     "tool_choice": "auto (forced tool choice is not supported by this model)",
+                     "checks": ({"version": CHECKS_VERSION, "build_summary": True, "request_check": True,
+                                 "request_prompt_sha256": hashlib.sha256(REQ_PROMPT.encode()).hexdigest(),
+                                 "request_schema_sha256": hashlib.sha256(
+                                     json.dumps(REQ_SCHEMA, sort_keys=True).encode()).hexdigest()}
+                                if self.checks else None)}
 
     def _client_for(self, task):
         if self._client is not None:
@@ -236,15 +315,29 @@ class AgentSystem:
     def __call__(self, task, workdir, repeat=0):
         L = self.limits
         t0 = time.time()
+        guard_workdir(workdir)
+        if os.path.exists(os.path.join(workdir, "trace.jsonl")) and not self.overwrite:
+            raise FileExistsError(f"{workdir} already holds a run; choose a new folder or pass overwrite=True")
         os.makedirs(workdir, exist_ok=True)
         trace = Trace(os.path.join(workdir, "trace.jsonl"))
         trace.event("start", task=task["id"], input=task["input"], repeat=repeat, meta=self.meta, tools=self.tools)
         client = self._client_for(task)
-        tb = ToolBox(workdir)
+        tb = ToolBox(workdir, describe=self.checks)
         messages = [{"role": "user", "content": task["input"]}]
         usage = Counter()
         seen = Counter()
         attempts, final, stop, error = [], None, None, None
+        build_attempt, res = {}, None
+        req, raised = None, set()
+        if self.checks:                         # variant E: what the request states, read by a separate call
+            try:
+                req, req_usage, ev = extract_requirements(client, self.model, self.effort, task["input"])
+                usage.update(req_usage)
+                trace.event("requirements", requirements=req, **ev)
+            except Exception as e:
+                if type(e).__name__ == "AuthenticationError" or "authentication method" in str(e):
+                    raise SystemExit("No valid Anthropic credentials: set ANTHROPIC_API_KEY (or run `ant auth login`).")
+                trace.event("requirements", requirements=None, error=f"{type(e).__name__}: {str(e)[:300]}")
 
         for attempt in range(1, L["max_attempts"] + 1):
             steps, ended = 0, None
@@ -292,6 +385,8 @@ class AgentSystem:
                         trace.event("tool", attempt=attempt, step=steps, name=_get(b, "name"), id=_get(b, "id"),
                                     input=_get(b, "input"), result=json.loads(r["content"]), is_error=r["is_error"],
                                     duration_s=round(time.time() - ts, 3))
+                        if _get(b, "name") == "build_data_file":
+                            build_attempt[json.loads(r["content"]).get("build")] = attempt
                         results.append(r)
                     messages.append({"role": "user", "content": results})
                 elif resp.stop_reason == "refusal":
@@ -309,17 +404,26 @@ class AgentSystem:
                 tv = time.time()
                 res = validate(build, declared_config_for(tb.spec_of(build)))
                 fp = fingerprint(res)
+                mism = []
+                if req:
+                    entry = tb.entry_of(build)
+                    found = compare(req, built_values(entry["spec"], entry.get("details")))
+                    mism = [m for m in found if (m[0], json.dumps(m[2])) not in raised]
+                    raised |= {(m[0], json.dumps(m[2])) for m in mism}
+                    trace.event("request_check", attempt=attempt, mismatches=found, raised=mism,
+                                kept_by_agent=[m for m in found if m not in mism])
+                    fp = fp + tuple(("REQ:" + m[0], "req") for m in mism)
                 trace.event("validation", attempt=attempt, file=os.path.relpath(build, workdir), verdict=res.verdict,
                             passed=bool(res.passed), fingerprint=fp,
                             checks=[c.to_dict() for c in not_passing(res)],
                             lammps_errors=(res.lammps or {}).get("errors", []), duration_s=round(time.time() - tv, 2))
             else:
-                fp = ("NO_BUILD",)
+                fp, mism = ("NO_BUILD",), []
                 trace.event("validation", attempt=attempt, file=None, verdict="NO_BUILD", passed=False, fingerprint=fp)
             attempts.append({"attempt": attempt, "steps": steps, "ended": ended or stop,
                              "file": os.path.relpath(build, workdir) if build else None,
                              "verdict": res.verdict if res else "NO_BUILD", "fingerprint": list(fp)})
-            if res is not None and res.passed:
+            if res is not None and res.passed and not mism:
                 final = build
                 break
             if stop:
@@ -333,7 +437,7 @@ class AgentSystem:
                 stop = "attempt limit"
                 break
             text = feedback_text(os.path.basename(build or "").replace(".data", "") or "the last build", attempt,
-                                 L["max_attempts"], res, self.feedback, repeated=seen[fp] == 2)
+                                 L["max_attempts"], res, self.feedback, repeated=seen[fp] == 2, mismatches=mism)
             _add_user_text(messages, text)
             trace.event("feedback", attempt=attempt, mode=self.feedback, repeated=seen[fp] == 2, text=text)
 
@@ -342,8 +446,16 @@ class AgentSystem:
         summary = {"attempts": attempts, "stop": accepted if final else (stop or "attempt limit"),
                    "accepted_in_loop": bool(final), "usage": dict(usage), "wall_s": round(time.time() - t0, 2),
                    "tool_calls": tb.n_calls, "builds": tb.n_builds}
+        report = None
+        if not final:
+            report = os.path.join(workdir, "REPORT.md")
+            with open(report, "w") as fh:
+                fh.write(report_text(task, summary["stop"], attempts, tb.builds, build_attempt,
+                                     res if attempts and attempts[-1]["file"] else None, out_file, workdir))
+            summary["report"] = "REPORT.md"
         trace.event("stop", **summary, data_file=os.path.relpath(out_file, workdir) if out_file else None)
-        return {"data_file": out_file, "attempts": len(attempts) or 1, "usage": {} if self.mock else dict(usage),
+        return {"data_file": out_file, "report": report, "attempts": len(attempts) or 1,
+                "usage": {} if self.mock else dict(usage),
                 "error": error or (None if final or out_file else f"no build ({summary['stop']})"),
                 "escalated": summary["stop"].startswith("escalated"), "stop": summary["stop"], "trace": summary}
 
@@ -356,6 +468,7 @@ def replay(run_dir: str, workdir: str) -> list:
     start = events[0]
     meta = start["meta"]
     responses = [e for e in events if e["event"] == "response"]
+    requirements = next((e for e in events if e["event"] == "requirements"), None)
 
     class ReplayClient:
         def __init__(self):
@@ -363,6 +476,10 @@ def replay(run_dir: str, workdir: str) -> list:
             self.i = 0
 
         def create(self, **kw):
+            if "tools" not in kw:                   # variant E's extraction call, recorded as "requirements"
+                return SimpleNamespace(stop_reason=requirements["stop_reason"], model=None,
+                                       usage=SimpleNamespace(**requirements["usage"]),
+                                       content=[SimpleNamespace(type="text", text=requirements["text"])])
             e = responses[self.i]
             self.i += 1
             return SimpleNamespace(stop_reason=e["stop_reason"], model=e.get("model"),
@@ -371,14 +488,15 @@ def replay(run_dir: str, workdir: str) -> list:
                                                              "cache_read_input_tokens")}),
                                    content=[SimpleNamespace(**b) for b in e["content"]])
 
-    system = AgentSystem(feedback=meta["feedback"], client=ReplayClient(), limits=meta["limits"])
+    system = AgentSystem(feedback=meta["feedback"], client=ReplayClient(), limits=meta["limits"],
+                         checks=bool(meta.get("checks")))
     system({"id": start["task"], "input": start["input"]}, workdir)
     again = [json.loads(l) for l in open(os.path.join(workdir, "trace.jsonl"))]
 
     def key(evts):
         return [(e["event"], e.get("name"), json.dumps(e.get("result"), sort_keys=True) if e["event"] == "tool" else None,
                  e.get("verdict"), tuple(map(tuple, e.get("fingerprint") or ())), e.get("text"))
-                for e in evts if e["event"] in ("tool", "validation", "feedback")]
+                for e in evts if e["event"] in ("tool", "validation", "feedback", "request_check")]
     a, b = key(events), key(again)
     return [f"{i}: recorded {x} / replayed {y}" for i, (x, y) in enumerate(zip(a, b)) if x != y] + \
         ([f"event count {len(a)} vs {len(b)}"] if len(a) != len(b) else [])

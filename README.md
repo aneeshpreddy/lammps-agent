@@ -27,15 +27,19 @@ python scripts/build_eval_set.py          # eval set v3: eval/tasks/*.json + dat
 python scripts/build_mineral_references.py   # docs/MINERALS.md (every cement mineral, both force fields)
 ```
 
-## Evaluation harness and baseline
+## Evaluation: harness, baseline, agent, experiments
 
 ```bash
-python scripts/harness_checks.py                                  # docs/HARNESS.md: oracle / corrupters / mock baseline on dev
+python scripts/harness_checks.py                                  # docs/HARNESS.md: oracle / corrupters / mock baseline and agents on dev
+python scripts/api_smoke.py                                       # one tiny model call: is the key working?
 python -m agents.baseline --show-prompt                           # the baseline's system prompt and output schema
 python -m eval.harness --system baseline --split dev --repeats 3 --write-doc docs/BASELINE_RESULTS.md   # needs ANTHROPIC_API_KEY
+python -m eval.analyse runs/eval/<run>/ --write-doc docs/BASELINE_RESULTS.md                           # failure analysis
+python -m eval.experiment run --split dev --systems baseline agent-nofeedback agent agent-checked --write-doc docs/RESULTS_DEV.md
+python scripts/freeze_config.py [--check]                         # code freeze record: docs/FROZEN_CONFIG.md
 ```
 
-The harness refuses the test split before 16 Nov and checks the split and task files against the frozen hashes (METRICS.md). Design and settings of the baseline: `docs/BASELINE.md`.
+The harness refuses the test split before 16 Nov and checks the split and task files against the frozen hashes (METRICS.md). The experiment runner also refuses the test split unless the configuration is unchanged since the code freeze. Design and settings: `docs/BASELINE.md` (baseline), `docs/TOOLS.md` (tools), `docs/AGENT.md` (agent loop, variant E), `docs/EVALUATION.md` (experiments, tables, freeze).
 
 PCE files are written in a box slightly bigger than the atoms (2 Å per face; supervisor 2026-10-26, checked by P2.10). Force fields: CVFF-INTERFACE (class I) and PCFF-INTERFACE (class II), INTERFACE FF 1.5. The builders refuse to write a file when the force field lacks a parameter (other than class II cross terms) or when msi2lmp writes a non-finite value.
 
@@ -98,4 +102,4 @@ python scripts/reproduce_r13.py        # docs/R13_ASE_ROUNDTRIP.md (ASE round tr
 
 ## Layout
 
-See plan Appendix A. `validator/` holds the parser and Tiers 0–3, TC, the backends and the configuration. `scripts/` holds the fixture, calibration, mutation, matrix and R13 tools, and `tests/` holds the unit tests. `data/reference/` holds the candidate references (read-only) and `provenance.md`. `data/fixtures/` holds the synthetic tobermorite fixtures. `templates/` holds the Tier 3 input templates. `eval/` holds the tasks, the frozen split and the harness. `agents/` holds the single-call baseline (and, from 2 Nov, the agent loop). `tools/` holds the agent's tool layer (`docs/TOOLS.md`); `agent/` is an empty placeholder.
+See plan Appendix A. `validator/` holds the parser and Tiers 0–3, TC, the backends and the configuration. `scripts/` holds the fixture, calibration, mutation, matrix and R13 tools, and `tests/` holds the unit tests. `data/reference/` holds the candidate references (read-only) and `provenance.md`. `data/fixtures/` holds the synthetic tobermorite fixtures. `templates/` holds the Tier 3 input templates. `eval/` holds the tasks, the frozen split and the harness. `agents/` holds the single-call baseline, the agent loop, variant E's checks and the scripted mock models. `tools/` holds the agent's tool layer (`docs/TOOLS.md`); `agent/` is an empty placeholder.

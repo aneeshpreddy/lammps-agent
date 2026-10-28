@@ -218,6 +218,8 @@ def aggregate(runs: List[dict], tasks: List[dict], repeats: int) -> dict:
 
 
 def evaluate(system, tasks: List[dict], repeats: int, outdir: str, log=print) -> dict:
+    if os.path.exists(os.path.join(outdir, "results.json")) or os.path.isdir(os.path.join(outdir, "runs")):
+        raise FileExistsError(f"{outdir} already holds a run: choose a new --out (results are never overwritten)")
     os.makedirs(outdir, exist_ok=True)
     if isinstance(getattr(system, "system", None), str):    # the exact system prompt of this run (plan Day 24)
         with open(os.path.join(outdir, "system_prompt.txt"), "w") as fh:
@@ -293,12 +295,12 @@ def main(argv=None):
     from eval.systems import make_system
     ap = argparse.ArgumentParser(prog="python -m eval.harness", description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--system", required=True, help="oracle | corrupt-file | corrupt-spec | baseline | agent | agent-nofeedback | agent-tiers01")
+    ap.add_argument("--system", required=True, help="oracle | corrupt-file | corrupt-spec | baseline | agent | agent-nofeedback | agent-tiers01 | agent-checked")
     ap.add_argument("--split", default="dev")
     ap.add_argument("--repeats", type=int, default=3)
     ap.add_argument("--tasks", nargs="*", help="subset of task IDs (within the split)")
     ap.add_argument("--out", help="output directory (default runs/eval/<system>_<split>_<timestamp>)")
-    ap.add_argument("--mock", help="'perfect' (baseline, agent) replaces the model with the hidden spec; agent also: fix | stubborn | runaway (agents/mock.py)")
+    ap.add_argument("--mock", help="'perfect' (baseline, agent) replaces the model with the hidden spec; agent also: fix | stubborn | runaway | wrongvalid (agents/mock.py)")
     ap.add_argument("--write-doc", help="also write the summary to this Markdown file (e.g. docs/BASELINE_RESULTS.md)")
     a = ap.parse_args(argv)
     tasks = load_tasks(a.split, a.tasks)

@@ -24,6 +24,10 @@ The plan asks for a minimal set: every tool is a failure surface.
 - it does not say whether that charge is acceptable;
 - it does not run Tier 2 or 3.
 
+**Variant E only (`ToolBox(describe=True)`, docs/AGENT.md).** `build_data_file` also returns `summary`, one sentence saying what was built. The tool definitions are the same either way.
+
+**Guard rail.** A `ToolBox` refuses a work folder inside `data/reference/`.
+
 **The output of an attempt** is the last successful `build_data_file` (`ToolBox.last_build`). The orchestrator validates it when the model stops calling tools (plan Day 30).
 
 ## Guarantees

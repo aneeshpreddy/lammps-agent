@@ -116,10 +116,12 @@ def make_system(name: str, mock: str = None):
         return FileCorrupter()
     if name == "corrupt-spec":
         return SpecCorrupter()
-    if name in ("agent", "agent-nofeedback", "agent-tiers01"):
+    if name in ("agent", "agent-nofeedback", "agent-tiers01", "agent-checked"):
         from agents.loop import AgentSystem
+        if name == "agent-checked":             # variant E: C + build summary + request check
+            return AgentSystem(feedback="full", mock=mock, checks=True)
         return AgentSystem(feedback={"agent": None, "agent-nofeedback": "none", "agent-tiers01": "tiers01"}[name],
-                           mock=mock)
+                           mock=mock, checks=False)
     if name == "baseline":
         from agents.baseline import BaselineSystem
         return BaselineSystem(mock=mock)

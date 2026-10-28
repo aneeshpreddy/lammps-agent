@@ -476,3 +476,43 @@ Owner's goal (27 Oct): finish by 14–15 Nov. The loop needs no model to build, 
 
 ### Hours
 - To be filled by project owner.
+
+---
+
+## 2026-10-28 — Plan Days 38–43 groundwork without a model: escalation report, variant E, experiment runner, freeze record (AI-assisted)
+
+Model access is still with the supervisor (expected in 1–2 days). Haiku 5.5 was discussed as the low-cost choice ($0.10 / $0.50 per million tokens on the 27 Oct pricing record, about 1/20 of Sonnet 5.5). Nothing was changed in `config.yaml` `model:`; the choice stays with the owner.
+
+### Done
+- **Escalation report and guard rails (plan Day 38, `agents/loop.py`).**
+  - A run that ends without an accepted build writes `REPORT.md`: the outcome, a warning that the last build did NOT pass, every attempt with its failing checks, the last build's messages and LAMMPS errors, and what changed between builds.
+  - Guard rails:
+    - no work folder inside `data/reference/` (ToolBox and loop);
+    - no overwriting a run folder unless `overwrite=True`;
+    - the harness refuses an output folder that already holds results;
+    - no tool runs commands or submits jobs.
+- **Variant E, optional and off by default (`agents/checks.py`, `--system agent-checked`).** It answers the known limitation that a valid but wrong build passes the loop. It adds:
+  - a one-sentence build summary in the `build_data_file` result;
+  - a request check: one separate model call reads only the request and lists what it states, and plain code compares that list with each build.
+
+  A mismatch is fed back once per field and value. If the agent rebuilds it unchanged, its reading wins. New mock `wrongvalid`: C accepts the wrong build and TC.2 fails, while E catches and fixes it (tests and harness checks).
+- **Experiment runner and tables (plan Days 40–43, `eval/experiment.py`, docs/EVALUATION.md).**
+  - One command runs A/B/C(/D/E) on the same tasks and repeats.
+  - It writes the tables: success with spread, breakdowns, paired contrasts with per-task counts and a sign test, failure categories, A's failures against the others, in-loop recovery, and cost.
+  - It also writes two figures.
+- **Freeze record (plan Day 39, `scripts/freeze_config.py`).**
+  - It records the model, every prompt, schema and tool hash, the limits, configurations, calibration files, split, tasks, prices and LAMMPS.
+  - `--check` lists any change since the freeze, and `eval.experiment run --split test` refuses to start if there is one.
+- **Tests:** test_loop (14), test_checks (10), test_experiment (2), test_freeze (2). matplotlib pinned in requirements.
+
+### Not done
+- Any run with a real model.
+- Whether E is kept is decided on dev data only.
+- The test-open-date decision (owner).
+
+### Tomorrow
+- Write-up sections that need no results (problem, validator, task set, baseline and agent design, limitations, R18–R21).
+- README reproduction steps.
+
+### Hours
+- To be filled by project owner.

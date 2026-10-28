@@ -7,16 +7,21 @@ They read the task's hidden spec, so they are harness and loop checks, never res
             after feedback it builds the hidden spec                                -> accepted in attempt 2
   stubborn  rebuilds the same defective spec whatever the feedback                 -> escalation
   runaway   keeps calling a lookup tool and never builds                           -> step and attempt limits
+  wrongvalid  attempt 1 builds a valid but different system (eval/systems.py perturb_spec: one more cell,
+            EO unit or acid unit); after feedback it builds the hidden spec. Without variant E the wrong
+            build is accepted; with E the request check catches it
+The request check's extraction call (no tools) is answered with what the hidden spec states.
 Responses mimic the SDK's shape (stop_reason, content blocks, usage) with fixed token counts.
 """
 from __future__ import annotations
 
 import copy
+import json
 from types import SimpleNamespace
 
 from agents.baseline import from_builder_spec
 
-POLICIES = ("perfect", "fix", "stubborn", "runaway")
+POLICIES = ("perfect", "fix", "stubborn", "runaway", "wrongvalid")
 _KIND = {"minerals": "mineral", "pce": "pce_ester", "composite": "composite"}
 
 
@@ -48,6 +53,8 @@ class ScriptedClient:
     # -- the SDK surface used by the loop --------------------------------------------------------
     def create(self, **kw):
         self.n += 1
+        if "tools" not in kw:                                   # variant E: the request check's extraction call
+            return self._text(json.dumps(_requirements(self.spec)))
         msgs = kw["messages"]
         attempt = 1 + sum(1 for m in msgs[1:] if m["role"] == "user" and _has_text(m))
         last = msgs[-1]
@@ -67,6 +74,9 @@ class ScriptedClient:
         return self._text("Built the requested system.")
 
     def _build(self, attempt):
+        if self.policy == "wrongvalid" and attempt == 1:
+            from eval.systems import perturb_spec
+            return self._tool("build_data_file", _tool_input(perturb_spec(self.spec)))
         bad = self.policy == "stubborn" or (self.policy == "fix" and attempt == 1)
         return self._tool("build_data_file", _tool_input(_defective(self.spec) if bad else self.spec))
 
@@ -82,6 +92,17 @@ class ScriptedClient:
         return SimpleNamespace(stop_reason=stop, model="mock", content=content,
                                usage=SimpleNamespace(input_tokens=1000, output_tokens=100,
                                                      cache_creation_input_tokens=0, cache_read_input_tokens=0))
+
+
+def _requirements(spec: dict) -> dict:
+    """Everything the hidden spec determines, in agents/checks.py REQ_SCHEMA form."""
+    from agents.checks import REQ_FIELDS, built_values
+    b = built_values(spec)
+    req = {f: b.get(f) for f in REQ_FIELDS}
+    req["anchor"] = b["anchor"][0] if len(b.get("anchor") or []) == 1 else None
+    if req.get("supercell") == "auto":
+        req["supercell"] = None
+    return req
 
 
 def _has_text(m) -> bool:

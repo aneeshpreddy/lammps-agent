@@ -40,6 +40,7 @@ from tools.facts import FORCE_FIELDS, cement_models, data_facts, model_facts  # 
 from tools.schema_check import check  # noqa: E402
 
 TOOLS_VERSION = "tools-v1 (2026-10-27)"
+REFERENCE_DIR = os.path.realpath(os.path.join(ROOT, "data", "reference"))
 
 BUILD_SCHEMA = copy.deepcopy(SCHEMA)
 del BUILD_SCHEMA["properties"]["notes"]
@@ -86,6 +87,13 @@ def definitions() -> list:
     return [{"name": n, "description": DESCRIPTIONS[n], "input_schema": SCHEMAS[n], "strict": True} for n in SCHEMAS]
 
 
+def guard_workdir(workdir: str):
+    """Guard rail (plan Day 38): nothing the agent runs may write into data/reference/ (read-only)."""
+    real = os.path.realpath(workdir)
+    if real == REFERENCE_DIR or real.startswith(REFERENCE_DIR + os.sep):
+        raise ValueError(f"refusing to write into data/reference/ (read-only): {workdir}")
+
+
 def _now() -> str:
     return datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="milliseconds")
 
@@ -93,14 +101,16 @@ def _now() -> str:
 class ToolBox:
     """The tools of one attempt, bound to its work directory and its JSONL log."""
 
-    def __init__(self, workdir: str, log_path: str = None):
+    def __init__(self, workdir: str, log_path: str = None, describe: bool = False):
+        guard_workdir(workdir)
+        self.describe = describe        # variant E: add a one-sentence summary of what was built (agents/checks.py)
         self.workdir = workdir
         os.makedirs(workdir, exist_ok=True)
         self.log_path = log_path or os.path.join(workdir, "tool_calls.jsonl")
         self.n_calls = 0
         self.n_builds = 0
         self.last_build = None          # path of the last successful build: the attempt's output
-        self.builds = []                # every build: {"build", "ok", "data_file" + "spec" | "error"}
+        self.builds = []                # every build: {"build", "ok", "input", "data_file" + "spec" | "error"}
 
     # -- dispatch ------------------------------------------------------------------------------
     def run(self, name: str, args) -> dict:
@@ -124,7 +134,10 @@ class ToolBox:
 
     def spec_of(self, data_file: str) -> dict:
         """The builder spec that produced a build (the orchestrator picks the validation config from it)."""
-        return next(b["spec"] for b in self.builds if b.get("data_file") == data_file)
+        return self.entry_of(data_file)["spec"]
+
+    def entry_of(self, data_file: str) -> dict:
+        return next(b for b in self.builds if b.get("data_file") == data_file)
 
     def tool_result(self, block) -> dict:
         """A tool_use block (SDK object or dict) -> the tool_result block that answers it."""
@@ -137,7 +150,7 @@ class ToolBox:
     def _build_data_file(self, args: dict) -> dict:
         self.n_builds += 1
         name = f"build_{self.n_builds}"
-        entry = {"build": name, "ok": False}
+        entry = {"build": name, "ok": False, "input": copy.deepcopy(args)}
         self.builds.append(entry)
         try:
             spec = to_builder_spec({**args, "notes": ""})
@@ -149,10 +162,15 @@ class ToolBox:
         except Exception as e:
             entry["error"] = f"builder: {type(e).__name__}: {str(e)[:500]}"
             return {"ok": False, "build": name, "stage": "builder", "error": entry["error"]}
-        entry.update(ok=True, data_file=path, spec=spec)
+        details = _details(spec["builder"], rec)
+        entry.update(ok=True, data_file=path, spec=spec, details=details)
         self.last_build = path
-        return {"ok": True, "build": name, "builder": spec["builder"], "facts": data_facts(path),
-                "builder_details": _details(spec["builder"], rec)}
+        out = {"ok": True, "build": name, "builder": spec["builder"], "facts": data_facts(path),
+               "builder_details": details}
+        if self.describe:
+            from agents.checks import describe_build
+            out["summary"] = describe_build(spec, out["facts"], details)
+        return out
 
     def _get_model_info(self, args: dict) -> dict:
         try:

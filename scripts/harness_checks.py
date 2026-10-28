@@ -8,6 +8,8 @@ Runs on the dev split only (the test split stays closed until 16 Nov):
                          hidden spec in the baseline's output schema                expect success = 1.00
   corrupt-file           oracle file + one corruption operator      expect success <= 0.05, validity <= 0.05
   corrupt-spec           a slightly different system, built cleanly expect success <= 0.05, validity >= 0.95
+  agent (mock)           perfect / fix / stubborn / wrongvalid scripted models (agents/mock.py)
+  agent-checked (mock)   variant E with the wrongvalid model         expect success = 1.00 in 2 attempts
 """
 from __future__ import annotations
 
@@ -35,6 +37,11 @@ CHECKS = [
      and a["mean_attempts"] == round(1 + 9 / 13, 3), "success = 1.00; the 9 PCE/composite tasks recover in attempt 2"),
     ("agent", "stubborn", lambda a: a["system_success_rate"] == round(4 / 13, 4)
      and a["escalations"] == round(9 / 13 * a["runs"]), "success = 4/13 (minerals); the 9 PCE/composite tasks escalate"),
+    # variant E (agents/checks.py): a valid but wrong first build
+    ("agent", "wrongvalid", lambda a: a["system_success_rate"] <= 0.05 and a["validity_rate"] >= 0.95
+     and a["mean_attempts"] == 1.0, "success ≤ 0.05, validity ≥ 0.95, 1 attempt (C accepts the wrong build)"),
+    ("agent-checked", "wrongvalid", lambda a: a["system_success_rate"] == 1.0 and a["mean_attempts"] == 2.0,
+     "success = 1.00 in 2 attempts (the request check catches it)"),
 ]
 
 
@@ -75,7 +82,11 @@ def write(rows, tasks, repeats):
             "agent-mock-perfect": "the agent loop with a mock model: example lookup, build of the hidden spec, stop",
             "agent-mock-fix": "the agent loop with a mock model whose first build has a defect the validator catches "
                               "(PCE without counter-ions) or the builder refuses (mistyped mineral model); fixed after feedback",
-            "agent-mock-stubborn": "the agent loop with a mock model that repeats its defective build whatever the feedback"}
+            "agent-mock-stubborn": "the agent loop with a mock model that repeats its defective build whatever the feedback",
+            "agent-mock-wrongvalid": "the agent loop (C) with a mock model whose first build is valid but a slightly "
+                                     "different system (as corrupt-spec); fixed only if told",
+            "agent-checked-mock-wrongvalid": "variant E (C + build summary + request check) with the same mock; the mock "
+                                             "answers the request check's extraction call from the hidden spec"}
     for name, crit, agg, ok, _, out in rows:
         cats = ", ".join(f"{k} {v}" for k, v in agg["failure_categories"].items()) or "—"
         L.append(f"| {name} | {what.get(name, '')} | {crit} | {agg['system_success_rate']:.3f} | {agg['validity_rate']:.3f} | "
@@ -87,7 +98,10 @@ def write(rows, tasks, repeats):
           "scored as successes; the spec corrupter shows that valid files of the wrong system are not either (TC.2 "
           "does its job). The three agent checks show that the loop validates every attempt, turns a caught defect "
           "into feedback that leads to a fix and a scored success, and stops a model that repeats its failure "
-          "(escalation) — all with scripted models, so they check the loop, not a model."]
+          "(escalation) — all with scripted models, so they check the loop, not a model. The last two show the known "
+          "limitation of C (a valid but wrong build is accepted, and only TC.2 afterwards sees it) and that variant E's "
+          "request check closes it when the request states the field (here the mock's extraction is perfect, so this "
+          "checks the plumbing, not the extraction)."]
     with open(os.path.join(ROOT, "docs", "HARNESS.md"), "w") as fh:
         fh.write("\n".join(L) + "\n")
 

@@ -9,8 +9,8 @@ import pytest
 
 from agents.baseline import knowledge, system_prompt
 from agents.loop import (AgentSystem, ToolTimeout, _with_cache_breakpoint, agent_system_prompt, declared_config_for,
-                         feedback_text, replay, time_limit)
-from eval.harness import load_tasks, score
+                         feedback_text, replay, report_text, spec_changes, time_limit)
+from eval.harness import evaluate, load_tasks, score
 from validator import validate
 
 
@@ -120,3 +120,39 @@ def test_declared_config_follows_the_build():
     dec = cfg["declared"]
     assert dec["density_family"] == "tob11_unit_cell" and "pcff" in dec["config_id"]
     assert declared_config_for({"builder": "composite", "force_field": "cvff"})["declared"]["config_id"].startswith("interface-cvff")
+
+
+def test_not_accepted_run_writes_a_report(tasks, tmp_path):
+    out = AgentSystem(mock="stubborn")(tasks["p02"], str(tmp_path / "s"))
+    rep = open(out["report"]).read()
+    assert rep.startswith("# Not accepted: p02") and "did NOT pass validation" in rep and "**P2.1**" in rep
+    assert rep.count("the same input as the previous build") == 2           # what was tried: nothing changed
+    out = AgentSystem(mock="runaway", limits={"max_steps_per_attempt": 2, "max_attempts": 1})(tasks["p02"], str(tmp_path / "r"))
+    assert "No file was built" in open(out["report"]).read() and "no build_data_file call" in open(out["report"]).read()
+    out = AgentSystem(mock="fix")(tasks["p02"], str(tmp_path / "f"))             # accepted: no report
+    assert out["report"] is None and not os.path.exists(tmp_path / "f" / "REPORT.md")
+
+
+def test_report_lists_what_changed():
+    builds = [{"build": "build_1", "ok": False, "input": {"builder": "minerals", "force_field": "pcff", "model": "x"},
+               "error": "builder: unknown model"},
+              {"build": "build_2", "ok": True, "input": {"builder": "minerals", "force_field": "pcff", "model": "y"}}]
+    rep = report_text({"id": "t", "input": "a request"}, "attempt limit", [], builds, {"build_1": 1, "build_2": 1},
+                      None, None, "/w")
+    assert "`build_1` (attempt 1): builder minerals, force field pcff — **refused**: builder: unknown model" in rep
+    assert '`build_2` (attempt 1): changed model: "x" -> "y"' in rep
+    assert spec_changes({"a": {"b": 1}, "c": [1]}, {"a": {"b": 2}, "c": [1]}) == ["a.b: 1 -> 2"]
+
+
+def test_guard_rails(tasks, tmp_path):
+    AgentSystem(mock="perfect")(tasks["p02"], str(tmp_path / "x"))
+    with pytest.raises(FileExistsError):                                       # never overwrite a run unasked
+        AgentSystem(mock="perfect")(tasks["p02"], str(tmp_path / "x"))
+    assert AgentSystem(mock="perfect", overwrite=True)(tasks["p02"], str(tmp_path / "x"))["stop"] == "accepted"
+    ref = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "reference", "agent_run")
+    with pytest.raises(ValueError, match="read-only"):
+        AgentSystem(mock="perfect")(tasks["p02"], ref)
+    assert not os.path.exists(ref)
+    evaluate(AgentSystem(mock="perfect"), [tasks["p02"]], 1, str(tmp_path / "ev"), log=lambda *a: None)
+    with pytest.raises(FileExistsError):                                       # nor a finished harness run
+        evaluate(AgentSystem(mock="perfect"), [tasks["p02"]], 1, str(tmp_path / "ev"), log=lambda *a: None)

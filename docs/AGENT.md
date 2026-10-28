@@ -90,9 +90,25 @@ The run folder also holds `system_prompt.txt`.
 
 `replay(run_dir, workdir)` re-runs a recorded run, with the recorded model responses standing in for the model. It returns every difference in tool results, verdicts and feedback; an empty list means the run was reproduced exactly. Tests and checks use it.
 
+## Escalation report and guard rails (plan Day 38)
+
+**Report.** A run that ends without an accepted build writes `REPORT.md` in its folder and returns its path as `report`. This covers escalation, the attempt limit, a token or time limit, a refusal and an API error. The report gives:
+- the outcome, and a bold warning that the last build did NOT pass validation (or that nothing was built);
+- one row per attempt: model calls, how it ended, the build, the verdict, and the checks that did not pass;
+- the last build's failing checks, with messages and LAMMPS errors;
+- what was tried: each build's input as a field-by-field change from the previous build, and the builder's reason for any refusal.
+
+**Scoring.** The harness still scores the last build, so the failure category (P2.1, TC_ONLY, …) stays visible in the results. A user of the agent gets the report together with a file that is clearly marked as not accepted.
+
+**Guard rails:**
+- Nothing is written into `data/reference/`. `ToolBox` and the loop refuse a work folder inside it.
+- A run folder that already holds a run (`trace.jsonl`) is not overwritten unless `AgentSystem(overwrite=True)` is passed.
+- The harness refuses an output folder that already holds results.
+- No cluster jobs. The agent's whole interface is the three tools: none runs a command or submits a job. The validator's LAMMPS backend is set by the owner in `config.yaml`, never by the agent.
+
 ## Checks without a model
 
-- **`tests/test_loop.py` (11 tests):**
+- **`tests/test_loop.py` (14 tests):**
   - the prompts share the knowledge;
   - accepted first time;
   - validator feedback leads to a fix;
@@ -103,7 +119,9 @@ The run folder also holds `system_prompt.txt`.
   - tool timeout;
   - replay is exact;
   - the cache breakpoint;
-  - the validation config follows the build.
+  - the validation config follows the build;
+  - a run that is not accepted writes a report, and the report lists what changed between builds;
+  - the guard rails (no overwrite, no writes into `data/reference/`, no reuse of a harness output folder).
 - **Harness checks** (`docs/HARNESS.md`): mock perfect, fix and stubborn agents on the whole dev split, each with an expected result.
 
 The mocks read the hidden spec. They check the loop's control flow, never a model.
@@ -128,8 +146,36 @@ A **wrong but valid system** passes inside the loop and fails only the harness's
 
 The agent can catch these only by comparing the facts `build_data_file` returns against the request. The prompt asks it to do that.
 
-This matters for the ablation: if most baseline failures turn out to be TC-only, B and C may differ little. That would be a finding, not a bug. The baseline failure analysis (`eval/analyse.py`, gap types) will show which kind dominates. Options if TC-only failures dominate:
-- an explicit "check the build against the request" step in the loop;
-- a request-checking tool that restates the build in words.
+This matters for the ablation: if most baseline failures turn out to be TC-only, B and C may differ little. That would be a finding, not a bug. The baseline failure analysis (`eval/analyse.py`, gap types) will show which kind dominates. Variant E (below) is built for this case.
 
-Both would be decided on dev data only.
+## Variant E: build summary and request check (optional, off by default)
+
+Code: `agents/checks.py` (`checks-v1 (2026-10-28)`). Run with `--system agent-checked`; in `config.yaml` it is `agent: checks: false`. E is C plus two checks. Neither one ever sees the task's reference.
+
+- **Build summary (no model).** `build_data_file` also returns one sentence saying what was built. For example: "Built: PCE (CVFF-INTERFACE), 1 chain(s), each 16 backbone units [maleic (2 COO-) x8, APEG EO20 OH x8], 8 side chain(s), sequence alternating, counter-ion Na+; …". A wrong-but-valid build is easier for the model to notice in words than in raw counts.
+- **Request check.** Once per task, a separate model call gets only the request and a short field glossary (`REQ_PROMPT`). It does not get the agent's knowledge or conversation. It returns what the request states explicitly, in `REQ_SCHEMA`, with every field null when it is not stated:
+  - domain, force field, supercell;
+  - chains, backbone units, side chains and acid units per chain;
+  - EO lengths, anchor, counter-ion, sequence;
+  - height, orientation.
+
+  After each attempt, plain code (`compare`) checks those statements against what was built. A mismatch blocks acceptance and goes back to the agent with the validator feedback:
+
+  ```
+  Validation of build_1 (attempt 1 of 3): the file is valid, but not accepted.
+  It does not match what the request states:
+  - supercell: the request says [2, 2, 1], the build has [3, 2, 1]
+  Re-read the request and rebuild with build_data_file. If you are sure the build is what the request asks for, build it again unchanged; it is then accepted if it is valid.
+  ```
+
+- **The agent's reading wins on a repeat.** Each (field, built value) mismatch is raised only once. If the agent rebuilds it unchanged, it is accepted and recorded as `kept_by_agent` in the trace. A wrong extraction can therefore cost one attempt, but it can never force an escalation.
+
+**Not compared:** mineral model names. Mapping a name to a catalogue model is the knowledge being tested, so the build summary leaves that check to the agent.
+
+**Cost.** One extra call per task with a short prompt, counted in the task's tokens.
+
+**Checks without a model:**
+- `tests/test_checks.py` (10 tests): a valid-but-wrong build (mock `wrongvalid`) is accepted by C and fails TC.2, while E catches it and fixes it in attempt 2, for a PCE, a mineral and a composite task. A misread request costs one attempt and the agent's build is then accepted. Replay is exact.
+- `docs/HARNESS.md`: the same comparison on the whole dev split.
+
+E is decided on dev data only. Keep it only if it beats C there; either way, report it as ablation E.

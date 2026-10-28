@@ -3,6 +3,8 @@ numpy==2.0.2
 PyYAML==6.0.3
 # single-call baseline / agent (agents/); the key is read from the environment, never stored
 anthropic==0.125.0
+# results tables and figures (eval/experiment.py)
+matplotlib==3.9.4
 # tests
 pytest==8.4.2
 # converter under test / cross-checks only — never used for validator verdicts
