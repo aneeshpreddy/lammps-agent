@@ -19,10 +19,10 @@ validator:
 
 model:                            # read by agents/baseline.py (and the agent loop): change the model here only
   provider: anthropic             # anthropic (Claude API key); others to be added once model access is decided
-  model_id: claude-opus-5-5       # Claude API ID from the models overview, 2026-10-27
-  effort: medium                  # the model's documented default, set explicitly
-  recorded: 2026-10-27
-  status: PROVISIONAL — model access not decided yet (supervisor, 2026-10-27); prices in eval/pricing.json
+  model_id: claude-sonnet-5-5     # Claude API ID from the models overview, 2026-11-03
+  effort: medium                  # set explicitly; the same for every system
+  recorded: 2026-11-03
+  status: IN USE — team API credits (Claude Console), key works 2026-11-03; Sonnet 5.5 chosen (owner, 2026-11-03; a partial Opus baseline run was stopped and discarded); prices in eval/pricing.json
 
 agent:                            # agents/loop.py (plan Days 29-33); PROVISIONAL limits, tuned on dev runs only
   max_attempts: 3                 # K: validation rounds per task (plan Day 30)
