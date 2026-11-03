@@ -227,7 +227,9 @@ def build(spec: dict, outdir: str) -> dict:
             if ext[a] + lateral_gap > sc[a] * cell_L[a] + 1e-9:
                 need = math.ceil((ext[a] + lateral_gap) / cell_L[a])
                 raise ValueError(f"the PCE is {ext[a]:.1f} Å wide along {AXES[a]}; with a {lateral_gap} Å gap to its "
-                                 f"periodic image it needs >= {need} slab cells along {AXES[a]} (got {sc[a]})")
+                                 f"periodic image it needs >= {need} slab cells along {AXES[a]} (got {sc[a]}). "
+                                 f"If the request fixes the number of slab cells, keep it and try another seed: "
+                                 f"the chain's conformation, and so its width, depends on the seed")
         srec = cell_rec if sc == [1, 1, 1] else build_mineral(surf["model"], tuple(sc), ff, wd, f"{name}_slab")
         slab = Data(srec["data_file"])
         geo = slab_geometry(slab)

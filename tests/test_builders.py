@@ -142,6 +142,18 @@ def test_composite_slab_normal_and_orientation():
         assert np.allclose(np.linalg.norm(out[1:] - out[0], axis=1), d0)    # rigid rotation
 
 
+def test_composite_too_narrow_suggests_another_seed(tmp_path):
+    # the refusal must name both ways out, so an agent bound to the requested cell changes the seed, not the cell
+    import json
+    from builders.composite import build as build_composite
+    spec = json.load(open(os.path.join(ROOT, "examples", "composite", "tob11_004_small.json")))
+    spec["pce"]["composition"] = {"A": 16, "E": 8}
+    spec["surface"]["supercell"] = [1, 1, 1]
+    spec["orientation"] = "as_built"
+    with pytest.raises(ValueError, match=r"slab cells along .*keep it and try another seed"):
+        build_composite(spec, str(tmp_path))
+
+
 def test_bond_strain_accepts_references_and_flags_stretched_bonds(tmp_path):
     from builders.pce import bond_strain, strained
     ref = os.path.join(ROOT, "data", "reference", "eval_v3", "p07.data")
