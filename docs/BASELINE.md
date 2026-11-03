@@ -46,7 +46,7 @@ The agent loop (2–13 Nov) will add tools and validator feedback on top of the 
 | Prompt caching | system prompt marked `cache_control: ephemeral` | — |
 | Refusal fallback | **off**: a fallback model would change which model is measured; a refusal is a failed run | — |
 | Prices | $4 / MTok input, $20 / MTok output, $5 / MTok 5-min cache write, $0.20 / MTok cache read | `eval/pricing.json`, pricing page fetched 2026-10-27 |
-| Prompt version | `baseline-v1 (2026-10-27)`; system prompt and schema SHA-256 in `results.json` | — |
+| Prompt version | `baseline-v2 (2026-11-03)`: v1 plus "unstated end groups = CH3, CH3" (owner, after the first dev run; v1 results kept in `docs/BASELINE_RESULTS_v1.md`); system prompt and schema SHA-256 in `results.json` | — |
 | SDK | `anthropic` 0.125.0 (Python 3.9 venv; the 1.x SDK needs Python ≥ 3.10) | — |
 
 ## Run it

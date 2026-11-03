@@ -36,7 +36,7 @@ def model_config() -> dict:
 MODEL = model_config().get("model_id") or "claude-opus-5-5"    # config.yaml; Claude API ID, models overview 2026-10-27
 EFFORT = model_config().get("effort") or "medium"               # the model's documented default, set explicitly
 MAX_TOKENS = 16000
-PROMPT_VERSION = "baseline-v1 (2026-10-27)"
+PROMPT_VERSION = "baseline-v2 (2026-11-03)"   # v2: unstated end groups = CH3, CH3 (owner: follow the references)
 UGRP = os.path.dirname(ROOT)
 
 # ---------------------------------------------------------------------------------------------
@@ -221,7 +221,7 @@ A vinyl backbone of monomer units, each unit given a short label (1-3 letters or
 Unused fields of a monomer are null.
 composition: number of units of each label per chain (the backbone length is the sum). Partly deprotonated acid = two labels (one deprotonated, one not).
 sequence.mode: "random" (shuffled), "alternating" (side-chain units spread evenly between the others), "block" (units in the order of the composition list: all of the first label, then the next), "gradient" (side-chain density increasing along the chain), or "explicit" with sequence.explicit = the full list of labels in chain order.
-end_groups: [head, tail], each "CH3" or "H". n_chains: number of identical-architecture chains. \
+end_groups: [head, tail] backbone chain ends, each "CH3" or "H"; when the request does not state them, use ["CH3", "CH3"] (the builder default; side-chain ends are the monomers' "end"). n_chains: number of identical-architecture chains. \
 counterion: "Ca2+", "Na+" or "K+" to neutralise the carboxylates (null = leave the system charged). \
 box_padding: empty space in Å on every side of the box around the atoms (default 2.0). seed: any integer.
 
