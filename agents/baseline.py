@@ -33,7 +33,7 @@ def model_config() -> dict:
     return yaml.safe_load(open(os.path.join(ROOT, "config.yaml"))).get("model") or {}
 
 
-MODEL = model_config().get("model_id") or "claude-opus-5-5"    # config.yaml; Claude API ID, models overview 2026-10-27
+MODEL = model_config().get("model_id") or "claude-sonnet-5-5"  # config.yaml; Claude API ID, models overview 2026-11-03
 EFFORT = model_config().get("effort") or "medium"               # the model's documented default, set explicitly
 MAX_TOKENS = 16000
 PROMPT_VERSION = "baseline-v2 (2026-11-03)"   # v2: unstated end groups = CH3, CH3 (owner: follow the references)
@@ -245,7 +245,7 @@ class BaselineSystem:
         self.model, self.effort = model, effort
         self.system = system_prompt()
         self.meta = {"name": "baseline" + (f"-mock-{mock}" if mock else ""), "kind": "single call, no tools, no feedback",
-                     "model": None if mock else model, "effort": effort, "thinking": "adaptive (always on for this model)",
+                     "model": None if mock else model, "effort": effort, "thinking": "adaptive (the model default; not set)",
                      "sampling": "API defaults (temperature is not settable on this model)", "max_tokens": MAX_TOKENS,
                      "prompt_version": PROMPT_VERSION,
                      "system_prompt_sha256": hashlib.sha256(self.system.encode()).hexdigest(),

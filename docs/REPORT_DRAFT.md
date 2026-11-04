@@ -220,7 +220,7 @@ The spec corrupter matters most. It shows that a file that is perfectly valid bu
 
 ## 5. Systems
 
-**Shared setup.** All systems use the same model (`config.yaml` → `model:`), the same domain knowledge in their system prompt and the same builders. The model is chosen and recorded at the code freeze; **[MODEL]**: ID, effort and date, from `docs/FROZEN_CONFIG.md`. The domain knowledge (shared word for word between the systems) is:
+**Shared setup.** All systems use the same model (`config.yaml` → `model:`), the same domain knowledge in their system prompt and the same builders. The model is Claude Sonnet 5.5 (`claude-sonnet-5-5`, effort medium), chosen on 3 Nov 2026; the frozen record is `docs/FROZEN_CONFIG.md`. The domain knowledge (shared word for word between the systems) is:
 - force-field coverage;
 - the builder fields;
 - the monomer chemistry, including how APEG/HPEG/TPEG/VPEG/MPEG map to the fields;

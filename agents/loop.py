@@ -283,7 +283,7 @@ class AgentSystem:
         name = "agent-checked" if self.checks else name
         self.meta = {"name": name + (f"-mock-{mock}" if mock else ""), "kind": "tool-use loop + validator feedback",
                      "model": None if mock else model, "effort": effort,
-                     "thinking": "adaptive (always on for this model)", "max_tokens": MAX_TOKENS,
+                     "thinking": "adaptive (the model default; not set)", "max_tokens": MAX_TOKENS,
                      "feedback": self.feedback, "limits": self.limits, "loop_version": LOOP_VERSION,
                      "tools_version": TOOLS_VERSION,
                      "system_prompt_sha256": hashlib.sha256(self.system.encode()).hexdigest(),

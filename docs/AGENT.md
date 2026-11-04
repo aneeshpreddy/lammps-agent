@@ -50,7 +50,7 @@ Run them as `--system agent`, `--system agent-nofeedback` or `--system agent-tie
 
 ## Bounds (plan Day 31)
 
-Configured in `config.yaml` → `agent:`. The values are PROVISIONAL and will be tuned on dev runs only.
+Configured in `config.yaml` → `agent:`. Tuned on dev runs only. In the dev runs of 3 Nov, no run needed a second attempt or hit a limit, so the defaults are kept.
 
 | Limit | Default | When it is hit |
 |---|---|---|
@@ -131,7 +131,7 @@ The mocks read the hidden spec. They check the loop's control flow, never a mode
 - **Prompt caching.** The system prompt (with the tools) and the conversation so far are cached: a breakpoint goes on the system block and on the last block of each request. Each call therefore re-reads earlier turns at the cache-read price.
 - **Usage accounting.** Usage is summed per task and priced by the harness (`eval/pricing.json`).
 
-## Known limitation, to discuss before the dev runs
+## Known limitation, confirmed by the dev runs
 
 **The validator inside the loop catches invalid files, not wrong systems.** The builders produce valid files for almost every consistent spec. Validator feedback can therefore only help where Tiers 0–3 catch something:
 - **charge:** a PCE without counter-ions (P2.1);
@@ -146,7 +146,14 @@ A **wrong but valid system** passes inside the loop and fails only the harness's
 
 The agent can catch these only by comparing the facts `build_data_file` returns against the request. The prompt asks it to do that.
 
-This matters for the ablation: if most baseline failures turn out to be TC-only, B and C may differ little. That would be a finding, not a bug. The baseline failure analysis (`eval/analyse.py`, gap types) will show which kind dominates. Variant E (below) is built for this case.
+This matters for the ablation: if most baseline failures turn out to be TC-only, B and C may differ little. That would be a finding, not a bug. Variant E (below) is built for this case.
+
+**Dev runs, 3 Nov** (Sonnet 5.5, 13 tasks × 3 repeats, `docs/RESULTS_DEV.md`). This is what happened:
+- **No file was rejected.** The in-loop validator did not reject a single build in B, C or E. Every accepted file was valid in attempt 1, so C's feedback never fired.
+- **The only recoverable failure was a builder refusal.** On c06 the PCE was too wide for the one slab cell the request fixes. The refusal comes back as a tool error, so B and C both see it.
+  - At first, both enlarged the cell, which gives a valid file of the wrong system.
+  - After the refusal message was changed to also suggest another seed (`builders/composite.py`), both kept the cell and changed the seed: c06 went from 0/3 to 3/3.
+- **Result: B and C differ only by noise.** A 0.92, B 1.00, C 0.97. The remaining C failure (c04) is a scoring effect of random sequences in TC.2 chemistry mode, not a model error: the hidden spec itself passes with only 5 of 10 seeds. Changing that needs an owner decision (METRICS).
 
 ## Variant E: build summary and request check (optional, off by default)
 
@@ -173,6 +180,12 @@ Code: `agents/checks.py` (`checks-v1 (2026-10-28)`). Run with `--system agent-ch
 **Not compared:** mineral model names. Mapping a name to a catalogue model is the knowledge being tested, so the build summary leaves that check to the agent.
 
 **Cost.** One extra call per task with a short prompt, counted in the task's tokens.
+
+**Dev runs, 3 Nov.** E did worse than C (0.90 against 0.97). Two things happened:
+- **A wrong extraction was followed.** On p04 the request check read "30 methacrylate units and 10 MPEG methacrylate side chains" as a backbone of 30, when it is 30 + 10 = 40. The agent rebuilt to match in all 3 runs, instead of keeping its correct build.
+- **A real mismatch was caught.** The check caught the c06 supercell change before the seed hint existed.
+
+Whether E is kept, fixed or reported as a negative result is an owner decision.
 
 **Checks without a model:**
 - `tests/test_checks.py` (10 tests): a valid-but-wrong build (mock `wrongvalid`) is accepted by C and fails TC.2, while E catches it and fixes it in attempt 2, for a PCE, a mineral and a composite task. A misread request costs one attempt and the agent's build is then accepted. Replay is exact.

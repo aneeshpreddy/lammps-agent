@@ -14,6 +14,16 @@ Code: `eval/experiment.py` (runner and tables) and `scripts/freeze_config.py` (f
 
 Every system uses the same model (`config.yaml` `model:`), the same tasks and the same repeats. The central claim is **B vs C**: the value of validator feedback.
 
+## Dev results so far (3 Nov, Sonnet 5.5)
+
+`docs/RESULTS_DEV.md`, from `runs/exp/dev_20261103-180733`:
+- **Success:** A 0.92, B 1.00, C 0.97, E 0.90.
+- **Validity:** 1.00 for every file produced.
+- **Cost:** $1.66 for all four systems.
+- **No contrast is significant.** Per task, B vs A is 1 better / 12 same, and C vs B is 0 better / 1 worse.
+
+Why B and C cannot differ on these tasks is explained in docs/AGENT.md, "Known limitation". The first dev run, before the seed hint, is in `runs/exp/dev_20261103-170817` (A 0.90, B 0.87, C 0.90, E 0.87).
+
 ## Running
 
 ```bash

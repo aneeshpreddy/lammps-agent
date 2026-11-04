@@ -524,3 +524,40 @@ Model access is still with the supervisor (expected in 1–2 days). Haiku 5.5 wa
   - its deterministic structure summary was not found and was removed;
   - R18's "1 of 80" is now quoted from its abstract.
 - **README.** New "Reproduce the results from a clean checkout" section. The old validator block has its counts updated.
+
+### 2026-11-03: model access, baseline (Gate 2) and first dev experiment
+- **Model access.** The team's Claude Console API credits ($500). The owner's key lives in the environment only. Smoke test OK.
+  - The owner switched the model to **Sonnet 5.5**. A partial Opus 5.5 baseline (11 runs, $0.12) was stopped and is not used.
+  - Prices re-checked on the pricing page: unchanged.
+- **Baseline v1 (dev): 0.59.** 12 of its 16 failures had one cause: the request leaves the backbone end groups unstated, the reference uses the builder default CH3, and the model chose H.
+  - Owner: "follow the reference files".
+  - Prompt `baseline-v2` adds "unstated end groups = CH3, CH3". It is shared by every system.
+  - **Baseline v2: 0.92.** The only failure is c06, a builder refusal. v1 is kept in `docs/BASELINE_RESULTS_v1.md`.
+- **Dev experiment A/B/C/E: 0.90 / 0.87 / 0.90 / 0.87.**
+  - The in-loop validator rejected no file, so C's feedback never fired.
+  - On c06 the agents answered the "too narrow" refusal by enlarging the cell the request fixes.
+- **Fix:** the refusal now also suggests another seed (`builders/composite.py`, plus a test). **Rerun: 0.92 / 1.00 / 0.97 / 0.90.** c06 is now 3/3 for the agents.
+- **Remaining failures.**
+  - c04 is a TC.2 chemistry-mode effect of random sequences: the hidden spec itself passes with 5 of 10 seeds.
+  - E's request check misreads p04 (backbone 30 instead of 30 + 10).
+- **Cost on 3 Nov:** about $3.80 in total.
+- **The owner rejected** a "model writes the file directly" system.
+
+### 2026-11-04: pre-freeze cleanup
+- **Model references.** The fallback model, the run metadata (thinking, sampling) and BASELINE.md, TOOLS.md and REPORT_DRAFT now describe Sonnet 5.5.
+  - Its restrictions were tested on the API: `temperature` is rejected, forced `tool_choice` is rejected, and `thinking: disabled` is rejected.
+- **Docs.** AGENT.md and EVALUATION.md record the dev findings. The agent limits are kept, because no dev run needed them.
+
+### Not done
+- Owner and supervisor decisions:
+  - the claim framing (validity guarantee against feedback benefit);
+  - the c04 scoring fix (it changes METRICS);
+  - keep or drop E;
+  - the test-open date;
+  - the provisional values in `configs/*.yaml`.
+
+### Tomorrow
+- Act on those decisions. Then the final dev run and the code freeze (`v1.0`, `freeze_config.py`).
+
+### Hours
+- To be filled by project owner.

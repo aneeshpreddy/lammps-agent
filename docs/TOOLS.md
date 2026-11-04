@@ -35,7 +35,7 @@ The plan asks for a minimal set: every tool is a failure surface.
 - **Strict schemas.**
   - Each definition carries `strict: true`, with `additionalProperties: false` and every property `required`. Unused fields are `null` via `anyOf`.
   - Arguments returned by the API therefore match the schema (Claude API docs, structured outputs / strict tool use, read 2026-10-27).
-  - Opus 5.5 rejects forced tool choice (`tool_choice` `any` / `tool`), so the loop will use `auto` and say in the prompt which tool builds the answer.
+  - Opus 5.5 and Sonnet 5.5 reject forced tool choice (`tool_choice` `any` / `tool`; Sonnet tested 2026-11-04), so the loop uses `auto` and says in the prompt which tool builds the answer.
 - **Checked again inside the tool.** `tools/schema_check.py` validates every call against the same schema, with no dependency. It catches:
   - direct Python calls;
   - replayed traces;
