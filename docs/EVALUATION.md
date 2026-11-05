@@ -24,6 +24,14 @@ Every system uses the same model (`config.yaml` `model:`), the same tasks and th
 
 Why B and C cannot differ on these tasks is explained in docs/AGENT.md, "Known limitation". The first dev run, before the seed hint, is in `runs/exp/dev_20261103-170817` (A 0.90, B 0.87, C 0.90, E 0.87).
 
+## Final dev run on the frozen code (6 Nov)
+
+`docs/RESULTS_DEV_FINAL.md`, from `runs/exp/dev_20261106-014152`, at git 73b1841: the code that was tagged `v1.0`.
+- **Success:** A 0.92, B 1.00, C 1.00.
+- **Validity:** 1.00 for every file produced. A's 3 failures are builder refusals with no output (c06).
+- **Cost:** $0.93 for the three systems.
+- **No agent run was declined.**
+
 ## Running
 
 ```bash
