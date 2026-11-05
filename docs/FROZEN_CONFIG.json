@@ -1,0 +1,82 @@
+{
+  "recorded": "2026-11-06T02:01:15",
+  "git_commit": "eacb2862b98b2fb66b79814ef9157c3f4cb2f142",
+  "git_dirty": false,
+  "git_tag": "v1.0",
+  "model": {
+    "provider": "anthropic",
+    "model_id": "claude-sonnet-5-5",
+    "effort": "medium",
+    "max_tokens": 16000,
+    "thinking": "adaptive (model default)",
+    "sampling": "API defaults"
+  },
+  "prompts": {
+    "baseline_version": "baseline-v3 (2026-11-06)",
+    "baseline_system_sha256": "7d40278c68cf5329eb62f880a404e6faed978c5d7db34f8613396ee875cb5116",
+    "baseline_schema_sha256": "1c91f609f58bba49e00360e533fc645341512ef3a9005f48d58402a9c27d1b73",
+    "agent_system_sha256": "e14dbcc75171d55d0dcee663b426b2896d29143dfafafb31e53e8b4b3b38c937",
+    "request_check_prompt_sha256": "a17c0aaddba805427dfedd0a3c0c3ab33b28869eb86acd14244d1ff4ced5e781",
+    "request_check_schema_sha256": "618d0337a9bc04628fadc08b4009512cf723fc6fda65f04340bf4d50c1d92400"
+  },
+  "tools": {
+    "version": "tools-v1 (2026-10-27)",
+    "definitions_sha256": "2e869096603062c9925b18e37177f8fcf2207440a3cf7ed78407debf12dd1903",
+    "names": [
+      "build_data_file",
+      "get_model_info",
+      "get_reference_example"
+    ]
+  },
+  "loop": {
+    "version": "loop-v2 (2026-11-06)",
+    "limits": {
+      "max_attempts": 3,
+      "max_steps_per_attempt": 12,
+      "max_tokens_per_task": 400000,
+      "max_wall_s": 1200,
+      "tool_timeout_s": 300
+    },
+    "feedback": "full",
+    "checks_default": false,
+    "checks_version": "checks-v1 (2026-10-28)",
+    "summary_default": false
+  },
+  "validator": {
+    "version": "1.0.0",
+    "configs": {
+      "emc_pcff_real_full.yaml": "8435b37f8c4b7444d5e223531a98f678eb451200e86928a7c2708b8b6fba20b0",
+      "interface_cvff_composite.yaml": "ea0865bd6abe7ace61edf886952c28f3bde973dda4ed059555945bc03dcb34de",
+      "interface_cvff_minerals.yaml": "92b569c2c31525a4939bddc76ea5ebd6dc728761a8c8e1ee1d9d8adf043de68d",
+      "interface_cvff_pce.yaml": "bb632f35b7504a33ad50188eaea0e956d08a6a486b87a036179e209b3f04eb67",
+      "interface_pcff_composite.yaml": "669995f129352556d30b4fec00a9b657544579a3dcc3de1bf5975d90d231a6ec",
+      "interface_pcff_fixture.yaml": "08d0c7f7199a3155a0941e9ec3c85147d4265863b23174560ebec3f87d976eff",
+      "interface_pcff_minerals.yaml": "7e276ef33baae7108399b75e4619b1e39dc42b0a65fbece9a7efde1cd13f4026",
+      "interface_pcff_pce.yaml": "ffaa223bb6d5b2fb0026cdc3244465bbca6a695ba8954fda72931303a7d839a5",
+      "interface_pcff_tobermorite.yaml": "217dbeb05afa968574490f3be18e7b8a3deaa9f58f1e06d2e65dfe71c9fdbfa6"
+    },
+    "calibration": {
+      "composite_cvff.json": "4a72b87aa76efbcf85b4d2fd0f4d0081f43e930673c3fa4cbf19d90ec0fae971",
+      "composite_pcff.json": "80d794904600d532a14d995dea645a4af2c7980e0f4ecc189b2a98c4921513eb",
+      "minerals_cvff.json": "cba0aa9be04e79e222c785ede6d8cc845cb1b6f38c9db50f0591441f96629b1d",
+      "minerals_pcff.json": "f5c0b5741459ba93e62275f40a3ea83e28f3167170b0e574961978dece6cd7de",
+      "pce_builder.json": "ec3c00b4f26d04bda65ed0a612a8bae696ecab26acd226fef3315bf3b62f4aeb",
+      "pce_emc.json": "e73ca55542a8b3f015bb7e25042a7d7d39de12f71e7ead1b7a1bf0ddbd3fa504",
+      "tobermorite_fixture.json": "1147c3e8fa01a19cfe5c6aad06180d4c8d3ef2ba69c96da275e99e4cebef1b48",
+      "tobermorite_interface.json": "91982ea6c3d24f8ce7dda9811c5b160d5ad80088457712e499d2cc485a8dcebe"
+    }
+  },
+  "eval": {
+    "split_sha256": "063c2ddad24be986bf16dd3b8a549c3681871837d133d20340416003d6cb5fe4",
+    "metrics_sha256": "cf4aed9c99e9ace4d30cfd44a08d79d46e534f122ce77d431dfa5b13145f01ec",
+    "tasks_sha256": "74e32c43ced9c9a7e979a7743cdbe98f4401662d15f7d9c08ae3e27c6e6e96d0"
+  },
+  "pricing": {
+    "date": "2026-11-03",
+    "source": "https://platform.claude.com/docs/en/about-claude/pricing (and models/overview), fetched 2026-10-27, re-checked unchanged 2026-11-03",
+    "unit": "USD per million tokens, Claude API, standard (non-batch, global inference)",
+    "sha256": "508a88452b879a7c64cac983b590bb287be39127420be3291067855fb07bd5ad"
+  },
+  "lammps": "Large-scale Atomic/Molecular Massively Parallel Simulator - 22 Jul 2025 - Update 6",
+  "config_yaml_sha256": "16456ea11c6f44d7cd65ec616b265727ebef821d0bcd13427554404a0c58c959"
+}
