@@ -1,0 +1,27 @@
+{
+  "id": "c3s_unit_cell_minimized_pcff__FM10__tilt_line_dropped",
+  "file": "data/corrupted/c3s_unit_cell_minimized_pcff__FM10__tilt_line_dropped.data",
+  "sha256": "bd5b32ab144e4258861c1925108f49a4b925e64b422a647bd7248f4fe770c561",
+  "parent_id": "c3s_unit_cell_minimized_pcff",
+  "parent_file": "data/reference/minerals/c3s_unit_cell_minimized_pcff.data",
+  "parent_sha256": "07713482cd7234025d0fdda3dcca83fc1d70f778b5ec15454f2822b16ae7a031",
+  "failure_mode": "FM10",
+  "operator": "fm10_drop",
+  "variant": "tilt_line_dropped",
+  "description": "delete the 'xy xz yz' line of a triclinic box",
+  "params": {},
+  "expected_failing_properties": [
+    "P0.8"
+  ],
+  "expected_tier": 0,
+  "spec_expected_properties": [
+    "P0.8"
+  ],
+  "expected_lammps_behaviour": "Silent",
+  "header_consistent": true,
+  "declared_config": "configs/interface_pcff_minerals.yaml",
+  "overrides": {
+    "density_family": "c3s_unit_cell_minimized",
+    "box_kind": "triclinic"
+  }
+}

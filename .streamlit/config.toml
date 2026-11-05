@@ -1,0 +1,18 @@
+# Demo page theme (demo/app.py): black / navy / light blue
+[theme]
+base = "dark"
+primaryColor = "#5aa9ff"
+backgroundColor = "#070b14"
+secondaryBackgroundColor = "#0f1a30"
+textColor = "#e3ecfb"
+font = "sans serif"
+
+[server]
+headless = false
+address = "localhost"          # this Mac only: Live mode spends the team's API credits
+
+[browser]
+gatherUsageStats = false
+
+[client]
+toolbarMode = "viewer"           # no Deploy button in the presentation
