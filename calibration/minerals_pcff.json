@@ -1,8 +1,8 @@
 {
   "calibration_id": "minerals_pcff",
   "version": 1,
-  "status": "PROVISIONAL_DEFAULT",
-  "date": "2026-10-22",
+  "status": "ACCEPTED",
+  "date": "2026-11-05",
   "derivation_version": "calibrate.py v1 (2026-10-16)",
   "references": [
     {

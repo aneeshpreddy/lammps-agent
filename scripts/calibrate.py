@@ -4,8 +4,8 @@
   python scripts/calibrate.py fixture    -> calibration/tobermorite_fixture.json (FIX-T11, FIX-T14)
 
 Every tolerance records what is measured, how it is derived, the reference IDs + SHA-256 used,
-and a status. Margins are stated constants (below) with a written basis; they are PROVISIONAL
-until the owner confirms the references as trusted and accepts the margins. Changing a reference
+and a status. Margins are stated constants (below) with a written basis. Status ACCEPTED: the supervisor
+accepted the margins on 2026-10-26 and the project owner the records on 2026-11-05 (SPEC §7.14). Changing a reference
 invalidates the record: re-run this script and commit the new JSON.
 """
 from __future__ import annotations
@@ -40,7 +40,7 @@ R0_PAIR_MARGIN = 0.03       # P2.9: +- 0.03 on the observed (mean length / r0) r
 R0_DEFAULT_FACTOR = 2.0     # P2.9 default tolerance: 2 x the largest |ratio - 1| seen in the set (min 0.03)       # tau_centroid = max(0.02, ceil_0.01(3 x largest observed excursion))
 
 SETS = {
-    "pce": {"out": "calibration/pce_emc.json", "id": "pce_emc", "status": "PROVISIONAL",
+    "pce": {"out": "calibration/pce_emc.json", "id": "pce_emc", "status": "ACCEPTED",
             "files": ["data/reference/REF-01.data", "data/reference/REF-02.data",
                       "data/reference/REF-03.data", "data/reference/REF-04.data"],
             "density_basis": {
@@ -50,7 +50,7 @@ SETS = {
                                  "rule 4), proposed by the project and accepted by the supervisor on 2026-10-26.",
                 "pce_emc_dilute": None}},
     "tobermorite": {"out": "calibration/tobermorite_interface.json", "id": "tobermorite_interface",
-                    "status": "PROVISIONAL_DEFAULT",
+                    "status": "ACCEPTED",
                     "files": ["data/reference/REF-05.data", "data/reference/REF-06.data",
                               "data/reference/REF-07.data", "data/reference/REF-08.data"],
                     "density_margin_rel": 1e-4,
@@ -60,7 +60,7 @@ SETS = {
                                            "relative margin covers box lengths printed to >= 6 significant digits; it is "
                                            "a representation tolerance, not a physical one (PROPERTIES §8.5 rule 3)."
                         for n in (11, 14)}},
-    "pce_builder": {"out": "calibration/pce_builder.json", "id": "pce_builder", "status": "PROVISIONAL",
+    "pce_builder": {"out": "calibration/pce_builder.json", "id": "pce_builder", "status": "ACCEPTED",
                     "files": ["data/reference/REF-01.data", "data/reference/REF-02.data",
                               "data/reference/REF-03.data", "data/reference/REF-04.data"],
                     "density_basis": {"pce_emc_dense": None, "pce_emc_dilute": None},
@@ -94,7 +94,7 @@ def mineral_set(ff: str) -> dict:
     basis = {fam: None if fam == "surface" else
              "Crystal model: every supercell has the model's density exactly; ±1e-4 relative is a representation "
              "tolerance (PROPERTIES §8.5 rule 3), not a physical one." for fam in fams}
-    return {"out": f"calibration/minerals_{ff}.json", "id": f"minerals_{ff}", "status": "PROVISIONAL_DEFAULT",
+    return {"out": f"calibration/minerals_{ff}.json", "id": f"minerals_{ff}", "status": "ACCEPTED",
             "files": files, "density_margin_rel": 1e-4, "density_basis": basis}
 
 
@@ -104,7 +104,7 @@ def composite_set(ff: str) -> dict:
     get the cross-pair fallback (see main)."""
     m = mineral_set(ff)
     files = SETS["pce_builder"]["files"] + m["files"]
-    return {"out": f"calibration/composite_{ff}.json", "id": f"composite_{ff}", "status": "PROVISIONAL_DEFAULT",
+    return {"out": f"calibration/composite_{ff}.json", "id": f"composite_{ff}", "status": "ACCEPTED",
             "files": files, "density_margin_rel": 1e-4, "density_basis": {},
             "contact_sources": SETS["pce_builder"]["contact_sources"], "contact_ions": SETS["pce_builder"]["contact_ions"],
             "cross_pair_fallback": True,

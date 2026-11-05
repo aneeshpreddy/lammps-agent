@@ -1,8 +1,8 @@
 {
   "calibration_id": "pce_emc",
   "version": 1,
-  "status": "PROVISIONAL",
-  "date": "2026-10-26",
+  "status": "ACCEPTED",
+  "date": "2026-11-05",
   "derivation_version": "calibrate.py v1 (2026-10-16)",
   "references": [
     {
