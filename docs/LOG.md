@@ -577,13 +577,18 @@ Model access is still with the supervisor (expected in 1–2 days). Haiku 5.5 wa
 - **Variant E dropped (owner).** It is not run on the test split. The code is kept so the dev result can be reproduced. Updated: EVALUATION.md, AGENT.md, README, CLAUDE.md, config.yaml and REPORT_DRAFT §5.3–5.4 and §6.
 - **METRICS v1.2: TC.2 chemistry mode made order-free (owner; the supervisor to be informed).**
   - **The flaw.** v1.1 compared the count of each bond kind and the multiset of (type, charge). Both depend on the random draw, through the joins between units and the charges of the units at the chain ends. The hidden spec itself passed with only 5/10 seeds on c04 and 8/10 on p04.
-  - **v1.2 compares,** per molecule, the atom types, the net charge and the bonds per atom type. Bond kinds and (type, charge) values must occur in the reference or in a join catalogue: every two-unit chain of the task's monomers (`eval/catalogue.py`), built by the harness from the hidden spec at scoring time in 0.2 s.
+  - **v1.2 compares,** per molecule, the elements, the net charge and the bonds per element. It started with atom types, but check 3 (below) found that an H cap on a maleic unit changes a carbon's type. Bond kinds and (type, charge) values must occur in the reference or in a join catalogue: every two-unit chain of the task's monomers (`eval/catalogue.py`), built by the harness from the hidden spec at scoring time in 0.2 s.
   - **Checked.**
     - 55/55 buildable seeds of the four dev chemistry tasks pass. A wrong composition, EO length or chain ends fails.
     - Matrix re-run: 948/948 corrupted files caught, 36/36 positives pass, identical to 26 Oct.
     - Harness checks 9/9.
     - 156 tests.
   - **Re-scored from the saved files** (`eval.harness --rescore`, v1.1 results kept as `results_metrics-v1.1.json`). 4 c04 runs went FAIL -> PASS. Dev: A 0.92, B 1.00, C 1.00, E 0.92.
+- **Pre-freeze checks 3 and 4 (5 Nov).**
+  - **Check 3: the catalogue on all 18 example recipe and force-field combinations** (random re-draws). 18/18 pass and wrong recipes fail, after the per-molecule comparison moved from atom types to elements. The first run failed apeg_maleic, because an end cap changes the type of the carbon it meets. Dev chemistry tasks: still 55/55. Dev re-scored again from the v1.1 scores: unchanged, A 0.92, B 1.00, C 1.00.
+  - **Check 4: a fresh copy of the committed repo in an empty folder**, with a fresh venv and `pip install -r requirements.txt`.
+    - It found an undocumented requirement: `INTERFACE_FF_1_5/` and `CEMENT_MINERALS/` must sit next to the repo. README (Install) and the report appendix now say so; the data is not redistributed.
+    - With them in place, all 156 tests pass.
 - **Not done.** The test-open date (owner).
 - **Tomorrow.** Act on those decisions, then the final dev run and the freeze.
 

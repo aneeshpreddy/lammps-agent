@@ -72,7 +72,18 @@ python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-You also need LAMMPS. On macOS: `brew install lammps`. The Homebrew executables are `lmp_serial` and `lmp_mpi`; set `lammps.executable` in `config.yaml`. The build used for every result in `docs/` is recorded in `docs/lammps_build.txt` (22 Jul 2025 – Update 6, with CLASS2, KSPACE and MOLECULE).
+**Two data folders sit next to the repository, not in it.** The builders read them from the repository's parent folder:
+
+```
+UGRP/
+├── lammps-agent/        this repository
+├── INTERFACE_FF_1_5/    INTERFACE FF 1.5: FORCE_FIELDS/*.frc and MODEL_DATABASE/ (from its authors, the Heinz group)
+└── CEMENT_MINERALS/     the research group's cement-mineral .car/.mdf models
+```
+
+They are not redistributed here. Without them, the builders, the agent and every test that builds a structure fail. The validator alone (`python -m validator`) works without them.
+
+You also need LAMMPS. On macOS: `brew install lammps`. On first use, the builders compile `msi2lmp` from the Homebrew LAMMPS sources into `build/msi2lmp/`. That needs the Xcode command-line tools (`xcode-select --install`). The Homebrew executables are `lmp_serial` and `lmp_mpi`; set `lammps.executable` in `config.yaml`. The build used for every result in `docs/` is recorded in `docs/lammps_build.txt` (22 Jul 2025 – Update 6, with CLASS2, KSPACE and MOLECULE).
 
 ## Validate a file
 

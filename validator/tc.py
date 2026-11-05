@@ -7,14 +7,15 @@ TC.2 has three comparison modes (declared `tc_mode`, normally set per task; METR
                (`tc_compare_cell`: true = all lengths and tilts; a list of axes = only those lengths,
                e.g. the lateral axes of a slab with an adsorbate). For deterministic structures built in a different geometry
                (minerals, PCE with explicit/alternating/block sequences).
-  chemistry  — position- and sequence-free: per molecule, the multiset of atom types, the net charge
-               and the number of bonds on each atom type must match; every bond's (type, type) kind
-               and every atom's (type, charge) must occur in the reference or in the declared join
-               catalogue (`tc_allowed_bond_pairs`, `tc_allowed_type_charges`, built by eval/catalogue.py).
-               For random-sequence PCE, where any draw of the requested architecture is equally correct.
+  chemistry  — position- and sequence-free: per molecule, the multiset of elements, the net charge and
+               the number of bonds on each element must match; every bond's (type, type) kind and every
+               atom's (type, charge) must occur in the reference or in the declared join catalogue
+               (`tc_allowed_bond_pairs`, `tc_allowed_type_charges`, built by eval/catalogue.py). For
+               random-sequence PCE, where any draw of the requested architecture is equally correct.
                METRICS v1.2 (owner, 2026-11-05): v1.1 compared the count of each bond kind and the
-               multiset of (type, charge), which both depend on the draw (the bonds that join neighbouring
-               units, the bond-increment charges of the units at the chain ends), so a correct draw could fail.
+               multiset of (type, charge), which depend on the draw: the bonds that join neighbouring
+               units, and the types and charges of the atoms where an end group meets a unit (an H cap
+               turns a CH into a CH2), so a correct draw could fail.
 
 TC.2 compares a file with a trusted reference *property by property*. Atoms are matched by
 position (minimum image) rather than by ID, so a consistent renumbering is not reported as a
@@ -225,8 +226,10 @@ def bond_kinds(m: Model) -> set:
     return {tuple(sorted((_type_name(m, i), _type_name(m, j)))) for i in range(m.natoms) for j in adj[i] if i < j}
 
 
-def molecule_chemistry(m: Model) -> Counter:
+def molecule_chemistry(m: Model, elements: Dict[str, str] = None) -> Counter:
+    """Per molecule: (element multiset, net charge, bonds per element); a type without an element counts as itself."""
     names = m.type_names or {}
+    elements = elements or {}
     q = m.q if m.q is not None else np.zeros(m.natoms)
     adj = _adjacency(m)
     comp = bond_graph_components(m)
@@ -235,14 +238,14 @@ def molecule_chemistry(m: Model) -> Counter:
         mols.setdefault(int(c), []).append(i)
     out = Counter()
     for atoms in mols.values():
-        # atom-type multiset; charges are compared as a set of (type, charge) values (type_charges), because
-        # the bond-increment charges of the units at the chain ends depend on which units they are
-        tc = Counter(str(names.get(int(m.types[i]), int(m.types[i]))) for i in atoms)
-        # bonds per atom type: fixed by the architecture, whatever the order of the units (which bond kinds
-        # join neighbouring units depends on the draw, so their counts are not compared; bond_kinds is)
+        # elements, not types: where an end group meets a unit, the atom types and bond-increment charges
+        # depend on which unit it is; types and charges are compared as sets (type_charges, bond_kinds)
+        el = {i: (lambda n: elements.get(n, n))(str(names.get(int(m.types[i]), int(m.types[i])))) for i in atoms}
+        tc = Counter(el.values())
+        # bonds per element: fixed by the architecture, whatever the order of the units
         deg = Counter()
         for i in atoms:
-            deg[str(names.get(int(m.types[i]), ""))] += len(adj[i])
+            deg[el[i]] += len(adj[i])
         key = (tuple(sorted(tc.items())), round(float(sum(q[i] for i in atoms)), 3), tuple(sorted(deg.items())))
         out[key] += 1
     return out
@@ -264,7 +267,8 @@ def tc2_position_free(pf, m: Model, cfg, ref_path: str, mode: str) -> CheckResul
         a, b = molecule_hashes(m), molecule_hashes(r)
         what = "molecular graphs"
     else:
-        a, b = molecule_chemistry(m), molecule_chemistry(r)
+        table = element_table(cfg)
+        a, b = molecule_chemistry(m, table), molecule_chemistry(r, table)
         what = "molecule chemistries"
         dec = declared(cfg)
         allowed = bond_kinds(r) | {tuple(sorted(map(str, p))) for p in dec.get("tc_allowed_bond_pairs") or []}

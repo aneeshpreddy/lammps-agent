@@ -206,9 +206,9 @@ The metrics were frozen in METRICS v1.1 (2026-10-26), before any scored run. The
 
 **TC.2 modes:**
 - **`graph`:** identical molecules by a Weisfeiler–Lehman hash of the typed, charged bond graph; for minerals, also the same cell.
-- **`chemistry`:** for random or gradient sequences, where any draw of the requested architecture is correct. Per molecule it requires the same atom types, net charge and number of bonds on each atom type. Every bond kind and every (atom type, charge) must also occur in the reference, or in a catalogue of the values any draw can contain. The catalogue is built from two-unit chains of the requested monomers.
+- **`chemistry`:** for random or gradient sequences, where any draw of the requested architecture is correct. Per molecule it requires the same elements, net charge and number of bonds on each element. Every bond kind and every (atom type, charge) must also occur in the reference, or in a catalogue of the values any draw can contain. The catalogue is built from two-unit chains of the requested monomers.
 
-**The one revision (v1.2).** In v1.1 the chemistry mode also compared the count of each bond kind and the exact list of charges. Both depend on the random order: the bonds that join neighbouring units, and the charges of the units at the chain ends. A correct file could therefore fail by chance. On dev task c04, the reference recipe itself passed with only 5 of 10 seeds. v1.2 removes that dependence. Every buildable draw now passes (55 of 55 on the four dev tasks), and wrong compositions, side-chain lengths and chain ends still fail. All development results were re-scored, and the validator matrix was re-run.
+**The one revision (v1.2).** In v1.1 the chemistry mode also compared the count of each bond kind and the exact list of charges. Both depend on the random order: the bonds that join neighbouring units, and the types and charges of the atoms where an end group meets a unit. A correct file could therefore fail by chance. On dev task c04, the reference recipe itself passed with only 5 of 10 seeds. v1.2 removes that dependence. Every buildable draw now passes: 55 of 55 on the four dev tasks, and all 18 example recipes. Wrong compositions, side-chain lengths and chain ends still fail. All development results were re-scored, and the validator matrix was re-run.
 
 **Neither condition alone is enough.** A valid file can be the wrong system, and the right system can be written invalidly.
 
@@ -401,7 +401,7 @@ We state this as a gap in the reviewed literature, not as proven novelty. A wide
 
 ## Appendix: reproducing the results
 
-**[RESULTS]**: commands and the frozen configuration. From a clean checkout:
+**[RESULTS]**: commands and the frozen configuration. From a clean checkout, with INTERFACE FF 1.5 (`INTERFACE_FF_1_5/`) and the group's mineral models (`CEMENT_MINERALS/`) placed next to the repository (README, Install). They are not redistributed.
 
 ```bash
 python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt   # + LAMMPS (README)
