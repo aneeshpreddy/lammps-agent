@@ -43,7 +43,7 @@ SPLIT = os.path.join(ROOT, "eval", "split.json")
 PRICING = os.path.join(ROOT, "eval", "pricing.json")
 # METRICS.md v1.1 §5 / LOG.md 2026-10-26: the frozen split every scored run is tied to
 SPLIT_SHA256 = "063c2ddad24be986bf16dd3b8a549c3681871837d133d20340416003d6cb5fe4"
-TEST_OPENS = _dt.date(2026, 11, 16)          # METRICS.md §6
+TEST_OPENS = _dt.date(2026, 11, 6)           # METRICS.md §6 (v1.2: moved from 16 Nov by the owner, opened after the freeze)
 METRICS_VERSION = "1.2"                       # 1.2 (owner 2026-11-05): order-free TC.2 chemistry mode
 TIER_ORDER = {0: 0, 1: 1, 2: 2, 3: 3, "TC": 4}
 

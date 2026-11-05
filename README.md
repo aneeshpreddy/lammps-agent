@@ -49,7 +49,7 @@ python -m eval.experiment run --split dev --systems baseline agent-nofeedback ag
 python scripts/freeze_config.py [--check]                         # code freeze record: docs/FROZEN_CONFIG.md
 ```
 
-The harness refuses the test split before 16 Nov and checks the split and task files against the frozen hashes (METRICS.md). The experiment runner also refuses the test split unless the configuration is unchanged since the code freeze. Design and settings: `docs/BASELINE.md` (baseline), `docs/TOOLS.md` (tools), `docs/AGENT.md` (agent loop, the dropped variant E), `docs/EVALUATION.md` (experiments, tables, freeze).
+The harness refuses the test split before its opening date (right after the code freeze, METRICS §6) and checks the split and task files against the frozen hashes (METRICS.md). The experiment runner also refuses the test split unless the configuration is unchanged since the code freeze. Design and settings: `docs/BASELINE.md` (baseline), `docs/TOOLS.md` (tools), `docs/AGENT.md` (agent loop, the dropped variant E), `docs/EVALUATION.md` (experiments, tables, freeze).
 
 PCE files are written in a box slightly bigger than the atoms (2 Å per face; supervisor 2026-10-26, checked by P2.10). Force fields: CVFF-INTERFACE (class I) and PCFF-INTERFACE (class II), INTERFACE FF 1.5. The builders refuse to write a file when the force field lacks a parameter (other than class II cross terms) or when msi2lmp writes a non-finite value.
 

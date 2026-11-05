@@ -7,7 +7,8 @@
 Writes into DIR (default runs/requests/<timestamp>/):
   system.data   the accepted file (a copy of the last build), only if every Tier 0-3 check passed
   trace.jsonl   every model response, tool call and validation
-  REPORT.md     what was tried and why it failed, if no build was accepted
+  REPORT.md     what was tried and why it failed, if no build was accepted (or why the agent declined:
+                it says so when the builders cannot make the request, rather than build a substitute)
 and prints one sentence saying what was built, so the user can check it against the request: the
 validator certifies that the file is valid, not that it is the system that was meant.
 
@@ -59,6 +60,8 @@ def main(argv=None) -> int:
     print(f"{'ACCEPTED' if accepted else 'NOT ACCEPTED'}: {r['stop']} ({r['attempts']} attempt(s))")
     if r.get("build_summary"):
         print(r["build_summary"])
+    if r.get("reply"):
+        print(f"Agent: {r['reply']}")
     if accepted:
         dest = os.path.join(out, "system.data")
         shutil.copyfile(r["data_file"], dest)
@@ -69,7 +72,7 @@ def main(argv=None) -> int:
         if r.get("error"):
             print(f"Error: {r['error']}")
         if r.get("report"):
-            print(f"Report: {r['report']} (do not use the last file without review)")
+            print(f"Report: {r['report']}" + (" (do not use the last file without review)" if r.get("data_file") else ""))
     print(f"Trace: {os.path.join(out, 'trace.jsonl')}" + (f" · cost ${cost:.4f}" if cost else ""))
     return 0 if accepted else 1
 

@@ -15,7 +15,7 @@ Each failure gets a SUGGESTED gap type (plan Day 25, step 2), for a human to con
   pipeline     the spec was right but the file failed validation: a builder or validator problem
   validator    a check was NOT_CALIBRATED / NOT_EVALUATED (INCOMPLETE)
   infrastructure  API error
-Hidden specs are read through eval.harness.load_tasks, which keeps the test split closed until 16 Nov.
+Hidden specs are read through eval.harness.load_tasks, which keeps the test split closed until its opening date (METRICS §6).
 """
 from __future__ import annotations
 

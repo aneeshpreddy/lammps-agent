@@ -594,3 +594,13 @@ Model access is still with the supervisor (expected in 1–2 days). Haiku 5.5 wa
 
 ### Hours
 - To be filled by project owner.
+
+### 2026-11-06: natural-language trial, decline path, freeze
+- **Trial of `agents/run.py`** on six chemist-style requests (no eval task). The fixes are loop-v2 and baseline-v3 (docs/AGENT.md).
+  - **Found:** a CLAYFF C-S-H request was answered with a PCFF tobermorite substitute, because the loop pushed past the agent's correct decline. Also, APEG side chains got methoxy ends, and a vague request was filled with unstated defaults.
+  - **Fixed:**
+    - a reply without a build is a decline;
+    - the prompt asks the agent to decline rather than substitute, and to state its assumptions (printed by the CLI);
+    - the shared knowledge gives default side-chain ends.
+  - **Rerun:** 6/6 right, and the C-S-H request is declined. About $0.15 for both trials.
+- **Owner:** "do not be particular on the dates … completed as soon as possible". The test split opens after the freeze, not on 16 Nov: `TEST_OPENS` is now 6 Nov, and METRICS §6 is updated.

@@ -10,6 +10,7 @@ They read the task's hidden spec, so they are harness and loop checks, never res
   wrongvalid  attempt 1 builds a valid but different system (eval/systems.py perturb_spec: one more cell,
             EO unit or acid unit); after feedback it builds the hidden spec. Without variant E the wrong
             build is accepted; with E the request check catches it
+  decline   answers that the builders cannot make the request, without building    -> declined, no file
 The request check's extraction call (no tools) is answered with what the hidden spec states.
 Responses mimic the SDK's shape (stop_reason, content blocks, usage) with fixed token counts.
 """
@@ -21,7 +22,7 @@ from types import SimpleNamespace
 
 from agents.baseline import from_builder_spec
 
-POLICIES = ("perfect", "fix", "stubborn", "runaway", "wrongvalid")
+POLICIES = ("perfect", "fix", "stubborn", "runaway", "wrongvalid", "decline")
 _KIND = {"minerals": "mineral", "pce": "pce_ester", "composite": "composite"}
 
 
@@ -61,6 +62,8 @@ class ScriptedClient:
         last_tool = _last_tool_name(msgs) if last["role"] == "user" and not _has_text(last) else None
         last_error = _last_tool_error(last) if last_tool else False
 
+        if self.policy == "decline":
+            return self._text("The builders cannot make this request: no such force field in the catalogue.")
         if self.policy == "runaway":
             return self._tool("get_model_info", {"model": "tob11_unit_cell", "force_field": "pcff"})
         if last_tool is None:                                   # start of an attempt

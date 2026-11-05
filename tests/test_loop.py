@@ -183,3 +183,11 @@ def test_run_command_writes_the_file_and_says_what_was_built(tmp_path, capsys):
     assert ok, "accepted run: system.data written and the build sentence printed"
     assert main(["again", "--out", str(tmp_path / "r"), "--mock", "perfect:p02"]) == 2      # folder holds a run
     assert main([]) == 2
+
+
+def test_a_reply_without_a_build_is_a_decline(tasks, tmp_path):
+    # loop-v2: the agent is not pushed into building a substitute for something the builders cannot make
+    out = AgentSystem(mock="decline")(tasks["p02"], str(tmp_path))
+    assert out["stop"] == "declined by the agent" and out["attempts"] == 1 and out["data_file"] is None
+    assert "cannot make" in out["reply"] and os.path.exists(tmp_path / "REPORT.md")
+    assert not [e for e in _events(tmp_path) if e["event"] == "feedback"]

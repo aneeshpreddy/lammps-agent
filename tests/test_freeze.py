@@ -23,6 +23,8 @@ def test_record_and_check(tmp_path, monkeypatch):
     assert freeze_config.check() == []
     c["loop"]["limits"]["max_attempts"] += 1
     c["git_commit"] = "something else"                 # volatile: not compared
+    c["git_tag"] = None                                 # later commits are not on the tag
+    c["pricing"] = {"date": "2026-11-16"}               # prices re-checked on the day of use
     json.dump(c, open(path, "w"))
     assert freeze_config.check() == [f"loop.limits.max_attempts: frozen {c['loop']['limits']['max_attempts']} / "
                                      f"now {c['loop']['limits']['max_attempts'] - 1}"]

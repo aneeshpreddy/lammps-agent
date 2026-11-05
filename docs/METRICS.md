@@ -100,7 +100,7 @@ system written with a defect fails Tier 0–3 (plan Day 20 "watch out").
 
 ## 6. Rules
 
-- The **test split is not opened** (no runs, no reading of failures) until 16 Nov (plan Day 41).
+- The **test split is not opened** (no runs, no reading of failures) before the code freeze. It opens right after the freeze: 6 Nov 2026, moved from 16 Nov (plan Day 41) by the project owner, who asked to finish as soon as possible. Nothing about the systems changes after it is opened.
 - Tuning (prompts, tools, limits) uses the dev split only; every change is logged with its dev score.
 - A reference that turns out to be wrong is fixed only with a logged reason; every system is then
   re-scored on that task.

@@ -176,6 +176,21 @@ The exit status is 0 if accepted, 1 if not accepted, and 2 if there was no run.
 
 **It stays off for the agent:** it had no effect and costs a few more tokens. It stays on for the person reading the result.
 
+## Declining and stating assumptions (loop-v2, 6 Nov)
+
+**The trial.** Six natural-language requests, written in a chemist's style, were run through `agents/run.py`. No eval task was involved.
+- Four were right.
+- On the APEG surface request, the side chains got methoxy ends. The request did not say, but APEG is normally OH-terminated.
+- "Make me a PCE…" was built with silent defaults.
+- **"C-S-H with Ca/Si 1.7 and water in CLAYFF" came back as tobermorite 14 Å in PCFF-INTERFACE, ACCEPTED.** The agent had declined correctly in attempt 1. The loop then fed back "Build the requested system", and the agent built a substitute.
+
+**Changes:**
+- **A reply without a build is a decline.** If an attempt ends with an answer and no successful build, the run stops as "declined by the agent". No file is written; the reason goes to the reply and to REPORT.md.
+- **The agent prompt** tells it to decline, rather than substitute, what the builders cannot make, and to name its assumptions in its final reply. `agents/run.py` prints that reply.
+- **The shared knowledge (baseline-v3)** gives the side-chain end when the request does not state one: OCH3 for MPEG, OH for APEG, HPEG, TPEG and VPEG. Every eval task states it, so no task is affected.
+
+**After the change, the same six requests** gave six right outcomes. Each one lists its assumptions, the APEG ends are OH, and the C-S-H request is declined with the reason. Test: mock policy `decline`.
+
 ## Variant E: build summary and request check (dropped by the owner on 5 Nov)
 
 E is not part of the test experiment. Its code stays in the repository (`--system agent-checked`), so the dev result below can be reproduced.

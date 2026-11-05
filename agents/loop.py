@@ -51,7 +51,7 @@ from tools.facts import data_facts  # noqa: E402
 from tools.toolbox import TOOLS_VERSION, ToolBox, definitions, guard_workdir  # noqa: E402
 from validator import load_config, validate  # noqa: E402
 
-LOOP_VERSION = "loop-v1 (2026-10-27)"
+LOOP_VERSION = "loop-v2 (2026-11-06)"     # v2: an attempt that ends with a reply and no build is a decline
 FEEDBACK_MODES = ("full", "tiers01", "none")
 DEFAULT_LIMITS = {"max_attempts": 3, "max_steps_per_attempt": 12, "max_tokens_per_task": 400000,
                   "max_wall_s": 1200, "tool_timeout_s": 300}
@@ -62,7 +62,8 @@ You do not write the file: the deterministic builders do (INTERFACE FF 1.5, msi2
 ## How to work
 - Build the requested system with build_data_file. get_model_info compares mineral models and get_reference_example shows the exact input format; use them when they help.
 - Check the facts build_data_file returns against the request (element counts, backbone sequences, counter-ions, supercell, surface, height). If they do not match, change the spec and build again.
-- When the last build is the requested system, stop calling tools and reply with one sentence. The last successful build is the one submitted.
+- When the last build is the requested system, stop calling tools and reply in one or two sentences, naming any assumption you made for what the request did not state. The last successful build is the one submitted.
+- If the request asks for something the builders cannot make (another force field, a system or model not in the catalogue, a composition or property you cannot set), do not build a substitute: stop without building and say in one or two sentences what is not supported.
 - After you stop, the file is validated. If validation fails you receive the result and can rebuild."""
 
 
@@ -330,7 +331,7 @@ class AgentSystem:
         messages = [{"role": "user", "content": task["input"]}]
         usage = Counter()
         seen = Counter()
-        attempts, final, stop, error = [], None, None, None
+        attempts, final, stop, error, reply = [], None, None, None, None
         build_attempt, res = {}, None
         req, raised = None, set()
         if self.checks:                         # variant E: what the request states, read by a separate call
@@ -374,6 +375,8 @@ class AgentSystem:
                             usage=call_usage, latency_s=round(time.time() - tc, 2),
                             content=[_dump(b) for b in resp.content])
                 messages.append({"role": "assistant", "content": resp.content})
+                said = " ".join(_get(b, "text") for b in resp.content if _get(b, "type") == "text").strip()
+                reply = said or reply
                 if resp.stop_reason == "tool_use":
                     results = []
                     for b in resp.content:
@@ -399,6 +402,15 @@ class AgentSystem:
                 else:                       # end_turn, max_tokens, ...: the attempt is over
                     ended = resp.stop_reason
             if stop and tb.last_build is None:
+                break
+            if ended == "end_turn" and tb.last_build is None:
+                # the model stopped and answered without a successful build: it declines (the prompt tells it to
+                # when the builders cannot make the request); pushing it to build would produce a substitute
+                stop = "declined by the agent"
+                trace.event("validation", attempt=attempt, file=None, verdict="NO_BUILD", passed=False,
+                            fingerprint=("NO_BUILD",))
+                attempts.append({"attempt": attempt, "steps": steps, "ended": ended, "file": None,
+                                 "verdict": "NO_BUILD", "fingerprint": ["NO_BUILD"]})
                 break
 
             # the orchestrator validates the attempt's last build: always (plan Day 30)
@@ -462,7 +474,8 @@ class AgentSystem:
         if out_file:                    # what the submitted file is, in words, for whoever reads the result
             entry = tb.entry_of(out_file)
             built = describe_build(entry["spec"], data_facts(out_file), entry.get("details"))
-        return {"data_file": out_file, "report": report, "build_summary": built, "attempts": len(attempts) or 1,
+        return {"data_file": out_file, "report": report, "build_summary": built, "reply": reply,
+                "attempts": len(attempts) or 1,
                 "usage": {} if self.mock else dict(usage),
                 "error": error or (None if final or out_file else f"no build ({summary['stop']})"),
                 "escalated": summary["stop"].startswith("escalated"), "stop": summary["stop"], "trace": summary}

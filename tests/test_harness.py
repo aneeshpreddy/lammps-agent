@@ -13,9 +13,9 @@ from eval.harness import aggregate, load_tasks
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-def test_test_split_is_closed_before_16_nov():
-    with pytest.raises(RuntimeError, match="closed until 2026-11-16"):
-        load_tasks("test", today=dt.date(2026, 11, 15))
+def test_test_split_is_closed_before_its_date():
+    with pytest.raises(RuntimeError, match="closed until 2026-11-06"):
+        load_tasks("test", today=dt.date(2026, 11, 5))
     assert len(load_tasks("dev")) == 13
 
 

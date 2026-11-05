@@ -36,7 +36,7 @@ def model_config() -> dict:
 MODEL = model_config().get("model_id") or "claude-sonnet-5-5"  # config.yaml; Claude API ID, models overview 2026-11-03
 EFFORT = model_config().get("effort") or "medium"               # the model's documented default, set explicitly
 MAX_TOKENS = 16000
-PROMPT_VERSION = "baseline-v2 (2026-11-03)"   # v2: unstated end groups = CH3, CH3 (owner: follow the references)
+PROMPT_VERSION = "baseline-v3 (2026-11-06)"   # v2: unstated end groups = CH3, CH3 (owner: follow the references); v3: unstated side-chain ends
 UGRP = os.path.dirname(ROOT)
 
 # ---------------------------------------------------------------------------------------------
@@ -218,6 +218,7 @@ A vinyl backbone of monomer units, each unit given a short label (1-3 letters or
 - kind "ester_peg": (meth)acrylate ester carrying a PEG side chain: alpha_methyl false = acrylate ester, true = methacrylate ester (MPEG type); eo_units = ethylene-oxide units in the side chain; end "OH" or "OCH3" (methoxy).
 - kind "ether_peg": vinyl-ether-anchored PEG: APEG (allyl) = alpha_methyl false, spacer 1; HPEG (methallyl) = alpha_methyl true, spacer 1; TPEG (isoprenyl) = alpha_methyl true, spacer 2; VPEG (butenyl / 4-hydroxybutyl vinyl) = alpha_methyl false, spacer 2; eo_units and end as above.
 - kind "diacid": maleic unit; deprotonated = number of carboxylates (0, 1 or 2).
+Side-chain end when the request does not state it: "OCH3" for ester_peg (MPEG, methoxy PEG) and "OH" for ether_peg (APEG, HPEG, TPEG, VPEG).
 Unused fields of a monomer are null.
 composition: number of units of each label per chain (the backbone length is the sum). Partly deprotonated acid = two labels (one deprotonated, one not).
 sequence.mode: "random" (shuffled), "alternating" (side-chain units spread evenly between the others), "block" (units in the order of the composition list: all of the first label, then the next), "gradient" (side-chain density increasing along the chain), or "explicit" with sequence.explicit = the full list of labels in chain order.

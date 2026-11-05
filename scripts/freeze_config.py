@@ -22,7 +22,9 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ROOT)
 JSON_PATH = os.path.join(ROOT, "docs", "FROZEN_CONFIG.json")
 MD_PATH = os.path.join(ROOT, "docs", "FROZEN_CONFIG.md")
-VOLATILE = ("recorded", "git_commit", "git_dirty")       # not compared by --check
+# not compared by --check: git state moves on after the freeze (results, report), and the prices are re-checked
+# on the day of use (CLAUDE.md) without changing what any system does; all are still recorded
+VOLATILE = ("recorded", "git_commit", "git_dirty", "git_tag", "pricing")
 
 
 def _h(x) -> str:
