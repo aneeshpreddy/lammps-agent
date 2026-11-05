@@ -1,11 +1,11 @@
 # Declared validation configuration record (SPEC §7.10) — PRIMARY system class from v0.5.
-# STATUS: PROVISIONAL_DEFAULT. Adopted on 2026-10-19 as the default-unless-objection choice
+# STATUS: ACCEPTED by the project owner 2026-11-05 (was PROVISIONAL_DEFAULT). Adopted on 2026-10-19 as the default-unless-objection choice
 # (SPEC §7.3 B/C, LOG 2026-10-19): bulk tobermorite 11 Å / 14 Å from the INTERFACE FF 1.5 model
 # database (Heinz et al., Langmuir 2013, 29, 1754; structures after Merlino 1999), PCFF-INTERFACE
 # (class II), coefficients written in the DATA FILE. Supervisor confirmation pending.
 config_id: interface-pcff-tobermorite
 config_version: 0.1
-status: PROVISIONAL_DEFAULT
+status: ACCEPTED                  # by the project owner 2026-11-05 (was PROVISIONAL_DEFAULT)
 derived_from: [REF-05, REF-06, REF-07, REF-08]
 
 units: real                       # OD-C3  INTERFACE/PCFF parameters are in real units

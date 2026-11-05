@@ -1,9 +1,9 @@
 # Declared validation configuration for a PCE on an INTERFACE FF 1.5 cement-mineral surface, written by
 # builders/composite.py in CVFF-INTERFACE (class I) — C3S and C3A surfaces only.
-# STATUS: PROVISIONAL_DEFAULT (supervisor 2026-10-26: "yes a combined builder").
+# STATUS: ACCEPTED by the project owner 2026-11-05 (was PROVISIONAL_DEFAULT) (supervisor 2026-10-26: "yes a combined builder").
 config_id: interface-cvff-composite
 config_version: 0.1
-status: PROVISIONAL_DEFAULT
+status: ACCEPTED                  # by the project owner 2026-11-05 (was PROVISIONAL_DEFAULT)
 derived_from: [REF-01..REF-04 (EMC PCE), data/reference/minerals/*_cvff, ion contact sources]
 
 units: real                       # OD-C3  INTERFACE/PCFF parameters are in real units

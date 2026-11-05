@@ -561,3 +561,13 @@ Model access is still with the supervisor (expected in 1–2 days). Haiku 5.5 wa
 
 ### Hours
 - To be filled by project owner.
+
+### 2026-11-05: declared configurations accepted
+- **Done.** The project owner accepted every value in the 8 declared configurations (`configs/*.yaml`): `status: ACCEPTED`, recorded in SPEC §7.14, README and CLAUDE.md.
+  - No value changed, and the validator does not read `status`.
+  - The calibration records (`calibration/*.json`) are not covered.
+- **Not done.** The claim framing, the c04 scoring fix, E, and the test-open date (owner and supervisor).
+- **Tomorrow.** Act on those decisions, then the final dev run and the freeze.
+
+### Hours
+- To be filled by project owner.

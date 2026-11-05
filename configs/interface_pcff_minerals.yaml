@@ -1,9 +1,9 @@
 # Declared validation configuration for INTERFACE FF 1.5 cement minerals in PCFF-INTERFACE (class II):
 # C3S, C3A, ettringite, monosulfate, tobermorite 11/14 Å — unit cells, rectangular cells and surfaces
-# (UGRP/CEMENT_MINERALS). STATUS: PROVISIONAL_DEFAULT (supervisor 2026-10-20: "let it learn about all").
+# (UGRP/CEMENT_MINERALS). STATUS: ACCEPTED by the project owner 2026-11-05 (was PROVISIONAL_DEFAULT) (supervisor 2026-10-20: "let it learn about all").
 config_id: interface-pcff-minerals
 config_version: 0.1
-status: PROVISIONAL_DEFAULT
+status: ACCEPTED                  # by the project owner 2026-11-05 (was PROVISIONAL_DEFAULT)
 derived_from: [data/reference/minerals/*_pcff (all INTERFACE cement-mineral models)]
 
 units: real                       # OD-C3  INTERFACE/PCFF parameters are in real units

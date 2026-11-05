@@ -89,9 +89,9 @@ Every result follows the `ValidationResult` schema (plan Appendix B). Each check
 ## Configuration
 
 - `config.yaml` (project): the LAMMPS executable, the backend (`local` · `ssh` · `docker`), the timeout, and the default declared configuration.
-- `configs/*.yaml`: the declared validation configuration records (SPEC §7.10). These set the units, atom_style, boundary and styles, and the policies for image flags, wrapping, tilt, charge, encoding and the warning allow-list. **Every value is provisional until the project owner decides** (SPEC §7.14).
-  - `interface_pcff_tobermorite.yaml`: **the primary system** — bulk tobermorite, PCFF-INTERFACE (status PROVISIONAL_DEFAULT, SPEC §7.3). Default in `config.yaml`.
-  - `emc_pcff_real_full.yaml`: for the EMC/PCFF PCE references (status PROVISIONAL; regression set).
+- `configs/*.yaml`: the declared validation configuration records (SPEC §7.10). These set the units, atom_style, boundary and styles, and the policies for image flags, wrapping, tilt, charge, encoding and the warning allow-list. **The project owner accepted every value on 2026-11-05** (SPEC §7.14).
+  - `interface_pcff_tobermorite.yaml`: **the primary system** — bulk tobermorite, PCFF-INTERFACE (status ACCEPTED, SPEC §7.3, §7.14). Default in `config.yaml`.
+  - `emc_pcff_real_full.yaml`: for the EMC/PCFF PCE references (status ACCEPTED; regression set).
   - `interface_pcff_fixture.yaml`: for the synthetic tobermorite fixtures (status SYNTHETIC).
 - `calibration/*.json`: the Tier 2 tolerances, with the reference IDs, SHA-256 checksums and the basis for each value. Rebuild them with `python scripts/calibrate.py`.
 - Each data file has a sidecar `<name>.json` that names its declared configuration and per-file overrides (for example the coefficient file).

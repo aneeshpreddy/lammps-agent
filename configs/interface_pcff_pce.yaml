@@ -1,9 +1,9 @@
 # Declared validation configuration for PCE structures written by builders/pce.py in PCFF-INTERFACE
-# (class II). STATUS: PROVISIONAL_DEFAULT (force field chosen by the project, supervisor 2026-10-20:
+# (class II). STATUS: ACCEPTED by the project owner 2026-11-05 (was PROVISIONAL_DEFAULT) (force field chosen by the project, supervisor 2026-10-20:
 # "F.F is our choice"; class II member of the INTERFACE FF 1.5 pair).
 config_id: interface-pcff-pce
 config_version: 0.2
-status: PROVISIONAL_DEFAULT
+status: ACCEPTED                  # by the project owner 2026-11-05 (was PROVISIONAL_DEFAULT)
 derived_from: [REF-01, REF-02, REF-03, REF-04]   # tolerances (element pairs) from the EMC PCE files
 
 units: real
@@ -67,7 +67,7 @@ box_margin:                           # P2.10 (supervisor 2026-10-26)
   basis: >-
     Supervisor 2026-10-26: "After making PCE, it just have to be inside a box, let it be a box slightly
     bigger than the bounds of the atoms of PCE". The builder leaves 2 Å on every face. The window is a
-    PROVISIONAL reading of "slightly": >= 1 Å keeps every atom off the box faces (periodic images >= 2 Å
+    Reading of "slightly" (accepted by the project owner 2026-11-05): >= 1 Å keeps every atom off the box faces (periodic images >= 2 Å
     apart, P2.3 still judges any closer pair); <= 5 Å rules out the old 10 Å vacuum padding.
 calibration: calibration/pce_builder.json
 tier3:

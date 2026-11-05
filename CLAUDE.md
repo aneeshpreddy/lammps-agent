@@ -10,7 +10,7 @@ validator (done; Gate 1 passed, owner 22 Oct) → eval set (v3: 22 tasks PCE + m
 - Never write into `data/reference/` (the files are read-only). Corrupted variants go to `data/corrupted/`.
 - No tolerance without a derivation. A property without a tolerance returns NOT_CALIBRATED, and that never counts as PASS. Record new tolerances in `calibration/*.json` through `scripts/calibrate.py`.
 - "LAMMPS would catch it" never satisfies a property (PROPERTIES §8.8).
-- Owner decisions (OD-B…OD-N, S-Q1…S-Q7) are not yours to take. Use the provisional values in `configs/*.yaml` and list them (SPEC §7.14).
+- Owner decisions (OD-B…OD-N, S-Q1…S-Q7) are not yours to take. The values in `configs/*.yaml` were accepted by the owner on 2026-11-05 (SPEC §7.14); changing one is again the owner's decision.
 - The orchestrator will always run the validator after each generation attempt. Do not expose it as an optional agent tool.
 - Record model IDs and prices from the docs on the day you use them, never from memory.
 

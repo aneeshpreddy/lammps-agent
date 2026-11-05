@@ -274,6 +274,10 @@ Build order (CLAUDE.md §3): validator → evaluation set → single-call baseli
 
 ## 7.14 Validator-phase status and provisional values (v0.4; updated v0.5)
 
+**Update 2026-11-05: accepted.** The project owner accepted every value in the 8 declared configurations in `configs/*.yaml` as they stand. Their `status` is now `ACCEPTED` (the old status is kept in a comment). The synthetic fixture configuration stays `SYNTHETIC`. The values below are unchanged; only their status changed.
+- **Not covered:** the calibration tolerances in `calibration/*.json`. The supervisor accepted the Tier 2 margins on 26 Oct (§7.17), but their records still carry the status written by `scripts/calibrate.py`.
+- **The validator does not read `status`,** so no verdict changes.
+
 **Built (plan Days 5–16):** own parser, Tiers 0–3, TC layer, local/SSH/Docker backends, calibration records, 49 corruption operators, validation matrix. Results: `VALIDATOR_RESULTS.md` (v0.5: 24/24 positive controls pass; 448/448 corrupted files rejected, 439 by the validator's own Tier 0–2 checks, 9 only by TC.2; the validator fails exactly the 6 of 10 LAMMPS-replicated supercells that TC.2 shows to be wrong). Implementation map: PROPERTIES §8.10.
 
 **Primary configuration `configs/interface_pcff_tobermorite.yaml` (PROVISIONAL DEFAULT, v0.5):** units real · atom_style full · boundary p p p · masses and all coefficients in the DATA FILE (class II sections allowed) · coordinates wrapped, image flags optional, no unwrapped-coordinate check (infinite bonded crystal) · tilt: documented bound and source criterion, FAIL · neutral, statistical charge floor · molecule-ID/bond policy: report · bonded-term consistency and completeness required · Tier 3b: class2 styles, `special_bonds lj/coul 0 0 1`, **Ewald 1e-4** (this build's PPPM segfaults on most tobermorite supercells, FAILURE_MODES §9.6) · build: Homebrew `lmp_serial` 22 Jul 2025 – Update 6.

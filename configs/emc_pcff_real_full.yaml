@@ -1,12 +1,12 @@
 # Declared validation configuration record (SPEC §7.10).
-# STATUS: PROVISIONAL. Every value below was derived from the candidate references
+# STATUS: ACCEPTED by the project owner 2026-11-05 (was PROVISIONAL). Every value below was derived from the candidate references
 # REF-01..REF-04 (EMC v9.4.4 builds of PCE superplasticisers, data/reference/provenance.md)
 # and their EMC-generated INPUT SCRIPTs. None of them is an owner decision yet. When the owner
 # decides OD-B/C/F/G/H/J/L/M/N or S-Q1..S-Q7, change the value, bump config_version, and
 # re-run the validator on every reference (a change invalidates earlier Tier 3 verdicts).
 config_id: emc-pcff-real-full
 config_version: 0.3
-status: PROVISIONAL
+status: ACCEPTED                  # by the project owner 2026-11-05 (was PROVISIONAL)
 derived_from: [REF-01, REF-02, REF-03, REF-04]
 
 units: real                       # OD-C3   source: REF-0*.in 'units real'
