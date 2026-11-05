@@ -39,7 +39,7 @@ from eval.harness import evaluate, load_tasks  # noqa: E402
 LABELS = {"baseline": "A", "agent-nofeedback": "B", "agent": "C", "agent-tiers01": "D", "agent-checked": "E"}
 WHAT = {"A": "single call, no tools", "B": "loop, retries without feedback", "C": "loop + validator feedback",
         "D": "loop, Tier 0-1 feedback only", "E": "C + build summary + request check"}
-CONTRASTS = [("B", "A", "tools and retries"), ("C", "B", "validator feedback (the central claim)"),
+CONTRASTS = [("B", "A", "tools and retries"), ("C", "B", "validator feedback"),
              ("C", "A", "the whole agent"), ("C", "D", "Tier 2-3 feedback"), ("E", "C", "request check")]
 DOMAINS = ("mineral", "pce", "composite")
 # reference palette (dataviz skill, references/palette.md), light mode, categorical slots 1-5 in fixed order;

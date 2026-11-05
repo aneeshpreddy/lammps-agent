@@ -12,7 +12,7 @@ Code: `eval/experiment.py` (runner and tables) and `scripts/freeze_config.py` (f
 | D (optional) | `agent-tiers01` | feedback from Tier 0–1 checks only |
 | E (optional) | `agent-checked` | C + build summary + request check (docs/AGENT.md) |
 
-Every system uses the same model (`config.yaml` `model:`), the same tasks and the same repeats. The central claim is **B vs C**: the value of validator feedback.
+Every system uses the same model (`config.yaml` `model:`), the same tasks and the same repeats. The main result is the agent's (C's) validity and TC.2 success on the test split (docs/REPORT_DRAFT.md, Section 1; reframed by the owner on 2026-11-05). The contrasts explain where that reliability comes from. B vs C, the value of validator feedback, was the plan's original central claim; the dev runs showed that the feedback never fired.
 
 ## Dev results so far (3 Nov, Sonnet 5.5)
 

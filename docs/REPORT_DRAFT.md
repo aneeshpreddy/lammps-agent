@@ -1,12 +1,12 @@
 # Agentic generation of LAMMPS data files for cementitious systems, with a deterministic validator in the loop
 
-*Draft, 2026-10-28. This draft contains the sections that do not depend on model runs. Places that need results are marked **[RESULTS]**; they are filled from `docs/BASELINE_RESULTS.md`, `docs/RESULTS_DEV.md` and the test run (plan Days 41–43). Every number below comes from a generated document in this repository, which is named next to it. The prior-work statements were re-checked against the papers on 2026-10-28.*
+*Draft, 2026-10-28; main claim reframed on 2026-11-05 after the development runs (owner decision; the plan's original claim was the value of validator feedback, see Section 5.3). This draft contains the sections that do not depend on model runs. Places that need results are marked **[RESULTS]**; they are filled from `docs/BASELINE_RESULTS.md`, `docs/RESULTS_DEV.md` and the test run (plan Days 41–43). Every number below comes from a generated document in this repository, which is named next to it. The prior-work statements were re-checked against the papers on 2026-10-28.*
 
 ---
 
 ## Abstract
 
-**[RESULTS]**: written last. The intended shape is as follows. Large language models can drive molecular-dynamics tools, but the LAMMPS data file a simulation starts from can be wrong without LAMMPS noticing. We build a deterministic validator for LAMMPS data files: 44 properties in four tiers, calibrated tolerances, and LAMMPS used only as the last tier, never as proof. We show that the validator catches every one of 948 corrupted files, including 515 of the 521 that LAMMPS accepts silently or with only a warning. We then place the validator in the loop of an LLM agent that generates data files for PCE superplasticisers, INTERFACE FF cement minerals and PCE-on-mineral composites in CVFF- and PCFF-INTERFACE. We measure, on held-out tasks, how much the validator's feedback improves on a single-call baseline and on retries without feedback.
+**[RESULTS]**: written last. The intended shape is as follows. Large language models can drive molecular-dynamics tools, but the LAMMPS data file a simulation starts from can be wrong without LAMMPS noticing. We build a deterministic validator for LAMMPS data files: 44 properties in four tiers, calibrated tolerances, and LAMMPS used only as the last tier, never as proof. We show that the validator catches every one of 948 corrupted files, including 515 of the 521 that LAMMPS accepts silently or with only a warning. We then build an LLM agent that turns a plain-English request into a LAMMPS data file for PCE superplasticisers, INTERFACE FF cement minerals and PCE-on-mineral composites in CVFF- and PCFF-INTERFACE. The model chooses what to build, deterministic builders write the file, and the validator checks every file before it is accepted. On held-out tasks, the generated files are accepted by LAMMPS without error in **[X] %** of cases and match the requested system in **[Y] %**, at about **[cost]** per file. An ablation against a single-call baseline and retries without feedback shows where this reliability comes from: the builders prevent invalid files, and the validator certifies them rather than repairs them.
 
 ---
 
@@ -36,7 +36,16 @@ The corrupted-file experiment in Section 3.4 puts a number on this. On 948 corru
 
 **"It runs" is therefore a weak test of a data file.** This matters for LLM agents in particular. An agent that checks its work by running LAMMPS will accept most of these files, and an agent that writes coordinates or topology itself can introduce exactly these defects.
 
-**Question.** Can an LLM agent generate correct LAMMPS data files for a realistic class of cementitious systems when a deterministic validator checks every attempt and its findings are fed back? How much of the improvement comes from that feedback, and not from tools or retries alone?
+**Question.** Can an LLM-based system turn a plain-English request into a LAMMPS data file for a realistic class of cementitious systems that (1) LAMMPS accepts without error and (2) is the system that was asked for, and can this be verified independently of LAMMPS?
+
+**Main claim.** Given a plain-English request, the system generates LAMMPS data files that LAMMPS accepts without errors in **[X] %** of cases and that match the requested system in **[Y] %** of cases, on held-out test tasks. Every file is checked by a deterministic validator that caught all 948 deliberately corrupted files. "Accurate" therefore has two measured parts:
+- **validity:** every Tier 0–3 check passes, including LAMMPS with the full force field;
+- **correctness:** TC.2 matches a trusted reference of the requested system.
+
+**What is not claimed:**
+- that validator feedback improves the agent (Section 6.4 reports what the ablation shows);
+- coverage beyond the system class of Section 2;
+- scientific correctness of a simulation set up from the file.
 
 ## 2. Scope and design decisions
 
@@ -265,7 +274,7 @@ The agent is a plain tool-use loop with no agent framework, so its control flow 
 |---|---|---|
 | A | single call | the model with knowledge alone |
 | B | the loop with retries, but only "the last build did not pass validation, try again" | tools and retries without information |
-| C | the loop with validator feedback | **B vs C: the value of the validator's feedback (the central claim)** |
+| C | the loop with validator feedback (the agent) | B vs C: whether the validator's feedback adds to retries |
 | D (optional) | feedback from Tier 0–1 checks only | the value of the physically informed Tier 2–3 feedback |
 | E (optional) | C + a build summary + a request check | catching valid-but-wrong builds (5.4) |
 
@@ -273,7 +282,7 @@ The agent is a plain tool-use loop with no agent framework, so its control flow 
 
 **What the validator cannot see.** Inside the loop, the validator can only catch **invalid** files. The builders produce valid files for almost every consistent spec, so a **valid file of the wrong system** passes inside the loop. Examples are the wrong mineral model, the wrong supercell, a wrong side-chain length, or HPEG where TPEG was asked for. It fails only TC.2 afterwards.
 
-**Why it matters for the comparison.** If most baseline failures are of this kind, B and C may differ little. That would be a finding about where validator feedback helps, not a defect of the experiment. Section 6 reports which kind of failure dominates.
+**Why it matters for the comparison.** If most baseline failures are of this kind, B and C may differ little. That would be a finding about where validator feedback helps, not a defect of the experiment. On the development split this is what happened: the validator rejected no build, so its feedback never fired (Section 6.2). This is why the main claim (Section 1) is about validity and correctness, not about feedback.
 
 **Variant E** (`docs/AGENT.md`) addresses this without ever seeing the reference. It adds two things:
 - **A build summary.** One plain sentence saying what was built.
@@ -292,9 +301,13 @@ E is decided on the development split only.
 **[RESULTS]** Filled from `python -m eval.experiment` (`docs/EVALUATION.md`). Planned content:
 
 - **6.1 Baseline on the development split.** Success, validity, failure categories and the failure analysis (`eval/analyse.py`). Gap types are suggested from a field-by-field comparison of the model's spec with the hidden spec: formatting, knowledge, reasoning, pipeline, validator. A human confirms them. The key question is what share of failures are TC-only (valid but wrong).
-- **6.2 Agent on the development split.** Side by side with the baseline. Recovery from first-attempt failures. Remaining failure categories. The single targeted change (plan Day 37) and its measured effect.
-- **6.3 Held-out test split.** A, B and C (D and E if run): 9 tasks × 3 repeats. Success with its spread across repeats, by domain, difficulty and force field.
-- **6.4 Ablation.** Paired per-task comparisons, reported as tasks better / same / worse with a sign test:
+- **6.2 Agent on the development split.** Side by side with the baseline. Recovery from first-attempt failures. Remaining failure categories. The changes made on dev and their measured effect. Notes for writing this up (from `docs/RESULTS_DEV.md`, `docs/BASELINE_RESULTS*.md` and `docs/LOG.md`, 3 Nov):
+  - **Baseline v1: 0.59.** 12 of its failures came from requests that leave the backbone end groups unstated. The prompt now states the default, and baseline v2 scores 0.92.
+  - **Validity 1.00.** The in-loop validator rejected no build, so C's feedback never fired.
+  - **The seed hint.** The refusal for a PCE too wide for a fixed slab cell now also suggests another seed. With it, the agents keep the requested cell: c06 went from 0/3 to 3/3.
+  - **Final dev scores:** A 0.92, B 1.00, C 0.97, E 0.90.
+- **6.3 Held-out test split: the main result.** The agent's (C's) validity and TC.2 success on 9 tasks × 3 repeats: the [X] % and [Y] % of the main claim. They are given with their spread across repeats, and by domain, difficulty and force field. A and B (D and E if run) are reported alongside.
+- **6.4 Ablation: where the reliability comes from.** Paired per-task comparisons, reported as tasks better / same / worse with a sign test. They are read as an explanation of the main result, not as the claim:
   - B vs A: tools and retries;
   - C vs B: feedback;
   - C vs D: Tier 2–3 feedback;
@@ -353,7 +366,7 @@ Every statement below was re-checked against the papers on 2026-10-28 (abstract 
 
 **Position.** In the works reviewed, no deterministic validator for the LAMMPS data file itself (types, charges, topology, box and force-field consistency) is provided. Deterministic checking of LLM output is not new (R18). This project contributes:
 1. such a validator, tested against a failure-mode taxonomy;
-2. its use as the always-on feedback source of a data-file-generating agent, with an ablation that isolates the value of that feedback.
+2. a data-file-generating agent whose every output this validator certifies, evaluated on held-out tasks for both validity and correctness against trusted references, with an ablation showing where its reliability comes from.
 
 We state this as a gap in the reviewed literature, not as proven novelty. A wider search of data-file checking tools was not completed.
 
@@ -368,7 +381,8 @@ We state this as a gap in the reviewed literature, not as proven novelty. A wide
 - **One model.** Results are for the model recorded in `docs/FROZEN_CONFIG.md`. A different model may fail differently.
 
 **About the systems:**
-- **The loop was built against scripted models** before any real model was available. Its limits (attempts, steps, tokens) are provisional and were tuned only on the development split.
+- **The loop was built against scripted models** before any real model was available. Its limits (attempts, steps, tokens) were checked on the development split, where no run needed more than one attempt.
+- **Feedback was barely exercised.** The builders refuse inconsistent specs, so the validator found nothing to reject in the agent's builds on the development split. The value of its feedback on systems where builders are less protective is therefore not measured here.
 - **Validity is not scientific correctness.** The validator certifies that a file is consistent and plausible. It does not certify that a model is suitable for a given scientific question.
 - **Scope.** Only CVFF/PCFF-INTERFACE, cement minerals, PCE and their composites. No C-S-H models beyond the database minerals, no CLAYFF, no reactive force fields, no input scripts.
 

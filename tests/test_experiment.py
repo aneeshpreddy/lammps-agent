@@ -37,7 +37,7 @@ def test_tables_and_figures(tmp_path):
     _write(exp, "agent", "agent", [True, True, True, False], attempts=2)
     md = tables(exp)
     assert "| **A** | baseline (single call, no tools) | **0.250** |" in md
-    assert "| C vs B | validator feedback (the central claim) | +0.250 | 1 / 3 / 0 | 1.000 |" in md
+    assert "| C vs B | validator feedback | +0.250 | 1 / 3 / 0 | 1.000 |" in md
     assert "| TC_ONLY | 6 | 2/6 | 4/6 |" in md                      # A's failures, B and C on the same runs
     assert "P2.1 → 4/8 succeed" in md                                  # inside the loop (B)
     assert os.path.exists(tmp_path / "figures" / "success_per_system.png")

@@ -41,7 +41,7 @@ Model: claude-sonnet-5-5. Prices: https://platform.claude.com/docs/en/about-clau
 | Contrast | What it isolates | Δ success | Tasks better / same / worse | Sign test p |
 |---|---|---|---|---|
 | B vs A | tools and retries | +0.077 | 1 / 12 / 0 | 1.000 |
-| C vs B | validator feedback (the central claim) | -0.026 | 0 / 12 / 1 | 1.000 |
+| C vs B | validator feedback | -0.026 | 0 / 12 / 1 | 1.000 |
 | C vs A | the whole agent | +0.051 | 1 / 11 / 1 | 1.000 |
 | E vs C | request check | -0.077 | 0 / 12 / 1 | 1.000 |
 

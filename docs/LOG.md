@@ -562,11 +562,14 @@ Model access is still with the supervisor (expected in 1–2 days). Haiku 5.5 wa
 ### Hours
 - To be filled by project owner.
 
-### 2026-11-05: declared configurations accepted
+### 2026-11-05: configurations accepted, main claim reframed
 - **Done.** The project owner accepted every value in the 8 declared configurations (`configs/*.yaml`): `status: ACCEPTED`, recorded in SPEC §7.14, README and CLAUDE.md.
   - No value changed, and the validator does not read `status`.
   - The calibration records (`calibration/*.json`) are also `ACCEPTED`. The 7 non-synthetic records were regenerated with `scripts/calibrate.py`: every tolerance value is identical, and only `status` and `date` changed.
-- **Not done.** The claim framing, the c04 scoring fix, E, and the test-open date (owner and supervisor).
+- **Main claim reframed (owner, 2026-11-05).** The main claim is now that the agent's files pass LAMMPS without error ([X] %) and match the requested system ([Y] %) on held-out tasks, and that every file is certified by a validator that caught 948/948 corrupted files.
+  - "Validator feedback improves the agent" is no longer claimed. The ablation explains the result instead: the builders prevent invalid files.
+  - Updated: REPORT_DRAFT (abstract, §1, §5.3–5.4, §6, §7 position, §8), EVALUATION.md, and the contrast label in `eval/experiment.py`.
+- **Not done.** The c04 scoring fix, E, and the test-open date (owner and supervisor).
 - **Tomorrow.** Act on those decisions, then the final dev run and the freeze.
 
 ### Hours
