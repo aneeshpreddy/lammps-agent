@@ -32,6 +32,15 @@ Why B and C cannot differ on these tasks is explained in docs/AGENT.md, "Known l
 - **Cost:** $0.93 for the three systems.
 - **No agent run was declined.**
 
+## Test results (6 Nov, frozen v1.0)
+
+`docs/RESULTS_TEST.md`, from `runs/exp/test_20261106-021208`. Run once, after the freeze.
+- **Success:** A 0.89, B 1.00, C 1.00.
+- **Validity:** 1.00 for every file produced.
+- **A's only failure:** c03, all 3 repeats. The builder refused, because the chain did not fit the requested slab cells. Both agents recovered on every repeat.
+- **C vs B:** 0 better / 9 same / 0 worse.
+- **Cost:** $0.64 in total.
+
 ## Running
 
 ```bash

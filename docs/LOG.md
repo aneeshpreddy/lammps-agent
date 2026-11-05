@@ -604,3 +604,9 @@ Model access is still with the supervisor (expected in 1–2 days). Haiku 5.5 wa
     - the shared knowledge gives default side-chain ends.
   - **Rerun:** 6/6 right, and the C-S-H request is declined. About $0.15 for both trials.
 - **Owner:** "do not be particular on the dates … completed as soon as possible". The test split opens after the freeze, not on 16 Nov: `TEST_OPENS` is now 6 Nov, and METRICS §6 is updated.
+- **Code freeze.** Final dev run on the code to be frozen: A 0.92, B 1.00, C 1.00 ($0.93). Tag `v1.0` (eacb286); freeze record `docs/FROZEN_CONFIG.md` (64ac239); `--check` unchanged; mock dry run of the test command OK; pushed with the tag.
+- **Test split, run once on the frozen code** (`runs/exp/test_20261106-021208`, `docs/RESULTS_TEST.md`, 9 tasks × 3 repeats):
+  - **Success:** A 0.889, B 1.000, C 1.000.
+  - **Validity:** 1.000 for every file produced. A's 3 failures are all c03, with no output: the builder refused, because the chain was too wide for the requested 2 slab cells with the model's seed. B and C recovered on every repeat.
+  - **Contrasts:** B vs A 1/8/0, C vs B 0/9/0, so no contrast is significant.
+  - **Cost:** $0.64 in total; C costs $0.009 per file, with a mean latency of 18.6 s.
