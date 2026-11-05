@@ -10,7 +10,7 @@ Code: `eval/experiment.py` (runner and tables) and `scripts/freeze_config.py` (f
 | B | `agent-nofeedback` | the loop with retries, but only "try again" after a failed attempt |
 | C | `agent` | the loop with validator feedback (the agent) |
 | D (optional) | `agent-tiers01` | feedback from Tier 0–1 checks only |
-| E (optional) | `agent-checked` | C + build summary + request check (docs/AGENT.md) |
+| E (dropped, owner 5 Nov) | `agent-checked` | C + build summary + request check (docs/AGENT.md). On dev it scored 0.90 against C's 0.97, so it is not run on the test split. The code stays so the dev result can be reproduced. |
 
 Every system uses the same model (`config.yaml` `model:`), the same tasks and the same repeats. The main result is the agent's (C's) validity and TC.2 success on the test split (docs/REPORT_DRAFT.md, Section 1; reframed by the owner on 2026-11-05). The contrasts explain where that reliability comes from. B vs C, the value of validator feedback, was the plan's original central claim; the dev runs showed that the feedback never fired.
 
@@ -28,7 +28,7 @@ Why B and C cannot differ on these tasks is explained in docs/AGENT.md, "Known l
 
 ```bash
 # dev split, every system, 3 repeats -> runs/exp/dev_<timestamp>/<system>/ + results.md + figures/
-python -m eval.experiment run --split dev --systems baseline agent-nofeedback agent agent-checked --write-doc docs/RESULTS_DEV.md
+python -m eval.experiment run --split dev --systems baseline agent-nofeedback agent --write-doc docs/RESULTS_DEV.md   # the 3 Nov run also had agent-checked (E)
 
 # tables again from finished runs (e.g. after adding a system)
 python -m eval.experiment tables runs/exp/dev_<timestamp> --write-doc docs/RESULTS_DEV.md

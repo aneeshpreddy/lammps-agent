@@ -174,7 +174,9 @@ The exit status is 0 if accepted, 1 if not accepted, and 2 if there was no run.
 
 **It stays off for the agent:** it had no effect and costs a few more tokens. It stays on for the person reading the result.
 
-## Variant E: build summary and request check (optional, off by default)
+## Variant E: build summary and request check (dropped by the owner on 5 Nov)
+
+E is not part of the test experiment. Its code stays in the repository (`--system agent-checked`), so the dev result below can be reproduced.
 
 Code: `agents/checks.py` (`checks-v1 (2026-10-28)`). Run with `--system agent-checked`; in `config.yaml` it is `agent: checks: false`. E is C plus two checks. Neither one ever sees the task's reference.
 
@@ -204,7 +206,7 @@ Code: `agents/checks.py` (`checks-v1 (2026-10-28)`). Run with `--system agent-ch
 - **A wrong extraction was followed.** On p04 the request check read "30 methacrylate units and 10 MPEG methacrylate side chains" as a backbone of 30, when it is 30 + 10 = 40. The agent rebuilt to match in all 3 runs, instead of keeping its correct build.
 - **A real mismatch was caught.** The check caught the c06 supercell change before the seed hint existed.
 
-Whether E is kept, fixed or reported as a negative result is an owner decision.
+**Owner, 5 Nov: dropped.** It is reported as a negative result. The user-facing alternative is the build summary printed by `agents/run.py`; the person who wrote the request checks it.
 
 **Checks without a model:**
 - `tests/test_checks.py` (10 tests): a valid-but-wrong build (mock `wrongvalid`) is accepted by C and fails TC.2, while E catches it and fixes it in attempt 2, for a PCE, a mineral and a composite task. A misread request costs one attempt and the agent's build is then accepted. Replay is exact.

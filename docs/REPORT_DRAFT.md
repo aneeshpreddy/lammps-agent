@@ -276,7 +276,7 @@ The agent is a plain tool-use loop with no agent framework, so its control flow 
 | B | the loop with retries, but only "the last build did not pass validation, try again" | tools and retries without information |
 | C | the loop with validator feedback (the agent) | B vs C: whether the validator's feedback adds to retries |
 | D (optional) | feedback from Tier 0–1 checks only | the value of the physically informed Tier 2–3 feedback |
-| E (optional) | C + a build summary + a request check | catching valid-but-wrong builds (5.4) |
+| E (dropped after dev) | C + a build summary + a request check | catching valid-but-wrong builds (5.4) |
 
 ### 5.4 A known limitation of the loop, and variant E
 
@@ -288,7 +288,9 @@ The agent is a plain tool-use loop with no agent framework, so its control flow 
 - **A build summary.** One plain sentence saying what was built.
 - **A request check.** A separate model call, given only the request, lists what the request states explicitly: counts, EO lengths, anchor, counter-ion, supercell, height and similar. Plain code compares that list with each build, and a mismatch is fed back like a failing check. If the agent rebuilds the same thing, its reading wins, so an extraction error costs at most one attempt.
 
-E is decided on the development split only.
+**E was dropped after the development runs** (owner, 5 Nov). The request check misread one dev request: "30 methacrylate units and 10 MPEG methacrylate side chains" was read as a backbone of 30, when it is 40. In all three runs the agent followed the check and broke a correct build. E scored 0.90 against C's 0.97, so the test split runs A, B and C only.
+
+**What replaces it.** Every run returns the build summary, and the command-line tool prints it. The person who wrote the request checks it against what they meant. Shown to the agent instead (C + summary), the sentence had no effect on dev: the model never rebuilt.
 
 **Checks with scripted models.** E and the other systems were tested with scripted models whose behaviour is fixed in advance. These check the loop's control flow, not a model:
 - a "perfect" model is accepted in one attempt;
@@ -305,13 +307,12 @@ E is decided on the development split only.
   - **Baseline v1: 0.59.** 12 of its failures came from requests that leave the backbone end groups unstated. The prompt now states the default, and baseline v2 scores 0.92.
   - **Validity 1.00.** The in-loop validator rejected no build, so C's feedback never fired.
   - **The seed hint.** The refusal for a PCE too wide for a fixed slab cell now also suggests another seed. With it, the agents keep the requested cell: c06 went from 0/3 to 3/3.
-  - **Final dev scores:** A 0.92, B 1.00, C 0.97, E 0.90.
-- **6.3 Held-out test split: the main result.** The agent's (C's) validity and TC.2 success on 9 tasks × 3 repeats: the [X] % and [Y] % of the main claim. They are given with their spread across repeats, and by domain, difficulty and force field. A and B (D and E if run) are reported alongside.
+  - **Final dev scores:** A 0.92, B 1.00, C 0.97, E 0.90, so E was dropped. C + summary scored 0.95 and never rebuilt.
+- **6.3 Held-out test split: the main result.** The agent's (C's) validity and TC.2 success on 9 tasks × 3 repeats: the [X] % and [Y] % of the main claim. They are given with their spread across repeats, and by domain, difficulty and force field. A and B (and D, if run) are reported alongside.
 - **6.4 Ablation: where the reliability comes from.** Paired per-task comparisons, reported as tasks better / same / worse with a sign test. They are read as an explanation of the main result, not as the claim:
   - B vs A: tools and retries;
   - C vs B: feedback;
   - C vs D: Tier 2–3 feedback;
-  - E vs C: request check.
 
   With 9 test tasks, a sign test reaches p < 0.05 only if at least 6 tasks improve and none worsen. Claims are limited to what the per-task counts show.
 - **6.5 Cost.** Attempts, tokens, cost (list price on the run date, cited) and latency per task.

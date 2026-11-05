@@ -574,7 +574,8 @@ Model access is still with the supervisor (expected in 1–2 days). Haiku 5.5 wa
   - Every run now returns `build_summary`.
   - The variant that also shows the sentence to the agent (`--system agent-summary`) was tested on dev: 0.95 against C's 0.97. The difference is one more c04 run, from the random-sequence scoring effect, and the model never rebuilt. It is kept off.
   - 2 new tests.
-- **Not done.** The c04 scoring fix, E, and the test-open date (owner and supervisor).
+- **Variant E dropped (owner).** It is not run on the test split. The code is kept so the dev result can be reproduced. Updated: EVALUATION.md, AGENT.md, README, CLAUDE.md, config.yaml and REPORT_DRAFT §5.3–5.4 and §6.
+- **Not done.** The c04 scoring fix and the test-open date (owner and supervisor).
 - **Tomorrow.** Act on those decisions, then the final dev run and the freeze.
 
 ### Hours
