@@ -1,6 +1,6 @@
 # Single-call baseline (plan Days 23–24)
 
-Code: `agents/baseline.py`. Harness: `eval/harness.py` (METRICS.md v1.1). Harness sanity checks: `docs/HARNESS.md`.
+Code: `agents/baseline.py`. Harness: `eval/harness.py` (METRICS.md v1.2). Harness sanity checks: `docs/HARNESS.md`.
 
 ## What it is
 

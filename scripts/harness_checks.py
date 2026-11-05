@@ -71,7 +71,7 @@ def write(rows, tasks, repeats):
          f"{' (dirty)' if fc['git_dirty'] else ''} · validator {fc['validator_version']} · split {fc['split_sha256'][:12]}… · "
          f"{fc['lammps']}. Dev split ({len(tasks)} tasks: {', '.join(t['id'] for t in tasks)}) × {repeats} repeats. "
          "The harness (`eval/harness.py`) scores a run as a success iff the validator passes every Tier 0–3 check "
-         "and TC.2 matches the task's reference in its mode (METRICS.md v1.1). Full runs: `runs/eval/` (gitignored).\n",
+         "and TC.2 matches the task's reference in its mode (METRICS.md v1.2). Full runs: `runs/eval/` (gitignored).\n",
          "| System | What it does | Expected | Success | Validity | Failure categories | Result |",
          "|---|---|---|---|---|---|---|"]
     what = {"oracle": "builds the hidden spec with the builders",

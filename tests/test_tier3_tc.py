@@ -137,11 +137,25 @@ def test_graph_and_chemistry_detect_changed_charge(write, make_cfg):
         assert res.get("TC.2").verdict == "FAIL", mode
 
 
-def test_graph_detects_changed_connectivity(write, make_cfg):
+def test_graph_and_chemistry_detect_changed_connectivity(write, make_cfg):
     ref = write(VALID)
     text = VALID.replace("4 1 4 6\n", "4 1 5 6\n")       # H-H bond instead of O-H: same counts
-    res = validate(write(text), _cfg_mode(make_cfg, "graph"), reference=ref, run_tier3=False)
-    assert res.get("TC.2").verdict == "FAIL"
+    for mode in ("graph", "chemistry"):
+        res = validate(write(text), _cfg_mode(make_cfg, mode), reference=ref, run_tier3=False)
+        assert res.get("TC.2").verdict == "FAIL", mode
+
+
+def test_chemistry_catalogue_admits_listed_values_only(write, make_cfg):
+    # METRICS v1.2: a bond kind or (type, charge) absent from the reference passes only if the catalogue lists it
+    ref = write(VALID)
+    text = VALID.replace("4 1 4 6\n", "4 1 5 6\n")
+    cfg = _cfg_mode(make_cfg, "chemistry")
+    res = validate(write(text), cfg, reference=ref, run_tier3=False)
+    assert "bond kinds in neither" in res.get("TC.2").message
+    pair = res.get("TC.2").message.split("join catalogue: ")[1].split(",")[0].strip().split("-")
+    cfg["declared"]["tc_allowed_bond_pairs"] = [pair]       # listed in the catalogue: that difference is gone
+    res = validate(write(text), cfg, reference=ref, run_tier3=False)
+    assert "bond kinds in neither" not in res.get("TC.2").message
 
 
 def test_cell_comparison_on_selected_axes(write, make_cfg):

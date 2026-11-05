@@ -200,13 +200,15 @@ The hard tasks include known traps:
 
 ### 4.2 Metrics
 
-The metrics are frozen in METRICS v1.1 (2026-10-26), before any scored run. A run of a task **succeeds** iff both of the following hold:
+The metrics were frozen in METRICS v1.1 (2026-10-26), before any scored run. They were revised once, to v1.2 (2026-11-05, before any test-split run; see below). A run of a task **succeeds** iff both of the following hold:
 1. **Valid:** every Tier 0–3 property passes under the task's declared configuration.
 2. **Correct:** TC.2 against the reference passes.
 
 **TC.2 modes:**
 - **`graph`:** identical molecules by a Weisfeiler–Lehman hash of the typed, charged bond graph; for minerals, also the same cell.
-- **`chemistry`:** for random or gradient sequences, where any draw of the requested architecture is correct, the same per-molecule multiset of types and charges, net charge and bonded type pairs.
+- **`chemistry`:** for random or gradient sequences, where any draw of the requested architecture is correct. Per molecule it requires the same atom types, net charge and number of bonds on each atom type. Every bond kind and every (atom type, charge) must also occur in the reference, or in a catalogue of the values any draw can contain. The catalogue is built from two-unit chains of the requested monomers.
+
+**The one revision (v1.2).** In v1.1 the chemistry mode also compared the count of each bond kind and the exact list of charges. Both depend on the random order: the bonds that join neighbouring units, and the charges of the units at the chain ends. A correct file could therefore fail by chance. On dev task c04, the reference recipe itself passed with only 5 of 10 seeds. v1.2 removes that dependence. Every buildable draw now passes (55 of 55 on the four dev tasks), and wrong compositions, side-chain lengths and chain ends still fail. All development results were re-scored, and the validator matrix was re-run.
 
 **Neither condition alone is enough.** A valid file can be the wrong system, and the right system can be written invalidly.
 
@@ -288,7 +290,7 @@ The agent is a plain tool-use loop with no agent framework, so its control flow 
 - **A build summary.** One plain sentence saying what was built.
 - **A request check.** A separate model call, given only the request, lists what the request states explicitly: counts, EO lengths, anchor, counter-ion, supercell, height and similar. Plain code compares that list with each build, and a mismatch is fed back like a failing check. If the agent rebuilds the same thing, its reading wins, so an extraction error costs at most one attempt.
 
-**E was dropped after the development runs** (owner, 5 Nov). The request check misread one dev request: "30 methacrylate units and 10 MPEG methacrylate side chains" was read as a backbone of 30, when it is 40. In all three runs the agent followed the check and broke a correct build. E scored 0.90 against C's 0.97, so the test split runs A, B and C only.
+**E was dropped after the development runs** (owner, 5 Nov). The request check misread one dev request: "30 methacrylate units and 10 MPEG methacrylate side chains" was read as a backbone of 30, when it is 40. In all three runs the agent followed the check and broke a correct build. E scored 0.92 against C's 1.00, so the test split runs A, B and C only.
 
 **What replaces it.** Every run returns the build summary, and the command-line tool prints it. The person who wrote the request checks it against what they meant. Shown to the agent instead (C + summary), the sentence had no effect on dev: the model never rebuilt.
 
@@ -307,7 +309,7 @@ The agent is a plain tool-use loop with no agent framework, so its control flow 
   - **Baseline v1: 0.59.** 12 of its failures came from requests that leave the backbone end groups unstated. The prompt now states the default, and baseline v2 scores 0.92.
   - **Validity 1.00.** The in-loop validator rejected no build, so C's feedback never fired.
   - **The seed hint.** The refusal for a PCE too wide for a fixed slab cell now also suggests another seed. With it, the agents keep the requested cell: c06 went from 0/3 to 3/3.
-  - **Final dev scores:** A 0.92, B 1.00, C 0.97, E 0.90, so E was dropped. C + summary scored 0.95 and never rebuilt.
+  - **Final dev scores (METRICS v1.2, re-scored from the saved files):** A 0.92, B 1.00, C 1.00, E 0.92, so E was dropped. C + summary scored 1.00 and never rebuilt.
 - **6.3 Held-out test split: the main result.** The agent's (C's) validity and TC.2 success on 9 tasks × 3 repeats: the [X] % and [Y] % of the main claim. They are given with their spread across repeats, and by domain, difficulty and force field. A and B (and D, if run) are reported alongside.
 - **6.4 Ablation: where the reliability comes from.** Paired per-task comparisons, reported as tasks better / same / worse with a sign test. They are read as an explanation of the main result, not as the claim:
   - B vs A: tools and retries;

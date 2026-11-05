@@ -10,14 +10,14 @@ Code: `eval/experiment.py` (runner and tables) and `scripts/freeze_config.py` (f
 | B | `agent-nofeedback` | the loop with retries, but only "try again" after a failed attempt |
 | C | `agent` | the loop with validator feedback (the agent) |
 | D (optional) | `agent-tiers01` | feedback from Tier 0–1 checks only |
-| E (dropped, owner 5 Nov) | `agent-checked` | C + build summary + request check (docs/AGENT.md). On dev it scored 0.90 against C's 0.97, so it is not run on the test split. The code stays so the dev result can be reproduced. |
+| E (dropped, owner 5 Nov) | `agent-checked` | C + build summary + request check (docs/AGENT.md). On dev it scored 0.92 against C's 1.00 (METRICS v1.2; 0.90 against 0.97 under v1.1), so it is not run on the test split. The code stays so the dev result can be reproduced. |
 
 Every system uses the same model (`config.yaml` `model:`), the same tasks and the same repeats. The main result is the agent's (C's) validity and TC.2 success on the test split (docs/REPORT_DRAFT.md, Section 1; reframed by the owner on 2026-11-05). The contrasts explain where that reliability comes from. B vs C, the value of validator feedback, was the plan's original central claim; the dev runs showed that the feedback never fired.
 
 ## Dev results so far (3 Nov, Sonnet 5.5)
 
 `docs/RESULTS_DEV.md`, from `runs/exp/dev_20261103-180733`:
-- **Success:** A 0.92, B 1.00, C 0.97, E 0.90.
+- **Success under METRICS v1.2:** A 0.92, B 1.00, C 1.00, E 0.92. The runs were re-scored from their saved files on 5 Nov (`eval.harness --rescore`); under v1.1 they were A 0.92, B 1.00, C 0.97, E 0.90.
 - **Validity:** 1.00 for every file produced.
 - **Cost:** $1.66 for all four systems.
 - **No contrast is significant.** Per task, B vs A is 1 better / 12 same, and C vs B is 0 better / 1 worse.

@@ -153,7 +153,9 @@ This matters for the ablation: if most baseline failures turn out to be TC-only,
 - **The only recoverable failure was a builder refusal.** On c06 the PCE was too wide for the one slab cell the request fixes. The refusal comes back as a tool error, so B and C both see it.
   - At first, both enlarged the cell, which gives a valid file of the wrong system.
   - After the refusal message was changed to also suggest another seed (`builders/composite.py`), both kept the cell and changed the seed: c06 went from 0/3 to 3/3.
-- **Result: B and C differ only by noise.** A 0.92, B 1.00, C 0.97. The remaining C failure (c04) is a scoring effect of random sequences in TC.2 chemistry mode, not a model error: the hidden spec itself passes with only 5 of 10 seeds. Changing that needs an owner decision (METRICS).
+- **Result: B and C do not differ.** Under METRICS v1.2: A 0.92, B 1.00, C 1.00.
+  - Under v1.1, C had one failure on c04. It was a scoring effect of random sequences in TC.2 chemistry mode, not a model error: the hidden spec itself passed with only 5 of 10 seeds.
+  - v1.2 (owner, 5 Nov) made that mode order-free. The re-score from the saved files turned that run, and 3 others on c04, into passes.
 
 ## The build summary and the command-line tool (5 Nov)
 
@@ -169,7 +171,7 @@ This matters for the ablation: if most baseline failures turn out to be TC-only,
 The exit status is 0 if accepted, 1 if not accepted, and 2 if there was no run.
 
 **Showing the sentence to the agent too** (`agent: summary` in `config.yaml`, or `--system agent-summary`). The same sentence is added to every `build_data_file` result, so the model can compare it with the request itself. This is variant E without the request check. **Dev run, 5 Nov:** `runs/eval/agent-summary_dev_20261105-182152` against C in `runs/exp/dev_20261103-180733/agent`.
-- **Success:** 0.95 against 0.97. The only difference is one more c04 failure, the random-sequence scoring effect (docs/AGENT.md, "Known limitation").
+- **Success:** 1.00 against 1.00 under METRICS v1.2. Under v1.1 it was 0.95 against 0.97, both from the c04 random-sequence scoring effect.
 - **The model never acted on the sentence.** All 39 runs in both systems built exactly once.
 
 **It stays off for the agent:** it had no effect and costs a few more tokens. It stays on for the person reading the result.
@@ -202,7 +204,7 @@ Code: `agents/checks.py` (`checks-v1 (2026-10-28)`). Run with `--system agent-ch
 
 **Cost.** One extra call per task with a short prompt, counted in the task's tokens.
 
-**Dev runs, 3 Nov.** E did worse than C (0.90 against 0.97). Two things happened:
+**Dev runs, 3 Nov.** E did worse than C: 0.92 against 1.00 under METRICS v1.2 (0.90 against 0.97 under v1.1). Two things happened:
 - **A wrong extraction was followed.** On p04 the request check read "30 methacrylate units and 10 MPEG methacrylate side chains" as a backbone of 30, when it is 30 + 10 = 40. The agent rebuilt to match in all 3 runs, instead of keeping its correct build.
 - **A real mismatch was caught.** The check caught the c06 supercell change before the seed hint existed.
 

@@ -88,3 +88,25 @@ def test_aggregate_follows_metrics():
     assert a["validity_rate"] == 0.75
     assert a["by_difficulty"]["hard"]["rate"] == 0.5
     assert a["failure_categories"] == {"P2.1": 1}
+
+
+def test_chemistry_mode_accepts_any_draw_of_the_requested_architecture(tmp_path):
+    # METRICS v1.2: another random order of the hidden spec passes TC.2; one more unit still fails
+    import copy, json
+    from builders.dispatch import build_from_spec
+    from eval.harness import ROOT, task_config
+    from validator import validate
+    t = json.load(open(os.path.join(ROOT, "eval", "tasks", "p06.json")))
+    ref = os.path.join(ROOT, t["reference"])
+    verdicts = []
+    for seed, extra in ((2, 0), (5, 0), (2, 1)):
+        h = copy.deepcopy(t["hidden_spec"])
+        h["seed"] = seed
+        if extra and "composition" in h:
+            lab = next(iter(h["composition"]))
+            h["composition"][lab] += extra
+        elif extra:                     # convenience form (builders/pce.py architecture_from_params)
+            h["n_acid"] = h.get("n_acid", 0) + extra
+        path, _ = build_from_spec(h, str(tmp_path / f"s{seed}_{extra}"), "x")
+        verdicts.append(validate(path, task_config(t), reference=ref, run_tier3=False).get("TC.2").verdict)
+    assert verdicts == ["PASS", "PASS", "FAIL"], "two draws pass, a wrong composition fails"

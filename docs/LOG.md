@@ -575,7 +575,16 @@ Model access is still with the supervisor (expected in 1–2 days). Haiku 5.5 wa
   - The variant that also shows the sentence to the agent (`--system agent-summary`) was tested on dev: 0.95 against C's 0.97. The difference is one more c04 run, from the random-sequence scoring effect, and the model never rebuilt. It is kept off.
   - 2 new tests.
 - **Variant E dropped (owner).** It is not run on the test split. The code is kept so the dev result can be reproduced. Updated: EVALUATION.md, AGENT.md, README, CLAUDE.md, config.yaml and REPORT_DRAFT §5.3–5.4 and §6.
-- **Not done.** The c04 scoring fix and the test-open date (owner and supervisor).
+- **METRICS v1.2: TC.2 chemistry mode made order-free (owner; the supervisor to be informed).**
+  - **The flaw.** v1.1 compared the count of each bond kind and the multiset of (type, charge). Both depend on the random draw, through the joins between units and the charges of the units at the chain ends. The hidden spec itself passed with only 5/10 seeds on c04 and 8/10 on p04.
+  - **v1.2 compares,** per molecule, the atom types, the net charge and the bonds per atom type. Bond kinds and (type, charge) values must occur in the reference or in a join catalogue: every two-unit chain of the task's monomers (`eval/catalogue.py`), built by the harness from the hidden spec at scoring time in 0.2 s.
+  - **Checked.**
+    - 55/55 buildable seeds of the four dev chemistry tasks pass. A wrong composition, EO length or chain ends fails.
+    - Matrix re-run: 948/948 corrupted files caught, 36/36 positives pass, identical to 26 Oct.
+    - Harness checks 9/9.
+    - 156 tests.
+  - **Re-scored from the saved files** (`eval.harness --rescore`, v1.1 results kept as `results_metrics-v1.1.json`). 4 c04 runs went FAIL -> PASS. Dev: A 0.92, B 1.00, C 1.00, E 0.92.
+- **Not done.** The test-open date (owner).
 - **Tomorrow.** Act on those decisions, then the final dev run and the freeze.
 
 ### Hours

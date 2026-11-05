@@ -1,4 +1,4 @@
-"""Evaluation harness (plan Day 21; METRICS.md v1.1).
+"""Evaluation harness (plan Day 21; METRICS.md v1.2).
 
   python -m eval.harness --system oracle         --split dev --repeats 3   # must score 100 %
   python -m eval.harness --system corrupt-file   --split dev --repeats 3   # must score ~0 % (validity fails)
@@ -44,6 +44,7 @@ PRICING = os.path.join(ROOT, "eval", "pricing.json")
 # METRICS.md v1.1 §5 / LOG.md 2026-10-26: the frozen split every scored run is tied to
 SPLIT_SHA256 = "063c2ddad24be986bf16dd3b8a549c3681871837d133d20340416003d6cb5fe4"
 TEST_OPENS = _dt.date(2026, 11, 16)          # METRICS.md §6
+METRICS_VERSION = "1.2"                       # 1.2 (owner 2026-11-05): order-free TC.2 chemistry mode
 TIER_ORDER = {0: 0, 1: 1, 2: 2, 3: 3, "TC": 4}
 
 
@@ -77,9 +78,13 @@ def load_tasks(split: str, ids: List[str] = None, today: _dt.date = None) -> Lis
 
 
 def task_config(task: dict) -> dict:
-    """Declared configuration + the reference's overrides (TC mode, cell comparison, density family)."""
+    """Declared configuration + the reference's overrides (TC mode, cell comparison, density family) + the join
+    catalogue for chemistry mode."""
     side = os.path.join(ROOT, os.path.splitext(task["reference"])[0] + ".json")
     overrides = json.load(open(side)).get("overrides", {})
+    if overrides.get("tc_mode", task.get("tc_mode")) == "chemistry" and task.get("hidden_spec"):
+        from eval.catalogue import join_catalogue         # METRICS v1.2: every join any draw can contain
+        overrides = {**overrides, **join_catalogue(task["hidden_spec"])}
     return load_config(declared=task["declared_config"], overrides={"declared": overrides})
 
 
@@ -161,7 +166,7 @@ def fixed_conditions(tasks: List[dict], system_meta: dict) -> dict:
     lmp = open(os.path.join(ROOT, "docs", "lammps_build.txt")).read().strip().splitlines()
     return {"date": _dt.datetime.now().isoformat(timespec="seconds"), "git_commit": git("rev-parse", "HEAD"),
             "git_dirty": bool(git("status", "--porcelain", "--untracked-files=no")),
-            "validator_version": VALIDATOR_VERSION, "configs": configs,
+            "validator_version": VALIDATOR_VERSION, "metrics_version": METRICS_VERSION, "configs": configs,
             "lammps": next((l.strip() for l in lmp if "LAMMPS" in l or "Simulator" in l), lmp[0] if lmp else ""),
             "split_sha256": _sha(SPLIT), "python": platform.python_version(), "system": system_meta,
             "pricing": {k: v for k, v in prices().items() if k != "models"}}
@@ -261,6 +266,53 @@ def evaluate(system, tasks: List[dict], repeats: int, outdir: str, log=print) ->
     return result
 
 
+def rescore_chemistry(outdir: str, log=print) -> dict:
+    """METRICS v1.2: re-score a finished run under v1.2 from its saved files. v1.2 changed only TC.2 in
+    chemistry mode, so only that is recomputed (Tiers 0-3 verdicts are unchanged by construction). The v1.1
+    results are kept as results_metrics-v1.1.json."""
+    path = os.path.join(outdir, "results.json")
+    result = json.load(open(path))
+    fc = result["fixed_conditions"]
+    if fc.get("metrics_version", "1.1") == METRICS_VERSION:
+        log(f"{outdir}: already scored under METRICS v{METRICS_VERSION}")
+        return result
+    sp = json.load(open(SPLIT))
+    split = "dev" if set(result["tasks"]) <= set(sp["dev"]) else "test"
+    tasks = {t["id"]: t for t in load_tasks(split, result["tasks"])}
+    for row in result["runs"]:
+        t = tasks[row["task"]]
+        if t.get("tc_mode") != "chemistry" or not row.get("data_sha256"):
+            continue
+        trace = json.load(open(os.path.join(outdir, "runs", t["id"], f"r{row['repeat']}", "trace.json")))
+        f = trace["output"]["data_file"]
+        if _sha(f) != row["data_sha256"]:
+            raise RuntimeError(f"{f} changed since it was scored")
+        new = validate(f, task_config(t), reference=os.path.join(ROOT, t["reference"]), run_tier3=False).get("TC.2")
+        if new.verdict == row["tc2"]:
+            continue
+        log(f"{t['id']} r{row['repeat']}: TC.2 {row['tc2']} -> {new.verdict}")
+        row["tc2"] = new.verdict
+        row["failing"] = sorted({p for p in row["failing"] if p != "TC.2"} | ({"TC.2"} if new.verdict == "FAIL" else set()))
+        row["not_pass"] = sorted({p for p in row["not_pass"] if not p.startswith("TC.2:")}
+                                 | ({f"TC.2:{new.verdict}"} if new.verdict != "PASS" else set()))
+        row["failing_details"] = [d for d in row.get("failing_details", []) if d["property"] != "TC.2"] + \
+            ([{"property": "TC.2", "tier": "TC", "message": (new.message or "")[:300]}] if new.verdict == "FAIL" else [])
+        row["success"] = row["valid"] and new.verdict == "PASS"
+        if row["valid"]:
+            row["first_failing"] = "" if row["success"] else "TC.2"
+            row["category"] = "SUCCESS" if row["success"] else "TC_ONLY"
+    os.replace(path, os.path.join(outdir, "results_metrics-v1.1.json"))
+    fc["metrics_version"] = METRICS_VERSION
+    fc["rescored"] = {"date": _dt.datetime.now().isoformat(timespec="seconds"), "from": "1.1",
+                      "what": "TC.2 of chemistry-mode tasks, from the saved files (eval.harness --rescore)"}
+    result["aggregate"] = aggregate(result["runs"], list(tasks.values()), result["repeats"])
+    with open(path, "w") as fh:
+        json.dump(result, fh, indent=2, default=str)
+    with open(os.path.join(outdir, "summary.md"), "w") as fh:
+        fh.write(summary_md(result))
+    return result
+
+
 def summary_md(result: dict) -> str:
     a, fc = result["aggregate"], result["fixed_conditions"]
     sp = a["spread_across_repeats"]
@@ -295,14 +347,22 @@ def main(argv=None):
     from eval.systems import make_system
     ap = argparse.ArgumentParser(prog="python -m eval.harness", description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--system", required=True, help="oracle | corrupt-file | corrupt-spec | baseline | agent | agent-nofeedback | agent-tiers01 | agent-checked | agent-summary")
+    ap.add_argument("--system", help="oracle | corrupt-file | corrupt-spec | baseline | agent | agent-nofeedback | agent-tiers01 | agent-checked | agent-summary")
     ap.add_argument("--split", default="dev")
     ap.add_argument("--repeats", type=int, default=3)
     ap.add_argument("--tasks", nargs="*", help="subset of task IDs (within the split)")
     ap.add_argument("--out", help="output directory (default runs/eval/<system>_<split>_<timestamp>)")
     ap.add_argument("--mock", help="'perfect' (baseline, agent) replaces the model with the hidden spec; agent also: fix | stubborn | runaway | wrongvalid (agents/mock.py)")
     ap.add_argument("--write-doc", help="also write the summary to this Markdown file (e.g. docs/BASELINE_RESULTS.md)")
+    ap.add_argument("--rescore", nargs="+", metavar="RUN_DIR",
+                    help="re-score finished runs under the current METRICS version from their saved files")
     a = ap.parse_args(argv)
+    if a.rescore:
+        for d in a.rescore:
+            rescore_chemistry(d)
+        return
+    if not a.system:
+        ap.error("--system is required")
     tasks = load_tasks(a.split, a.tasks)
     system = make_system(a.system, mock=a.mock)
     out = a.out or os.path.join(ROOT, "runs", "eval",

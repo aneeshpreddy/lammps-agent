@@ -1,7 +1,27 @@
 # METRICS — how systems are scored on the eval set (plan Day 20)
 
-Version 1.1, 2026-10-26. Frozen together with `eval/split.json` (version 2). Changing any definition below
+Version 1.2, 2026-11-05. Frozen together with `eval/split.json` (version 2). Changing any definition below
 after the first scored run requires a new version and re-scoring every system already reported.
+
+**v1.2 changes (project owner, 2026-11-05; the supervisor to be informed):** TC.2 `chemistry` mode is made
+order-free in fact, as v1.1 intended.
+- **The flaw.** v1.1 compared the count of each bonded type pair and the multiset of (type, charge). Both
+  depend on the random draw: the bonds that join neighbouring units, and the bond-increment charges of the
+  units at the chain ends.
+- **Its effect.** On dev task c04 the hidden spec itself passed with only 5 of 10 seeds, and on p04 with
+  8 of 10.
+- **v1.2 compares**, per molecule, the atom-type multiset, the net charge and the number of bonds on each
+  atom type.
+- **v1.2 admits** a bond kind or an (atom type, charge) only if it occurs in the reference or in the task's
+  join catalogue. The catalogue is the values of every two-unit chain of the task's monomers, built by the
+  harness from the hidden spec at scoring time (`eval/catalogue.py`).
+- **Checked on 2026-11-05.**
+  - Every buildable seed of the hidden spec passes on the four dev chemistry tasks: 15 seeds each, 55
+    builds.
+  - A wrong composition, a wrong EO length or swapped chain ends still fails.
+  - The corrupted-file matrix is re-run under v1.2 (docs/VALIDATOR_RESULTS.md).
+- **Re-scored.** Every dev system reported so far is re-scored (docs/RESULTS_DEV.md). No test-split run
+  exists yet.
 
 **v1.1 changes (before any scored run; supervisor replies of 2026-10-26, SPEC §7.17):** eval set v3 adds the
 domain `composite` (PCE on a mineral surface, tasks c01–c06); TC.2 compares only the lateral cell for
@@ -28,7 +48,7 @@ A run of task *t* **succeeds** iff both hold:
 | `tc_mode` | Used for | Equivalent when |
 |---|---|---|
 | `graph` | minerals (with `tc_compare_cell`), PCE and composites with a deterministic sequence (alternating, block, explicit) | same header counts (atoms, bonds, angles, dihedrals, impropers); identical multiset of molecules, each identified by a Weisfeiler–Lehman hash (24 rounds) of its bond graph labelled by atom-type name and charge (3 decimals); for minerals also the same cell lengths and tilt within 1e-3 Å |
-| `chemistry` | PCE and composites with a random or gradient sequence | same header counts; per molecule the same multiset of (atom-type name, charge), the same net charge and the same counts of bonded type pairs. Positions and monomer order are free: any draw of the requested architecture is correct |
+| `chemistry` | PCE and composites with a random or gradient sequence | same header counts; per molecule the same multiset of atom-type names, the same net charge and the same number of bonds on each atom type; every bonded type pair and every (atom type, charge) occurs in the reference or the task's join catalogue (v1.2). Positions and monomer order are free: any draw of the requested architecture is correct |
 | `positions` | not used in v2/v3 (kept for tasks whose geometry is fixed by the request) | atoms matched by minimum-image position; types, charges, topology, coefficients and cell equal |
 
 Cell comparison (`tc_compare_cell`): `true` for minerals (all lengths and tilts within 1e-3 Å); for
