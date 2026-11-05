@@ -1,2 +1,0 @@
-# Presentation demo only (demo/app.py); the project itself needs ../requirements.txt
-streamlit==1.50.0

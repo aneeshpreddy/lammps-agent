@@ -1,4 +1,4 @@
-# Demo page theme (demo/app.py): black / navy / light blue
+# Website theme (web/app.py): black / navy / light blue
 [theme]
 base = "dark"
 primaryColor = "#5aa9ff"
@@ -15,4 +15,4 @@ address = "localhost"          # this Mac only: Live mode spends the team's API 
 gatherUsageStats = false
 
 [client]
-toolbarMode = "viewer"           # no Deploy button in the presentation
+toolbarMode = "viewer"           # no Deploy button
