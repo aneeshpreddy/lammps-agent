@@ -57,7 +57,8 @@ def current() -> dict:
         "tools": {"version": TOOLS_VERSION, "definitions_sha256": _h(definitions()),
                   "names": [d["name"] for d in definitions()]},
         "loop": {"version": LOOP_VERSION, "limits": load_limits(), "feedback": cfg["agent"].get("feedback", "full"),
-                 "checks_default": bool(cfg["agent"].get("checks", False)), "checks_version": CHECKS_VERSION},
+                 "checks_default": bool(cfg["agent"].get("checks", False)), "checks_version": CHECKS_VERSION,
+                 "summary_default": bool(cfg["agent"].get("summary", False))},
         "validator": {"version": VALIDATOR_VERSION,
                       "configs": {f: _file(f"configs/{f}") for f in sorted(os.listdir(os.path.join(ROOT, "configs")))},
                       "calibration": {f: _file(f"calibration/{f}")
@@ -103,7 +104,7 @@ def markdown(c: dict) -> str:
          f"| Agent prompt | system `{p['agent_system_sha256'][:16]}…` |",
          f"| Request check (E) | prompt `{p['request_check_prompt_sha256'][:16]}…`, schema `{p['request_check_schema_sha256'][:16]}…`, {lp['checks_version']} |",
          f"| Tools | {t['version']}: {', '.join(t['names'])}; definitions `{t['definitions_sha256'][:16]}…` |",
-         f"| Loop | {lp['version']}; feedback {lp['feedback']}; checks by default {lp['checks_default']}; limits "
+         f"| Loop | {lp['version']}; feedback {lp['feedback']}; checks by default {lp['checks_default']}; build summary by default {lp.get('summary_default', False)}; limits "
          + ", ".join(f"{k} {val}" for k, val in lp["limits"].items()) + " |",
          f"| Validator | {v['version']}; {len(v['configs'])} declared configurations, {len(v['calibration'])} calibration files (hashes in FROZEN_CONFIG.json) |",
          f"| Eval set | split `{e['split_sha256'][:16]}…`, tasks `{e['tasks_sha256'][:16]}…`, METRICS.md `{e['metrics_sha256'][:16]}…` |",

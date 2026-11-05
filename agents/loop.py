@@ -46,7 +46,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ROOT)
 from agents.baseline import EFFORT, MAX_TOKENS, MODEL, knowledge  # noqa: E402
 from agents.checks import (CHECKS_VERSION, REQ_PROMPT, REQ_SCHEMA, built_values, compare,  # noqa: E402
-                           extract_requirements, mismatch_lines)
+                           describe_build, extract_requirements, mismatch_lines)
+from tools.facts import data_facts  # noqa: E402
 from tools.toolbox import TOOLS_VERSION, ToolBox, definitions, guard_workdir  # noqa: E402
 from validator import load_config, validate  # noqa: E402
 
@@ -264,7 +265,8 @@ class AgentSystem:
     """system(task_view, workdir, repeat) for eval/harness.py."""
 
     def __init__(self, feedback: str = None, mock: str = None, client=None, model: str = MODEL,
-                 effort: str = EFFORT, limits: dict = None, overwrite: bool = False, checks: bool = None):
+                 effort: str = EFFORT, limits: dict = None, overwrite: bool = False, checks: bool = None,
+                 summary: bool = None, name: str = None):
         import yaml
         cfg = yaml.safe_load(open(os.path.join(ROOT, "config.yaml"))).get("agent") or {}
         self.feedback = feedback or cfg.get("feedback", "full")
@@ -273,18 +275,20 @@ class AgentSystem:
         self.checks = bool(cfg.get("checks", False) if checks is None else checks)
         if self.checks and self.feedback != "full":
             raise ValueError("variant E (checks) is defined on top of full feedback (C)")
+        # build summary: build_data_file also returns one sentence saying what was built (always on in E)
+        self.summary = self.checks or bool(cfg.get("summary", False) if summary is None else summary)
         self.mock, self._client, self.overwrite = mock, client, overwrite
         self.needs_hidden = bool(mock)
         self.model, self.effort = model, effort
         self.limits = {**load_limits(), **(limits or {})}
         self.system = agent_system_prompt()
         self.tools = definitions()
-        name = {"full": "agent", "none": "agent-nofeedback", "tiers01": "agent-tiers01"}[self.feedback]
-        name = "agent-checked" if self.checks else name
+        name = name or ("agent-checked" if self.checks else
+                        {"full": "agent", "none": "agent-nofeedback", "tiers01": "agent-tiers01"}[self.feedback])
         self.meta = {"name": name + (f"-mock-{mock}" if mock else ""), "kind": "tool-use loop + validator feedback",
                      "model": None if mock else model, "effort": effort,
                      "thinking": "adaptive (the model default; not set)", "max_tokens": MAX_TOKENS,
-                     "feedback": self.feedback, "limits": self.limits, "loop_version": LOOP_VERSION,
+                     "feedback": self.feedback, "build_summary": self.summary, "limits": self.limits, "loop_version": LOOP_VERSION,
                      "tools_version": TOOLS_VERSION,
                      "system_prompt_sha256": hashlib.sha256(self.system.encode()).hexdigest(),
                      "tools_sha256": hashlib.sha256(json.dumps(self.tools, sort_keys=True).encode()).hexdigest(),
@@ -322,7 +326,7 @@ class AgentSystem:
         trace = Trace(os.path.join(workdir, "trace.jsonl"))
         trace.event("start", task=task["id"], input=task["input"], repeat=repeat, meta=self.meta, tools=self.tools)
         client = self._client_for(task)
-        tb = ToolBox(workdir, describe=self.checks)
+        tb = ToolBox(workdir, describe=self.summary)
         messages = [{"role": "user", "content": task["input"]}]
         usage = Counter()
         seen = Counter()
@@ -454,7 +458,11 @@ class AgentSystem:
                                      res if attempts and attempts[-1]["file"] else None, out_file, workdir))
             summary["report"] = "REPORT.md"
         trace.event("stop", **summary, data_file=os.path.relpath(out_file, workdir) if out_file else None)
-        return {"data_file": out_file, "report": report, "attempts": len(attempts) or 1,
+        built = None
+        if out_file:                    # what the submitted file is, in words, for whoever reads the result
+            entry = tb.entry_of(out_file)
+            built = describe_build(entry["spec"], data_facts(out_file), entry.get("details"))
+        return {"data_file": out_file, "report": report, "build_summary": built, "attempts": len(attempts) or 1,
                 "usage": {} if self.mock else dict(usage),
                 "error": error or (None if final or out_file else f"no build ({summary['stop']})"),
                 "escalated": summary["stop"].startswith("escalated"), "stop": summary["stop"], "trace": summary}
@@ -489,7 +497,7 @@ def replay(run_dir: str, workdir: str) -> list:
                                    content=[SimpleNamespace(**b) for b in e["content"]])
 
     system = AgentSystem(feedback=meta["feedback"], client=ReplayClient(), limits=meta["limits"],
-                         checks=bool(meta.get("checks")))
+                         checks=bool(meta.get("checks")), summary=bool(meta.get("build_summary")))
     system({"id": start["task"], "input": start["input"]}, workdir)
     again = [json.loads(l) for l in open(os.path.join(workdir, "trace.jsonl"))]
 

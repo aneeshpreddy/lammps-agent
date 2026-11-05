@@ -27,6 +27,16 @@ python scripts/build_eval_set.py          # eval set v3: eval/tasks/*.json + dat
 python scripts/build_mineral_references.py   # docs/MINERALS.md (every cement mineral, both force fields)
 ```
 
+## Use the agent: one request in plain English
+
+```bash
+export ANTHROPIC_API_KEY=...        # in ~/.zshrc or the terminal, never in the repo
+python -m agents.run "Build a LAMMPS data file in PCFF-INTERFACE for an MPEG-type PCE with 12 methacrylic acid units (all deprotonated) and 4 methoxy-PEG methacrylate side chains of 10 EO units, alternating, calcium counter-ions." --out runs/requests/my_pce
+python -m agents.run --file request.txt --out runs/requests/my_system
+```
+
+The command prints one sentence saying what was built ("Built: PCE (PCFF-INTERFACE), 1 chain(s), each 16 backbone units …"). It writes `system.data` only if every Tier 0–3 check passed, including LAMMPS with the full force field; otherwise it writes a `REPORT.md` of what was tried. Read the sentence against your request: the validator certifies that the file is valid, not that it is the system you meant. The agent uses the `config.yaml` defaults (model, feedback, limits); a request costs about 1–3 cents.
+
 ## Evaluation: harness, baseline, agent, experiments
 
 ```bash

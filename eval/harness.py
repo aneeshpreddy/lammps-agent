@@ -295,7 +295,7 @@ def main(argv=None):
     from eval.systems import make_system
     ap = argparse.ArgumentParser(prog="python -m eval.harness", description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--system", required=True, help="oracle | corrupt-file | corrupt-spec | baseline | agent | agent-nofeedback | agent-tiers01 | agent-checked")
+    ap.add_argument("--system", required=True, help="oracle | corrupt-file | corrupt-spec | baseline | agent | agent-nofeedback | agent-tiers01 | agent-checked | agent-summary")
     ap.add_argument("--split", default="dev")
     ap.add_argument("--repeats", type=int, default=3)
     ap.add_argument("--tasks", nargs="*", help="subset of task IDs (within the split)")

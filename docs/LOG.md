@@ -569,6 +569,11 @@ Model access is still with the supervisor (expected in 1–2 days). Haiku 5.5 wa
 - **Main claim reframed (owner, 2026-11-05).** The main claim is now that the agent's files pass LAMMPS without error ([X] %) and match the requested system ([Y] %) on held-out tasks, and that every file is certified by a validator that caught 948/948 corrupted files.
   - "Validator feedback improves the agent" is no longer claimed. The ablation explains the result instead: the builders prevent invalid files.
   - Updated: REPORT_DRAFT (abstract, §1, §5.3–5.4, §6, §7 position, §8), EVALUATION.md, and the contrast label in `eval/experiment.py`.
+- **"What was built" for the user (5 Nov).**
+  - New command `python -m agents.run "request" [--out DIR]`. It prints the verdict and one "Built: …" sentence, and writes `system.data` only if accepted (otherwise `REPORT.md`). Real-model check: an MPEG PCE request was accepted in 1 attempt for $0.024.
+  - Every run now returns `build_summary`.
+  - The variant that also shows the sentence to the agent (`--system agent-summary`) was tested on dev: 0.95 against C's 0.97. The difference is one more c04 run, from the random-sequence scoring effect, and the model never rebuilt. It is kept off.
+  - 2 new tests.
 - **Not done.** The c04 scoring fix, E, and the test-open date (owner and supervisor).
 - **Tomorrow.** Act on those decisions, then the final dev run and the freeze.
 

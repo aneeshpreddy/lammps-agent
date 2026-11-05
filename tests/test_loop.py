@@ -156,3 +156,30 @@ def test_guard_rails(tasks, tmp_path):
     evaluate(AgentSystem(mock="perfect"), [tasks["p02"]], 1, str(tmp_path / "ev"), log=lambda *a: None)
     with pytest.raises(FileExistsError):                                       # nor a finished harness run
         evaluate(AgentSystem(mock="perfect"), [tasks["p02"]], 1, str(tmp_path / "ev"), log=lambda *a: None)
+
+
+def test_build_summary_goes_to_the_agent_only_when_enabled(tasks, tmp_path):
+    # every run returns what its file is in words; only agent-summary (and E) also shows it to the model
+    from eval.systems import make_system
+    plain = make_system("agent", mock="perfect")
+    out = plain(tasks["p02"], str(tmp_path / "c"))
+    tools = [e for e in _events(tmp_path / "c") if e["event"] == "tool" and e.get("name") == "build_data_file"]
+    ok = (out["build_summary"] or "").startswith("Built: PCE") and not any("summary" in (t.get("result") or {}) for t in tools)
+    assert ok, "C: summary returned to the caller but not to the model"
+    s = make_system("agent-summary", mock="perfect")
+    assert s.meta["name"] == "agent-summary-mock-perfect" and s.meta["build_summary"] and not s.meta["checks"]
+    out = s(tasks["p02"], str(tmp_path / "s"))
+    tools = [e for e in _events(tmp_path / "s") if e["event"] == "tool" and e.get("name") == "build_data_file"]
+    ok = out["stop"] == "accepted" and tools and all((t["result"].get("summary") or "").startswith("Built:") for t in tools)
+    assert ok, "agent-summary: every build result carries the summary"
+
+
+def test_run_command_writes_the_file_and_says_what_was_built(tmp_path, capsys):
+    from agents.run import main
+    code = main(["any request", "--out", str(tmp_path / "r"), "--mock", "perfect:p02"])
+    printed = capsys.readouterr().out
+    ok = (code == 0 and os.path.exists(tmp_path / "r" / "system.data") and "ACCEPTED" in printed
+          and "\nBuilt: PCE" in printed)
+    assert ok, "accepted run: system.data written and the build sentence printed"
+    assert main(["again", "--out", str(tmp_path / "r"), "--mock", "perfect:p02"]) == 2      # folder holds a run
+    assert main([]) == 2

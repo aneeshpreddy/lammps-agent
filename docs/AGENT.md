@@ -155,6 +155,25 @@ This matters for the ablation: if most baseline failures turn out to be TC-only,
   - After the refusal message was changed to also suggest another seed (`builders/composite.py`), both kept the cell and changed the seed: c06 went from 0/3 to 3/3.
 - **Result: B and C differ only by noise.** A 0.92, B 1.00, C 0.97. The remaining C failure (c04) is a scoring effect of random sequences in TC.2 chemistry mode, not a model error: the hidden spec itself passes with only 5 of 10 seeds. Changing that needs an owner decision (METRICS).
 
+## The build summary and the command-line tool (5 Nov)
+
+**Every run says what its file is.** The loop returns `build_summary`: one plain sentence (`describe_build`, `agents/checks.py`) saying what the submitted file contains. For example: "Built: PCE (PCFF-INTERFACE), 1 chain(s), each 16 backbone units [methacrylic acid (COO-) x12, methacrylate ester PEG EO10 OCH3 x4], 4 side chain(s), sequence alternating, counter-ion Ca2+; 486 atoms, net charge +0 e, box 25.3 x 32.6 x 37.7 Å."
+
+**Why.** The validator certifies validity, not intent. A valid file of the wrong system, such as 2×2 slab cells where 2×1 was asked, passes it. The sentence lets the person who wrote the request catch that in seconds, without a second model reading the request (variant E's request check, which misread p04 on dev).
+
+**`python -m agents.run "request" [--out DIR]`** (`agents/run.py`):
+- runs the agent with the `config.yaml` defaults;
+- prints the verdict and the sentence;
+- copies an accepted file to `DIR/system.data`, or points to `REPORT.md`.
+
+The exit status is 0 if accepted, 1 if not accepted, and 2 if there was no run.
+
+**Showing the sentence to the agent too** (`agent: summary` in `config.yaml`, or `--system agent-summary`). The same sentence is added to every `build_data_file` result, so the model can compare it with the request itself. This is variant E without the request check. **Dev run, 5 Nov:** `runs/eval/agent-summary_dev_20261105-182152` against C in `runs/exp/dev_20261103-180733/agent`.
+- **Success:** 0.95 against 0.97. The only difference is one more c04 failure, the random-sequence scoring effect (docs/AGENT.md, "Known limitation").
+- **The model never acted on the sentence.** All 39 runs in both systems built exactly once.
+
+**It stays off for the agent:** it had no effect and costs a few more tokens. It stays on for the person reading the result.
+
 ## Variant E: build summary and request check (optional, off by default)
 
 Code: `agents/checks.py` (`checks-v1 (2026-10-28)`). Run with `--system agent-checked`; in `config.yaml` it is `agent: checks: false`. E is C plus two checks. Neither one ever sees the task's reference.
