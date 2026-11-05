@@ -8,7 +8,7 @@ pip install -r web/requirements.txt     # once (Streamlit)
 ./web/run.sh violet                     # violet theme
 ```
 
-- **Build a data file:** example cards or your own request, a four-stage progress bar, a 3D view, what was built, the validator tiers, a download button, and the agent's notes.
+- **Build a data file:** four example cards or your own request, a four-stage progress bar, a 3D view, what was built, the validator tiers, a download button, and the agent's notes.
   - The agent needs `ANTHROPIC_API_KEY` in the terminal the site is started from.
   - **Offline mode** (sidebar) replays saved results for the example requests from `runs/requests/`, with no internet.
 - **Check an existing data file:** the validator on four corrupted C3S cells that LAMMPS runs without any error or warning, on the correct cell, or on an uploaded file. It shows LAMMPS on its own next to the validator.

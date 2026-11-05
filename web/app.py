@@ -49,8 +49,6 @@ EXAMPLES = [
     ("🔗", "Three HPEG chains", "Multi-chain system with Ca²⁺ counter-ions",
      "Three HPEG chains, each with 12 acrylic acid units (all deprotonated) and 6 HPEG side chains of 23 EO units, "
      "random sequence, calcium counter-ions, PCFF-INTERFACE."),
-    ("🚫", "Outside the scope", "C-S-H in CLAYFF: the agent declines",
-     "Build a C-S-H model with Ca/Si ratio 1.7 including interlayer water, in CLAYFF."),
 ]
 CHECK_FILES = [
     ("Two atoms 0.3 Å apart", "c3s_unit_cell_minimized_pcff__FM17__atom_moved_onto_another.data",
