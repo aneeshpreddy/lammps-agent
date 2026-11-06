@@ -1,15 +1,15 @@
-# Website theme (web/app.py): black / navy / light blue
+# AtomForge theme (web/app.py): charcoal navy, blue/cyan accent
 [theme]
 base = "dark"
-primaryColor = "#5aa9ff"
-backgroundColor = "#070b14"
-secondaryBackgroundColor = "#0f1a30"
-textColor = "#e3ecfb"
+primaryColor = "#38bdf8"
+backgroundColor = "#0a0e16"
+secondaryBackgroundColor = "#111827"
+textColor = "#e6edf7"
 font = "sans serif"
 
 [server]
 headless = false
-address = "localhost"          # this Mac only: Live mode spends the team's API credits
+address = "localhost"          # this Mac only: generation spends the team's API credits
 
 [browser]
 gatherUsageStats = false

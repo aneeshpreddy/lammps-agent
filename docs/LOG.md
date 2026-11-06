@@ -610,3 +610,22 @@ Model access is still with the supervisor (expected in 1–2 days). Haiku 5.5 wa
   - **Validity:** 1.000 for every file produced. A's 3 failures are all c03, with no output: the builder refused, because the chain was too wide for the requested 2 slab cells with the model's seed. B and C recovered on every repeat.
   - **Contrasts:** B vs A 1/8/0, C vs B 0/9/0, so no contrast is significant.
   - **Cost:** $0.64 in total; C costs $0.009 per file, with a mean latency of 18.6 s.
+
+### 2026-11-06: AtomForge, the website redesign
+- **Done.** The website (`web/`) is now **AtomForge**, built around Describe → Refine → Configure → Generate → Visualise & download. The frozen v1.0 code is unchanged: `freeze_config.py --check` reports unchanged, and 177 tests pass, 20 of them new in `tests/test_web_assistant.py`.
+  - **Request assistant** (`web/assistant.py`):
+    - One model call returns the baseline's builder spec, imported unchanged, with a source for each value: stated, inferred or default. It also lists ambiguities with alternatives, and missing information. Out-of-scope requests get a reason, never a substitute.
+    - The suggested request text is written by code from the configuration, so the text and the panel stay in sync.
+    - It is an interface helper and is not part of the evaluated system.
+  - **Configuration panel:** dynamic per system type (PCE / mineral / surface). It shows the counter-ion count by the builder's own rule and warns before a request the builder would refuse.
+  - **Result page:**
+    - large 3D view with a toolbar (fit, zoom, spin, box, hide H, representation, hover atom ID, PNG);
+    - description; a check of the built spec against the reviewed configuration; an assumptions table with sources;
+    - status and downloads; molecular summary; four tiers with every check; technical details.
+  - **Validate page:**
+    - plain names for the declared configurations, and a declared box shape for uploads;
+    - three outcomes: valid, incomplete, failed. NOT_CALIBRATED is shown as incomplete, never as passed.
+  - **Reliability figures** are read from `docs/validator_matrix.csv`, `docs/PROPERTIES.md` and the latest test run.
+  - **Browser tests (Playwright):** detailed and vague requests, a parameter edit (EO 10 → 20 updates the text), a live generation, mineral, surface, out-of-scope, declined run, offline replay, example and uploaded files, About. Model calls for testing cost about $0.10.
+- **Not done.** Nothing pending for the website.
+- **Tomorrow.** The report.
