@@ -653,3 +653,7 @@ Model access is still with the supervisor (expected in 1–2 days). Haiku 5.5 wa
     - Model calls for testing cost about $0.03.
 - **Not done.** The Apple reference page itself was not opened. The design follows its principles: one idea per screen, large type, product imagery, scroll reveals.
 - **Tomorrow.** The report.
+- **Later (owner feedback: "when I click Build I can't come back").**
+  - Added a Home tab (Home · Build · Validate · About).
+  - The browser's Back and Forward now work: each page change adds a `?page=` history entry, and a listener in the page clicks the matching tab. A reload keeps the page.
+  - Tested with Playwright: Home → Build → Back → Home; Forward; Validate → About → Back ×3; the Home tab; reload; `?page=Validate`. The request is kept.

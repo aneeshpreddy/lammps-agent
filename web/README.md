@@ -14,7 +14,7 @@ pip install -r web/requirements.txt     # once (Streamlit)
 - **As you scroll:** an introduction, then the four stages (Understand, Build, Validate, Deliver), then two identical entry cards, **Build** and **Validate**, each with a live structure.
   - The sections reveal with scroll-driven CSS: no script, and they stay visible in browsers without it.
 - **Motion:** every animation stops for visitors who prefer reduced motion, and the live views pause while scrolled out of sight.
-- **Navigation:** the AtomForge logo returns to Home. Build, Validate and About open the working pages. The request, the configuration, results and Validate choices are kept across pages.
+- **Navigation:** Home · Build · Validate · About tabs, and the logo also returns to Home. The browser's Back and Forward buttons move between pages (each page change adds a `?page=<name>` history entry), and a reload reopens the same page. The request, the configuration, results and Validate choices are kept across pages.
 
 ## Build: Describe → Refine → Configure → Generate → Visualise & download
 

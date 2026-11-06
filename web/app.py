@@ -1531,7 +1531,9 @@ def page_home():
 # --------------------------------------------------------------------------------------------- shell
 S = st.session_state
 S.setdefault("view", "compose")
-S.setdefault("page", "Home")
+PAGES = ["Home", "Build", "Validate", "About"]
+if "page" not in S:                              # a fresh visit or a reload: ?page=<name> opens that page
+    S["page"] = st.query_params.get("page") if st.query_params.get("page") in PAGES else "Home"
 # Streamlit drops the value of a widget that is not drawn in a run; keep the request, the configuration and the
 # Validate choices while another page is shown.
 for k in [k for k in S.keys() if k in ("request", "sugg_text", "v_src", "v_example") or str(k).startswith("c_")]:
@@ -1547,15 +1549,15 @@ def nav_changed():
         go(S["nav"])
 
 
-S["nav"] = None if S["page"] == "Home" else S["page"]
+S["nav"] = S["page"]
 logo_uri = "data:image/svg+xml;utf8," + urllib.parse.quote(LOGO)
 md(f"<style>.st-key-brand button {{background:url('{logo_uri}') no-repeat left center / 34px 34px !important;}}</style>")
 h = st.columns([1.3, 1.4, 1.1], vertical_alignment="center")
 with h[0]:
     st.button("AtomForge", key="brand", type="tertiary", on_click=go, args=("Home",), help="AtomForge home")
 with h[1]:
-    st.segmented_control("Navigation", ["Build", "Validate", "About"], key="nav", label_visibility="collapsed",
-                         on_change=nav_changed)
+    with st.container(key="navbar"):
+        st.segmented_control("Navigation", PAGES, key="nav", label_visibility="collapsed", on_change=nav_changed)
 with h[2]:
     r = st.columns([1.5, 1], vertical_alignment="center")
     offline = S.get("offline", False)
@@ -1571,10 +1573,27 @@ with h[2]:
                   help="Replays saved results and assistant analyses. Needs no internet connection.")
         st.caption("Generation uses the model in config.yaml through the API key of this terminal.")
 md("<div class='rule'></div>")
-if S.get("scroll_top"):                          # a page change: start the new page at its top
-    components.html(f"<script>/* {S['scroll_top']} */ const m = window.parent.document.querySelector('section.stMain') "
-                    f"|| window.parent.document.querySelector('[data-testid=\"stMain\"]'); if (m) m.scrollTo(0, 0);</script>",
-                    height=0)
+# Browser history: every page change adds an entry (?page=<name>), so Back and Forward move between pages and a
+# reload reopens the same page. Streamlit has no history support of its own, so a small script in the (same-origin)
+# parent window listens for Back/Forward and clicks the matching navigation tab.
+components.html(f"""<script>/* {S["page"]} {S.get("scroll_top", 0)} */
+const w = window.parent, page = {json.dumps(S["page"])};
+if (!w.__afHistory) {{
+  w.__afHistory = true;
+  w.history.replaceState({{afPage: page}}, "", "?page=" + page);
+  // created in the parent window's own context: this frame is replaced on every page change
+  new w.Function(`window.addEventListener("popstate", (e) => {{
+    const target = (e.state && e.state.afPage) || "Home";
+    const tab = [...document.querySelectorAll(".st-key-navbar button")].find(b => b.innerText.trim() === target);
+    if (tab) {{ window.__afFromHistory = true; tab.click(); }}
+  }});`)();
+}} else if (w.__afFromHistory) {{
+  w.__afFromHistory = false;                    // this page change came from Back/Forward: no new entry
+}} else if (!w.history.state || w.history.state.afPage !== page) {{
+  w.history.pushState({{afPage: page}}, "", "?page=" + page);
+}}
+{"const m = w.document.querySelector('section.stMain') || w.document.querySelector('[data-testid=stMain]'); if (m) m.scrollTo(0, 0);" if S.get("scroll_top") else ""}
+</script>""", height=0)
 
 if S["page"] == "Validate":
     page_validate()
