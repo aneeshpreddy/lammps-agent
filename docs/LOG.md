@@ -629,3 +629,27 @@ Model access is still with the supervisor (expected in 1–2 days). Haiku 5.5 wa
   - **Browser tests (Playwright):** detailed and vague requests, a parameter edit (EO 10 → 20 updates the text), a live generation, mineral, surface, out-of-scope, declined run, offline replay, example and uploaded files, About. Model calls for testing cost about $0.10.
 - **Not done.** Nothing pending for the website.
 - **Tomorrow.** The report.
+
+### 2026-11-07: AtomForge landing page and viewer redesign
+- **Done.** The generation pipeline is unchanged: `freeze_config.py --check` reports unchanged, and 180 tests pass, 3 of them new in `tests/test_web_viewer.py`.
+  - **Home page (the default):**
+    - hero with a live 3D view of a real AtomForge output (APEG PCE on C3S (040));
+    - scroll-revealed introduction and four-stage workflow (CSS only);
+    - two identical Build and Validate entry cards with live structures.
+    - Motion stops for reduced-motion visitors and pauses off screen.
+    - Navigation: the logo goes Home; Build, Validate and About are tabs. The request, configuration, results and validation are kept across pages, and the page scrolls to the top on a change.
+  - **Build:** five equal example cards, each with an image of the structure built for that request (`web/make_assets.py`, from five accepted runs).
+  - **About:** the "Platform reliability" section is removed. The figures remain as one line on Build and in the docs.
+  - **Viewer:**
+    - camera fitted to the atoms, a gentle 3D tilt;
+    - box drawn as cylinders, Jmol/CPK colours;
+    - x, y, z orientation indicator, element labels, view along x/y/z, reset, an atoms-only representation.
+  - **Bug fixed:** 3Dmol drops hydrogens from PDB text unless `keepH` is set. Earlier versions of the site showed no hydrogens, and the hover atom IDs were shifted for hydrogen-containing structures.
+  - **Browser tests (Playwright):**
+    - Home on desktop and mobile; navigation, and state kept across pages.
+    - Build: example cards; live refine and EO edit; live generation; download of `system.data` (215 kB).
+    - Validate.
+    - Result viewer: all toolbar controls, no JS errors; About.
+    - Model calls for testing cost about $0.03.
+- **Not done.** The Apple reference page itself was not opened. The design follows its principles: one idea per screen, large type, product imagery, scroll reveals.
+- **Tomorrow.** The report.

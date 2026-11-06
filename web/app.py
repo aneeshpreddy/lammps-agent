@@ -37,20 +37,26 @@ from eval.analyse import spec_diff  # noqa: E402
 from validator import load_config, validate  # noqa: E402
 from validator.registry import config_for  # noqa: E402
 import assistant as A  # noqa: E402
+import urllib.parse  # noqa: E402
 import viewer  # noqa: E402
 
 st.set_page_config(page_title="AtomForge", page_icon="⚛️", layout="wide", initial_sidebar_state="collapsed")
 
-EXAMPLES = [
-    ("MPEG-type PCE", "I need a data file for a typical MPEG-type PCE in PCFF. Methacrylic acid backbone, 20 units in "
+EXAMPLES = [     # (title, description, illustration in web/assets/examples, request text)
+    ("MPEG-type PCE", "Methacrylic backbone of 20 units, about 25 % MPEG side chains of 45 EO, Na⁺", "mpeg_pce",
+     "I need a data file for a typical MPEG-type PCE in PCFF. Methacrylic acid backbone, 20 units in "
      "total with about 25% of them carrying MPEG side chains of 45 EO, methoxy capped, random order, neutralised with sodium."),
-    ("C3S supercell", "Give me a 2x2x2 supercell of the tricalcium silicate (C3S) unit cell in CVFF-INTERFACE."),
-    ("PCE on a C3S surface", "Can you put a short APEG-type PCE on the hydroxylated C3S (040) surface? Something like 4 "
+    ("C3S supercell", "Tricalcium silicate unit cell as a 2 × 2 × 2 supercell, CVFF-INTERFACE", "c3s_supercell",
+     "Give me a 2x2x2 supercell of the tricalcium silicate (C3S) unit cell in CVFF-INTERFACE."),
+    ("PCE on a C3S surface", "Short APEG–maleic PCE lying flat on hydroxylated C3S (040)", "pce_on_c3s",
+     "Can you put a short APEG-type PCE on the hydroxylated C3S (040) surface? Something like 4 "
      "maleic acid units alternating with 4 APEG units of 10 EO, sodium counterions, lying flat about 3 Angstrom above "
      "the surface, PCFF, 2x2 surface cells."),
-    ("Three HPEG chains", "Three HPEG chains, each with 12 acrylic acid units (all deprotonated) and 6 HPEG side chains "
+    ("Three HPEG chains", "12 acrylic acid and 6 HPEG side chains of 23 EO per chain, Ca²⁺", "three_hpeg",
+     "Three HPEG chains, each with 12 acrylic acid units (all deprotonated) and 6 HPEG side chains "
      "of 23 EO units, random sequence, calcium counter-ions, PCFF-INTERFACE."),
-    ("A loosely worded request", "short APEG superplasticizer, maybe 6 maleic and 6 APEG units with 10 EO each, sodium, pcff"),
+    ("A loosely worded request", "An informal APEG–maleic request: try it with the assistant", "apeg_maleic",
+     "short APEG superplasticizer, maybe 6 maleic and 6 APEG units with 10 EO each, sodium, pcff"),
 ]
 PLACEHOLDER = ("Build a PCE superplasticizer using PCFF-INTERFACE with 20 acrylic acid backbone units, 5 MPEG side "
                "chains of 45 EO units, random sequence and sodium counter-ions.")
@@ -221,12 +227,112 @@ div.stButton > button:hover, div.stDownloadButton > button:hover {{transform: tr
 .stTextArea textarea {{font-size:.95rem; line-height:1.55; background:{P['surface2']}; border-radius:10px;}}
 [data-testid="stExpander"] details {{border-color:{P['border']}; border-radius:12px; background:{P['surface']};}}
 [data-testid="stExpander"] summary p {{font-size:.9rem; font-weight:550;}}
+/* navigation */
+.st-key-brand button {{padding:.2rem .4rem .2rem 46px !important; min-height:40px; border:none !important; box-shadow:none !important;}}
+.st-key-brand button p {{font-size:1.32rem !important; font-weight:700 !important; color:{P['text']} !important; letter-spacing:-.02em;}}
+.st-key-brand button:hover {{transform:none !important;}} .st-key-brand button:hover p {{color:{P['accent']} !important;}}
+/* page headers (Build, Validate, About) */
+.phead {{margin:.4rem 0 1.1rem 0;}}
+.phead .h {{font-size:clamp(1.9rem, 3.2vw, 2.6rem); font-weight:700; letter-spacing:-.03em; margin:.25rem 0 .5rem 0; color:{P['text']}; line-height:1.1;}}
+.phead .h span {{color:{P['accent']};}}
+.phead p {{color:{P['muted']}; font-size:1rem; line-height:1.6; max-width:880px; margin:0;}}
+.sec-eyebrow {{font-size:.78rem; font-weight:650; letter-spacing:.16em; text-transform:uppercase; color:{P['accent']};}}
+/* landing: hero */
+.st-key-hero {{position:relative; padding:3.2rem 0 0 0; min-height:calc(100vh - 120px);}}
+.st-key-hero .glow {{position:absolute; border-radius:50%; filter:blur(70px); pointer-events:none; z-index:0;}}
+.st-key-hero .g1 {{width:520px; height:420px; left:-140px; top:-60px; background:{P['accent2']}26;}}
+.st-key-hero .g2 {{width:420px; height:360px; left:28%; top:52%; background:{P['accent']}14;}}
+.h-eyebrow {{display:inline-flex; align-items:center; gap:.55rem; font-size:.95rem; font-weight:650; letter-spacing:.2em;
+            text-transform:uppercase; color:{P['accent']};}}
+.h-eyebrow .dot {{width:.55rem; height:.55rem; border-radius:50%; background:{P['accent']}; box-shadow:0 0 14px {P['accent']};}}
+.h-title {{font-size:clamp(2.4rem, 4.3vw, 3.9rem); font-weight:700; line-height:1.03; letter-spacing:-.045em; margin:1rem 0 1.4rem 0;}}
+.h-title span {{display:block; color:{P['text']};}}
+.h-title span.grad {{background:linear-gradient(92deg, #7dd3fc 0%, {P['accent']} 45%, #818cf8 100%); -webkit-background-clip:text;
+                    background-clip:text; color:transparent;}}
+.h-sub {{font-size:1.14rem; line-height:1.7; color:{P['muted']}; max-width:34rem; margin:0;}}
+.st-key-herovis iframe {{-webkit-mask-image:radial-gradient(closest-side, #000 72%, transparent 100%);
+                        mask-image:radial-gradient(closest-side, #000 72%, transparent 100%);}}
+.caption {{text-align:center; color:{P['faint']}; font-size:.78rem; margin-top:.2rem; line-height:1.4;}}
+.scroll-cue {{text-align:center; margin:2.2rem 0 1rem 0; color:{P['faint']}; font-size:.72rem; letter-spacing:.18em; text-transform:uppercase;}}
+.scroll-cue .m {{width:22px; height:36px; border:2px solid {P['border2']}; border-radius:12px; margin:.7rem auto 0; position:relative;}}
+.scroll-cue .m::after {{content:""; position:absolute; left:50%; top:7px; width:4px; height:8px; margin-left:-2px; border-radius:2px;
+                       background:{P['accent']}; animation:wheel 1.9s ease-in-out infinite;}}
+/* landing: sections */
+.st-key-intro {{padding:7rem 0 2rem 0;}}
+.st-key-introvis, .st-key-herovis, [class*="st-key-excard_"],
+:is(.st-key-introvis, .st-key-herovis, [class*="st-key-excard_"]) [data-testid="stElementContainer"],
+:is(.st-key-introvis, [class*="st-key-excard_"]) [data-testid="stElementContainer"]:has(img) div {{width:100% !important;}}
+.st-key-introvis img {{-webkit-mask-image:radial-gradient(closest-side, #000 62%, transparent 100%);
+                      mask-image:radial-gradient(closest-side, #000 62%, transparent 100%);}}
+.sec {{padding:7rem 0 2.2rem 0;}}
+.sec-title {{font-size:clamp(2rem, 3.6vw, 3.1rem); font-weight:700; line-height:1.08; letter-spacing:-.035em; color:{P['text']};
+            margin:.7rem 0 1.1rem 0; max-width:40rem;}}
+.sec-text {{font-size:1.1rem; line-height:1.75; color:{P['muted']}; max-width:36rem;}}
+.chips2 {{display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1.4rem;}}
+.chips2 span {{font-size:.82rem; color:{P['text']}; padding:.38rem .8rem; border-radius:999px; border:1px solid {P['border2']};
+              background:{P['surface2']};}}
+.flow {{position:relative; display:grid; grid-template-columns:repeat(4, 1fr); gap:1.1rem;}}
+.flow::before {{content:""; position:absolute; left:12.5%; right:12.5%; top:2.05rem; height:1px;
+               background:linear-gradient(90deg, transparent, {P['accent']}88, {P['accent2']}88, transparent);}}
+.fstep {{position:relative; text-align:center; padding:0 .4rem;}}
+.fstep .fi {{width:4.1rem; height:4.1rem; margin:0 auto; border-radius:50%; display:flex; align-items:center; justify-content:center;
+            background:{P['surface']}; border:1px solid {P['border2']}; color:{P['accent']}; box-shadow:0 0 0 6px {P['bg']};}}
+.fstep .fi svg {{width:1.7rem; height:1.7rem;}}
+.fstep .fn {{margin-top:1rem; font-size:.75rem; color:{P['faint']}; font-weight:600; letter-spacing:.1em;}}
+.fstep .ft {{font-size:1.02rem; font-weight:700; letter-spacing:.14em; color:{P['text']}; margin:.25rem 0 .5rem 0;}}
+.fstep .fd {{font-size:.9rem; line-height:1.6; color:{P['muted']}; max-width:17rem; margin:0 auto;}}
+/* landing: Build / Validate cards (identical structure, sizes and hover) */
+[class*="st-key-landcard_"] {{background:linear-gradient(180deg, {P['surface']} 0%, {P['surface2']} 100%); border:1px solid {P['border']};
+                              border-radius:26px; padding:1.4rem 1.6rem 1.7rem 1.6rem; gap:.4rem;
+                              transition:transform .35s cubic-bezier(.2,.7,.2,1), border-color .35s, box-shadow .35s;}}
+[class*="st-key-landcard_"]:hover {{transform:translateY(-6px); border-color:{P['accent']}66; box-shadow:0 34px 70px -34px {P['accent']}66;}}
+[class*="st-key-landcard_"] iframe {{border-radius:18px;}}
+.lc-title {{font-size:2.3rem; font-weight:700; letter-spacing:-.035em; color:{P['text']}; margin-top:.5rem; line-height:1.1;}}
+.lc-sub {{font-size:1.12rem; color:{P['text']}; margin:.35rem 0 .5rem 0; font-weight:550;}}
+.lc-desc {{font-size:.98rem; line-height:1.65; color:{P['muted']}; min-height:4.95em; margin-bottom:.6rem;}}
+[class*="st-key-landcard_"] button {{min-height:48px; border-radius:12px;}} [class*="st-key-landcard_"] button p {{font-size:1rem; font-weight:600;}}
+.foot {{display:flex; justify-content:center; gap:1.6rem; flex-wrap:wrap; margin:5rem 0 1rem 0; padding-top:1.4rem;
+       border-top:1px solid {P['border']}; color:{P['faint']}; font-size:.8rem;}}
+.foot span:first-child {{color:{P['muted']}; font-weight:650;}}
+/* example cards (Build) */
+[class*="st-key-excard_"] {{background:{P['surface2']}; border:1px solid {P['border']}; border-radius:14px; padding:.6rem .6rem .75rem .6rem;
+                            gap:.35rem; transition:border-color .25s, transform .25s;}}
+[class*="st-key-excard_"]:hover {{border-color:{P['accent']}66; transform:translateY(-2px);}}
+[class*="st-key-excard_"] img {{aspect-ratio:16 / 10; object-fit:cover; border-radius:10px; width:100%;}}
+.ex-t {{font-size:.92rem; font-weight:650; color:{P['text']}; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-top:.2rem;}}
+.ex-d {{font-size:.78rem; line-height:1.45; color:{P['muted']}; height:4.35em; margin-bottom:.35rem; display:-webkit-box; -webkit-line-clamp:3;
+       -webkit-box-orient:vertical; overflow:hidden;}}
+/* information cards (About): equal heights through the grid */
+.grid2 {{display:grid; grid-template-columns:1fr 1fr; gap:1.1rem;}}
+.icard {{background:{P['surface']}; border:1px solid {P['border']}; border-radius:16px; padding:1.25rem 1.4rem;}}
+.icard .ih {{font-size:1.08rem; font-weight:650; color:{P['text']}; margin-bottom:.6rem;}}
+.icard p {{color:{P['muted']}; font-size:.92rem; line-height:1.65; margin:.2rem 0 .6rem 0;}}
+/* motion: entrance on load, reveal on scroll (scroll-driven CSS, no script); none for reduced motion */
+@keyframes fadeUp {{from {{opacity:0; transform:translateY(22px);}} to {{opacity:1; transform:none;}}}}
+@keyframes wheel {{0% {{opacity:0; transform:translateY(0);}} 30% {{opacity:1;}} 80% {{opacity:0; transform:translateY(12px);}} 100% {{opacity:0;}}}}
+@keyframes reveal {{from {{opacity:0; transform:translateY(46px) scale(.985);}} to {{opacity:1; transform:none;}}}}
+@keyframes drift {{from {{transform:translateY(34px);}} to {{transform:translateY(-34px);}}}}
+@keyframes floaty {{0%, 100% {{transform:translateY(0);}} 50% {{transform:translateY(-10px);}}}}
+@media (prefers-reduced-motion: no-preference) {{
+  .fade-up {{animation:fadeUp .9s cubic-bezier(.2,.7,.2,1) both;}} .d1 {{animation-delay:.12s;}} .d2 {{animation-delay:.26s;}} .d3 {{animation-delay:.42s;}}
+  .st-key-introvis {{animation:floaty 7s ease-in-out infinite;}}
+  @supports (animation-timeline: view()) {{
+    .reveal, [class*="st-key-landcard_"] {{animation:reveal linear both; animation-timeline:view(); animation-range:entry 5% cover 28%;}}
+    .fstep.reveal {{animation-range:entry calc(5% + var(--i) * 6%) cover calc(26% + var(--i) * 4%);}}
+    .st-key-intro [data-testid="stColumn"]:first-child {{animation:drift linear both; animation-timeline:view(); animation-range:cover;}}
+  }}
+}}
+@media (prefers-reduced-motion: reduce) {{ .scroll-cue .m::after {{animation:none; opacity:1;}} }}
 @media (max-width: 900px) {{
-  .stats, .steps4 {{grid-template-columns: 1fr 1fr;}} .vs {{grid-template-columns:1fr;}} .hero h1 {{font-size:1.6rem;}}
+  .stats, .steps4, .flow {{grid-template-columns: 1fr 1fr;}} .vs, .grid2 {{grid-template-columns:1fr;}} .hero h1 {{font-size:1.6rem;}}
+  .flow {{row-gap:2.2rem;}} .flow::before {{display:none;}} .st-key-hero {{min-height:auto; padding-top:1.4rem;}}
+  .sec, .st-key-intro {{padding-top:4rem;}}
   .journey .arrow {{display:none;}}
 }}
+@media (max-width: 520px) {{ .flow {{grid-template-columns:1fr;}} .lc-title {{font-size:1.9rem;}} }}
 </style>""", unsafe_allow_html=True)
 
+HERE = os.path.dirname(os.path.abspath(__file__))
 LOGO = f"""<svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect x="0.5" y="0.5" width="33" height="33" rx="9" fill="{P['surface']}" stroke="{P['border2']}"/>
 <ellipse cx="17" cy="17" rx="11" ry="4.3" stroke="{P['accent']}" stroke-width="1.4"/>
@@ -977,24 +1083,9 @@ def page_build():
         result_view(S["last_run"])
         return
 
-    md(f"""<div class='hero'><h1>From molecular intent to <span>simulation-ready structures</span>.</h1>
-<p>Describe a PCE superplasticiser, a cement mineral or a polymer–cement interface in your own words. AtomForge
-interprets the request, builds the LAMMPS data file with deterministic builders, and validates it — up to and including
-LAMMPS itself — before you download it.</p></div>""")
-    e1, e2 = st.columns(2, gap="medium")
-    with e1.expander("What is a LAMMPS data file?"):
-        st.markdown("A LAMMPS data file defines the molecular system a molecular-dynamics simulation starts from: the "
-                    "**atoms** with their coordinates, atom types, masses and charges; the **bonds, angles, dihedrals "
-                    "and impropers** that connect them; the **force-field coefficients** for those interactions; and "
-                    "the **simulation box** and its periodic dimensions. LAMMPS reads it with `read_data`. You can use "
-                    "the files to start simulations, study molecular conformations, investigate polymer–cement "
-                    "interactions and explore material properties.")
-    with e2.expander("How AtomForge works"):
-        st.markdown("1. **Describe** the system in plain language.\n2. **Refine** (optional): the assistant shows how it "
-                    "reads your request and what it had to assume.\n3. **Configure** the parameters it found.\n4. "
-                    "**Generate**: an agent turns the request into a builder specification; deterministic builders "
-                    "write the atoms, topology and INTERFACE FF parameters; the validator checks the file in four tiers, "
-                    "LAMMPS included. Only a file that passes every check is delivered.")
+    page_header("Build", "Build a <span>molecular system</span>.",
+                "Describe a PCE superplasticiser, a cement mineral or a polymer–cement interface in your own words, or "
+                "start from an example. Every file is validated — up to and including LAMMPS — before you download it.")
 
     analysis = S.get("analysis")
     has_cfg = bool(analysis and analysis.get("ok") and analysis["result"].get("buildable"))
@@ -1009,10 +1100,14 @@ LAMMPS itself — before you download it.</p></div>""")
         card_head(1, "Describe your molecular system",
                   "Tell us what you want to simulate. You can describe the polymer, backbone composition, side chains, "
                   "force field and counter-ions in your own words.")
-        md("<div class='eyebrow'>Examples</div>")
-        ex = st.columns(len(EXAMPLES))
-        for col, (title, text) in zip(ex, EXAMPLES):
-            col.button(title, key=f"ex_{title}", width="stretch", help=text, on_click=set_request, args=(text,))
+        md("<div class='eyebrow'>Start from an example · each picture is the structure AtomForge built for it</div>")
+        ex = st.columns(len(EXAMPLES), gap="small")
+        for i, (col, (title, desc, img, text)) in enumerate(zip(ex, EXAMPLES)):
+            with col.container(key=f"excard_{i}"):
+                st.image(os.path.join(HERE, "assets", "examples", f"{img}.png"), width="stretch")
+                md(f"<div class='ex-t'>{esc(title)}</div><div class='ex-d'>{esc(desc)}</div>")
+                st.button("Use this request", key=f"ex_{i}", width="stretch", help=text, on_click=set_request, args=(text,))
+        md("<div style='height:.6rem'></div>")
         request = st.text_area("Your request", key="request", height=130, label_visibility="collapsed", placeholder=PLACEHOLDER,
                                max_chars=3000)
         text = (request or "").strip()
@@ -1175,15 +1270,14 @@ def bottom_sections():
     if "latency" in s:
         parts.append(f"mean time <b>≈ {s['latency']:.0f} s</b> per file")
     if parts:
-        md("<div class='strip'><span>Platform reliability</span>" + "".join(f"<span>{p}</span>" for p in parts)
-           + "<span>· details under About</span></div>")
+        md("<div class='strip'><span>Technical information</span>" + "".join(f"<span>{p}</span>" for p in parts) + "</div>")
 
 
 def page_validate():
     S = st.session_state
-    md("<div class='hero'><h1>Validate an existing <span>LAMMPS data file</span>.</h1><p>Check any LAMMPS data file — from "
-       "AtomForge, EMC, Materials Studio, msi2lmp or written by hand — against up to 44 properties in four tiers. Runs "
-       "locally; nothing is uploaded anywhere.</p></div><div style='height:1.1rem'></div>")
+    page_header("Validate", "Validate a <span>LAMMPS data file</span>.",
+                "Check any LAMMPS data file — from AtomForge, EMC, Materials Studio, msi2lmp or written by hand — in four "
+                "tiers, up to and including LAMMPS itself. Runs locally; nothing is uploaded anywhere.")
     matrix = {}
     mpath = os.path.join(ROOT, "docs", "validator_matrix.csv")
     if os.path.exists(mpath):
@@ -1313,69 +1407,155 @@ def page_validate():
 
 
 def page_about():
-    md("<div class='hero'><h1>About <span>AtomForge</span></h1><p>AtomForge is an AI-assisted molecular structure "
-       "generation and validation platform for molecular-dynamics simulations with LAMMPS. Describe a system in natural "
-       "language, configure its chemical parameters, and AtomForge translates the request into a structured "
-       "configuration, builds the LAMMPS data file with deterministic builders, and validates its structural and "
-       "physical consistency before delivering a simulation-ready file.</p></div><div style='height:1.2rem'></div>")
-    with st.container(key="card_how"):
-        card_head("", "How it works")
-        md("<div class='steps4'>"
-           "<div><b>1 · Understand</b>A language model reads the request and writes a structured builder specification. "
-           "It never writes coordinates.</div>"
-           "<div><b>2 · Build</b>Deterministic builders create atoms, bonds, angles, dihedrals and impropers with "
-           "INTERFACE FF 1.5 typing and charges.</div>"
-           "<div><b>3 · Validate</b>An independent validator checks the file in four tiers, finishing with LAMMPS "
-           "itself. Failures go back to the agent, which revises.</div>"
-           "<div><b>4 · Deliver</b>Only a file that passes every check is offered for download. Requests the builders "
-           "cannot make are declined, never substituted.</div></div>")
-    md("<div style='height:.9rem'></div>")
-    c = st.columns(2, gap="large")
-    with c[0]:
-        with st.container(key="card_scope"):
-            card_head("", "What it can build")
-            md(kv_html([("PCE superplasticisers", "Any architecture: acrylic / methacrylic acid, maleic acid, MPEG, APEG, "
-                         "HPEG, TPEG and VPEG side chains; any sequence; several chains; Na⁺, K⁺ or Ca²⁺"),
-                        ("Cement minerals", "Every INTERFACE FF 1.5 model: C3S, C3A, ettringite, monosulfate, tobermorite 11 Å "
-                         "and 14 Å — unit cells, supercells and surfaces"),
-                        ("Interfaces", "A PCE placed on a cement-mineral surface"),
-                        ("Force fields", "PCFF-INTERFACE (class II); CVFF-INTERFACE (class I) for PCE, C3S and C3A")]))
-    with c[1]:
-        with st.container(key="card_perf"):
-            card_head("", "Platform reliability")
-            s = perf_stats()
-            stats = []
-            if "test" in s:
-                stats.append((f"{s['test'][0]} / {s['test'][1]}", "held-out test runs: a valid file of exactly the requested system"))
-            if "caught" in s:
-                stats.append((f"{s['caught'][0]} / {s['caught'][1]}", "deliberately corrupted files caught by the validator"))
-            if "properties" in s:
-                stats.append((str(s["properties"]), "properties checked in four tiers, LAMMPS included"))
-            if "latency" in s:
-                stats.append((f"≈ {s['latency']:.0f} s", "mean time from request to validated file (test runs)"))
-            md("<div class='stats' style='grid-template-columns:1fr 1fr'>" + "".join(
-                f"<div class='stat'><div class='v'>{esc(v)}</div><div class='l'>{esc(l)}</div></div>" for v, l in stats) + "</div>")
-            md("<p class='faint' style='margin-top:.6rem'>Read from the project's result files (docs/validator_matrix.csv, "
-               "docs/PROPERTIES.md and the latest test run). The figures refer to the generation pipeline; the request "
-               "assistant is an interface helper on top of it.</p>")
-    md("<p class='faint' style='margin-top:1.2rem'>Version 1.0 · validator 1.0.0 · INTERFACE FF 1.5 · LAMMPS 22 Jul 2025 · "
-       "runs locally on this machine</p>")
+    page_header("About", "About <span>AtomForge</span>.",
+                "AtomForge is an AI-assisted molecular structure generation and validation platform for molecular-dynamics "
+                "simulations with LAMMPS. Describe a system in natural language, configure its chemical parameters, and "
+                "AtomForge translates the request into a structured configuration, builds the LAMMPS data file with "
+                "deterministic builders, and validates its structural and physical consistency before delivering a "
+                "simulation-ready file.")
+    md("<div class='grid2'>"
+       "<div class='icard'><div class='ih'>What is a LAMMPS data file?</div><p>A LAMMPS data file defines the molecular "
+       "system a molecular-dynamics simulation starts from: the <b>atoms</b> with their coordinates, atom types, masses and "
+       "charges; the <b>bonds, angles, dihedrals and impropers</b> that connect them; the <b>force-field coefficients</b> "
+       "for those interactions; and the <b>simulation box</b> with its periodic dimensions. LAMMPS reads it with "
+       "<code>read_data</code>.</p><p>Use the files to start simulations, study molecular conformations, investigate "
+       "polymer–cement interactions and explore material properties.</p></div>"
+       "<div class='icard'><div class='ih'>What it can build</div>" + kv_html([
+           ("PCE superplasticisers", "Any architecture: acrylic / methacrylic acid, maleic acid, MPEG, APEG, HPEG, TPEG and "
+            "VPEG side chains; any sequence; several chains; Na⁺, K⁺ or Ca²⁺"),
+           ("Cement minerals", "Every INTERFACE FF 1.5 model: C3S, C3A, ettringite, monosulfate, tobermorite 11 Å and 14 Å — "
+            "unit cells, supercells and surfaces"),
+           ("Interfaces", "A PCE placed on a cement-mineral surface"),
+           ("Force fields", "PCFF-INTERFACE (class II); CVFF-INTERFACE (class I) for PCE, C3S and C3A")]) + "</div></div>")
+    md("<div class='sec-eyebrow' style='margin-top:2.2rem'>How it works</div>" + flow_html())
+    md("<div class='grid2' style='margin-top:1.2rem'>"
+       "<div class='icard'><div class='ih'>The request assistant</div><p>An optional helper that shows how a request is "
+       "read: which values you stated, which it inferred from loose wording, and which are builder defaults. It never "
+       "overrides an explicit value, and it explains instead of substituting when a request is out of scope. It is an "
+       "interface helper on top of the generation pipeline, not part of it.</p></div>"
+       "<div class='icard'><div class='ih'>Technical information</div>" + kv_html([
+           ("Version", "AtomForge 1.0 (frozen generation pipeline v1.0)"), ("Validator", "1.0.0 — 44 properties in four tiers"),
+           ("Force field", "INTERFACE FF 1.5 (CVFF- and PCFF-INTERFACE)"), ("LAMMPS", "22 Jul 2025 (Update 6), this machine"),
+           ("Model", MODEL), ("Runs", "locally; nothing leaves this machine except the model call")]) + "</div></div>")
+
+
+def page_header(eyebrow: str, title_html: str, text: str):
+    md(f"<div class='phead'><div class='sec-eyebrow'>{esc(eyebrow)}</div><div class='h' role='heading' aria-level='1'>{title_html}</div>"
+       f"<p>{esc(text)}</p></div>")
+
+
+FLOW = [("Understand", "AI interprets the molecular request and converts it into a structured specification.",
+         '<path d="M4 6h16M4 12h10M4 18h7"/><circle cx="18" cy="16" r="3"/><path d="M20.2 18.2 22 20"/>'),
+        ("Build", "Deterministic builders generate atoms, bonds, angles, dihedrals and molecular topology.",
+         '<circle cx="6" cy="7" r="2.2"/><circle cx="18" cy="7" r="2.2"/><circle cx="12" cy="17" r="2.2"/>'
+         '<path d="M8 7.8h8M7.2 9l3.7 6.1M16.8 9l-3.7 6.1"/>'),
+        ("Validate", "A multi-tier validator checks structural consistency, physical plausibility and LAMMPS compatibility.",
+         '<path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.2 7.5 9.5 4.3-1.3 7.5-4.9 7.5-9.5V6Z"/><path d="m8.8 12.2 2.3 2.3 4.3-4.6"/>'),
+        ("Deliver", "The validated LAMMPS data file becomes available for download.",
+         '<path d="M12 4v11M7.5 10.5 12 15l4.5-4.5"/><path d="M5 19h14"/>')]
+
+
+def flow_html() -> str:
+    return "<div class='flow'>" + "".join(
+        f"<div class='fstep reveal' style='--i:{i}'><div class='fi'><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' "
+        f"stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'>{icon}</svg></div><div class='fn'>0{i + 1}</div>"
+        f"<div class='ft'>{t.upper()}</div><div class='fd'>{esc(d)}</div></div>" for i, (t, d, icon) in enumerate(FLOW)) + "</div>"
+
+
+@st.cache_data(show_spinner=False)
+def structure(name: str) -> dict:
+    return json.load(open(os.path.join(HERE, "structures", f"{name}.json")))
+
+
+def go(page: str):
+    """Callback: change page (state, results and the request are kept); scroll to the top of the new page."""
+    st.session_state["page"] = page
+    st.session_state["scroll_top"] = st.session_state.get("scroll_top", 0) + 1
+
+
+def page_home():
+    hero = structure("pce_on_c3s")
+    with st.container(key="hero"):
+        md("<div class='glow g1'></div><div class='glow g2'></div>")
+        left, right = st.columns([1.05, 1], gap="large", vertical_alignment="center")
+        with left:
+            md("<div class='h-eyebrow fade-up'><span class='dot'></span>AtomForge</div>"
+               "<div class='h-title fade-up d1' role='heading' aria-level='1'><span>Engineer molecules.</span>"
+               "<span class='grad'>Explore materials.</span><span>Simulate reality.</span></div>"
+               "<p class='h-sub fade-up d2'>Transform natural-language molecular specifications into simulation-ready LAMMPS "
+               "structures. Build complex polymer systems, explore material interfaces and validate every structure through "
+               "an intelligent, multi-stage workflow.</p>")
+        with right:
+            with st.container(key="herovis"):
+                components.html(viewer.showcase(hero, 540, bg=P["bg"], spin_speed=0.22, particles=70, box=P["accent"]), height=540)
+            md(f"<div class='caption fade-up d3'>Live 3D · an actual AtomForge output: APEG-type PCE on a hydroxylated C3S (040) "
+               f"surface, PCFF-INTERFACE, {hero['atoms']:,} atoms</div>")
+        md("<div class='scroll-cue fade-up d3'>Scroll to explore<div class='m'></div></div>")
+
+    with st.container(key="intro"):
+        left, right = st.columns([1, 1.1], gap="large", vertical_alignment="center")
+        with left:
+            with st.container(key="introvis"):
+                st.image(os.path.join(HERE, "assets", "examples", "intro_pce.png"), width="stretch")
+            md("<div class='caption'>An MPEG-type PCE built and validated by AtomForge</div>")
+        with right:
+            md("<div class='reveal'><div class='sec-eyebrow'>Introduction</div>"
+               "<div role='heading' aria-level='2' class='sec-title'>Where molecular intent becomes simulation-ready reality.</div>"
+               "<p class='sec-text'>AtomForge connects natural-language intelligence with deterministic molecular builders "
+               "and rigorous validation, helping researchers translate complex material specifications into reliable "
+               "LAMMPS data files.</p><div class='chips2'><span>Natural language in</span><span>Deterministic builders</span>"
+               "<span>Four-tier validation</span><span>LAMMPS-ready out</span></div></div>")
+
+    md("<div class='sec reveal' style='text-align:center'><div class='sec-eyebrow'>How AtomForge works</div>"
+       "<div role='heading' aria-level='2' class='sec-title' style='margin-left:auto;margin-right:auto'>From a sentence to a validated file, in four stages.</div>"
+       "</div>" + flow_html())
+
+    md("<div class='sec reveal' style='text-align:center;padding-bottom:1.4rem'><div class='sec-eyebrow'>Get started</div>"
+       "<div role='heading' aria-level='2' class='sec-title' style='margin-left:auto;margin-right:auto'>Choose your workflow.</div></div>")
+    cards = [("build", "Build", "Create molecular systems from natural language.",
+              "Describe your polymer, cement mineral or interface. Configure its molecular parameters and generate a "
+              "validated LAMMPS data file.", "apeg_maleic", "Start Building  →", "Build"),
+             ("validate", "Validate", "Verify your molecular structures.",
+              "Upload an existing LAMMPS data file and evaluate its structural integrity, physical consistency and "
+              "simulation compatibility.", "c3s_supercell", "Start Validation  →", "Validate")]
+    cols = st.columns(2, gap="large")
+    for col, (key, title, sub, desc, struct, label, page) in zip(cols, cards):
+        with col.container(key=f"landcard_{key}"):
+            components.html(viewer.showcase(structure(struct), 320, bg=P["surface"], spin_speed=0.3, box=P["accent"]), height=320)
+            md(f"<div class='lc-title'>{title}</div><div class='lc-sub'>{esc(sub)}</div><div class='lc-desc'>{esc(desc)}</div>")
+            st.button(label, key=f"go_{key}", type="primary", width="stretch", on_click=go, args=(page,))
+    md("<div class='foot'><span>AtomForge</span><span>LAMMPS data files for cementitious systems</span>"
+       "<span>INTERFACE FF 1.5 · LAMMPS · runs locally</span></div>")
 
 
 # --------------------------------------------------------------------------------------------- shell
 S = st.session_state
 S.setdefault("view", "compose")
+S.setdefault("page", "Home")
+# Streamlit drops the value of a widget that is not drawn in a run; keep the request, the configuration and the
+# Validate choices while another page is shown.
+for k in [k for k in S.keys() if k in ("request", "sugg_text", "v_src", "v_example") or str(k).startswith("c_")]:
+    S[k] = S[k]
 shown_run = st.query_params.get("show")          # ?show=<folder in runs/requests>: open a saved result directly
 if shown_run and "shown" not in S:
     S["shown"] = True
-    S["last_run"], S["view"] = os.path.join(ROOT, "runs", "requests", os.path.basename(shown_run)), "result"
+    S["last_run"], S["view"], S["page"] = os.path.join(ROOT, "runs", "requests", os.path.basename(shown_run)), "result", "Build"
 
-h = st.columns([1.6, 1.4, 1.1], vertical_alignment="center")
-h[0].markdown(f"<div class='brand'>{LOGO}<div><div class='name'>AtomForge</div>"
-              f"<div class='tag'>From molecular intent to simulation-ready structures</div></div></div>", unsafe_allow_html=True)
+
+def nav_changed():
+    if S.get("nav"):                             # clicking the selected tab again deselects it: stay on that page
+        go(S["nav"])
+
+
+S["nav"] = None if S["page"] == "Home" else S["page"]
+logo_uri = "data:image/svg+xml;utf8," + urllib.parse.quote(LOGO)
+md(f"<style>.st-key-brand button {{background:url('{logo_uri}') no-repeat left center / 34px 34px !important;}}</style>")
+h = st.columns([1.3, 1.4, 1.1], vertical_alignment="center")
+with h[0]:
+    st.button("AtomForge", key="brand", type="tertiary", on_click=go, args=("Home",), help="AtomForge home")
 with h[1]:
-    nav = st.segmented_control("Navigation", ["Build", "Validate", "About"], key="nav", default="Build",
-                               label_visibility="collapsed") or "Build"
+    st.segmented_control("Navigation", ["Build", "Validate", "About"], key="nav", label_visibility="collapsed",
+                         on_change=nav_changed)
 with h[2]:
     r = st.columns([1.5, 1], vertical_alignment="center")
     offline = S.get("offline", False)
@@ -1391,10 +1571,16 @@ with h[2]:
                   help="Replays saved results and assistant analyses. Needs no internet connection.")
         st.caption("Generation uses the model in config.yaml through the API key of this terminal.")
 md("<div class='rule'></div>")
+if S.get("scroll_top"):                          # a page change: start the new page at its top
+    components.html(f"<script>/* {S['scroll_top']} */ const m = window.parent.document.querySelector('section.stMain') "
+                    f"|| window.parent.document.querySelector('[data-testid=\"stMain\"]'); if (m) m.scrollTo(0, 0);</script>",
+                    height=0)
 
-if nav == "Validate":
+if S["page"] == "Validate":
     page_validate()
-elif nav == "About":
+elif S["page"] == "About":
     page_about()
-else:
+elif S["page"] == "Build":
     page_build()
+else:
+    page_home()
