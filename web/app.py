@@ -1286,7 +1286,8 @@ def page_validate():
     with left:
         with st.container(key="card_vinput"):
             card_head(1, "Choose a file")
-            src = st.segmented_control("Source", ["Example files", "Upload a file"], key="v_src", default="Example files",
+            S.setdefault("v_src", "Example files")         # set via session state: no default= (it is kept across pages)
+            src = st.segmented_control("Source", ["Example files", "Upload a file"], key="v_src",
                                        label_visibility="collapsed")
             path, cfg, row = None, None, None
             if src == "Upload a file":

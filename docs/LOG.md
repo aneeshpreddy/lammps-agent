@@ -657,3 +657,15 @@ Model access is still with the supervisor (expected in 1–2 days). Haiku 5.5 wa
   - Added a Home tab (Home · Build · Validate · About).
   - The browser's Back and Forward now work: each page change adds a `?page=` history entry, and a listener in the page clicks the matching tab. A reload keeps the page.
   - Tested with Playwright: Home → Build → Back → Home; Forward; Validate → About → Back ×3; the Home tab; reload; `?page=Validate`. The request is kept.
+
+### 2026-11-09: the report as a Word file; one website fix
+- **Done.**
+  - The report is written as `../report/LAMMPS_Agent_Report_Aneesh.docx`, with a PDF copy: 17 pages, 10 figures, 8 tables.
+    - Its format was measured from the owner's earlier report (TABNET): A4, 2 cm margins, Times New Roman; title 16 pt; headings 14 and 13 pt; body 12 pt justified, line spacing 1.15; tables with a #2E4057 header.
+    - Every number comes from `docs/RESULTS_TEST.md`, `docs/RESULTS_DEV_FINAL.md`, `docs/VALIDATOR_RESULTS.md` and `docs/HARNESS.md`.
+    - The figures and their build script are in `../report/figures/`.
+  - Fixed a Streamlit warning on the Validate page (`v_src` had both a default and a session-state value) that appeared after a page change.
+  - Credits used so far: about $6.50. That is $5.62 for evaluation runs plus $0.55 for website and command-line runs, priced from saved token counts, plus estimates for the assistant calls and smoke tests.
+- **Not done.** Owner to review the report:
+  - check the references (INTERFACE FF: Heinz et al. 2013 is cited; add the cement-mineral database paper if wanted);
+  - fill in Hours.
