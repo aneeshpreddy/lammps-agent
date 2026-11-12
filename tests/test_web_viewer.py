@@ -19,12 +19,15 @@ def test_scene_keeps_every_atom_and_draws_the_cell():
     assert len(hetatm) == S["atoms"] == len(S["ids"]) == sum(S["elements"].values())
     assert set(S["elements"]) == {"Ca", "Si", "O"}
     assert len(S["edges"]) == 12                           # a parallelepiped
+    assert len(S["q"]) == len(S["type"]) == S["atoms"] and abs(sum(S["q"])) < 1e-6   # charges for the hover label
+    assert S["tnames"]["1"] == "ca++" and S["q"][0] == 1.5
     assert all(len(p) == 3 and len(q) == 3 for p, q in S["edges"])
 
 
 def test_viewer_html_loads_hydrogens_and_has_no_inert_controls():
     page = viewer.html(C3S, height=400)
     assert "keepH: true" in page                           # 3Dmol drops hydrogens from PDB text otherwise
+    assert "hoverHTML(S, atom.index" in page and "charge" in page
     for fn in ("resetView", "fit", "along", "toggleSpin", "toggleBox", "toggleLabels", "toggleH", "restyle", "png"):
         assert f"function {fn}(" in page, fn               # every toolbar button calls a defined function
 

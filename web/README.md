@@ -28,7 +28,7 @@ pip install -r web/requirements.txt     # once (Streamlit)
    - The counter-ion count follows the builder's own rule (carboxylates ÷ ion charge). The panel warns before a request the builder would refuse, for example Ca²⁺ with an odd number of carboxylates.
 4. **Generate.** The frozen agent receives the request text. Seven stages are each marked done only when the agent's trace records them.
 5. **Result.** The result page shows:
-   - a large 3D view: centred on the atoms (not on the vacuum above a slab), with the periodic box drawn as cylinders, an orientation indicator (x, y, z) and an element legend in Jmol/CPK colours. The toolbar has reset, fit, zoom, view along x/y/z, rotate, box, element labels, hide H, representation (ball and stick, sticks, space filling, lines, atoms only), hover (element and LAMMPS atom ID) and PNG export;
+   - a large 3D view: centred on the atoms (not on the vacuum above a slab), with the periodic box drawn as cylinders, an orientation indicator (x, y, z) and an element legend in Jmol/CPK colours. The toolbar has reset, fit, zoom, view along x/y/z, rotate, box, element labels, hide H, representation (ball and stick, sticks, space filling, lines, atoms only), hover (element, force-field type, LAMMPS atom ID and charge, read from the file) and PNG export;
    - a one-line description;
    - a check that the built spec matches the configuration you reviewed;
    - an assumptions table with the source of each value;

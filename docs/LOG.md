@@ -686,3 +686,7 @@ Model access is still with the supervisor (expected in 1–2 days). Haiku 5.5 wa
   - Streamlit's own theme is switched too (set_option, then one re-run), and the choice survives a reload.
   - 3D views keep a dark stage in both modes.
   - Browser test on every page in both modes: no errors.
+- **Hover shows the charge (13 Nov).**
+  - In every 3D view the label now shows the element, force-field type (name and number), LAMMPS atom ID and partial charge, read from the data file. The Learn page's rotatable views gained the same label.
+  - Checked by hovering real atoms: Na⁺ +1 e, o- −0.5337 e, ca++ +1.5 e, each matching its file.
+  - The structures in `web/structures/` were regenerated to include the charges.

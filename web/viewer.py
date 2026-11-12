@@ -76,8 +76,10 @@ def scene(path: str) -> dict:
             lines.append("CONECT" + f"{i:5d}" + "".join(f"{j:5d}" for j in nb[k:k + 4]))
     lines.append("END")
     present = sorted(set(names), key=lambda e: list(COLOURS).index(e) if e in COLOURS else 99)
+    q = [round(float(x), 6) for x in m.q] if getattr(m, "q", None) is not None else []
     return {"pdb": "\n".join(lines), "ids": [int(a) for a in m.ids], "colours": {e: COLOURS.get(e, COLOURS["X"]) for e in present},
-            "edges": edges, "atoms": len(names), "elements": {e: names.count(e) for e in present}}
+            "edges": edges, "atoms": len(names), "elements": {e: names.count(e) for e in present},
+            "q": q, "type": [int(t) for t in m.types], "tnames": {str(k): v for k, v in (m.type_names or {}).items()}}
 
 
 @functools.lru_cache(maxsize=1)
@@ -104,6 +106,17 @@ function applyStyle(v, S, rep, hideH) {
     v.setStyle({elem: e}, s);
     if (IONS.includes(e)) v.setStyle({elem: e, bonds: 0}, {sphere: {scale: rep === "sp" ? 0.9 : rep === "rich" ? 0.55 : 0.42, color: S.colours[e]}});
   }
+}
+function fmtQ(q) {                              // charge as in the file, with a real minus sign
+  if (q === undefined || q === null) return "";
+  const t = Math.abs(q).toFixed(4).replace(/0+$/, "").replace(/\.$/, "");
+  return (q > 0 ? "+" : q < 0 ? "\u2212" : "") + t + " e";
+}
+function hoverHTML(S, i, elem) {                  // element, force-field type, LAMMPS atom ID and charge of atom i
+  const t = S.type ? S.type[i] : null, name = t !== null && S.tnames ? S.tnames[String(t)] : null;
+  let top = "<b>" + elem + "</b>" + (t !== null && t !== undefined ? " · type " + (name ? name + " (" + t + ")" : t) : "");
+  let bot = "atom ID " + S.ids[i] + (S.q && S.q.length ? " · charge <b>" + fmtQ(S.q[i]) + "</b>" : "");
+  return top + "<br>" + bot;
 }
 function boxShapes(v, S, colour) {
   if (!S.edges.length) return [];
@@ -165,8 +178,8 @@ body {{margin:0; font-family:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;
 .lg i {{display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:5px; vertical-align:-1px;}}
 .axes {{position:absolute; z-index:5; right:12px; bottom:12px; width:74px; height:74px; border-radius:50%;
   background:{panel}aa; border:1px solid {border};}}
-.hover {{position:absolute; z-index:6; right:96px; bottom:12px; padding:5px 10px; font-size:12px; color:{text};
-  background:{panel}e6; border:1px solid {border}; border-radius:8px; display:none;}}
+.hover {{position:absolute; z-index:6; right:96px; bottom:12px; padding:6px 11px; font-size:12px; line-height:1.5; color:{text};
+  background:{panel}f0; border:1px solid {accent}88; border-radius:8px; display:none; font-variant-numeric:tabular-nums;}}
 </style>
 <div class="wrap">{bar}<div id="v"></div><div class="legend">{legend}</div>
 <svg class="axes" viewBox="-37 -37 74 74"><g id="ax"></g></svg><div class="hover" id="hv"></div></div>
@@ -202,7 +215,7 @@ function toggleLabels() {{
 function png() {{ const a = document.createElement("a"); a.href = v.pngURI(); a.download = "structure.png";
   document.body.appendChild(a); a.click(); a.remove(); }}
 const hv = document.getElementById("hv");
-v.setHoverable({{}}, true, function (atom) {{ hv.style.display = "block"; hv.textContent = atom.elem + " · atom ID " + S.ids[atom.index]; }},
+v.setHoverable({{}}, true, function (atom) {{ hv.style.display = "block"; hv.innerHTML = hoverHTML(S, atom.index, atom.elem); }},
   function () {{ hv.style.display = "none"; }});
 v.setHoverDuration(60);
 // orientation axes: the x, y, z directions of the box frame, rotated with the view (quaternion from getView)
@@ -243,8 +256,10 @@ def showcase(S: dict, height: int, bg: str = "#05070c", box: str = "#38bdf8", sp
     occlusion (`ao`) is for still images only: it is too heavy for a page with several live views."""
     return f"""<style>html, body {{margin:0; background:{bg}; overflow:hidden;}}
 #v {{position:relative; width:100%; height:{height}px;}}
-#p {{position:absolute; inset:0; width:100%; height:{height}px; pointer-events:none; z-index:3;}}</style>
-<div id="v"></div><canvas id="p"></canvas>
+#p {{position:absolute; inset:0; width:100%; height:{height}px; pointer-events:none; z-index:3;}}
+#hv {{position:absolute; z-index:6; right:10px; bottom:10px; padding:6px 11px; font:12px/1.5 "Inter",-apple-system,sans-serif;
+  color:#e6edf7; background:#111827f0; border:1px solid {accent}88; border-radius:8px; display:none;}}</style>
+<div id="v"></div><canvas id="p"></canvas><div id="hv"></div>
 <script>{_lib()}</script>
 <script>
 {_CORE % {"ions": json.dumps(list(IONS))}}
@@ -254,6 +269,12 @@ const v = $3Dmol.createViewer("v", {{backgroundColor: "{bg}", antialias: true, n
   {", ambientOcclusion: {strength: 0.9, radius: 6}" if ao else ""}}});
 v.addModel(S.pdb, "pdb", {{keepH: true}});
 applyStyle(v, S, "rich", false);
+if ({str(interactive).lower()}) {{
+  const hv = document.getElementById("hv");
+  v.setHoverable({{}}, true, (atom) => {{ hv.style.display = "block"; hv.innerHTML = hoverHTML(S, atom.index, atom.elem); }},
+                 () => {{ hv.style.display = "none"; }});
+  v.setHoverDuration(60);
+}}
 frame(v, {str(tilt).lower()}, {zoom});
 {'boxShapes(v, S, "' + box + '");' if show_box else ''}
 v.render();
