@@ -678,3 +678,6 @@ Model access is still with the supervisor (expected in 1–2 days). Haiku 5.5 wa
   - Browser test: every step and control, the request builder sending its text to Build, and Back.
   - Report: removed the Anthropic/Claude reference and its in-text citation, at the owner's request.
 - **Not done.** About-page people and acknowledgements: waiting for the owner's details.
+- **About page (later, 13 Nov).**
+  - Added the people cards (owner, no email; supervisor Adarsh P, Ph.D. scholar; Prof. Aslam Kunhi Mohamed, from his faculty page; the mineral models and EMC files credited to Adarsh P, owner), an acknowledgements note and grouped references with links. The DOIs were checked to resolve.
+  - Removed the model ID from About (owner: "don't mention Claude"); the result page's technical details still show it.

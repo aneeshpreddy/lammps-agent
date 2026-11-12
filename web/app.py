@@ -293,6 +293,21 @@ div.stButton > button:hover, div.stDownloadButton > button:hover {{transform: tr
 .lc-desc {{font-size:.98rem; line-height:1.65; color:{P['muted']}; min-height:4.95em; margin-bottom:.6rem;}}
 [class*="st-key-landcard_"] button {{min-height:48px; border-radius:12px;}} [class*="st-key-landcard_"] button p {{font-size:1rem; font-weight:600;}}
 .st-key-learncta {{margin-top:1.4rem; background:{P['surface2']}; border:1px solid {P['border']}; border-radius:18px; padding:1.1rem 1.6rem;}}
+.pgrid {{display:grid; grid-template-columns:repeat(3, 1fr); gap:1.1rem; margin-top:.4rem;}}
+.pcard {{background:{P['surface']}; border:1px solid {P['border']}; border-radius:16px; padding:1.3rem 1.4rem; display:flex;
+        flex-direction:column; transition:border-color .25s, transform .25s;}}
+.pcard:hover {{border-color:{P['accent']}66; transform:translateY(-3px);}}
+.pcard .av {{width:3.2rem; height:3.2rem; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700;
+            font-size:1.05rem; color:{P['bg']}; background:linear-gradient(135deg, {P['accent']}, {P['accent2']}); margin-bottom:.8rem;}}
+.pcard .pn {{font-size:1.1rem; font-weight:650; color:{P['text']};}}
+.pcard .pr {{font-size:.8rem; color:{P['accent']}; margin:.2rem 0 .6rem 0; line-height:1.45;}}
+.pcard p {{color:{P['muted']}; font-size:.88rem; line-height:1.6; margin:0 0 .7rem 0; flex:1;}}
+.pcard a, ol.refs a {{color:{P['accent']}; text-decoration:none; font-size:.84rem; word-break:break-all;}}
+.pcard a:hover, ol.refs a:hover {{text-decoration:underline;}}
+.rgroup {{font-size:.74rem; font-weight:650; letter-spacing:.1em; text-transform:uppercase; color:{P['faint']}; margin:.9rem 0 .3rem 0;}}
+.rgroup:first-child {{margin-top:0;}}
+ol.refs {{margin:0 0 .3rem 1.1rem; padding:0; color:{P['muted']}; font-size:.87rem; line-height:1.6;}}
+ol.refs li {{margin:.25rem 0;}}
 .foot {{display:flex; justify-content:center; gap:1.6rem; flex-wrap:wrap; margin:5rem 0 1rem 0; padding-top:1.4rem;
        border-top:1px solid {P['border']}; color:{P['faint']}; font-size:.8rem;}}
 .foot span:first-child {{color:{P['muted']}; font-weight:650;}}
@@ -326,6 +341,7 @@ div.stButton > button:hover, div.stDownloadButton > button:hover {{transform: tr
 }}
 @media (prefers-reduced-motion: reduce) {{ .scroll-cue .m::after {{animation:none; opacity:1;}} }}
 @media (max-width: 900px) {{
+  .pgrid {{grid-template-columns:1fr;}}
   .stats, .steps4, .flow {{grid-template-columns: 1fr 1fr;}} .vs, .grid2 {{grid-template-columns:1fr;}} .hero h1 {{font-size:1.6rem;}}
   .flow {{row-gap:2.2rem;}} .flow::before {{display:none;}} .st-key-hero {{min-height:auto; padding-top:1.4rem;}}
   .sec, .st-key-intro {{padding-top:4rem;}}
@@ -1439,7 +1455,73 @@ def page_about():
        "<div class='icard'><div class='ih'>Technical information</div>" + kv_html([
            ("Version", "AtomForge 1.0 (frozen generation pipeline v1.0)"), ("Validator", "1.0.0 — 44 properties in four tiers"),
            ("Force field", "INTERFACE FF 1.5 (CVFF- and PCFF-INTERFACE)"), ("LAMMPS", "22 Jul 2025 (Update 6), this machine"),
-           ("Model", MODEL), ("Runs", "locally; nothing leaves this machine except the model call")]) + "</div></div>")
+           ("Runs", "locally; nothing leaves this machine except the model call")]) + "</div></div>")
+    about_people()
+    about_references()
+
+
+PEOPLE = [  # (initials, name, role, intro, link label, link); only what the owner and the faculty page state
+    ("AR", "P. Aneesh Reddy", "Developer · B.Tech Civil Engineering, IIT Madras (2027)",
+     "Interested in integrating AI into civil engineering. Developed AtomForge: the data-file validator, the agent that "
+     "builds the files, its evaluation and this web interface.", "", ""),
+    ("AP", "Adarsh P", "Supervisor · Ph.D. scholar, Department of Civil Engineering, IIT Madras",
+     "Research interest: nucleation and growth of calcium silicate hydrate (C‑S‑H), the main binding phase of hydrated "
+     "cement.", "", ""),
+    ("AK", "Prof. Aslam Kunhi Mohamed", "Assistant Professor · BTCM division, Department of Civil Engineering, IIT Madras",
+     "Research areas: molecular modelling of construction materials, cement hydration at the atomic scale, and molecular "
+     "dynamics and density functional theory simulations. Ph.D., EPFL (2018).", "Faculty page",
+     "https://civil.iitm.ac.in/faculty/aslam/"),
+]
+REFERENCES = [
+    ("Force field and models", [
+        ("Heinz, H., Lin, T.-J., Mishra, R.K., Emami, F.S. (2013). Thermodynamically consistent force fields for the "
+         "assembly of inorganic, organic, and biological nanostructures: the INTERFACE force field. Langmuir, 29(6), "
+         "1754–1765.", "https://doi.org/10.1021/la3038846"),
+        ("INTERFACE FF 1.5: CVFF-INTERFACE and PCFF-INTERFACE parameters and the cement-mineral model database, from its "
+         "authors (the Heinz group).", ""),
+        ("Cement-mineral models and EMC-built PCE reference files: provided by Adarsh P, IIT Madras.", "")]),
+    ("Simulation software", [
+        ("Thompson, A.P., et al. (2022). LAMMPS – a flexible simulation tool for particle-based materials modeling at the "
+         "atomic, meso, and continuum scales. Computer Physics Communications, 271, 108171.",
+         "https://doi.org/10.1016/j.cpc.2021.108171"),
+        ("LAMMPS documentation (22 Jul 2025 release), including read_data and the msi2lmp converter used by the builders.",
+         "https://docs.lammps.org")]),
+    ("Web interface", [
+        ("Rego, N., Koes, D. (2015). 3Dmol.js: molecular visualization with WebGL. Bioinformatics, 31(8), 1322–1324.",
+         "https://doi.org/10.1093/bioinformatics/btu829"),
+        ("Streamlit, the open-source Python framework the interface is built with.", "https://streamlit.io"),
+        ("Inter and JetBrains Mono typefaces (Google Fonts).", "https://fonts.google.com")]),
+    ("Related work", [
+        ("Holbrook, E., Verduzco, J.C., Strachan, A. (2026). Evaluating LLM-generated code for domain-specific languages: "
+         "molecular dynamics with LAMMPS. arXiv:2603.20630.", "https://arxiv.org/abs/2603.20630"),
+        ("Kumar, V., Rajput, S., Mausam, Krishnan, N.M.A. (2026). MDGym: Benchmarking AI agents on molecular simulations. "
+         "arXiv:2605.08941.", "https://arxiv.org/abs/2605.08941"),
+        ("Park, Y., Chung, Y., You, J., Kim, J., Ju, S., Han, S. (2026). An extensible agentic framework for expert-level "
+         "automation of atomistic simulations. arXiv:2606.09422.", "https://arxiv.org/abs/2606.09422"),
+        ("Somasundaram, R., et al. (2026). An agentic orchestration of atomistic simulations. arXiv:2607.22596.",
+         "https://arxiv.org/abs/2607.22596")]),
+]
+
+
+def about_people():
+    md("<div class='sec-eyebrow' style='margin-top:2.4rem'>The people</div><div class='pgrid'>" + "".join(
+        f"<div class='pcard'><div class='av'>{ini}</div><div class='pn'>{esc(name)}</div><div class='pr'>{esc(role)}</div>"
+        f"<p>{esc(intro)}</p>" + (f"<a href='{esc(href)}' target='_blank' rel='noopener'>{esc(label)} ↗</a>" if href else "") +
+        "</div>" for ini, name, role, intro, label, href in PEOPLE) + "</div>")
+    md("<div class='icard' style='margin-top:1.1rem'><div class='ih'>Acknowledgements</div><p>I thank my supervisor, "
+       "<b>Adarsh P</b>, and <b>Prof. Aslam Kunhi Mohamed</b> for their guidance throughout this project and for the "
+       "resources they made available; Adarsh P also provided the cement-mineral models and reference PCE files. "
+       "I also thank the authors of INTERFACE FF and the developers of LAMMPS, 3Dmol.js and Streamlit, whose open "
+       "work this project builds on.</p></div>")
+
+
+def about_references():
+    body = ""
+    for group, refs in REFERENCES:
+        body += f"<div class='rgroup'>{esc(group)}</div><ol class='refs'>" + "".join(
+            f"<li>{esc(text)}" + (f" <a href='{esc(href)}' target='_blank' rel='noopener'>{esc(href.replace('https://', ''))}</a>"
+                                  if href else "") + "</li>" for text, href in refs) + "</ol>"
+    md(f"<div class='sec-eyebrow' style='margin-top:2.4rem'>References and resources</div><div class='icard'>{body}</div>")
 
 
 def page_header(eyebrow: str, title_html: str, text: str):

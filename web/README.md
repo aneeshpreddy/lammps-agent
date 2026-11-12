@@ -67,6 +67,11 @@ pip install -r web/requirements.txt     # once (Streamlit)
 ## About
 
 - **What the page covers:** what AtomForge does, what a LAMMPS data file is, what it can build, how it works, the request assistant's place (an interface helper, not part of the evaluated pipeline) and technical information.
+- **People, acknowledgements and references:**
+  - The people: the developer, the supervisor (Adarsh P) and the professor (Prof. Aslam Kunhi Mohamed). The intros use only what the owner gave and what the faculty page states.
+  - An acknowledgements note.
+  - Grouped references with links (DOIs checked to resolve).
+  - No model or vendor is named on this page.
 - **Where the reliability figures went:** they moved off About to a single "Technical information" line at the bottom of Build. They are read from `docs/validator_matrix.csv`, `docs/PROPERTIES.md` and the latest test run, not typed in.
 
 ## Notes
