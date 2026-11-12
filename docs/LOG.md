@@ -669,3 +669,12 @@ Model access is still with the supervisor (expected in 1–2 days). Haiku 5.5 wa
 - **Not done.** Owner to review the report:
   - check the references (INTERFACE FF: Heinz et al. 2013 is cited; add the cement-mineral database paper if wanted);
   - fill in Hours.
+
+### 2026-11-13: Learn tutorial; report reference removed
+- **Done.**
+  - Added a **Learn** tab with a 12-step tutorial for first-time users (`web/learn.py`): what a data file contains section by section, the topology lists, units and atom style, the two force fields, the cement minerals (with 3D views), PCE chemistry, boxes and surfaces, validation, a request builder, and a quiz.
+  - Every fact is read from project files. `tests/test_web_learn.py` checks it: 6 tests, 186 in total pass, and the freeze check reports unchanged.
+  - The landing page links to the guide.
+  - Browser test: every step and control, the request builder sending its text to Build, and Back.
+  - Report: removed the Anthropic/Claude reference and its in-text citation, at the owner's request.
+- **Not done.** About-page people and acknowledgements: waiting for the owner's details.

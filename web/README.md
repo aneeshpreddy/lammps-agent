@@ -52,6 +52,18 @@ pip install -r web/requirements.txt     # once (Streamlit)
   - the 3D structure.
 - **Three outcomes:** valid, incomplete (a check NOT_CALIBRATED or NOT_EVALUATED, which never counts as a pass) and failed.
 
+## Learn
+
+- **A 12-step guide for first-time users:** simulations and LAMMPS; the data file section by section; bonds, angles, dihedrals and impropers; units and atom style; the two force fields; the cement minerals; PCE superplasticisers; boxes, supercells and surfaces; validation; a request builder; and a five-question quiz. A searchable glossary sits under every step.
+- **Where the facts come from:**
+  - data-file excerpts: a validated agent output, `examples/apeg_maleic_pcff_tutorial.data`, which can be downloaded from the page;
+  - atom-type meanings: the PCFF-INTERFACE parameter file;
+  - force-field styles: the builders;
+  - mineral compositions: computed from the reference models;
+  - PCE sequences: drawn by the builder's own `make_sequence`.
+- **Background:** general context (what C3S is, what a PCE does) is labelled as such. `tests/test_web_learn.py` fails if the guide's facts drift from these files.
+- **The request builder:** it writes the request with the same code as Build (`assistant.render_prompt`), and *Open this request in Build* puts it in the request box.
+
 ## About
 
 - **What the page covers:** what AtomForge does, what a LAMMPS data file is, what it can build, how it works, the request assistant's place (an interface helper, not part of the evaluated pipeline) and technical information.

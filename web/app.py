@@ -38,6 +38,7 @@ from validator import load_config, validate  # noqa: E402
 from validator.registry import config_for  # noqa: E402
 import assistant as A  # noqa: E402
 import urllib.parse  # noqa: E402
+import learn  # noqa: E402
 import viewer  # noqa: E402
 
 st.set_page_config(page_title="AtomForge", page_icon="⚛️", layout="wide", initial_sidebar_state="collapsed")
@@ -291,6 +292,7 @@ div.stButton > button:hover, div.stDownloadButton > button:hover {{transform: tr
 .lc-sub {{font-size:1.12rem; color:{P['text']}; margin:.35rem 0 .5rem 0; font-weight:550;}}
 .lc-desc {{font-size:.98rem; line-height:1.65; color:{P['muted']}; min-height:4.95em; margin-bottom:.6rem;}}
 [class*="st-key-landcard_"] button {{min-height:48px; border-radius:12px;}} [class*="st-key-landcard_"] button p {{font-size:1rem; font-weight:600;}}
+.st-key-learncta {{margin-top:1.4rem; background:{P['surface2']}; border:1px solid {P['border']}; border-radius:18px; padding:1.1rem 1.6rem;}}
 .foot {{display:flex; justify-content:center; gap:1.6rem; flex-wrap:wrap; margin:5rem 0 1rem 0; padding-top:1.4rem;
        border-top:1px solid {P['border']}; color:{P['faint']}; font-size:.8rem;}}
 .foot span:first-child {{color:{P['muted']}; font-weight:650;}}
@@ -1525,6 +1527,12 @@ def page_home():
             components.html(viewer.showcase(structure(struct), 320, bg=P["surface"], spin_speed=0.3, box=P["accent"]), height=320)
             md(f"<div class='lc-title'>{title}</div><div class='lc-sub'>{esc(sub)}</div><div class='lc-desc'>{esc(desc)}</div>")
             st.button(label, key=f"go_{key}", type="primary", width="stretch", on_click=go, args=(page,))
+    with st.container(key="learncta"):
+        c = st.columns([3, 1], vertical_alignment="center")
+        c[0].markdown("<div class='lc-sub' style='margin:0'>New to LAMMPS data files?</div><div class='lc-desc' style='min-height:0;margin:0'>"
+                      "A 12-step guide to the file, the force fields, the cement minerals and PCE polymers, with real examples "
+                      "and a request builder.</div>", unsafe_allow_html=True)
+        c[1].button("Start the guide  →", key="go_learn", width="stretch", on_click=go, args=("Learn",))
     md("<div class='foot'><span>AtomForge</span><span>LAMMPS data files for cementitious systems</span>"
        "<span>INTERFACE FF 1.5 · LAMMPS · runs locally</span></div>")
 
@@ -1532,7 +1540,7 @@ def page_home():
 # --------------------------------------------------------------------------------------------- shell
 S = st.session_state
 S.setdefault("view", "compose")
-PAGES = ["Home", "Build", "Validate", "About"]
+PAGES = ["Home", "Build", "Validate", "Learn", "About"]
 if "page" not in S:                              # a fresh visit or a reload: ?page=<name> opens that page
     S["page"] = st.query_params.get("page") if st.query_params.get("page") in PAGES else "Home"
 # Streamlit drops the value of a widget that is not drawn in a run; keep the request, the configuration and the
@@ -1596,8 +1604,18 @@ if (!w.__afHistory) {{
 {"const m = w.document.querySelector('section.stMain') || w.document.querySelector('[data-testid=stMain]'); if (m) m.scrollTo(0, 0);" if S.get("scroll_top") else ""}
 </script>""", height=0)
 
+def use_request(text: str):
+    """Callback (Learn): put a composed request in the Build box and open Build."""
+    set_request(text)
+    S["view"] = "compose"
+    go("Build")
+
+
 if S["page"] == "Validate":
     page_validate()
+elif S["page"] == "Learn":
+    learn.render({"P": P, "WARN": WARN, "md": md, "esc": esc, "go": go, "use_request": use_request,
+                  "catalogue": catalogue, "structure": structure, "TIERS": TIERS, "page_header": page_header})
 elif S["page"] == "About":
     page_about()
 elif S["page"] == "Build":
