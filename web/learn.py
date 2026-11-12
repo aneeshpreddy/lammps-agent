@@ -536,7 +536,7 @@ def step_minerals(ctx):
     c1, c2 = st.columns([1.15, 1], gap="large")
     with c1:
         with st.container(key="lmin3d"):
-            components.html(viewer.showcase(S, 360, bg=P["surface2"], spin_speed=0.25, interactive=True, box=P["accent"]), height=360)
+            components.html(viewer.showcase(S, 360, bg=P.get("stage_card", P["surface2"]), spin_speed=0.25, interactive=True, box=P["accent"]), height=360)
         md(f"<p class='lmuted' style='font-size:.78rem;text-align:center'>Drag to rotate · {esc(model)} · {S['atoms']} atoms</p>")
     with c2:
         md(f"<div class='formula'>{esc(title)}</div><p class='lmuted' style='margin:.1rem 0 .6rem 0'>{esc(notation)}</p>"
@@ -597,7 +597,7 @@ def step_box(ctx):
     with c1:
         S = mineral_scene("c3s_unit_cell_minimized") if view == "Unit cell" else \
             ctx["structure"]("c3s_supercell" if view.startswith("2") else "pce_on_c3s")
-        components.html(viewer.showcase(S, 340, bg=P["surface2"], spin_speed=0.22, interactive=True, box=P["accent"]), height=340)
+        components.html(viewer.showcase(S, 340, bg=P.get("stage_card", P["surface2"]), spin_speed=0.22, interactive=True, box=P["accent"]), height=340)
     with c2:
         text = {"Unit cell": ("The C3S unit cell: the smallest repeating piece of the crystal, 54 atoms. Its box is slanted "
                               "(triclinic), so the file carries tilt factors."),

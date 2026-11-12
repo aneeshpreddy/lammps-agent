@@ -681,3 +681,8 @@ Model access is still with the supervisor (expected in 1–2 days). Haiku 5.5 wa
 - **About page (later, 13 Nov).**
   - Added the people cards (owner, no email; supervisor Adarsh P, Ph.D. scholar; Prof. Aslam Kunhi Mohamed, from his faculty page; the mineral models and EMC files credited to Adarsh P, owner), an acknowledgements note and grouped references with links. The DOIs were checked to resolve.
   - Removed the model ID from About (owner: "don't mention Claude"); the result page's technical details still show it.
+- **Light / dark mode (13 Nov).**
+  - Added Settings → Appearance (Dark / Light). The light palette has matching status colours.
+  - Streamlit's own theme is switched too (set_option, then one re-run), and the choice survives a reload.
+  - 3D views keep a dark stage in both modes.
+  - Browser test on every page in both modes: no errors.

@@ -93,16 +93,65 @@ SOURCES = {"stated": ("You specified", "src-stated"), "inferred": ("AI inferred 
            "default": ("Builder default", "src-default"), "edited": ("You edited", "src-edited"),
            None: ("Not reported", "src-none")}
 
+DARK_STATUS = {"ok": "#34d399", "bad": "#f87171", "warn": "#fbbf24", "ins": "#a7f3d0", "del": "#fecaca", "stated": "#93c5fd"}
 PALETTES = {     # design tokens; the base Streamlit theme is in .streamlit/config.toml (or --theme.* flags in run.sh)
     "navy": {"bg": "#0a0e16", "surface": "#111827", "surface2": "#0d1320", "raised": "#162033", "border": "#1f2a3d",
              "border2": "#2a3852", "accent": "#38bdf8", "accent2": "#3b82f6", "text": "#e6edf7", "muted": "#8b9bb4",
-             "faint": "#5d6b84", "viewer": "#0b111c"},
+             "faint": "#5d6b84", "viewer": "#0b111c", "stage": "#0a0e16", "stage_card": "#111827",
+             "grad1": "#7dd3fc", "grad2": "#818cf8", **DARK_STATUS},
     "violet": {"bg": "#0d0a16", "surface": "#161127", "surface2": "#110d20", "raised": "#1e1733", "border": "#2a2140",
                "border2": "#3a2f57", "accent": "#a78bfa", "accent2": "#7c5ce6", "text": "#efeaff", "muted": "#a99cc8",
-               "faint": "#6f6390", "viewer": "#100c1c"},
+               "faint": "#6f6390", "viewer": "#100c1c", "stage": "#0d0a16", "stage_card": "#161127",
+               "grad1": "#c4b5fd", "grad2": "#f0abfc", **DARK_STATUS},
+    # light mode: light page and cards; 3D views keep a dark stage (white H atoms and the box stay visible)
+    "light": {"bg": "#f5f7fb", "surface": "#ffffff", "surface2": "#f0f3f8", "raised": "#e6ebf3", "border": "#dde3ec",
+              "border2": "#c5cfdd", "accent": "#0284c7", "accent2": "#2563eb", "text": "#0f172a", "muted": "#475569",
+              "faint": "#64748b", "viewer": "#0b111c", "stage": "#0b1220", "stage_card": "#111a2b",
+              "grad1": "#0284c7", "grad2": "#4f46e5", "ok": "#059669", "bad": "#dc2626", "warn": "#b45309",
+              "ins": "#065f46", "del": "#991b1b", "stated": "#1d4ed8"},
 }
-P = PALETTES.get(st.query_params.get("palette") or os.environ.get("APP_PALETTE", "navy"), PALETTES["navy"])
-OK, BAD, WARN = "#34d399", "#f87171", "#fbbf24"
+THEME_KEYS = ("base", "primaryColor", "backgroundColor", "secondaryBackgroundColor", "textColor")
+
+
+@st.cache_resource
+def startup_theme() -> dict:
+    """The theme Streamlit was started with (config.toml or run.sh flags), restored when switching back to dark."""
+    from streamlit import config as _cfg
+    return {k: _cfg.get_option(f"theme.{k}") for k in THEME_KEYS}
+
+
+def apply_theme(mode: str):
+    """Set Streamlit's own theme (buttons, inputs, menus) to match; it is re-read on every run of the script."""
+    from streamlit import config as _cfg
+    vals = startup_theme() if mode == "Dark" else {
+        "base": "light", "primaryColor": PALETTES["light"]["accent"], "backgroundColor": PALETTES["light"]["bg"],
+        "secondaryBackgroundColor": PALETTES["light"]["surface2"], "textColor": PALETTES["light"]["text"]}
+    changed = False
+    for k in THEME_KEYS:
+        if _cfg.get_option(f"theme.{k}") != vals[k]:
+            _cfg.set_option(f"theme.{k}", vals[k], where_defined="AtomForge appearance setting")
+            changed = True
+    if changed:            # Streamlit sent this run's theme before the change: run again so its widgets follow at once
+        st.rerun()
+
+
+def theme_changed():
+    S_ = st.session_state
+    if S_.get("theme_choice") is None:              # clicking the selected option again deselects it: keep it
+        S_["theme_choice"] = S_.get("theme_last", "Dark")
+    S_["theme_last"] = S_["theme_choice"]
+
+
+# light/dark: a new session starts in the mode the server is currently in (so a reload keeps the choice)
+from streamlit import config as _stconfig  # noqa: E402
+startup_theme()                                   # record the startup theme before anything changes it
+st.session_state.setdefault("theme_choice", "Light" if _stconfig.get_option("theme.base") == "light" else "Dark")
+st.session_state.setdefault("theme_last", st.session_state["theme_choice"])
+MODE = st.session_state["theme_choice"] or "Dark"
+apply_theme(MODE)
+P = PALETTES["light"] if MODE == "Light" else \
+    PALETTES.get(st.query_params.get("palette") or os.environ.get("APP_PALETTE", "navy"), PALETTES["navy"])
+OK, BAD, WARN = P["ok"], P["bad"], P["warn"]
 
 st.markdown(f"""<style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
@@ -153,7 +202,7 @@ div[data-testid="stSegmentedControl"] button p, [data-testid="stButtonGroup"] bu
 .badge.warn {{background:{WARN}1a; color:{WARN}; border:1px solid {WARN}55;}}
 .src {{display:inline-block; font-size:.68rem; font-weight:600; padding:.08rem .45rem; border-radius:6px; margin-left:.35rem;
       vertical-align:1px; white-space:nowrap;}}
-.src-stated {{background:{P['accent2']}26; color:#93c5fd;}} .src-inferred {{background:{WARN}22; color:{WARN};}}
+.src-stated {{background:{P['accent2']}26; color:{P['stated']};}} .src-inferred {{background:{WARN}22; color:{WARN};}}
 .src-default {{background:{P['raised']}; color:{P['muted']};}} .src-edited {{background:{P['accent']}26; color:{P['accent']};}}
 .src-none {{background:transparent; color:{P['faint']}; border:1px dashed {P['border2']};}}
 /* key-value and lists */
@@ -167,8 +216,8 @@ div[data-testid="stSegmentedControl"] button p, [data-testid="stButtonGroup"] bu
         font-size:.9rem; line-height:1.55; min-height:120px;}}
 .diff {{background:{P['surface2']}; border:1px solid {P['border']}; border-radius:10px; padding:.75rem .9rem; font-size:.88rem;
        line-height:1.7; color:{P['muted']};}}
-.diff ins {{text-decoration:none; background:{OK}22; color:#a7f3d0; border-radius:4px; padding:0 .15rem;}}
-.diff del {{background:{BAD}1c; color:#fecaca; border-radius:4px; padding:0 .15rem;}}
+.diff ins {{text-decoration:none; background:{OK}22; color:{P['ins']}; border-radius:4px; padding:0 .15rem;}}
+.diff del {{background:{BAD}1c; color:{P['del']}; border-radius:4px; padding:0 .15rem;}}
 .attn {{border-left:3px solid {WARN}; background:{WARN}0f; border-radius:8px; padding:.55rem .8rem; margin:.4rem 0; font-size:.86rem;
        color:{P['text']};}}
 .attn .alt {{color:{P['muted']}; font-size:.8rem; margin-top:.15rem;}}
@@ -248,7 +297,7 @@ div.stButton > button:hover, div.stDownloadButton > button:hover {{transform: tr
 .h-eyebrow .dot {{width:.55rem; height:.55rem; border-radius:50%; background:{P['accent']}; box-shadow:0 0 14px {P['accent']};}}
 .h-title {{font-size:clamp(2.4rem, 4.3vw, 3.9rem); font-weight:700; line-height:1.03; letter-spacing:-.045em; margin:1rem 0 1.4rem 0;}}
 .h-title span {{display:block; color:{P['text']};}}
-.h-title span.grad {{background:linear-gradient(92deg, #7dd3fc 0%, {P['accent']} 45%, #818cf8 100%); -webkit-background-clip:text;
+.h-title span.grad {{background:linear-gradient(92deg, {P['grad1']} 0%, {P['accent']} 45%, {P['grad2']} 100%); -webkit-background-clip:text;
                     background-clip:text; color:transparent;}}
 .h-sub {{font-size:1.14rem; line-height:1.7; color:{P['muted']}; max-width:34rem; margin:0;}}
 .st-key-herovis iframe {{-webkit-mask-image:radial-gradient(closest-side, #000 72%, transparent 100%);
@@ -340,6 +389,7 @@ ol.refs li {{margin:.25rem 0;}}
   }}
 }}
 @media (prefers-reduced-motion: reduce) {{ .scroll-cue .m::after {{animation:none; opacity:1;}} }}
+{"" if MODE == "Dark" else ".st-key-herovis iframe, .st-key-introvis img {-webkit-mask-image:none !important; mask-image:none !important; border-radius:22px;}"}
 @media (max-width: 900px) {{
   .pgrid {{grid-template-columns:1fr;}}
   .stats, .steps4, .flow {{grid-template-columns: 1fr 1fr;}} .vs, .grid2 {{grid-template-columns:1fr;}} .hero h1 {{font-size:1.6rem;}}
@@ -1210,8 +1260,8 @@ def page_build():
             r[1].button("Re-analyse my text", on_click=reanalyse_suggestion)
         with st.expander("What changed", expanded=True):
             md(f"<div class='diff'>{diff_html(analysis['original'], S['sugg_text'])}</div>"
-               "<div class='faint' style='margin-top:.4rem'><span style='color:#a7f3d0'>Green</span> = added or made "
-               "explicit · <span style='color:#fecaca'>red</span> = replaced wording.</div>")
+               f"<div class='faint' style='margin-top:.4rem'><span style='color:{P['ins']}'>Green</span> = added or made "
+               f"explicit · <span style='color:{P['del']}'>red</span> = replaced wording.</div>")
         prov = A.parameters(result)
         amb = A.ambiguities(result)
         inferred = [(k, n) for k, (s_, n) in prov.items() if s_ == "inferred"]
@@ -1572,7 +1622,7 @@ def page_home():
                "an intelligent, multi-stage workflow.</p>")
         with right:
             with st.container(key="herovis"):
-                components.html(viewer.showcase(hero, 540, bg=P["bg"], spin_speed=0.22, particles=70, box=P["accent"]), height=540)
+                components.html(viewer.showcase(hero, 540, bg=P["stage"], spin_speed=0.22, particles=70, box=P["accent"]), height=540)
             md(f"<div class='caption fade-up d3'>Live 3D · an actual AtomForge output: APEG-type PCE on a hydroxylated C3S (040) "
                f"surface, PCFF-INTERFACE, {hero['atoms']:,} atoms</div>")
         md("<div class='scroll-cue fade-up d3'>Scroll to explore<div class='m'></div></div>")
@@ -1606,7 +1656,7 @@ def page_home():
     cols = st.columns(2, gap="large")
     for col, (key, title, sub, desc, struct, label, page) in zip(cols, cards):
         with col.container(key=f"landcard_{key}"):
-            components.html(viewer.showcase(structure(struct), 320, bg=P["surface"], spin_speed=0.3, box=P["accent"]), height=320)
+            components.html(viewer.showcase(structure(struct), 320, bg=P["stage_card"], spin_speed=0.3, box=P["accent"]), height=320)
             md(f"<div class='lc-title'>{title}</div><div class='lc-sub'>{esc(sub)}</div><div class='lc-desc'>{esc(desc)}</div>")
             st.button(label, key=f"go_{key}", type="primary", width="stretch", on_click=go, args=(page,))
     with st.container(key="learncta"):
@@ -1660,6 +1710,11 @@ with h[2]:
         pill = f"<span class='pill'><i style='background:{BAD}'></i>No API key</span>"
     r[0].markdown(f"<div style='text-align:right'>{pill}</div>", unsafe_allow_html=True)
     with r[1].popover("Settings", width="stretch"):
+        st.markdown("<div class='eyebrow' style='margin:0 0 .3rem 0'>Appearance</div>", unsafe_allow_html=True)
+        st.segmented_control("Appearance", ["Dark", "Light"], key="theme_choice", on_change=theme_changed,
+                             format_func=lambda m: {"Dark": ":material/dark_mode: Dark", "Light": ":material/light_mode: Light"}[m],
+                             label_visibility="collapsed", width="stretch")
+        st.divider()
         st.toggle("Offline mode", key="offline",
                   help="Replays saved results and assistant analyses. Needs no internet connection.")
         st.caption("Generation uses the model in config.yaml through the API key of this terminal.")

@@ -74,6 +74,13 @@ pip install -r web/requirements.txt     # once (Streamlit)
   - No model or vendor is named on this page.
 - **Where the reliability figures went:** they moved off About to a single "Technical information" line at the bottom of Build. They are read from `docs/validator_matrix.csv`, `docs/PROPERTIES.md` and the latest test run, not typed in.
 
+## Appearance
+
+- **Settings → Appearance** switches between **Dark** and **Light**. Streamlit's own widgets switch too: the app sets Streamlit's theme options and re-runs once, because Streamlit sends its theme at the start of each run.
+- **The choice is kept** across reloads while the server runs.
+- **3D views keep a dark stage in both modes,** so white hydrogen atoms and the box outline stay visible.
+- **Dark mode returns to the theme the server was started with** (blue, or violet with `./web/run.sh violet`).
+
 ## Notes
 
 - **This Mac only.** The site listens on `localhost` (`.streamlit/config.toml`), so nobody else on the network can spend the API credits. Both the assistant and the agent need `ANTHROPIC_API_KEY` in the terminal the site is started from.
